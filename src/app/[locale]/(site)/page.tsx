@@ -47,7 +47,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  // 레이아웃의 "%s | FASTLAB" 템플릿이 붙지 않도록 absolute 사용
+  // 레이아웃의 "%s | 헬씨팜바이오" 템플릿이 붙지 않도록 absolute 사용
   return {
     title: { absolute: t("defaultTitle") },
     description: t("defaultDescription"),

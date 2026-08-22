@@ -1,7 +1,7 @@
 {
   "meta": {
-    "siteName": "FASTLAB",
-    "defaultTitle": "건강기능식품 OEM·ODM 전문 제조 | FASTLAB",
+    "siteName": "헬씨팜바이오",
+    "defaultTitle": "건강기능식품 OEM·ODM 전문 제조 | 헬씨팜바이오",
     "defaultDescription": "26년 업력의 GMP·HACCP 인증 시설에서 건강기능식품 OEM/ODM/CDMO를 원스톱으로. 원료 개발부터 디자인·유통까지 가장 빠르게 제품화합니다."
   },
   "nav": {
@@ -29,7 +29,7 @@
     "heroDescription": "초기 창업자부터 확장을 준비하는 기업까지. 기획·원료·생산·디자인·유통까지 한 곳에서 해결하는 올인원 제조 파트너입니다.",
     "heroPrimaryCta": "1분 만에 견적 문의",
     "heroSecondaryCta": "보유 원료 보기",
-    "statsTitle": "숫자로 보는 FASTLAB",
+    "statsTitle": "숫자로 보는 헬씨팜바이오",
     "stats": {
       "years": "업력",
       "yearsValue": "26년",
@@ -136,7 +136,7 @@
     "name": "담당자명",
     "namePlaceholder": "홍길동",
     "company": "회사명",
-    "companyPlaceholder": "(주)패스트랩 · 없으면 비워두세요",
+    "companyPlaceholder": "(주)헬씨팜바이오 · 없으면 비워두세요",
     "phone": "연락처",
     "phonePlaceholder": "010-1234-5678",
     "email": "이메일",
@@ -181,7 +181,7 @@
     "language": "언어"
   },
   "footer": {
-    "companyName": "(주)패스트랩",
+    "companyName": "(주)헬씨팜바이오",
     "ceo": "대표이사",
     "bizNo": "사업자등록번호",
     "address": "주소",

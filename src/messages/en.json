@@ -1,7 +1,7 @@
 {
   "meta": {
-    "siteName": "FASTLAB",
-    "defaultTitle": "Health Functional Food OEM & ODM Manufacturer | FASTLAB",
+    "siteName": "Healthy Farm Bio",
+    "defaultTitle": "Health Functional Food OEM & ODM Manufacturer | Healthy Farm Bio",
     "defaultDescription": "26 years of manufacturing in GMP/HACCP certified facilities. One-stop OEM, ODM and CDMO for health functional foods — from raw material to design and distribution."
   },
   "nav": {
@@ -29,7 +29,7 @@
     "heroDescription": "Whether you are launching your first brand or scaling an existing one — planning, ingredients, production, design and distribution in one place.",
     "heroPrimaryCta": "Request a quote",
     "heroSecondaryCta": "Browse ingredients",
-    "statsTitle": "FASTLAB in numbers",
+    "statsTitle": "Healthy Farm Bio in numbers",
     "stats": {
       "years": "Years in business",
       "yearsValue": "26",
@@ -181,7 +181,7 @@
     "language": "Language"
   },
   "footer": {
-    "companyName": "FASTLAB Co., Ltd.",
+    "companyName": "Healthy Farm Bio Co., Ltd.",
     "ceo": "CEO",
     "bizNo": "Business no.",
     "address": "Address",

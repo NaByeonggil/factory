@@ -30,7 +30,7 @@ export default async function AdminDashboardLayout({
     <div className="flex min-h-screen">
       <aside className="hidden w-60 shrink-0 flex-col border-r border-ink-200 bg-white lg:flex">
         <div className="border-b border-ink-200 px-6 py-5">
-          <p className="text-lg font-extrabold text-brand-700">FASTLAB</p>
+          <p className="text-lg font-extrabold text-brand-700">헬씨팜바이오</p>
           <p className="text-xs text-ink-400">Admin</p>
         </div>
         <nav className="flex-1 space-y-1 p-3">
@@ -63,7 +63,7 @@ export default async function AdminDashboardLayout({
 
       <div className="min-w-0 flex-1">
         <header className="flex items-center gap-4 border-b border-ink-200 bg-white px-5 py-3 lg:hidden">
-          <p className="font-extrabold text-brand-700">FASTLAB Admin</p>
+          <p className="font-extrabold text-brand-700">헬씨팜바이오 Admin</p>
           <nav className="ml-auto flex gap-3 text-sm">
             {NAV.map(({ href, label }) => (
               <Link key={href} href={href} className="text-ink-600">

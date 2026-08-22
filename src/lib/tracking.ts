@@ -2,7 +2,7 @@
  * 광고 유입 정보(attribution).
  * 랜딩 시점에 캡처해두지 않으면 문의 페이지로 이동하는 순간 유실됩니다.
  */
-export const ATTRIBUTION_STORAGE_KEY = "fastlab_attribution";
+export const ATTRIBUTION_STORAGE_KEY = "hfb_attribution";
 
 export type Attribution = {
   utmSource?: string;

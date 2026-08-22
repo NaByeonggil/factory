@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "관리자 | FASTLAB",
+  title: "관리자 | 헬씨팜바이오",
   robots: { index: false, follow: false },
 };
 

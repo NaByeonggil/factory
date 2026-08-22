@@ -214,7 +214,7 @@ async function main() {
     create: {
       key: "company",
       value: {
-        name: "(주)패스트랩",
+        name: "(주)헬씨팜바이오",
         ceo: "홍길동",
         bizNo: "000-00-00000",
         address: "경기도 성남시 분당구 판교로 000",

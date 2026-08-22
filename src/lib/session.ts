@@ -1,7 +1,7 @@
 import { SignJWT, jwtVerify } from "jose";
 import type { Role } from "@/generated/prisma/enums";
 
-export const SESSION_COOKIE = "fastlab_admin";
+export const SESSION_COOKIE = "hfb_admin";
 export const SESSION_MAX_AGE = 60 * 60 * 8; // 8시간
 
 export type SessionUser = {

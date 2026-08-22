@@ -1,7 +1,7 @@
 {
   "meta": {
-    "siteName": "FASTLAB",
-    "defaultTitle": "保健功能食品 OEM·ODM 专业代工 | FASTLAB",
+    "siteName": "Healthy Farm Bio",
+    "defaultTitle": "保健功能食品 OEM·ODM 专业代工 | Healthy Farm Bio",
     "defaultDescription": "26年制造经验，GMP·HACCP认证工厂。从原料开发到设计与流通，一站式提供保健功能食品 OEM/ODM/CDMO 服务。"
   },
   "nav": {
@@ -29,7 +29,7 @@
     "heroDescription": "无论是初创品牌还是扩张中的企业，策划、原料、生产、设计与流通一站式解决。",
     "heroPrimaryCta": "一分钟获取报价",
     "heroSecondaryCta": "查看自有原料",
-    "statsTitle": "数字看 FASTLAB",
+    "statsTitle": "数字看 Healthy Farm Bio",
     "stats": {
       "years": "行业经验",
       "yearsValue": "26年",
@@ -181,7 +181,7 @@
     "language": "语言"
   },
   "footer": {
-    "companyName": "FASTLAB 株式会社",
+    "companyName": "Healthy Farm Bio 有限公司",
     "ceo": "代表理事",
     "bizNo": "营业执照号",
     "address": "地址",

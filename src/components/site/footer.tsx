@@ -27,7 +27,11 @@ export async function Footer({
       <Container className="py-12">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="max-w-md space-y-3">
-            <p className="text-title font-extrabold text-white">{company.name}</p>
+            {/* 표기명은 로케일별로 다릅니다 (국문 (주)헬씨팜바이오 / 영·중 Healthy Farm Bio).
+              법인 상세(대표·사업자번호 등)는 DB SiteSetting 에서 옵니다. */}
+            <p className="text-title font-extrabold text-white">
+              {t("companyName")}
+            </p>
             <dl className="space-y-1 text-sm text-ink-400">
               <div className="flex gap-2">
                 <dt className="shrink-0 text-ink-500">{t("ceo")}</dt>
@@ -88,7 +92,7 @@ export async function Footer({
 
         <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            Copyright © {year} {company.name}. {t("rights")}
+            Copyright © {year} {t("companyName")}. {t("rights")}
           </p>
           <div className="flex gap-4">
             <Link href="/legal/terms" className="hover:text-white">
