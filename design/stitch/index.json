@@ -146,5 +146,14 @@
     "deviceType": "MOBILE",
     "screenshot": "design/stitch/헬씨팜바이오-홈-푸터.png",
     "html": "design/stitch/헬씨팜바이오-홈-푸터.html"
+  },
+  {
+    "id": "afa64541f2ac43a28725ae1e796fa414",
+    "title": "헬씨팜바이오 브랜드 로고",
+    "slug": "헬씨팜바이오-브랜드로고",
+    "width": "1024",
+    "height": "1024",
+    "deviceType": null,
+    "screenshot": "design/stitch/헬씨팜바이오-브랜드로고.png"
   }
 ]

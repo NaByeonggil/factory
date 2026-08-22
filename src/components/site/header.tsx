@@ -7,6 +7,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { LocaleSwitcher } from "@/components/site/locale-switcher";
+import { Logo } from "@/components/site/logo";
 import { cn } from "@/lib/utils";
 
 type NavItem = { key: string; href: string; children?: { key: string; href: string }[] };
@@ -55,11 +56,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <Container className="flex h-16 items-center justify-between gap-6 lg:h-20">
-        <Link
-          href="/"
-          className="text-xl font-extrabold tracking-tight text-brand-700"
-        >
-          {tMeta("siteName")}
+        <Link href="/" className="text-brand-700" aria-label={tMeta("siteName")}>
+          <Logo label={tMeta("siteName")} markClassName="size-7 lg:size-8" />
         </Link>
 
         <nav aria-label="주 메뉴" className="hidden lg:flex lg:items-center lg:gap-1">

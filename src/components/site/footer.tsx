@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/section";
+import { LogoMark } from "@/components/site/logo";
 
 export type CompanyInfo = {
   name: string;
@@ -29,7 +30,8 @@ export async function Footer({
           <div className="max-w-md space-y-3">
             {/* 표기명은 로케일별로 다릅니다 (국문 (주)헬씨팜바이오 / 영·중 Healthy Farm Bio).
               법인 상세(대표·사업자번호 등)는 DB SiteSetting 에서 옵니다. */}
-            <p className="text-title font-extrabold text-white">
+            <p className="flex items-center gap-2 text-title font-extrabold text-white">
+              <LogoMark className="size-7" />
               {t("companyName")}
             </p>
             <dl className="space-y-1 text-sm text-ink-400">
