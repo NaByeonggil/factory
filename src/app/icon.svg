@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="헬씨팜바이오">
+  <!--
+    헬씨팜바이오 심볼 — 공장 + 새싹.
+
+    design/stitch/헬씨팜바이오-파비콘.png 의 로크업에서 마크만 따와 다시 그렸습니다.
+    원본은 파란색이고 워드마크가 붙어 있어 16px에서 읽히지 않습니다.
+
+    브랜드 그린 타일 + 흰 글리프 구성입니다. 브라우저 탭 배경이 밝든 어둡든
+    대비가 유지되고, 창문 격자 같은 잔디테일은 16px에서 뭉개져 뺐습니다.
+  -->
+  <rect width="64" height="64" rx="14" fill="#127a58" />
+  <g fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 본동 + 좌측 타워를 한 선으로 -->
+    <path d="M12 47V33h10V20h9v13h21v14" />
+    <!-- 바닥 -->
+    <path d="M10 47h44" />
+    <!-- 새싹: 줄기 + 잎 -->
+    <path d="M31 20c0-4 2-7 5-8" />
+    <path d="M36 12c-3-5 2-9 8-8 1 6-4 10-8 8Z" />
+  </g>
+</svg>

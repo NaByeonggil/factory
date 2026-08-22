@@ -27,6 +27,14 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // api / 정적 자산 / 파일 확장자가 있는 경로는 제외
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  /**
+   * 제외 대상: api · 내부 경로 · 확장자가 있는 파일
+   * 그리고 Next 메타데이터 라우트(apple-icon, opengraph-image 등).
+   *
+   * 메타데이터 라우트는 확장자가 없어서 그냥 두면 로케일 라우팅이
+   * /ko/apple-icon 으로 리다이렉트해버립니다(브라우저는 아이콘을 못 받음).
+   */
+  matcher: [
+    "/((?!api|_next|_vercel|icon|apple-icon|opengraph-image|twitter-image|manifest|.*\\..*).*)",
+  ],
 };
