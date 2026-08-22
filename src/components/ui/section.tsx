@@ -8,7 +8,7 @@ export function Container({
   children: React.ReactNode;
 }) {
   return (
-    <div className={cn("mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8", className)}>
+    <div className={cn("mx-auto w-full max-w-page px-5 sm:px-6 lg:px-8", className)}>
       {children}
     </div>
   );
@@ -24,7 +24,7 @@ export function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className={cn("py-16 sm:py-20 lg:py-24", className)}>
+    <section id={id} className={cn("py-section-mobile lg:py-section-desktop", className)}>
       {children}
     </section>
   );
@@ -49,15 +49,13 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="text-sm font-bold tracking-wide text-brand-600 uppercase">
+        <p className="text-label font-bold uppercase tracking-wide text-brand-700">
           {eyebrow}
         </p>
       )}
-      <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl lg:text-4xl">
-        {title}
-      </h2>
+      <h2 className="mt-2 text-headline text-brand-900">{title}</h2>
       {description && (
-        <p className="mt-4 text-base leading-relaxed text-ink-600">{description}</p>
+        <p className="mt-3 leading-relaxed text-ink-700">{description}</p>
       )}
     </div>
   );

@@ -23,27 +23,27 @@ export async function Footer({
   const year = 2026;
 
   return (
-    <footer className="mt-auto border-t border-ink-200 bg-ink-50">
+    <footer className="mt-auto bg-ink-900 text-ink-300">
       <Container className="py-12">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="max-w-md space-y-3">
-            <p className="text-lg font-extrabold text-brand-700">{company.name}</p>
-            <dl className="space-y-1 text-sm text-ink-600">
+            <p className="text-title font-extrabold text-white">{company.name}</p>
+            <dl className="space-y-1 text-sm text-ink-400">
               <div className="flex gap-2">
-                <dt className="shrink-0 text-ink-400">{t("ceo")}</dt>
+                <dt className="shrink-0 text-ink-500">{t("ceo")}</dt>
                 <dd>{company.ceo}</dd>
               </div>
               <div className="flex gap-2">
-                <dt className="shrink-0 text-ink-400">{t("bizNo")}</dt>
+                <dt className="shrink-0 text-ink-500">{t("bizNo")}</dt>
                 <dd>{company.bizNo}</dd>
               </div>
               <div className="flex gap-2">
-                <dt className="shrink-0 text-ink-400">{t("address")}</dt>
+                <dt className="shrink-0 text-ink-500">{t("address")}</dt>
                 <dd>{company.address}</dd>
               </div>
               <div className="flex gap-4">
                 <span className="flex gap-2">
-                  <dt className="text-ink-400">{t("tel")}</dt>
+                  <dt className="text-ink-500">{t("tel")}</dt>
                   <dd>
                     <a href={`tel:${company.tel.replace(/[^0-9+]/g, "")}`}>
                       {company.tel}
@@ -52,7 +52,7 @@ export async function Footer({
                 </span>
                 {company.fax && (
                   <span className="flex gap-2">
-                    <dt className="text-ink-400">{t("fax")}</dt>
+                    <dt className="text-ink-500">{t("fax")}</dt>
                     <dd>{company.fax}</dd>
                   </span>
                 )}
@@ -78,7 +78,7 @@ export async function Footer({
               <Link
                 key={key}
                 href={href}
-                className="text-ink-600 hover:text-brand-700"
+                className="text-ink-300 hover:text-white"
               >
                 {tNav(key)}
               </Link>
@@ -86,15 +86,15 @@ export async function Footer({
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-ink-200 pt-6 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
             Copyright © {year} {company.name}. {t("rights")}
           </p>
           <div className="flex gap-4">
-            <Link href="/legal/terms" className="hover:text-ink-800">
+            <Link href="/legal/terms" className="hover:text-white">
               {t("terms")}
             </Link>
-            <Link href="/legal/privacy" className="font-semibold hover:text-ink-800">
+            <Link href="/legal/privacy" className="font-semibold text-ink-300 hover:text-white">
               {t("privacy")}
             </Link>
           </div>

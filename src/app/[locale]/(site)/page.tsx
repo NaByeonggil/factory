@@ -19,6 +19,7 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
+import { CtaBand } from "@/components/site/cta-band";
 import {
   FORMULATIONS,
   PACKAGINGS,
@@ -95,10 +96,10 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
         <Container className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
           <div>
             <Badge tone="brand">{t("heroEyebrow")}</Badge>
-            <h1 className="mt-5 text-3xl font-extrabold leading-[1.2] tracking-tight text-ink-900 whitespace-pre-line sm:text-5xl">
+            <h1 className="mt-5 whitespace-pre-line text-display text-brand-900">
               {t("heroTitle")}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-600 sm:text-lg">
+            <p className="mt-6 max-w-xl leading-relaxed text-ink-700 lg:text-body-lg">
               {t("heroDescription")}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -122,7 +123,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
             ).map(([labelKey, valueKey]) => (
               <div
                 key={labelKey}
-                className="rounded-2xl border border-brand-100 bg-white p-6 shadow-sm"
+                className="rounded-card border border-ink-200 bg-white p-6 text-center shadow-[var(--shadow-soft)]"
               >
                 <dt className="text-sm font-medium text-ink-500">
                   {t(`stats.${labelKey}`)}
@@ -147,13 +148,11 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
                 <li key={type}>
                   <Link
                     href="/inquiry"
-                    className="flex h-full flex-col gap-3 rounded-2xl border border-ink-200 p-6 transition-colors hover:border-brand-300 hover:bg-brand-50/40"
+                    className="flex h-full flex-col gap-3 rounded-card border border-ink-200 bg-white p-6 transition-shadow hover:shadow-[var(--shadow-soft)]"
                   >
-                    <Icon className="size-7 text-brand-600" aria-hidden />
-                    <p className="text-lg font-bold text-ink-900">
-                      {tService(type)}
-                    </p>
-                    <p className="text-sm leading-relaxed text-ink-600">
+                    <Icon className="size-7 text-brand-700" aria-hidden />
+                    <p className="text-title text-ink-900">{tService(type)}</p>
+                    <p className="text-sm leading-relaxed text-ink-700">
                       {tService(`${type}_desc`)}
                     </p>
                   </Link>
@@ -225,7 +224,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
               {FORMULATIONS.map((code) => (
                 <li
                   key={code}
-                  className="rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700"
+                  className="rounded-full border border-brand-700 bg-brand-700/5 px-4 py-2 text-label text-brand-700"
                 >
                   {tOptions(`formulation.${code}`)}
                 </li>
@@ -238,7 +237,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
               {PACKAGINGS.map((code) => (
                 <li
                   key={code}
-                  className="rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-semibold text-ink-700"
+                  className="rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-700"
                 >
                   {tOptions(`packaging.${code}`)}
                 </li>
@@ -252,18 +251,16 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
       <Section className="bg-ink-900 text-white">
         <Container>
           <div className="max-w-2xl">
-            <p className="text-sm font-bold uppercase tracking-wide text-brand-300">
+            <p className="text-label font-bold uppercase tracking-wide text-brand-300">
               Certification
             </p>
-            <h2 className="mt-2 text-2xl font-bold sm:text-3xl lg:text-4xl">
-              {t("certTitle")}
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-ink-300">
+            <h2 className="mt-2 text-headline">{t("certTitle")}</h2>
+            <p className="mt-3 leading-relaxed text-ink-400">
               {t("certDescription")}
             </p>
           </div>
 
-          <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <ul className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
             {(certifications.length > 0
               ? certifications
               : [
@@ -275,7 +272,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
             ).map((cert) => (
               <li
                 key={cert.code}
-                className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3.5 text-sm font-semibold"
+                className="flex items-center gap-3 rounded-card bg-white/10 px-4 py-4 text-label font-semibold"
               >
                 {cert.imageUrl ? (
                   <span className="relative size-8 shrink-0 overflow-hidden rounded bg-white/90">
@@ -306,17 +303,15 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
             title={t("priorityTitle")}
             description={t("priorityDescription")}
           />
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
             {PRIORITY_ITEMS.map(({ key, Icon }) => (
               <li
                 key={key}
-                className="rounded-2xl border border-ink-200 p-6"
+                className="rounded-card border border-ink-200 bg-white p-6"
               >
-                <Icon className="size-7 text-brand-600" aria-hidden />
-                <p className="mt-3 text-base font-bold text-ink-900">
-                  {tPriority(key)}
-                </p>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-600">
+                <Icon className="size-7 text-brand-700" aria-hidden />
+                <p className="mt-3 font-bold text-ink-900">{tPriority(key)}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink-700">
                   {tPriority(`${key}Desc`)}
                 </p>
               </li>
@@ -333,14 +328,14 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
               title={t("recentTitle")}
               description={t("recentDescription")}
             />
-            <ul className="mt-8 divide-y divide-ink-200 rounded-2xl border border-ink-200 bg-white">
+            <ul className="mt-8 divide-y divide-ink-100 rounded-card border border-ink-200 bg-white">
               {recent.map((item) => (
                 <li
                   key={item.id}
-                  className="flex flex-wrap items-center gap-3 px-5 py-4 text-sm"
+                  className="flex flex-wrap items-center gap-4 px-5 py-4 text-sm"
                 >
                   <Badge tone="brand">{tService(item.serviceType)}</Badge>
-                  <span className="text-ink-700">
+                  <span className="text-ink-900">
                     {item.formulations.length > 0
                       ? item.formulations
                           .map((f) => tOptions(`formulation.${f}`))
@@ -358,21 +353,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
       )}
 
       {/* ─── 최종 CTA ─── */}
-      <Section className="bg-brand-700 text-white">
-        <Container className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold sm:text-3xl">{t("ctaTitle")}</h2>
-            <p className="mt-2 text-brand-100">{t("ctaDescription")}</p>
-          </div>
-          <Button
-            asChild
-            size="lg"
-            className="bg-white text-brand-700 hover:bg-brand-50"
-          >
-            <Link href="/inquiry">{tNav("inquiry")}</Link>
-          </Button>
-        </Container>
-      </Section>
+      <CtaBand locale={locale} />
     </>
   );
 }

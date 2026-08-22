@@ -11,7 +11,7 @@ const variants: Record<Variant, string> = {
   secondary:
     "bg-ink-900 text-white hover:bg-ink-800 focus-visible:outline-ink-900",
   outline:
-    "border border-ink-300 bg-white text-ink-800 hover:bg-ink-50 focus-visible:outline-ink-400",
+    "border border-ink-200 bg-white text-ink-800 hover:bg-ink-50 focus-visible:outline-ink-400",
   ghost: "text-ink-700 hover:bg-ink-100 focus-visible:outline-ink-400",
   danger: "bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-600",
 };
@@ -39,7 +39,7 @@ export function Button({
   return (
     <Comp
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors",
+        "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-colors",
         "focus-visible:outline-2 focus-visible:outline-offset-2",
         "disabled:pointer-events-none disabled:opacity-50",
         variants[variant],

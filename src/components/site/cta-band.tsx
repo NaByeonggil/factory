@@ -9,13 +9,17 @@ export async function CtaBand({ locale }: { locale: string }) {
   const tNav = await getTranslations({ locale, namespace: "nav" });
 
   return (
-    <Section className="bg-brand-700 text-white">
-      <Container className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <Section className="bg-brand-600 text-white">
+      <Container className="flex flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-left">
         <div>
-          <h2 className="text-2xl font-bold sm:text-3xl">{t("ctaTitle")}</h2>
-          <p className="mt-2 text-brand-100">{t("ctaDescription")}</p>
+          <h2 className="text-headline">{t("ctaTitle")}</h2>
+          <p className="mt-3 text-body-lg text-brand-100">{t("ctaDescription")}</p>
         </div>
-        <Button asChild size="lg" className="bg-white text-brand-700 hover:bg-brand-50">
+        <Button
+          asChild
+          size="lg"
+          className="shrink-0 bg-white text-brand-700 shadow-sm hover:bg-brand-50"
+        >
           <Link href="/inquiry">{tNav("inquiry")}</Link>
         </Button>
       </Container>

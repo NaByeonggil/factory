@@ -1,30 +1,41 @@
 @import "tailwindcss";
 
 /* ─────────────── 디자인 토큰 ───────────────
-   건기식 제조 B2B — 신뢰감(딥 그린) + 클린 뉴트럴 */
+   출처: Stitch "HealthyFarm Bio Trust System"
+   (design/stitch/DESIGN-SYSTEM-healthyfarm-bio-trust-system.md)
+
+   건기식 제조 B2B — 딥 그린 + 클린 뉴트럴.
+   그린 두 단계를 구분해서 씁니다:
+     brand-600 #127a58  큰 면(버튼·CTA 배너 배경)
+     brand-700 #005f43  밝은 배경 위 텍스트·아이콘 (대비 확보) */
 @theme {
   --color-brand-50: #eefaf4;
   --color-brand-100: #d5f2e4;
   --color-brand-200: #ade4cb;
-  --color-brand-300: #78d0ac;
+  --color-brand-300: #7dd8b0;
   --color-brand-400: #43b489;
   --color-brand-500: #1f996e;
   --color-brand-600: #127a58;
-  --color-brand-700: #0f6148;
+  --color-brand-700: #005f43;
   --color-brand-800: #0f4d3b;
   --color-brand-900: #0d4032;
   --color-brand-950: #04241c;
 
+  /* 뉴트럴 — ink-700 은 시안의 on-surface-variant(초록기 도는 회색) */
   --color-ink-50: #f7f8f8;
-  --color-ink-100: #eeeff0;
+  --color-ink-100: #ededf3;
   --color-ink-200: #dcdee1;
-  --color-ink-300: #b9bdc3;
+  --color-ink-300: #bec9c1;
   --color-ink-400: #8f959e;
   --color-ink-500: #6d7480;
-  --color-ink-600: #565c66;
-  --color-ink-700: #464a52;
-  --color-ink-800: #2f3238;
-  --color-ink-900: #1b1d21;
+  --color-ink-600: #4a5651;
+  --color-ink-700: #3e4943;
+  --color-ink-800: #2e3035;
+  --color-ink-900: #1a1c20;
+
+  /* 표면 */
+  --color-surface: #f9f9fe;
+  --color-surface-variant: #e2e2e7;
 
   --color-accent-500: #f0a202;
 
@@ -32,7 +43,59 @@
     var(--font-noto-sans-kr), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 
+  /* 레이아웃 리듬 — 8px 기준 */
+  --spacing-gutter: 24px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 32px;
+  --spacing-section-mobile: 64px;
+  --spacing-section-desktop: 120px;
+
+  --container-page: 1200px;
+
   --radius-card: 1rem;
+
+  /* "Soft Touch" 앰비언트 섀도 */
+  --shadow-soft: 0 4px 20px rgba(15, 23, 42, 0.08);
+  --shadow-soft-lg: 0 8px 28px rgba(15, 23, 42, 0.12);
+}
+
+/* 타이포 스케일 — 모바일 우선, 데스크톱에서 확대 */
+@utility text-display {
+  font-size: 28px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  @media (width >= 48rem) {
+    font-size: 40px;
+  }
+}
+
+@utility text-headline {
+  font-size: 24px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  @media (width >= 48rem) {
+    font-size: 32px;
+  }
+}
+
+@utility text-title {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+@utility text-body-lg {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+@utility text-label {
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 500;
 }
 
 html {
@@ -49,7 +112,7 @@ body {
 }
 
 /* 모바일 하단 고정 CTA 만큼 여백 확보 */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   body[data-has-mobile-cta="true"] {
     padding-bottom: 4.5rem;
   }
