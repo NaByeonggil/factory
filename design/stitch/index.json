@@ -116,5 +116,35 @@
     "deviceType": "MOBILE",
     "screenshot": "design/stitch/보유-원료-목록.png",
     "html": "design/stitch/보유-원료-목록.html"
+  },
+  {
+    "id": "511e502c1e3145498b0fa0c485b20fed",
+    "title": "헬씨팜바이오 - 홈 (모바일) ①상단",
+    "slug": "헬씨팜바이오-홈-full",
+    "width": "780",
+    "height": "2844",
+    "deviceType": "MOBILE",
+    "screenshot": "design/stitch/헬씨팜바이오-홈-full.png",
+    "html": "design/stitch/헬씨팜바이오-홈-full.html"
+  },
+  {
+    "id": "c0d8818575844c2cba0aebac49b76de1",
+    "title": "헬씨팜바이오 - 홈 (모바일) ②중단",
+    "slug": "헬씨팜바이오-홈-하단",
+    "width": "780",
+    "height": "4356",
+    "deviceType": "MOBILE",
+    "screenshot": "design/stitch/헬씨팜바이오-홈-하단.png",
+    "html": "design/stitch/헬씨팜바이오-홈-하단.html"
+  },
+  {
+    "id": "b6c4f944d148452b837d328c099dcfbe",
+    "title": "헬씨팜바이오 - 홈 (모바일) ③하단",
+    "slug": "헬씨팜바이오-홈-푸터",
+    "width": "780",
+    "height": "3174",
+    "deviceType": "MOBILE",
+    "screenshot": "design/stitch/헬씨팜바이오-홈-푸터.png",
+    "html": "design/stitch/헬씨팜바이오-홈-푸터.html"
   }
 ]

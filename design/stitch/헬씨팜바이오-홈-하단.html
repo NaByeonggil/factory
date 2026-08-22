@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Healthy Farm Bio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "outline": "#6e7a73",
+                  "on-secondary-fixed": "#291800",
+                  "ink-sub": "#6d7480",
+                  "on-error-container": "#93000a",
+                  "secondary-container": "#feae1b",
+                  "bg-section": "#f7f8f8",
+                  "primary": "#005f43",
+                  "surface-variant": "#e2e2e7",
+                  "surface-dim": "#d9d9df",
+                  "tertiary": "#4a5651",
+                  "on-error": "#ffffff",
+                  "border-light": "#dcdee1",
+                  "outline-variant": "#bec9c1",
+                  "error-container": "#ffdad6",
+                  "surface-bright": "#f9f9fe",
+                  "surface-container": "#ededf3",
+                  "on-primary-container": "#a9ffd6",
+                  "inverse-surface": "#2e3035",
+                  "surface-container-high": "#e8e8ed",
+                  "secondary-fixed": "#ffddb2",
+                  "on-tertiary-fixed-variant": "#3e4945",
+                  "on-tertiary": "#ffffff",
+                  "background": "#f9f9fe",
+                  "surface-container-lowest": "#ffffff",
+                  "on-tertiary-fixed": "#131e1a",
+                  "on-secondary-fixed-variant": "#624000",
+                  "tertiary-container": "#626e69",
+                  "tertiary-fixed": "#d9e5df",
+                  "on-surface-variant": "#3e4943",
+                  "surface": "#f9f9fe",
+                  "on-surface": "#1a1c20",
+                  "inverse-primary": "#7dd8b0",
+                  "on-tertiary-container": "#e4f0ea",
+                  "surface-container-low": "#f3f3f9",
+                  "brand-deep": "#0d4032",
+                  "on-secondary": "#ffffff",
+                  "on-primary-fixed": "#002115",
+                  "error": "#ba1a1a",
+                  "secondary-fixed-dim": "#ffb94d",
+                  "primary-fixed-dim": "#7dd8b0",
+                  "on-background": "#1a1c20",
+                  "surface-tint": "#006c4c",
+                  "inverse-on-surface": "#f0f0f6",
+                  "on-primary": "#ffffff",
+                  "on-primary-fixed-variant": "#005139",
+                  "primary-fixed": "#99f5cb",
+                  "surface-container-highest": "#e2e2e7",
+                  "brand-mid": "#0f6148",
+                  "tertiary-fixed-dim": "#bdc9c4",
+                  "error-red": "#e03131",
+                  "secondary": "#815500",
+                  "primary-container": "#127a58",
+                  "on-secondary-container": "#6a4500"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "stack-lg": "32px",
+                  "container-max": "1200px",
+                  "section-gap-mobile": "64px",
+                  "margin-mobile": "20px",
+                  "section-gap-desktop": "120px",
+                  "stack-md": "16px",
+                  "gutter": "24px",
+                  "stack-sm": "8px"
+          },
+          "fontFamily": {
+                  "headline-sm": ["Noto Sans KR"],
+                  "headline-lg-mobile": ["Noto Sans KR"],
+                  "label-md": ["Noto Sans KR"],
+                  "body-md": ["Noto Sans KR"],
+                  "headline-lg": ["Noto Sans KR"],
+                  "body-sm": ["Noto Sans KR"],
+                  "label-sm": ["Noto Sans KR"],
+                  "body-lg": ["Noto Sans KR"],
+                  "headline-md": ["Noto Sans KR"]
+          },
+          "fontSize": {
+                  "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                  "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "label-md": ["15px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                  "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "headline-lg": ["40px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                  "label-sm": ["13px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "headline-md": ["32px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+          }
+        },
+      }
+    }
+  </script>
+<style>
+    /* Hide scrollbar for horizontal scroll areas */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md antialiased pb-[56px] w-full max-w-[390px] mx-auto md:max-w-container-max relative shadow-2xl bg-white overflow-x-hidden">
+<!-- 1. HOT 트렌드 원료 Section -->
+<section class="py-section-gap-mobile bg-surface-container-low px-margin-mobile flex flex-col gap-stack-md">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-brand-deep">HOT 트렌드 원료</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">지금 시장에서 가장 많이 찾는 원료를<br/>바로 적용할 수 있습니다</p>
+</div>
+<a class="font-label-sm text-label-sm text-primary underline flex items-center gap-1" href="#">보유 원료 <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4 -mx-margin-mobile px-margin-mobile snap-x">
+<!-- Card 1 -->
+<div class="min-w-[240px] bg-surface rounded-[16px] border border-border-light overflow-hidden snap-start shrink-0 hover:shadow-lg transition-shadow">
+<div class="aspect-[4/3] w-full bg-surface-variant relative">
+<img class="w-full h-full object-cover" data-alt="A pristine white laboratory setting with a sleek glass beaker containing glowing amber liquid, illuminated by bright, cool, modern light-mode lighting. High-end corporate pharmaceutical aesthetic, sharp focus, clean composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVXuX6wObuX0anpw2SmJ46exWskj0oGQ7_WKkqwDQF6iw30ydOWiMCx2IcBkEbiXo2Aoy8Y4FJQl1I2oHmRLHmN-gaiSicjM7EkjWwz0OJLJZfwRTlD5NRowrV8EoHlE7nGRSS29XBWi-S5G6adlj-Cxn2ZQKmIgIH_tyzNMFKlrvI3plcuQnGe8E0flZ55QV9kQmObH9luKdMLoHWpTaw0wgL9aHgj_lFRlM44kSzcTY8lno_aWe8OGrOvluxcUphLAVHSkq_4U_k"/>
+<div class="absolute top-3 left-3 bg-secondary-container text-on-secondary-fixed px-2 py-1 rounded-sm font-label-sm text-label-sm">HOT 트렌드</div>
+</div>
+<div class="p-4">
+<h3 class="font-label-md text-label-md font-bold mb-1">멜라토닌</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">현대인의 수면 건강을 위한 핵심 원료. 높은 흡수율과 안정성을 자랑합니다.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[240px] bg-surface rounded-[16px] border border-border-light overflow-hidden snap-start shrink-0 hover:shadow-lg transition-shadow">
+<div class="aspect-[4/3] w-full bg-surface-variant relative">
+<img class="w-full h-full object-cover" data-alt="Close up macro photography of pristine white pharmaceutical powder on a sterile metallic surface, soft natural daylight filtering through a window, bright high-key lighting, modern clean corporate health aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCexwqCA3pkaSI9bJuli6hE3YsXfWIiWpuTSeMjvZAQ6zBiJ38Ege074eNOub4Lb36USXB_cqkUtl913u5KySasSc_vZ7rKKIJHsCsNH7Mk9_JwTsOHlvLpqBIdE3hHPvj9kf6jcQvHIoV5R7EVBfW5f1NIpN76fa3CgQDOLkHZohRPRn1zJLoO4ovHD0rr0T3aIBDz1_Avjq3EKx_Vzw064BA9PgILeUAXXL3-BEIYCFtSgeRrhlj2O27T3en7q7pTb-zKfJgpO1xK"/>
+<div class="absolute top-3 left-3 bg-secondary-fixed-dim text-on-secondary-fixed px-2 py-1 rounded-sm font-label-sm text-label-sm">슈퍼푸드</div>
+</div>
+<div class="p-4">
+<h3 class="font-label-md text-label-md font-bold mb-1">NMN</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">차세대 안티에이징 신소재. 프리미엄 제품 라인업 구축에 최적화된 원료.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[240px] bg-surface rounded-[16px] border border-border-light overflow-hidden snap-start shrink-0 hover:shadow-lg transition-shadow">
+<div class="aspect-[4/3] w-full bg-surface-variant relative">
+<img class="w-full h-full object-cover" data-alt="Vibrant botanical extracts in a series of sleek modern glass vials on a clean white countertop, shallow depth of field, bright clinical lighting, professional corporate wellness aesthetic, highly detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy1E-DIYAtNtblrgM_uAoX0aR9nX1_EVnHsfOJqRqX6L2m6wCQLoHc3P4sqSAGBQ5tXnVfqPjXf-SWJwoyUDVwiqFACJKI7HMbnA3YmWjyvNVF8coY8pr36TTUQa12M8qye49Qf0-EnHZX3Fat5pI8PTlvCWti9JlIIfXX5oTxSNw7ltyt0Q1EDFXwMoRDnO8DoPBrgPasmjx_phXv-nZg8HJSDzjMe7gKv8PV7BAO3RWXArlSwzeP0KHnlfZXeDKUb2AhmVzqLuwY"/>
+<div class="absolute top-3 left-3 bg-secondary-container text-on-secondary-fixed px-2 py-1 rounded-sm font-label-sm text-label-sm">HOT 트렌드</div>
+</div>
+<div class="p-4">
+<h3 class="font-label-md text-label-md font-bold mb-1">베르베린</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">혈당 관리 시장의 떠오르는 강자. 천연 유래 성분으로 안전한 포뮬러.</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="min-w-[240px] bg-surface rounded-[16px] border border-border-light overflow-hidden snap-start shrink-0 hover:shadow-lg transition-shadow">
+<div class="aspect-[4/3] w-full bg-surface-variant relative">
+<img class="w-full h-full object-cover" data-alt="A macro shot of a clear softgel capsule resting on a reflective white surface, bright, sterile, modern lighting, pharmaceutical precision, clean minimalistic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeAvpQrKdLKFqDCMNfIDULZu_wRIa9VdYqOnu0ECmaBBD8BAZEkKJiUFyOYsQ20zWrZtFVnuzSQaBQAeHh3QCaNBeZjM10_E7lyNaIxFfCwcuQr-9zvBrEMCSSSlpe0qWRwiR97i9R_y7pyhCibfr94FkZFHo5SGRDfRcDXRQnsA3PPHmYeq-GUFD49dHC1yvPnYUc9Dkhjd6Oc_W6RBJwkqLlgi5bxdgIu8X0V90bu28y1cIYpefiAVHbEu1RBhOCIIW-i5JOIXlJ"/>
+<div class="absolute top-3 left-3 bg-secondary-fixed-dim text-on-secondary-fixed px-2 py-1 rounded-sm font-label-sm text-label-sm">슈퍼푸드</div>
+</div>
+<div class="p-4">
+<h3 class="font-label-md text-label-md font-bold mb-1">피세틴</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">강력한 항산화 플라보노이드. 인지 기능 개선 및 노화 방지 타겟 원료.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. 생산 가능 제형 Section -->
+<section class="py-section-gap-mobile px-margin-mobile flex flex-col gap-stack-lg bg-surface">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-brand-deep">생산 가능 제형</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">7가지 제형과 6가지 포장 방식을<br/>자유롭게 조합하세요</p>
+</div>
+<!-- Forms Chips -->
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 rounded-full border border-primary text-primary bg-primary/5 font-label-md text-label-md">환</span>
+<span class="px-4 py-2 rounded-full border border-primary text-primary bg-primary/5 font-label-md text-label-md">경질캡슐</span>
+<span class="px-4 py-2 rounded-full border border-primary text-primary bg-primary/5 font-label-md text-label-md">연질캡슐</span>
+<span class="px-4 py-2 rounded-full border border-primary text-primary bg-primary/5 font-label-md text-label-md">젤리</span>
+<span class="px-4 py-2 rounded-full border border-primary text-primary bg-primary/5 font-label-md text-label-md">액상</span>
+<span class="px-4 py-2 rounded-full border border-primary text-primary bg-primary/5 font-label-md text-label-md">분말</span>
+<span class="px-4 py-2 rounded-full border border-primary text-primary bg-primary/5 font-label-md text-label-md">정제</span>
+</div>
+<!-- Packaging Chips -->
+<div>
+<h3 class="font-label-md text-label-md text-on-surface mb-3 font-bold">포장 방식</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 rounded-full border border-border-light text-on-surface-variant bg-surface-container-lowest font-label-sm text-label-sm">멀티팩</span>
+<span class="px-4 py-2 rounded-full border border-border-light text-on-surface-variant bg-surface-container-lowest font-label-sm text-label-sm">이중제형</span>
+<span class="px-4 py-2 rounded-full border border-border-light text-on-surface-variant bg-surface-container-lowest font-label-sm text-label-sm">병포장</span>
+<span class="px-4 py-2 rounded-full border border-border-light text-on-surface-variant bg-surface-container-lowest font-label-sm text-label-sm">액상포장</span>
+<span class="px-4 py-2 rounded-full border border-border-light text-on-surface-variant bg-surface-container-lowest font-label-sm text-label-sm">PTP</span>
+<span class="px-4 py-2 rounded-full border border-border-light text-on-surface-variant bg-surface-container-lowest font-label-sm text-label-sm">스틱포장</span>
+</div>
+</div>
+</section>
+<!-- 3. Certification Section -->
+<section class="py-section-gap-mobile px-margin-mobile bg-on-background text-white flex flex-col gap-stack-lg">
+<div>
+<span class="text-primary-fixed font-label-sm text-label-sm uppercase tracking-widest block mb-2">Certification</span>
+<h2 class="font-headline-sm text-headline-sm text-white">GMP · HACCP 인증 시설</h2>
+<p class="font-body-sm text-body-sm text-surface-dim mt-2">국제 표준 인증을 갖춘 자사 공장에서<br/>직접 생산합니다</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/10 p-4 rounded-[16px] border border-white/5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md font-bold">GMP</span>
+</div>
+<div class="bg-white/10 p-4 rounded-[16px] border border-white/5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md font-bold">HACCP</span>
+</div>
+<div class="bg-white/10 p-4 rounded-[16px] border border-white/5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md font-bold">ISO 9001</span>
+</div>
+<div class="bg-white/10 p-4 rounded-[16px] border border-white/5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md font-bold">ISO 22000</span>
+</div>
+<div class="bg-white/10 p-4 rounded-[16px] border border-white/5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md font-bold">ISO 14001</span>
+</div>
+<div class="bg-white/10 p-4 rounded-[16px] border border-white/5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md font-bold">ISO 45001</span>
+</div>
+</div>
+</section>
+<!-- 4. Priority Service Section -->
+<section class="py-section-gap-mobile px-margin-mobile bg-surface flex flex-col gap-stack-lg">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-brand-deep">Priority Service</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">제조를 넘어 브랜드가 팔리기까지<br/>함께합니다</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-[16px] border border-border-light shadow-sm flex flex-col gap-3">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="design_services">design_services</span>
+<span class="font-label-md text-label-md font-bold">패키지 디자인</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-[16px] border border-border-light shadow-sm flex flex-col gap-3">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md font-bold">온라인 유통 연계</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-[16px] border border-border-light shadow-sm flex flex-col gap-3">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="gavel">gavel</span>
+<span class="font-label-md text-label-md font-bold">특허 전략</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-[16px] border border-border-light shadow-sm flex flex-col gap-3">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="campaign">campaign</span>
+<span class="font-label-md text-label-md font-bold">펀딩 지원</span>
+</div>
+</div>
+</section>
+<!-- BottomNavBar (From JSON) -->
+<!-- Assuming Semantic Intent: This is a top-level page, bottom bar is relevant for conversion -->
+<nav class="fixed bottom-0 w-full z-50 h-[56px] bg-surface dark:bg-inverse-surface border-t border-border-light dark:border-outline-variant shadow-lg grid grid-cols-2 max-w-[390px] mx-auto md:max-w-container-max md:hidden">
+<!-- Tab 1: 전화문의 -->
+<a class="flex-1 flex items-center justify-center bg-surface text-on-surface h-full hover:brightness-95 transition-all" href="tel:031-000-0000">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="call">call</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">031-000-0000</span>
+</div>
+</a>
+<!-- Tab 2: 생산문의 (Active/Conversion focus) -->
+<a class="flex-1 flex items-center justify-center bg-primary text-on-primary h-full hover:brightness-95 transition-all" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary" data-icon="edit_note">edit_note</span>
+<span class="font-label-md text-label-md text-on-primary font-bold">생산문의</span>
+</div>
+</a>
+</nav>
+</body></html>
