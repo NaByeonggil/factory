@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Healthy Farm Bio - 보유 원료</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#e4f0ea",
+                        "surface-container-high": "#e8e8ed",
+                        "border-light": "#dcdee1",
+                        "ink-sub": "#6d7480",
+                        "brand-deep": "#0d4032",
+                        "tertiary-fixed": "#d9e5df",
+                        "surface-container-low": "#f3f3f9",
+                        "surface-bright": "#f9f9fe",
+                        "tertiary-fixed-dim": "#bdc9c4",
+                        "outline-variant": "#bec9c1",
+                        "inverse-surface": "#2e3035",
+                        "on-secondary-fixed-variant": "#624000",
+                        "on-background": "#1a1c20",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#4a5651",
+                        "error-red": "#e03131",
+                        "secondary-fixed": "#ffddb2",
+                        "brand-mid": "#0f6148",
+                        "on-primary-fixed-variant": "#005139",
+                        "on-secondary-fixed": "#291800",
+                        "inverse-on-surface": "#f0f0f6",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d9d9df",
+                        "on-primary-container": "#a9ffd6",
+                        "primary-container": "#127a58",
+                        "surface": "#f9f9fe",
+                        "on-secondary-container": "#6a4500",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1a1c20",
+                        "primary-fixed": "#99f5cb",
+                        "on-surface-variant": "#3e4943",
+                        "on-primary-fixed": "#002115",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#7dd8b0",
+                        "surface-variant": "#e2e2e7",
+                        "inverse-primary": "#7dd8b0",
+                        "tertiary-container": "#626e69",
+                        "background": "#f9f9fe",
+                        "on-error": "#ffffff",
+                        "secondary": "#815500",
+                        "bg-section": "#f7f8f8",
+                        "surface-container": "#ededf3",
+                        "surface-tint": "#006c4c",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#feae1b",
+                        "surface-container-highest": "#e2e2e7",
+                        "on-tertiary-fixed": "#131e1a",
+                        "secondary-fixed-dim": "#ffb94d",
+                        "primary": "#005f43",
+                        "on-tertiary-fixed-variant": "#3e4945",
+                        "error-container": "#ffdad6",
+                        "outline": "#6e7a73"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "section-gap-mobile": "64px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "container-max": "1200px",
+                        "stack-lg": "32px",
+                        "section-gap-desktop": "120px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Noto Sans KR"],
+                        "headline-lg-mobile": ["Noto Sans KR"],
+                        "body-md": ["Noto Sans KR"],
+                        "headline-lg": ["Noto Sans KR"],
+                        "headline-md": ["Noto Sans KR"],
+                        "headline-sm": ["Noto Sans KR"],
+                        "label-md": ["Noto Sans KR"],
+                        "body-lg": ["Noto Sans KR"],
+                        "body-sm": ["Noto Sans KR"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["13px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["32px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "700" }],
+                        "label-md": ["15px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col pb-[56px] md:pb-0">
+<!-- TopAppBar (Mobile & Desktop Header) -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-border-light dark:border-outline-variant shadow-sm opacity-[0.04] flex justify-between items-center px-margin-mobile h-14" style="opacity: 1;">
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full p-2 flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-brand-deep tracking-tight text-center flex-1">HEALTHY FARM BIO</h1>
+<button class="font-label-md text-label-md text-primary font-bold hover:bg-surface-container-low transition-colors px-3 py-1.5 rounded-lg active:opacity-80 duration-200">
+            생산 문의
+        </button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 max-w-container-max mx-auto w-full pt-[72px] md:pt-[100px] px-margin-mobile">
+<!-- Header Section -->
+<section class="py-stack-lg border-b border-border-light mb-stack-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-brand-deep mb-stack-sm">보유 원료</h2>
+<p class="font-body-md text-body-md text-ink-sub">헬씨팜바이오가 엄선한 고품질 특허 및 트렌드 원료입니다.</p>
+</section>
+<!-- Filter Chips (Horizontal Scroll) -->
+<section class="mb-stack-lg overflow-x-auto hide-scrollbar -mx-margin-mobile px-margin-mobile">
+<div class="flex gap-2 min-w-max pb-2">
+<button class="font-label-md text-label-md px-4 py-2 rounded-full border-2 border-brand-deep bg-primary-fixed text-brand-deep font-bold transition-all whitespace-nowrap">전체</button>
+<button class="font-label-md text-label-md px-4 py-2 rounded-full border border-border-light bg-surface text-ink-sub hover:border-brand-deep hover:text-brand-deep transition-all whitespace-nowrap">HOT 트렌드</button>
+<button class="font-label-md text-label-md px-4 py-2 rounded-full border border-border-light bg-surface text-ink-sub hover:border-brand-deep hover:text-brand-deep transition-all whitespace-nowrap">개별인정형</button>
+<button class="font-label-md text-label-md px-4 py-2 rounded-full border border-border-light bg-surface text-ink-sub hover:border-brand-deep hover:text-brand-deep transition-all whitespace-nowrap">특허보유</button>
+<button class="font-label-md text-label-md px-4 py-2 rounded-full border border-border-light bg-surface text-ink-sub hover:border-brand-deep hover:text-brand-deep transition-all whitespace-nowrap">기본</button>
+<button class="font-label-md text-label-md px-4 py-2 rounded-full border border-border-light bg-surface text-ink-sub hover:border-brand-deep hover:text-brand-deep transition-all whitespace-nowrap">슈퍼푸드</button>
+</div>
+</section>
+<!-- Ingredient Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-section-gap-mobile md:mb-section-gap-desktop">
+<!-- Card 1 -->
+<article class="group border border-border-light rounded-lg overflow-hidden bg-surface hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="aspect-[4/3] bg-primary-fixed-dim/20 flex items-center justify-center relative">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-50" data-alt="A pristine macro shot of a crystalline powder supplement ingredient resting on a clean white laboratory surface. The lighting is bright and clinical, emphasizing the purity of the raw material. Subtle reflections suggest a modern, sterile manufacturing environment. Soft focus background with a hint of green hue." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2up4amHCLZc9YFHrIvkr97dzlLTQZCAf4jUYVECOK44BNoGA_-RZObfFxamr0ewNsOBxVmp4TAOf-GJB4SYEFh35vzG25Ph8Qkd4xAQf3at8ZMMjAAdO3h-I4ARWer1LS7gf27mMIpMtXJbqpJrgCqulanX_ZYKNjM0aO2BZOyfs3DCe9D9nRS5wsfH5hTjNlI-XvcDcSVq-pT3XTeKpNwuevnOVE92oOzHuofoBNIzJByBnme5KjBA"/>
+<span class="font-headline-lg text-headline-lg text-primary/40 font-bold z-10">L</span>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="mb-2">
+<span class="inline-block font-label-sm text-label-sm bg-error-container text-on-error-container px-2 py-0.5 rounded text-xs font-bold">HOT</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2 line-clamp-1">Lactobacillus (유산균)</h3>
+<p class="font-body-sm text-body-sm text-ink-sub line-clamp-3 mt-auto">
+                        장 건강과 면역력 증진에 도움을 주는 대표적인 프로바이오틱스 원료입니다. 다양한 균주 조합을 통해 맞춤형 제품 개발이 가능하며, 높은 생존율을 보장하는 코팅 기술이 적용되어 있습니다.
+                    </p>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="group border border-border-light rounded-lg overflow-hidden bg-surface hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="aspect-[4/3] bg-secondary-fixed/20 flex items-center justify-center relative">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-50" data-alt="Close-up of golden viscous liquid extract dripping from a glass pipette into a clear beaker. Set against a clean, white pharmaceutical lab background. The lighting is crisp and highlights the amber tones of the extract, conveying high quality and concentration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBceHbuRozb-VXDdJwDlij7hCHXJLq4z9vFa3flCj4UHhGDdxx5a97xcbJi0FmGsnNjLZl1dm4wmoAwGrXdVxECib5rqg3OiX6Os57LjFrUkNX3NIhRU03g6eFcQF-DqgnV4-bzR6vlLxMmwbrInY7yt48VvbpfRnySSUmzCaBiYaCQ8GxvIVm-I_EKtnHyCgPuhYXORYpfQHdrf2zbeJ7qjXYLtJEhe7xtCe_WhDs5_XY2FamWNQXmeQ"/>
+<span class="font-headline-lg text-headline-lg text-secondary/40 font-bold z-10">R</span>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="mb-2">
+<span class="inline-block font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded text-xs font-bold">특허보유</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2 line-clamp-1">Red Ginseng Extract</h3>
+<p class="font-body-sm text-body-sm text-ink-sub line-clamp-3 mt-auto">
+                        국내산 6년근 홍삼을 사용하여 진세노사이드 함량을 극대화한 농축액입니다. 독자적인 추출 공법으로 유효성분 파괴를 최소화하였으며, 면역력 증진 및 피로 개선에 탁월한 효과를 기대할 수 있습니다.
+                    </p>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="group border border-border-light rounded-lg overflow-hidden bg-surface hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="aspect-[4/3] bg-primary-container/10 flex items-center justify-center relative">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-50" data-alt="A small pile of fine, bright green spirulina powder neatly arranged on a white ceramic dish. The surrounding environment is minimalistic and well-lit with natural-looking daylight, emphasizing the organic and raw nature of the superfood ingredient within a clinical setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-0L-1PS8jUxhSQoL_Y9E8dysXdpUqEf56n2stQO_oR7TD8mTKbwmUwdZ5US8IDkL8m9XWydi4RCl_QON_Vp0qjINbBtPWVzBW-sEMDE5bjjLC8FxbN8tQh9bpPmllgHd9u0Khpc7uYT7H7DrhGYBHiyPYAQXMoF_87ffIINPeFeEaPSlx6jtIK2vR-SQlUEjImAHDpd71cK2pYSeFK8VbXrEz2QayJdXk4dRnTdSY5gLLUKty1dRzSw"/>
+<span class="font-headline-lg text-headline-lg text-primary/40 font-bold z-10">S</span>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="mb-2">
+<span class="inline-block font-label-sm text-label-sm bg-surface-container-high text-on-surface px-2 py-0.5 rounded text-xs font-bold border border-border-light">슈퍼푸드</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2 line-clamp-1">Spirulina Powder</h3>
+<p class="font-body-sm text-body-sm text-ink-sub line-clamp-3 mt-auto">
+                        단백질, 비타민, 미네랄 등 필수 영양소가 풍부하게 함유된 고영양 원료입니다. 항산화 작용과 피부 건강 개선에 도움을 줄 수 있으며, 정제, 캡슐, 분말 등 다양한 제형에 적용이 용이합니다.
+                    </p>
+</div>
+</article>
+</section>
+<!-- Load More -->
+<div class="flex justify-center mb-section-gap-mobile md:mb-section-gap-desktop">
+<button class="font-label-md text-label-md text-primary border-2 border-primary px-8 py-3 rounded-lg hover:bg-primary hover:text-on-primary transition-colors flex items-center gap-2">
+                더보기 <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 h-[56px] border-t border-border-light dark:border-outline-variant shadow-lg grid grid-cols-2 md:hidden">
+<button class="flex-1 flex items-center justify-center bg-surface dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant h-full hover:brightness-95 active:scale-95 duration-150 gap-2 border-r border-border-light">
+<span class="material-symbols-outlined">call</span>
+<span class="font-label-md text-label-md">전화문의</span>
+</button>
+<button class="flex-1 flex items-center justify-center bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container h-full hover:brightness-95 active:scale-95 duration-150 gap-2">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label-md text-label-md font-bold">생산문의</span>
+</button>
+</nav>
+<!-- Footer (Desktop & Content Bottom) -->
+<footer class="w-full pt-16 pb-24 bg-inverse-surface dark:bg-on-background text-inverse-on-surface dark:text-surface-dim md:mb-0 mb-[56px]">
+<div class="max-w-container-max mx-auto px-margin-mobile flex flex-col gap-stack-lg">
+<h2 class="text-headline-sm font-headline-sm text-white mb-4">HEALTHY FARM BIO</h2>
+<div class="flex flex-col md:flex-row gap-4 mb-4">
+<a class="font-label-sm text-label-sm text-surface-variant hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">이용약관</a>
+<a class="font-label-sm text-label-sm text-surface-variant hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">개인정보처리방침</a>
+<a class="font-label-sm text-label-sm text-surface-variant hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">이메일무단수집거부</a>
+</div>
+<p class="font-body-sm text-body-sm text-surface-dim opacity-70">© 2024 Healthy Farm Bio. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

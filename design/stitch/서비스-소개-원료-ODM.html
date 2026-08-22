@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Raw Material ODM - Healthy Farm Bio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "error-red": "#e03131",
+                        "surface-container-highest": "#e2e2e7",
+                        "surface": "#f9f9fe",
+                        "on-tertiary-fixed-variant": "#3e4945",
+                        "secondary": "#815500",
+                        "on-tertiary-container": "#e4f0ea",
+                        "border-light": "#dcdee1",
+                        "secondary-fixed": "#ffddb2",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005139",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d9d9df",
+                        "on-background": "#1a1c20",
+                        "on-secondary-fixed-variant": "#624000",
+                        "primary": "#005f43",
+                        "bg-section": "#f7f8f8",
+                        "secondary-container": "#feae1b",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bec9c1",
+                        "primary-container": "#127a58",
+                        "on-surface-variant": "#3e4943",
+                        "on-primary-fixed": "#002115",
+                        "brand-deep": "#0d4032",
+                        "inverse-primary": "#7dd8b0",
+                        "surface-container-high": "#e8e8ed",
+                        "on-secondary-fixed": "#291800",
+                        "tertiary-container": "#626e69",
+                        "on-primary-container": "#a9ffd6",
+                        "inverse-surface": "#2e3035",
+                        "brand-mid": "#0f6148",
+                        "surface-variant": "#e2e2e7",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9fe",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a4500",
+                        "tertiary": "#4a5651",
+                        "outline": "#6e7a73",
+                        "ink-sub": "#6d7480",
+                        "surface-bright": "#f9f9fe",
+                        "inverse-on-surface": "#f0f0f6",
+                        "tertiary-fixed": "#d9e5df",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f3f3f9",
+                        "tertiary-fixed-dim": "#bdc9c4",
+                        "on-tertiary-fixed": "#131e1a",
+                        "surface-container": "#ededf3",
+                        "on-surface": "#1a1c20",
+                        "primary-fixed": "#99f5cb",
+                        "surface-tint": "#006c4c",
+                        "primary-fixed-dim": "#7dd8b0",
+                        "secondary-fixed-dim": "#ffb94d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "section-gap-desktop": "120px",
+                        "section-gap-mobile": "64px",
+                        "gutter": "24px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Noto Sans KR"],
+                        "headline-sm": ["Noto Sans KR"],
+                        "label-md": ["Noto Sans KR"],
+                        "label-sm": ["Noto Sans KR"],
+                        "headline-lg-mobile": ["Noto Sans KR"],
+                        "body-md": ["Noto Sans KR"],
+                        "body-sm": ["Noto Sans KR"],
+                        "body-lg": ["Noto Sans KR"],
+                        "headline-lg": ["Noto Sans KR"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "700" }],
+                        "label-md": ["15px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-sm": ["13px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f9f9fe; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background pb-[56px] md:pb-0">
+<!-- TopAppBar (JSON) -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-sm opacity-[0.04] border-b border-border-light dark:border-outline-variant flex justify-between items-center px-margin-mobile h-14 w-full transition-colors hover:bg-surface-container-low">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer mr-2">menu</span>
+<span class="font-headline-sm text-headline-sm text-brand-deep dark:text-primary-fixed tracking-tight">HEALTHY FARM BIO</span>
+</div>
+<div class="flex items-center">
+<span class="text-primary font-bold cursor-pointer font-label-md text-label-md">생산 문의</span>
+</div>
+</header>
+<main class="pt-14 pb-16">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile pt-12 md:pt-24 pb-12 md:pb-24">
+<div class="flex flex-col items-center text-center">
+<span class="bg-primary/10 text-primary font-label-sm text-label-sm px-3 py-1 rounded-full mb-4">원료 ODM</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-brand-deep mb-6">독자적인 원료 개발, 성공적인 브랜드의 시작입니다.</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mb-8">
+                    자연 유래 소재부터 고기능성 특허 원료까지, 고객사의 브랜드 콘셉트와 타겟에 최적화된 독자적인 원료를 연구 개발하여 제공합니다. 차별화된 원료로 시장 경쟁력을 확보하세요.
+                </p>
+<div class="w-full max-w-4xl rounded-xl overflow-hidden shadow-sm border border-border-light">
+<img class="w-full h-[300px] md:h-[450px] object-cover" data-alt="A pristine, modern pharmaceutical laboratory environment characterized by sleek stainless steel surfaces and advanced glass equipment. The scene is softly illuminated with bright, even white light, reflecting off the clean surfaces, creating a sterile yet inviting atmosphere. Subtle green accents in the background hint at the natural origin of the raw materials being researched, embodying a modern corporate health aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0bENKqD8WMT7KRa3bTM1M1k3Z6PHSzTjhzZvAmYRpHdNiWn4Ao6_z5lz4OYKYYkL_ZMtyoJqCPum05IO4B3sgxs-ge9zWPdU0QL0bCIF5kb2pCAHeXlDBmSkwvmOnV2kpPBpAuuttfBVGjCUb0bdk-TCR8n11UfQ1gf5DFzNORnwLUkGJuRNC0ahwKm-hXkggcYbfsm0Y30mdvQrY8MEULHtk1dPSAREla4X82jsFcfdSXXez_mhqcw"/>
+</div>
+</div>
+</section>
+<!-- Features Grid -->
+<section class="bg-bg-section py-16 md:py-24">
+<div class="max-w-container-max mx-auto px-margin-mobile">
+<div class="text-center mb-12">
+<h2 class="font-headline-md text-headline-md text-brand-deep mb-4">원료 개발 역량</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">다양한 원료 소싱부터 고도화된 추출 및 발효 기술까지.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Feature Card 1 -->
+<div class="bg-surface rounded-xl p-6 border border-border-light hover:shadow-lg transition-shadow duration-300">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2">천연물 추출</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            자연 유래 식물성 원료에서 유효 성분을 파괴 없이 안전하게 추출하는 공법을 적용합니다. 안정성과 효능을 극대화한 원료를 제공합니다.
+                        </p>
+</div>
+<!-- Feature Card 2 -->
+<div class="bg-surface rounded-xl p-6 border border-border-light hover:shadow-lg transition-shadow duration-300">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary">science</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2">발효 및 바이오 컨버전</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            미생물을 활용한 발효 기술을 통해 원료의 흡수율을 높이고 새로운 효능을 창출합니다. 고기능성 프리미엄 원료 개발에 적합합니다.
+                        </p>
+</div>
+<!-- Feature Card 3 -->
+<div class="bg-surface rounded-xl p-6 border border-border-light hover:shadow-lg transition-shadow duration-300">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2">특허 원료 공동 개발</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            고객사만의 독점적인 특허 원료 개발을 지원합니다. 기획부터 임상, 특허 출원까지 전 과정을 함께하여 강력한 브랜드 자산을 구축합니다.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Bento -->
+<section class="max-w-container-max mx-auto px-margin-mobile py-16 md:py-24">
+<h2 class="font-headline-md text-headline-md text-brand-deep mb-8 text-center">개발 프로세스</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl border border-border-light">
+<span class="text-primary font-bold text-lg mb-2 block">01</span>
+<h4 class="font-label-md text-label-md font-bold mb-2">요구사항 분석</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">브랜드 컨셉 및 타겟 효능 정의</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-border-light">
+<span class="text-primary font-bold text-lg mb-2 block">02</span>
+<h4 class="font-label-md text-label-md font-bold mb-2">원료 탐색 및 설계</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">문헌 조사 및 유효 성분 프로파일링</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-border-light">
+<span class="text-primary font-bold text-lg mb-2 block">03</span>
+<h4 class="font-label-md text-label-md font-bold mb-2">샘플링 및 효능 검증</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">랩스케일 제조 및 in-vitro 테스트</p>
+</div>
+<div class="bg-primary p-6 rounded-xl border border-primary text-on-primary">
+<span class="text-on-primary-container font-bold text-lg mb-2 block">04</span>
+<h4 class="font-label-md text-label-md font-bold mb-2 text-white">생산 및 품질 관리</h4>
+<p class="font-body-sm text-body-sm text-on-primary/80">스케일업, 안정성 테스트 및 양산</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (JSON) - Mobile Only -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 h-[56px] border-t border-border-light dark:border-outline-variant shadow-lg grid grid-cols-2 w-full h-full bg-surface dark:bg-inverse-surface">
+<div class="flex-1 flex flex-col items-center justify-center bg-surface dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant h-full hover:brightness-95 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span class="font-label-sm text-[11px] mt-1">전화문의</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container h-full hover:brightness-95 transition-colors cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+<span class="font-label-sm text-[11px] mt-1">생산문의</span>
+</div>
+</nav>
+<!-- Footer (JSON) -->
+<footer class="w-full pt-16 pb-24 bg-inverse-surface dark:bg-on-background text-inverse-on-surface dark:text-surface-dim">
+<div class="max-w-container-max mx-auto px-margin-mobile flex flex-col gap-stack-lg">
+<div class="text-headline-sm font-headline-sm text-white mb-4">HEALTHY FARM BIO</div>
+<div class="flex gap-4 flex-wrap">
+<a class="font-label-sm text-label-sm text-surface-variant hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">이용약관</a>
+<a class="font-label-sm text-label-sm text-surface-variant hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">개인정보처리방침</a>
+<a class="font-label-sm text-label-sm text-surface-variant hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">이메일무단수집거부</a>
+</div>
+<div class="font-body-sm text-body-sm text-surface-variant mt-8">
+                © 2024 Healthy Farm Bio. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

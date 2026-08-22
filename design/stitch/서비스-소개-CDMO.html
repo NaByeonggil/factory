@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CDMO Service - HEALTHY FARM BIO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "error-red": "#e03131",
+                        "surface-container-highest": "#e2e2e7",
+                        "surface": "#f9f9fe",
+                        "on-tertiary-fixed-variant": "#3e4945",
+                        "secondary": "#815500",
+                        "on-tertiary-container": "#e4f0ea",
+                        "border-light": "#dcdee1",
+                        "secondary-fixed": "#ffddb2",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005139",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d9d9df",
+                        "on-background": "#1a1c20",
+                        "on-secondary-fixed-variant": "#624000",
+                        "primary": "#005f43",
+                        "bg-section": "#f7f8f8",
+                        "secondary-container": "#feae1b",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bec9c1",
+                        "primary-container": "#127a58",
+                        "on-surface-variant": "#3e4943",
+                        "on-primary-fixed": "#002115",
+                        "brand-deep": "#0d4032",
+                        "inverse-primary": "#7dd8b0",
+                        "surface-container-high": "#e8e8ed",
+                        "on-secondary-fixed": "#291800",
+                        "tertiary-container": "#626e69",
+                        "on-primary-container": "#a9ffd6",
+                        "inverse-surface": "#2e3035",
+                        "brand-mid": "#0f6148",
+                        "surface-variant": "#e2e2e7",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9fe",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a4500",
+                        "tertiary": "#4a5651",
+                        "outline": "#6e7a73",
+                        "ink-sub": "#6d7480",
+                        "surface-bright": "#f9f9fe",
+                        "inverse-on-surface": "#f0f0f6",
+                        "tertiary-fixed": "#d9e5df",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f3f3f9",
+                        "tertiary-fixed-dim": "#bdc9c4",
+                        "on-tertiary-fixed": "#131e1a",
+                        "surface-container": "#ededf3",
+                        "on-surface": "#1a1c20",
+                        "primary-fixed": "#99f5cb",
+                        "surface-tint": "#006c4c",
+                        "primary-fixed-dim": "#7dd8b0",
+                        "secondary-fixed-dim": "#ffb94d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "section-gap-desktop": "120px",
+                        "section-gap-mobile": "64px",
+                        "gutter": "24px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Noto Sans KR"],
+                        "headline-sm": ["Noto Sans KR"],
+                        "label-md": ["Noto Sans KR"],
+                        "label-sm": ["Noto Sans KR"],
+                        "headline-lg-mobile": ["Noto Sans KR"],
+                        "body-md": ["Noto Sans KR"],
+                        "body-sm": ["Noto Sans KR"],
+                        "body-lg": ["Noto Sans KR"],
+                        "headline-lg": ["Noto Sans KR"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "700" }],
+                        "label-md": ["15px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-sm": ["13px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased pb-[56px] md:pb-0 pt-14 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-border-light dark:border-outline-variant shadow-sm opacity-[0.04] flex justify-between items-center px-margin-mobile h-14 transition-all hover:bg-surface-container-low duration-200">
+<div class="flex items-center gap-4">
+<button aria-label="Menu" class="text-primary dark:text-primary-fixed hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-sm text-headline-sm text-brand-deep dark:text-primary-fixed tracking-tight">HEALTHY FARM BIO</span>
+</div>
+<div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:brightness-95 transition-all">생산 문의</button>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative w-full overflow-hidden bg-gradient-to-br from-surface to-tertiary-container py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile">
+<div class="max-w-container-max mx-auto text-center z-10 relative">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-brand-deep mb-stack-md">CDMO Service</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    맞춤형 연구 개발부터 생산까지, 고객의 성공적인 제품 출시를 위한 토탈 솔루션을 제공합니다.
+                </p>
+</div>
+<div class="absolute inset-0 z-0 opacity-20" data-alt="A macro shot of a modern, sterile pharmaceutical manufacturing environment. Stainless steel equipment gleaming under bright, cool-toned cleanroom lighting. The scene emphasizes precision, cleanliness, and advanced technology. The color palette features metallic silver, crisp white, and subtle hints of deep corporate green (#0d4032) in the background. The mood is highly professional, trustworthy, and efficient, reflecting a top-tier CDMO facility." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVjFUF7vAt0_rdtWbelIVX0-9Hjktk-7P-8QxDJ06qD3s_aJVq0URTnAohALbLv0vft1XVR8lkKoM5BX3XPYWM5uXFyE8iJM4nSNGEr9SBU1QfWTt5e0czqwq8C62KLeqETnD8gE-sPgHRs6OhdfREroe2D1UPtLGyDrHY7JFNvJ-TsXd7Yp0K2V68GJ3yxNfBnDb9sO2OwQ7gX_4luVGHvoT7fmEzTIeEUT3qbkHbI1M-DKuJJ3CvVA'); background-size: cover; background-position: center;"></div>
+</section>
+<!-- Advantages Section -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-surface px-margin-mobile">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-brand-deep">CDMO 강점</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Advantage 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-light shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">science</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">R&amp;D 전문성</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">다년간의 축적된 연구 데이터를 바탕으로 최적의 제형과 포뮬러를 개발합니다.</p>
+</div>
+<!-- Advantage 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-light shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">factory</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">첨단 생산 설비</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">CGMP 기준을 충족하는 최신식 설비로 고품질 대량 생산이 가능합니다.</p>
+</div>
+<!-- Advantage 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-light shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">엄격한 품질 관리</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">원료 입고부터 완제품 출하까지 철저한 품질 검증 시스템을 운영합니다.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Section (4 Steps) -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-bg-section px-margin-mobile">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-brand-deep mb-2">진행 절차</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">체계적인 4단계 프로세스로 빠르고 정확하게 제품을 완성합니다.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter relative">
+<!-- Step 1 -->
+<div class="relative bg-surface-container-lowest p-6 rounded-xl border border-border-light z-10 flex flex-col h-full">
+<span class="font-headline-md text-headline-md text-primary opacity-20 mb-2">01</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">상담 및 기획</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">고객 니즈 분석 및 제품 컨셉 도출</p>
+</div>
+<!-- Step 2 -->
+<div class="relative bg-surface-container-lowest p-6 rounded-xl border border-border-light z-10 flex flex-col h-full">
+<span class="font-headline-md text-headline-md text-primary opacity-20 mb-2">02</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">연구 및 개발</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">샘플 제조 및 안정성 테스트 진행</p>
+</div>
+<!-- Step 3 -->
+<div class="relative bg-surface-container-lowest p-6 rounded-xl border border-border-light z-10 flex flex-col h-full">
+<span class="font-headline-md text-headline-md text-primary opacity-20 mb-2">03</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">생산 및 포장</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">본생산 진행 및 맞춤형 패키징</p>
+</div>
+<!-- Step 4 -->
+<div class="relative bg-surface-container-lowest p-6 rounded-xl border border-border-light z-10 flex flex-col h-full">
+<span class="font-headline-md text-headline-md text-primary opacity-20 mb-2">04</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">품질검사 및 납품</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">최종 검수 후 안전한 출고</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Banner -->
+<section class="bg-brand-deep py-16 px-margin-mobile text-center">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-headline-md text-headline-md text-white mb-4">성공적인 브랜드 런칭, 지금 시작하세요</h2>
+<p class="font-body-lg text-body-lg text-surface-dim mb-8">전문 컨설턴트가 빠르고 정확한 상담을 도와드립니다.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-primary text-white font-label-md text-label-md px-8 py-3 rounded-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">edit_note</span>
+                        생산 문의하기
+                    </button>
+<button class="bg-transparent border border-white text-white font-label-md text-label-md px-8 py-3 rounded-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">call</span>
+                        전화 상담예약
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 h-[56px] bg-surface dark:bg-inverse-surface border-t border-border-light dark:border-outline-variant shadow-lg grid grid-cols-2">
+<button class="flex-1 flex items-center justify-center bg-surface dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant h-full hover:brightness-95 active:scale-95 transition-all duration-150 gap-2 flex-col">
+<span class="material-symbols-outlined text-lg">call</span>
+<span class="font-label-sm text-label-sm">전화문의</span>
+</button>
+<button class="flex-1 flex items-center justify-center bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container h-full hover:brightness-95 active:scale-95 transition-all duration-150 gap-2 flex-col">
+<span class="material-symbols-outlined text-lg">edit_note</span>
+<span class="font-label-sm text-label-sm font-bold">생산문의</span>
+</button>
+</nav>
+<!-- Footer -->
+<footer class="w-full pt-16 pb-24 md:pb-16 bg-inverse-surface dark:bg-on-background max-w-container-max mx-auto px-margin-mobile flex flex-col gap-stack-lg border-t-0">
+<div>
+<h2 class="text-headline-sm font-headline-sm text-white mb-4">HEALTHY FARM BIO</h2>
+<div class="flex flex-wrap gap-4 text-surface-variant font-label-sm text-label-sm">
+<a class="hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">이용약관</a>
+<a class="hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">개인정보처리방침</a>
+<a class="hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed" href="#">이메일무단수집거부</a>
+</div>
+</div>
+<p class="text-inverse-on-surface dark:text-surface-dim font-body-sm text-body-sm">
+            © 2024 Healthy Farm Bio. All rights reserved.
+        </p>
+</footer>
+</body></html>

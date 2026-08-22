@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEALTHY FARM BIO - 소식</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "error-red": "#e03131",
+                        "surface-container-highest": "#e2e2e7",
+                        "surface": "#f9f9fe",
+                        "on-tertiary-fixed-variant": "#3e4945",
+                        "secondary": "#815500",
+                        "on-tertiary-container": "#e4f0ea",
+                        "border-light": "#dcdee1",
+                        "secondary-fixed": "#ffddb2",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005139",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d9d9df",
+                        "on-background": "#1a1c20",
+                        "on-secondary-fixed-variant": "#624000",
+                        "primary": "#005f43",
+                        "bg-section": "#f7f8f8",
+                        "secondary-container": "#feae1b",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bec9c1",
+                        "primary-container": "#127a58",
+                        "on-surface-variant": "#3e4943",
+                        "on-primary-fixed": "#002115",
+                        "brand-deep": "#0d4032",
+                        "inverse-primary": "#7dd8b0",
+                        "surface-container-high": "#e8e8ed",
+                        "on-secondary-fixed": "#291800",
+                        "tertiary-container": "#626e69",
+                        "on-primary-container": "#a9ffd6",
+                        "inverse-surface": "#2e3035",
+                        "brand-mid": "#0f6148",
+                        "surface-variant": "#e2e2e7",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9fe",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a4500",
+                        "tertiary": "#4a5651",
+                        "outline": "#6e7a73",
+                        "ink-sub": "#6d7480",
+                        "surface-bright": "#f9f9fe",
+                        "inverse-on-surface": "#f0f0f6",
+                        "tertiary-fixed": "#d9e5df",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f3f3f9",
+                        "tertiary-fixed-dim": "#bdc9c4",
+                        "on-tertiary-fixed": "#131e1a",
+                        "surface-container": "#ededf3",
+                        "on-surface": "#1a1c20",
+                        "primary-fixed": "#99f5cb",
+                        "surface-tint": "#006c4c",
+                        "primary-fixed-dim": "#7dd8b0",
+                        "secondary-fixed-dim": "#ffb94d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "section-gap-desktop": "120px",
+                        "section-gap-mobile": "64px",
+                        "gutter": "24px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Noto Sans KR"],
+                        "headline-sm": ["Noto Sans KR"],
+                        "label-md": ["Noto Sans KR"],
+                        "label-sm": ["Noto Sans KR"],
+                        "headline-lg-mobile": ["Noto Sans KR"],
+                        "body-md": ["Noto Sans KR"],
+                        "body-sm": ["Noto Sans KR"],
+                        "body-lg": ["Noto Sans KR"],
+                        "headline-lg": ["Noto Sans KR"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "700" }],
+                        "label-md": ["15px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-sm": ["13px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-[56px] md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-border-light dark:border-outline-variant shadow-sm opacity-[0.04] flex justify-between items-center px-margin-mobile h-14 w-full">
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-colors p-2 rounded-full focus:outline-none">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-brand-deep dark:text-primary-fixed tracking-tight truncate max-w-[50%] text-center">
+            HEALTHY FARM BIO
+        </h1>
+<button class="text-primary dark:text-primary-fixed font-bold hover:bg-surface-container-low transition-colors px-3 py-1.5 rounded-lg opacity-80 duration-200">
+            생산 문의
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-14 w-full max-w-container-max mx-auto md:px-gutter px-margin-mobile">
+<!-- Page Header -->
+<section class="py-12 md:py-16 flex flex-col items-center text-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-brand-deep mb-4">커뮤니티</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">헬씨팜바이오의 새로운 소식과 다양한 활동을 만나보세요.</p>
+</section>
+<!-- Navigation Tabs -->
+<nav class="flex overflow-x-auto whitespace-nowrap border-b border-border-light mb-8 no-scrollbar">
+<button class="px-6 py-3 font-label-md text-label-md text-primary font-bold border-b-2 border-primary mr-2">소식</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors mr-2">공지</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors mr-2">ESG 경영</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors">공장 투어</button>
+</nav>
+<!-- News List (List View) -->
+<section class="flex flex-col gap-stack-lg mb-section-gap-mobile md:mb-section-gap-desktop">
+<!-- News Item 1 -->
+<article class="flex flex-col md:flex-row gap-6 bg-surface rounded-xl p-4 md:p-6 border border-border-light hover:shadow-lg transition-shadow duration-300">
+<div class="w-full md:w-1/3 aspect-[4/3] rounded-lg overflow-hidden shrink-0 bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="A modern pharmaceutical manufacturing facility interior, brightly lit with soft white light, showcasing pristine stainless steel equipment and workers in white cleanroom suits. The atmosphere is sterile, professional, and highly advanced, reflecting a premium health and wellness corporate identity. Deep green brand accents subtly integrated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBtsZi-2wQwJN0kAzONEQjKsqoGBPQt2l40_vEXRFRArjZ9_zeDsdJxciU_KYIwo8HdXOBb19ZrerRmTrCeVc2XlantBmRLKRPasb63DFCD2HchUghgHmRFAvOh7_ptaU9ba-R6eVpseM9a6cX8xF7gr6xJFkteFlgFch_R8ke5419Z2rq1KDn2HvxJdEL4uuT2TOfYjfJP4yvImChlKU8BPatCXFdCnYEu_oOQzHAf9ujvU5RzXKS8A"/>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<span class="inline-block px-3 py-1 bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm rounded-full mb-3 self-start border border-border-light">소식</span>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2 line-clamp-2">건강기능식품 GMP 인증 시설 확장 및 설비 투자 완료</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-3">최고의 품질을 위해 최신 설비를 도입하고 생산 라인을 대폭 확장했습니다. 이를 통해 생산 효율성을 높이고 고객의 다양한 니즈에 더욱 신속하게 대응할 수 있게 되었습니다.</p>
+<span class="font-label-sm text-label-sm text-ink-sub mt-auto">2024.05.20</span>
+</div>
+</article>
+<!-- News Item 2 -->
+<article class="flex flex-col md:flex-row gap-6 bg-surface rounded-xl p-4 md:p-6 border border-border-light hover:shadow-lg transition-shadow duration-300">
+<div class="w-full md:w-1/3 aspect-[4/3] rounded-lg overflow-hidden shrink-0 bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="A group of corporate professionals in a modern, well-lit boardroom, discussing wellness product formulations. The environment is sleek, incorporating natural wood elements and soft daylight, reflecting transparency and professionalism. Key brand colors of deep green and crisp white dominate the scene." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeT95YEzvYgFDVWV9f4qkLANcvG0UXCQcsxdCyjISh9QRfOlBqAwV-YtxrIVY-5-2AIRXd3zHC2W6ev7jg2hZpLG1Iz4s3ALqYfpaysggXQph4pE8HnEgwm6Oftd_vtzHwgOw-bN19pnfvFQbrJqECcKhkMfVBmPyQLyFKr3Ho6dlaVeIgnmcPFQajIgNgt2LWehW1TGqDSR5meE8kR-_CTJUFNpL48FVjLQvEhaYqv3fNFboZmr3UlA"/>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<span class="inline-block px-3 py-1 bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm rounded-full mb-3 self-start border border-border-light">소식</span>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2 line-clamp-2">2024 서울 국제 식품 산업대전 참가 성공적 마무리</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-3">다양한 혁신적인 제품과 차별화된 OEM/ODM 서비스를 선보이며 많은 바이어와 관람객들의 뜨거운 호응을 얻었습니다.</p>
+<span class="font-label-sm text-label-sm text-ink-sub mt-auto">2024.05.15</span>
+</div>
+</article>
+<!-- News Item 3 -->
+<article class="flex flex-col md:flex-row gap-6 bg-surface rounded-xl p-4 md:p-6 border border-border-light hover:shadow-lg transition-shadow duration-300">
+<div class="w-full md:w-1/3 aspect-[4/3] rounded-lg overflow-hidden shrink-0 bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="Close-up of high-quality raw ingredients like ginseng and herbal extracts arranged neatly on a sterile white lab counter next to modern laboratory glassware. The lighting is bright and clinical, emphasizing purity, safety, and scientific formulation in a health manufacturing context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkdCSTuSGMvO_5Z9bJxL8BeTtdUV9RLUKQxa_SepMzt2g4JfOff2De1HNrLSfL2n2iP7u4Wu7TYYJkA-srCn0YBmow8hR02PY-6_cuaFV7oDtG3yzigtvckhpE3gbAfqfflLvICplO8xohG34M9ab2ezSiur9qokD_pBXEjdnWOop1wPj1vP-HZz2RAyh0zM-f6cr5PbClWI4okjI5qsoXaNPaiq9iWqW_KPgO-plf-_KmhaRS3zv9PQ"/>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<span class="inline-block px-3 py-1 bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm rounded-full mb-3 self-start border border-border-light">소식</span>
+<h3 class="font-headline-sm text-headline-sm text-brand-deep mb-2 line-clamp-2">신규 개별인정형 원료 개발 국책 과제 선정</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-3">헬씨팜바이오 연구소의 우수한 R&amp;D 역량을 인정받아 혁신적인 신소재 개발을 위한 국책 과제 주관 기관으로 최종 선정되었습니다.</p>
+<span class="font-label-sm text-label-sm text-ink-sub mt-auto">2024.04.02</span>
+</div>
+</article>
+</section>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-2 mb-section-gap-mobile md:mb-section-gap-desktop">
+<button class="p-2 border border-border-light rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center font-label-md text-label-md bg-primary text-on-primary rounded-lg shadow-sm">1</button>
+<button class="w-10 h-10 flex items-center justify-center font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors">3</button>
+<button class="p-2 border border-border-light rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface dark:bg-inverse-surface fixed bottom-0 w-full z-50 h-[56px] border-t border-border-light dark:border-outline-variant shadow-lg grid grid-cols-2 w-full h-full">
+<button class="flex-1 flex items-center justify-center bg-surface dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant h-full hover:brightness-95 transition-all">
+<span class="material-symbols-outlined mr-2" data-icon="call">call</span>
+<span class="font-label-md text-label-md text-primary dark:text-primary-fixed">전화문의</span>
+</button>
+<button class="flex-1 flex items-center justify-center bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container h-full hover:brightness-95 transition-all opacity-100">
+<span class="material-symbols-outlined mr-2" data-icon="edit_note">edit_note</span>
+<span class="font-label-md text-label-md">생산문의</span>
+</button>
+</nav>
+<!-- Footer -->
+<footer class="bg-inverse-surface dark:bg-on-background w-full pt-16 pb-24 md:pb-16 mt-section-gap-desktop">
+<div class="max-w-container-max mx-auto px-margin-mobile flex flex-col gap-stack-lg">
+<h2 class="text-headline-sm font-headline-sm text-white mb-4">HEALTHY FARM BIO</h2>
+<div class="flex flex-wrap gap-4 text-surface-variant font-label-sm text-label-sm">
+<a class="hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed outline-none rounded-sm" href="#">이용약관</a>
+<a class="hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed outline-none rounded-sm" href="#">개인정보처리방침</a>
+<a class="hover:text-white transition-colors focus:ring-1 focus:ring-primary-fixed outline-none rounded-sm" href="#">이메일무단수집거부</a>
+</div>
+<p class="font-body-sm text-body-sm text-inverse-on-surface dark:text-surface-dim opacity-70">
+                © 2024 Healthy Farm Bio. All rights reserved.
+            </p>
+</div>
+</footer>
+</body></html>
