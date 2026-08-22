@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# 필요한 환경변수 목록은 커밋합니다 (값은 전부 placeholder)
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +41,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# 업로드된 첨부파일 (로컬 스토리지 드라이버)
+/storage
+
+# prisma init 이 내려받는 AI 에이전트 스킬 문서 (재생성 가능)
+/.agents
+/.claude
+/.windsurf
+/skills-lock.json

@@ -1,0 +1,659 @@
+{
+  "meta": {
+    "siteName": "FASTLAB",
+    "defaultTitle": "Health Functional Food OEM & ODM Manufacturer | FASTLAB",
+    "defaultDescription": "26 years of manufacturing in GMP/HACCP certified facilities. One-stop OEM, ODM and CDMO for health functional foods — from raw material to design and distribution."
+  },
+  "nav": {
+    "about": "About",
+    "aboutCompany": "Company",
+    "aboutRnd": "R&D Center",
+    "aboutQc": "Quality Control",
+    "service": "OEM/ODM",
+    "serviceFinished": "Finished Products",
+    "serviceMaterial": "Raw Materials",
+    "cdmo": "CDMO",
+    "dtc": "Personalized Nutrition",
+    "pet": "Pet Products",
+    "ingredients": "Ingredients",
+    "portfolio": "Portfolio",
+    "community": "Community",
+    "news": "News",
+    "esg": "ESG",
+    "factoryTour": "Factory Tour",
+    "inquiry": "Get a Quote"
+  },
+  "home": {
+    "heroEyebrow": "Health Functional Food OEM · ODM · CDMO",
+    "heroTitle": "From your idea\nto a finished product, fast",
+    "heroDescription": "Whether you are launching your first brand or scaling an existing one — planning, ingredients, production, design and distribution in one place.",
+    "heroPrimaryCta": "Request a quote",
+    "heroSecondaryCta": "Browse ingredients",
+    "statsTitle": "FASTLAB in numbers",
+    "stats": {
+      "years": "Years in business",
+      "yearsValue": "26",
+      "ccm": "CCM certified",
+      "ccmValue": "16 years",
+      "satisfaction": "Client satisfaction",
+      "satisfactionValue": "98%",
+      "products": "Products manufactured",
+      "productsValue": "3,200+"
+    },
+    "hotTitle": "Trending ingredients",
+    "hotDescription": "The most requested ingredients on the market, ready to formulate.",
+    "formulationTitle": "Available dosage forms",
+    "formulationDescription": "Combine 7 dosage forms with 6 packaging types.",
+    "packagingTitle": "Packaging",
+    "certTitle": "GMP · HACCP certified facility",
+    "certDescription": "Manufactured in our own internationally certified plant.",
+    "serviceTitle": "How can we help",
+    "priorityTitle": "Priority Service",
+    "priorityDescription": "We stay with you beyond manufacturing — until the product sells.",
+    "ctaTitle": "An idea is all you need to start",
+    "ctaDescription": "Our team replies within one business day.",
+    "recentTitle": "Recent inquiries",
+    "recentDescription": "What clients asked us over the last six months."
+  },
+  "service": {
+    "OEM": "OEM",
+    "OEM_desc": "Contract manufacturing with proven formulations.",
+    "ODM": "ODM",
+    "ODM_desc": "Custom development from ingredient to formulation.",
+    "CDMO": "CDMO",
+    "CDMO_desc": "Integrated contract development and manufacturing.",
+    "DTC": "Personalized",
+    "DTC_desc": "DTC genetic testing linked personalized supplements.",
+    "PET": "Pet",
+    "PET_desc": "Supplements designed and produced for pets."
+  },
+  "priority": {
+    "design": "Package design",
+    "designDesc": "Carton and label design matched to your brand",
+    "channel": "Distribution support",
+    "channelDesc": "Marketplace onboarding and detail page production",
+    "patent": "Patent strategy",
+    "patentDesc": "Formulation patents and approved-ingredient consulting",
+    "funding": "Funding support",
+    "fundingDesc": "Government programs and investor material support"
+  },
+  "ingredients": {
+    "title": "Our ingredients",
+    "description": "Individually approved and patented ingredients, ready to apply.",
+    "all": "All",
+    "empty": "No ingredients published yet.",
+    "functionality": "Functionality",
+    "dailyDose": "Daily intake",
+    "relatedCta": "Inquire about this ingredient"
+  },
+  "category": {
+    "HOT_TREND": "Trending",
+    "INDIVIDUAL_APPROVED": "Individually approved",
+    "PATENT": "Patented",
+    "BASIC": "Standard",
+    "SUPERFOOD": "Superfood"
+  },
+  "options": {
+    "formulation": {
+      "PILL": "Pill",
+      "HARD_CAPSULE": "Hard capsule",
+      "SOFT_CAPSULE": "Soft capsule",
+      "JELLY": "Jelly",
+      "LIQUID": "Liquid",
+      "POWDER": "Powder",
+      "TABLET": "Tablet"
+    },
+    "packaging": {
+      "MULTI_PACK": "Multi pack",
+      "DUAL_FORM": "Dual form",
+      "BOTTLE": "Bottle",
+      "LIQUID_POUCH": "Liquid pouch",
+      "PTP": "PTP",
+      "STICK": "Stick"
+    },
+    "quantity": {
+      "UNDER_1K": "Under 1,000 units",
+      "1K_5K": "1,000 – 5,000 units",
+      "5K_10K": "5,000 – 10,000 units",
+      "10K_50K": "10,000 – 50,000 units",
+      "OVER_50K": "Over 50,000 units",
+      "UNDECIDED": "Not decided yet"
+    },
+    "budget": {
+      "UNDER_5M": "Under KRW 5M",
+      "5M_10M": "KRW 5M – 10M",
+      "10M_50M": "KRW 10M – 50M",
+      "OVER_50M": "Over KRW 50M",
+      "UNDECIDED": "Not decided yet"
+    }
+  },
+  "inquiry": {
+    "title": "Production inquiry",
+    "description": "Leave your details and our team will reply within one business day.",
+    "sectionContact": "Contact details",
+    "sectionProduct": "Product details",
+    "sectionAgree": "Consent",
+    "name": "Contact name",
+    "namePlaceholder": "Jane Doe",
+    "company": "Company",
+    "companyPlaceholder": "Optional",
+    "phone": "Phone",
+    "phonePlaceholder": "+82 10 1234 5678",
+    "email": "Email",
+    "emailPlaceholder": "hello@example.com",
+    "serviceType": "Inquiry type",
+    "formulations": "Preferred dosage form",
+    "packagings": "Preferred packaging",
+    "quantity": "Estimated quantity",
+    "budget": "Estimated budget",
+    "targetDate": "Target delivery date",
+    "message": "Details",
+    "messagePlaceholder": "Product concept, desired ingredients, reference products…",
+    "multiSelectHint": "Multiple choices allowed",
+    "optional": "optional",
+    "required": "required",
+    "privacy": "I consent to the collection and use of my personal data.",
+    "privacyDetail": "Collected: name, phone, email, company, message / Purpose: inquiry consultation and quotation / Retention: 3 years",
+    "marketing": "I agree to receive product and event news.",
+    "submit": "Send inquiry",
+    "submitting": "Sending…",
+    "completeTitle": "Your inquiry has been received",
+    "completeDescription": "We will contact you within one business day.",
+    "completeHome": "Back to home",
+    "errorGeneric": "Something went wrong. Please try again shortly.",
+    "errorRateLimit": "Too many requests. Please try again in a moment.",
+    "attachments": "Attachments",
+    "attachmentsHint": "PDF, image or document — up to 3 files, 5MB each"
+  },
+  "validation": {
+    "nameRequired": "Please enter a contact name.",
+    "phoneInvalid": "Please enter a valid phone number.",
+    "emailInvalid": "Please enter a valid email address.",
+    "messageTooLong": "Details must be 5,000 characters or fewer.",
+    "privacyRequired": "Please accept the privacy consent."
+  },
+  "common": {
+    "more": "Learn more",
+    "back": "Back",
+    "loading": "Loading…",
+    "language": "Language"
+  },
+  "footer": {
+    "companyName": "FASTLAB Co., Ltd.",
+    "ceo": "CEO",
+    "bizNo": "Business no.",
+    "address": "Address",
+    "tel": "Tel",
+    "fax": "Fax",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy",
+    "rights": "All Rights Reserved."
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "About",
+      "title": "The manufacturing partner\nfirst-time founders need",
+      "description": "Since 1999 we have made nothing but health functional foods. Formulation, production, packaging and distribution — finished in one place.",
+      "intro": "The hardest part of starting a supplement business is rarely the manufacturing itself. It is not knowing where to begin.\n\nWhere to source ingredients, which dosage form works best, what the minimum order quantity is, how to clear labelling review — we design all of it with you. Bringing an idea is enough.",
+      "bulletsTitle": "Who we work with",
+      "bullets": [
+        "First-time founders who need to start from a small minimum order",
+        "Brands looking to improve the cost or dosage form of an existing product",
+        "Companies differentiating with individually approved ingredients",
+        "Exporters that need a GMP/HACCP certified manufacturing site"
+      ],
+      "featuresTitle": "Why work with us",
+      "features": [
+        {
+          "title": "26 years of production data",
+          "body": "Over 3,200 products manufactured. That history is formulation knowledge you can skip ahead to."
+        },
+        {
+          "title": "Our own factory",
+          "body": "No subcontracting. We produce in our own GMP/HACCP certified facility and own the schedule and quality."
+        },
+        {
+          "title": "Proprietary approved ingredients",
+          "body": "Individually approved and patented ingredients we developed, ready to apply immediately."
+        },
+        {
+          "title": "Small batch friendly",
+          "body": "We take orders from 1,000 units. Test the market first, scale after."
+        },
+        {
+          "title": "16 consecutive CCM years",
+          "body": "Consumer Centered Management certification maintained for 16 years running."
+        },
+        {
+          "title": "Beyond manufacturing",
+          "body": "Package design, marketplace onboarding, patent strategy and government funding programs."
+        }
+      ],
+      "stepsTitle": "History",
+      "steps": [
+        {
+          "title": "1999",
+          "body": "Company founded, health functional food manufacturing begins"
+        },
+        {
+          "title": "2010",
+          "body": "GMP certification and first CCM certification obtained"
+        },
+        {
+          "title": "2018",
+          "body": "First in-house individually approved ingredient developed"
+        },
+        {
+          "title": "2024",
+          "body": "CDMO and personalized nutrition businesses expanded"
+        }
+      ]
+    },
+    "rnd": {
+      "eyebrow": "R&D Center",
+      "title": "Formulation comes\nout of data",
+      "description": "Our corporate research institute handles ingredient discovery, blend design and stability testing in house.",
+      "intro": "Using a good ingredient and making a good product are two different things.\n\nThe same ingredient absorbs and tastes very differently depending on ratio, excipients and dosage form. Our lab does not stop at the ingredient spec — we verify stability and sensory quality in the actual finished product before locking a formulation.",
+      "featuresTitle": "Research areas",
+      "features": [
+        {
+          "title": "Ingredient discovery",
+          "body": "We source novel materials and standardize their marker compounds."
+        },
+        {
+          "title": "Approved ingredient development",
+          "body": "From human trial design through to the approval filing."
+        },
+        {
+          "title": "Dosage form design",
+          "body": "Optimal blends per form — tablet, soft capsule, jelly and more."
+        },
+        {
+          "title": "Stability testing",
+          "body": "Accelerated and long-term studies to establish shelf life."
+        },
+        {
+          "title": "Sensory improvement",
+          "body": "Better taste and swallowability, which drives repeat purchase."
+        },
+        {
+          "title": "Patent filing",
+          "body": "Distinctive compositions are protected and become brand assets."
+        }
+      ],
+      "stepsTitle": "Development process",
+      "steps": [
+        {
+          "title": "Define concept",
+          "body": "Set the target customer and derive the functionality required."
+        },
+        {
+          "title": "Design formulation",
+          "body": "Combine ingredients, dosages and excipients into candidates."
+        },
+        {
+          "title": "Build prototype",
+          "body": "Produce in the real dosage form and check sensory and appearance."
+        },
+        {
+          "title": "Verify and lock",
+          "body": "Confirm through stability testing and finalize for mass production."
+        }
+      ]
+    },
+    "qc": {
+      "eyebrow": "Quality Control",
+      "title": "Checked three times\nbefore it ships",
+      "description": "Our in-house lab inspects incoming materials, work in progress and finished goods at every stage.",
+      "intro": "In this industry a single quality incident can take down an entire brand.\n\nWe place an inspection gate at every stage from incoming material to finished goods, and keep test reports and production records per lot. If something goes wrong, we can trace which lot and which material it came from.",
+      "bulletsTitle": "Test items",
+      "bullets": [
+        "Marker compound assay (HPLC)",
+        "Microbial limits (total plate count, coliforms, yeast, mould)",
+        "Heavy metals (lead, cadmium, arsenic, mercury)",
+        "Pesticide residues and foreign matter",
+        "Form-specific physical tests — disintegration, hardness, moisture",
+        "Seal integrity and label verification"
+      ],
+      "featuresTitle": "Quality system",
+      "features": [
+        {
+          "title": "GMP operation",
+          "body": "Every process is managed under Good Manufacturing Practice for health functional foods."
+        },
+        {
+          "title": "HACCP applied",
+          "body": "Critical control points block contamination and foreign matter risk upstream."
+        },
+        {
+          "title": "Lot traceability",
+          "body": "Two-way tracing from raw material lot to shipped lot."
+        },
+        {
+          "title": "Test reports supplied",
+          "body": "A finished-product test report ships with every lot."
+        },
+        {
+          "title": "Regular training",
+          "body": "Production staff receive scheduled hygiene and quality training."
+        },
+        {
+          "title": "Third-party verification",
+          "body": "Cross-verification by accredited laboratories on request."
+        }
+      ],
+      "faqTitle": "Frequently asked",
+      "faq": [
+        {
+          "q": "Can I request test reports separately?",
+          "a": "Yes. A finished-product report per shipped lot is standard, and we can commission accredited laboratories for additional items."
+        },
+        {
+          "q": "What happens if a quality issue occurs?",
+          "a": "We isolate the cause through lot tracing and agree on a response. Where manufacturing is at fault we re-produce or compensate."
+        },
+        {
+          "q": "Can we audit the factory?",
+          "a": "Yes. With prior arrangement you can inspect our facility and quality system in person."
+        }
+      ]
+    },
+    "oemOdm": {
+      "eyebrow": "OEM / ODM",
+      "title": "Launch fast on\na proven formulation",
+      "description": "OEM to use an existing proven formulation, ODM to design one from the ingredient up. We do both.",
+      "intro": "With OEM you put your brand on a formulation we have already validated. Development time and cost stay low, which suits a first product or a line extension.\n\nWith ODM we design from ingredient selection upward. It takes longer, but the result is hard for a competitor to copy. We help you judge which route fits during the first consultation.",
+      "bulletsTitle": "Which route fits",
+      "bullets": [
+        "OEM — you want to launch within three months on a proven formulation",
+        "OEM — you want minimal upfront capital and market feedback first",
+        "ODM — your ingredient profile must not overlap with competitors",
+        "ODM — you want to secure your own patent or exclusive ingredient"
+      ],
+      "stepsTitle": "How it works",
+      "steps": [
+        {
+          "title": "Inquiry",
+          "body": "We confirm concept, budget and target quantity, then set direction."
+        },
+        {
+          "title": "Formulation & quote",
+          "body": "You receive a draft formulation, unit price, MOQ and schedule."
+        },
+        {
+          "title": "Prototype review",
+          "body": "Check the real prototype for dosage form and sensory quality, then revise."
+        },
+        {
+          "title": "Production",
+          "body": "After contract we produce and ship with the test report."
+        }
+      ],
+      "faqTitle": "Frequently asked",
+      "faq": [
+        {
+          "q": "What is the minimum order quantity?",
+          "a": "It depends on the dosage form. Tablets and hard capsules start from 1,000 units; soft capsules and liquids are higher. We confirm exact figures during consultation."
+        },
+        {
+          "q": "How long does development take?",
+          "a": "OEM takes roughly 6–10 weeks after contract. ODM takes roughly 3–6 months including formulation development."
+        },
+        {
+          "q": "Can you handle package design?",
+          "a": "Yes, from carton and label design through to printing."
+        },
+        {
+          "q": "Who handles labelling review?",
+          "a": "We draft the label copy and review the regulatory approach together with you."
+        }
+      ]
+    },
+    "material": {
+      "eyebrow": "Raw Material ODM",
+      "title": "Differentiate at\nthe ingredient level",
+      "description": "Apply our proprietary ingredients, or develop a new material through to individual approval.",
+      "intro": "Recombining ingredients that everyone already has rarely produces differentiation.\n\nWe hold our own individually approved and patented ingredients — use them and a competitor cannot claim the same functionality. Where needed we discover a new material and take it through approval with you.",
+      "featuresTitle": "What we provide",
+      "features": [
+        {
+          "title": "Proprietary ingredients",
+          "body": "Individually approved and patented materials applied immediately."
+        },
+        {
+          "title": "New material discovery",
+          "body": "We search domestic and overseas materials and review the evidence base."
+        },
+        {
+          "title": "Human trials",
+          "body": "We design the study and coordinate with trial institutions."
+        },
+        {
+          "title": "Approval filing",
+          "body": "Full process from dossier preparation to approval."
+        },
+        {
+          "title": "Marker standardization",
+          "body": "We establish material specifications and test methods."
+        },
+        {
+          "title": "Patent strategy",
+          "body": "Composition patents to secure your rights."
+        }
+      ],
+      "faqTitle": "Frequently asked",
+      "faq": [
+        {
+          "q": "How long does individual approval take?",
+          "a": "Typically two to four years depending on the material and available evidence. Our existing approved ingredients can be applied immediately."
+        },
+        {
+          "q": "Who owns a jointly developed ingredient?",
+          "a": "It is defined at contract stage under the co-development terms. Exclusive licensing is negotiable."
+        }
+      ]
+    },
+    "cdmo": {
+      "eyebrow": "CDMO",
+      "title": "Development and supply\nunder one contract",
+      "description": "Integrated contract development and manufacturing for quasi-drugs and health foods.",
+      "intro": "When the developer and the manufacturer are different companies, accountability blurs the moment something goes wrong.\n\nUnder CDMO a single party owns formulation development, regulatory response and mass production. Communication overhead drops, and because manufacturability is considered during development, scale-up rarely stalls.",
+      "bulletsTitle": "Scope",
+      "bullets": [
+        "Formulation development and prototyping",
+        "Stability testing and shelf-life setting",
+        "Support for registration and filing documents",
+        "Technology transfer and validation",
+        "Routine production and quality management",
+        "Export documentation"
+      ],
+      "stepsTitle": "How it works",
+      "steps": [
+        {
+          "title": "Feasibility",
+          "body": "We assess technical and regulatory feasibility of the concept."
+        },
+        {
+          "title": "Development contract",
+          "body": "Scope, schedule, cost and rights ownership are made explicit."
+        },
+        {
+          "title": "Develop and verify",
+          "body": "Formulation is locked, then stability testing and validation run."
+        },
+        {
+          "title": "Commercial supply",
+          "body": "We move to routine production for stable supply."
+        }
+      ]
+    },
+    "dtc": {
+      "eyebrow": "Personalized Nutrition",
+      "title": "One sachet\nfor one person",
+      "description": "Personalized combinations built from DTC genetic testing results and lifestyle questionnaires.",
+      "intro": "Selling the same product to everyone is on its way out.\n\nWe derive each individual's required nutrients from genetic testing and lifestyle data, then design the sachet packing and subscription delivery around it. The brand gains customer data, and customers stop churning.",
+      "bulletsTitle": "What it includes",
+      "bullets": [
+        "DTC genetic testing partner integration",
+        "Questionnaire and algorithm design",
+        "Per-individual combination logic",
+        "Sachet and stick pack production",
+        "Subscription logistics integration",
+        "Labelling and regulatory compliance"
+      ],
+      "faqTitle": "Frequently asked",
+      "faq": [
+        {
+          "q": "Do we have to find a testing lab ourselves?",
+          "a": "No. We connect you with partner laboratories and support the results integration."
+        },
+        {
+          "q": "What scale do we need to start?",
+          "a": "Subscription models do not require large initial volume. We run a simulation during consultation."
+        }
+      ]
+    },
+    "pet": {
+      "eyebrow": "Pet Products",
+      "title": "Pet supplements,\nheld to the same standard",
+      "description": "Produced in facilities held to the same hygiene standard as our human products.",
+      "intro": "The pet supplement market is growing quickly, but few manufacturers hold themselves to human-grade quality standards.\n\nWe produce pet products in the same GMP-level facility as our human health functional foods, and design palatability alongside the formulation.",
+      "featuresTitle": "What we produce",
+      "features": [
+        {
+          "title": "Joint care",
+          "body": "For large breeds and senior dogs"
+        },
+        {
+          "title": "Gut health",
+          "body": "Probiotic blends formulated for pets"
+        },
+        {
+          "title": "Skin and coat",
+          "body": "Omega and skin health materials"
+        },
+        {
+          "title": "Oral care",
+          "body": "Products targeting plaque and breath"
+        },
+        {
+          "title": "Multivitamin",
+          "body": "Complete vitamin and mineral blends"
+        },
+        {
+          "title": "Palatable treats",
+          "body": "Chewable and treat forms for easy feeding"
+        }
+      ],
+      "faqTitle": "Frequently asked",
+      "faq": [
+        {
+          "q": "Are small batches possible for pet products?",
+          "a": "Yes. It varies by dosage form, but we discuss volumes similar to our human product minimums."
+        },
+        {
+          "q": "How is registration handled?",
+          "a": "We advise on the filing route required by product classification and support the documentation."
+        }
+      ]
+    }
+  },
+  "legal": {
+    "updatedLabel": "Last updated",
+    "updatedAt": "22 August 2026",
+    "terms": {
+      "title": "Terms of Use",
+      "sections": [
+        {
+          "title": "1. Purpose",
+          "body": "These terms set out the conditions and procedures for using the services provided on this website, and the rights, obligations and responsibilities of the company and users."
+        },
+        {
+          "title": "2. Effect and amendment",
+          "body": "These terms take effect once posted on the website. The company may amend them within the limits of applicable law, giving at least seven days' notice stating the effective date and reason."
+        },
+        {
+          "title": "3. Scope of service",
+          "body": "The company provides information on contract manufacturing of health functional foods (OEM/ODM/CDMO) and accepts production inquiries and consultation requests. Service content may change at the company's discretion."
+        },
+        {
+          "title": "4. Inquiries",
+          "body": "Users may request consultation through the production inquiry form. Submitting an inquiry does not constitute a contract; specific terms are agreed in a separate written agreement."
+        },
+        {
+          "title": "5. User obligations",
+          "body": "Users must provide accurate information and must not impersonate others or interfere with the operation of the service."
+        },
+        {
+          "title": "6. Intellectual property",
+          "body": "Copyright in all content published on this website, including ingredient information, product images and documents, belongs to the company and may not be reproduced or distributed without prior written consent."
+        },
+        {
+          "title": "7. Limitation of liability",
+          "body": "The company is not liable for service interruption caused by force majeure such as natural disaster, power failure or network fault. Information on this website is provided for reference; final terms are governed by individual contracts."
+        },
+        {
+          "title": "8. Governing law",
+          "body": "These terms are governed by the laws of the Republic of Korea, and jurisdiction follows the Civil Procedure Act."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "sections": [
+        {
+          "title": "1. Personal data collected",
+          "body": "The following is collected when you submit a production inquiry.\n\n• Required: contact name, phone number, consent to collection and use\n• Optional: company name, email, inquiry details, attachments\n• Collected automatically: a one-way hash of your IP address, browser information, and referral data (advertising parameters and referrer)\n\nIP addresses are never stored in plain form — only as an irreversible hash."
+        },
+        {
+          "title": "2. Purpose of collection and use",
+          "body": "• Consultation and quotation in response to production inquiries\n• Managing consultation history and progressing to contract\n• Blocking fraudulent inquiries and spam, and maintaining service stability\n• Sending product and event information, only where marketing consent was separately given"
+        },
+        {
+          "title": "3. Retention period",
+          "body": "Data is retained for three years from collection and then destroyed without delay. Where retention is required by law, the statutory period applies.\n\n• Records on contracts or withdrawal of subscription: 5 years\n• Records on consumer complaints or dispute resolution: 3 years"
+        },
+        {
+          "title": "4. Provision to third parties",
+          "body": "The company does not provide personal data to third parties, except with prior user consent or upon a lawful request from an investigative authority."
+        },
+        {
+          "title": "5. Outsourcing of processing",
+          "body": "The company may outsource processing to the extent necessary to operate the service. Where it does, the processor and the scope of work are disclosed in this policy, and data protection obligations are set out in the outsourcing contract."
+        },
+        {
+          "title": "6. Your rights",
+          "body": "You may at any time request access to, correction of, deletion of, or suspension of processing of your personal data. Requests can be made to the data protection officer below in writing, by phone or by email, and will be acted on without delay."
+        },
+        {
+          "title": "7. Destruction",
+          "body": "Personal data whose retention period has expired or whose purpose has been achieved is destroyed without delay. Electronic files are deleted irrecoverably; printed material is shredded or incinerated."
+        },
+        {
+          "title": "8. Data protection officer",
+          "body": "Role: Data Protection Officer\nPhone: +82 31 000 0000\nEmail: privacy@example.com\n\nFor reports or advice on privacy infringement you may contact the Korea Internet & Security Agency privacy centre (118)."
+        }
+      ]
+    }
+  },
+  "collections": {
+    "portfolioTitle": "Portfolio",
+    "portfolioDescription": "Products we have manufactured. Brand names are withheld at our clients' request.",
+    "portfolioEmpty": "No cases published yet.",
+    "formulationLabel": "Dosage form",
+    "serviceLabel": "Production type",
+    "ingredientsLabel": "Ingredients used",
+    "communityTitle": "Community",
+    "postEmpty": "No posts published yet.",
+    "readMore": "Read more",
+    "publishedAt": "Published",
+    "categoryNEWS": "News",
+    "categoryNOTICE": "Notice",
+    "categoryESG": "ESG",
+    "categoryFACTORY_TOUR": "Factory Tour",
+    "descNEWS": "Company news including product launches and trade shows.",
+    "descNOTICE": "Announcements for our clients.",
+    "descESG": "Our environmental, social and governance activities.",
+    "descFACTORY_TOUR": "An open look at our production floor."
+  }
+}
