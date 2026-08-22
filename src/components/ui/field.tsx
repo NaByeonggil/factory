@@ -45,8 +45,8 @@ export function Field({
 }
 
 const control =
-  "w-full rounded-lg border border-ink-300 bg-white px-3.5 py-2.5 text-[0.9375rem] text-ink-900 placeholder:text-ink-400 " +
-  "focus:border-brand-500 focus:outline-2 focus:outline-offset-0 focus:outline-brand-500/30 " +
+  "w-full rounded-xl border border-ink-200 bg-surface px-4 py-3 text-[0.9375rem] text-ink-900 placeholder:text-ink-400 " +
+  "focus:border-brand-600 focus:bg-white focus:outline-2 focus:outline-offset-0 focus:outline-brand-600/20 " +
   "aria-[invalid=true]:border-red-500";
 
 export function Input({
@@ -82,13 +82,23 @@ export function CheckChip({
       <input type="checkbox" className="peer sr-only" {...props} />
       <span
         className={cn(
-          "inline-flex items-center rounded-full border border-ink-300 bg-white px-4 py-2 text-sm text-ink-700 transition-colors",
-          "peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-checked:text-brand-700 peer-checked:font-semibold",
+          "inline-flex items-center rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-700 transition-colors",
+          "peer-checked:border-brand-600 peer-checked:bg-brand-600 peer-checked:font-semibold peer-checked:text-white",
           "peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-600",
         )}
       >
         {label}
       </span>
     </label>
+  );
+}
+
+
+/** 폼 섹션 제목 — 시안처럼 아래 구분선을 둡니다 */
+export function FieldsetLegend({ children }: { children: React.ReactNode }) {
+  return (
+    <legend className="mb-2 w-full border-b border-ink-200 pb-3 text-title text-brand-900">
+      {children}
+    </legend>
   );
 }

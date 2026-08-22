@@ -163,7 +163,9 @@
     "errorGeneric": "发送过程中出现问题，请稍后再试。",
     "errorRateLimit": "请求过于频繁，请稍后再试。",
     "attachments": "附件",
-    "attachmentsHint": "PDF·图片·文档，最多3个 / 每个5MB"
+    "attachmentsHint": "PDF·图片·文档，最多3个 / 每个5MB",
+    "attachmentsDrop": "或将文件拖放到此处",
+    "attachmentsBrowse": "选择文件"
   },
   "validation": {
     "nameRequired": "请输入联系人姓名。",

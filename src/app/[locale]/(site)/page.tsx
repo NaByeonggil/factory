@@ -186,24 +186,24 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
                 <li key={item.slug}>
                   <Link
                     href={`/ingredients/${item.slug}`}
-                    className="flex h-full flex-col gap-2 rounded-2xl border border-ink-200 bg-white p-5 transition-shadow hover:shadow-md"
+                    className="flex h-full flex-col overflow-hidden rounded-card border border-ink-200 bg-white transition-shadow hover:shadow-[var(--shadow-soft)]"
                   >
                     <Thumbnail
                       src={item.thumbnailUrl}
                       alt={item.name}
                       seed={item.name}
-                      className="mb-2"
+                      className="rounded-none"
                       sizes="(min-width: 1024px) 260px, 45vw"
                     />
-                    <Badge tone="accent">{tCategory(item.category)}</Badge>
-                    <p className="mt-1 text-base font-bold text-ink-900">
-                      {item.name}
-                    </p>
-                    {item.summary && (
-                      <p className="line-clamp-3 text-sm leading-relaxed text-ink-600">
-                        {item.summary}
-                      </p>
-                    )}
+                    <div className="flex flex-1 flex-col gap-2 p-5">
+                      <Badge tone="accent">{tCategory(item.category)}</Badge>
+                      <p className="font-bold text-ink-900">{item.name}</p>
+                      {item.summary && (
+                        <p className="line-clamp-3 text-sm leading-relaxed text-ink-700">
+                          {item.summary}
+                        </p>
+                      )}
+                    </div>
                   </Link>
                 </li>
               ))}

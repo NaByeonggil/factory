@@ -7,7 +7,14 @@ import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import { CheckChip, Field, Input, Select, Textarea } from "@/components/ui/field";
+import {
+  CheckChip,
+  Field,
+  FieldsetLegend,
+  Input,
+  Select,
+  Textarea,
+} from "@/components/ui/field";
 import {
   BUDGET_RANGES,
   FORMULATIONS,
@@ -113,9 +120,7 @@ export function InquiryForm() {
       </div>
 
       <fieldset className="space-y-6">
-        <legend className="text-lg font-bold text-ink-900">
-          {t("sectionContact")}
-        </legend>
+<FieldsetLegend>{t("sectionContact")}</FieldsetLegend>
 
         <div className="grid gap-6 sm:grid-cols-2">
           <Field
@@ -179,9 +184,7 @@ export function InquiryForm() {
       </fieldset>
 
       <fieldset className="space-y-6">
-        <legend className="text-lg font-bold text-ink-900">
-          {t("sectionProduct")}
-        </legend>
+<FieldsetLegend>{t("sectionProduct")}</FieldsetLegend>
 
         <Field label={t("serviceType")} htmlFor="serviceType">
           <Select id="serviceType" {...register("serviceType")}>
@@ -290,6 +293,8 @@ export function InquiryForm() {
             <FileUpload
               label={t("attachments")}
               hint={t("attachmentsHint")}
+              dropHint={t("attachmentsDrop")}
+              browseLabel={t("attachmentsBrowse")}
               value={(field.value ?? []) as Attachment[]}
               onChange={field.onChange}
             />
@@ -298,9 +303,7 @@ export function InquiryForm() {
       </fieldset>
 
       <fieldset className="space-y-4">
-        <legend className="text-lg font-bold text-ink-900">
-          {t("sectionAgree")}
-        </legend>
+<FieldsetLegend>{t("sectionAgree")}</FieldsetLegend>
 
         <div className="rounded-xl border border-ink-200 bg-ink-50 p-5">
           <label className="flex items-start gap-3">
@@ -343,7 +346,12 @@ export function InquiryForm() {
         </p>
       )}
 
-      <Button type="submit" size="lg" disabled={pending} className="w-full sm:w-auto">
+      <Button
+        type="submit"
+        size="lg"
+        disabled={pending}
+        className="w-full bg-brand-900 hover:bg-brand-800"
+      >
         {pending ? t("submitting") : t("submit")}
       </Button>
     </form>

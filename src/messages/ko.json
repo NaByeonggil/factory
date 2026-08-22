@@ -163,7 +163,9 @@
     "errorGeneric": "전송 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
     "errorRateLimit": "잠시 후 다시 시도해주세요. (짧은 시간에 너무 많이 요청했습니다)",
     "attachments": "첨부파일",
-    "attachmentsHint": "PDF·이미지·문서, 최대 3개 / 각 5MB"
+    "attachmentsHint": "PDF·이미지·문서, 최대 3개 / 각 5MB",
+    "attachmentsDrop": "또는 여기에 파일을 끌어다 놓으세요",
+    "attachmentsBrowse": "파일 선택하기"
   },
   "validation": {
     "nameRequired": "담당자명을 입력해주세요.",

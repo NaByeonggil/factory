@@ -1,13 +1,13 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { Paperclip, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Paperclip, Upload, X } from "lucide-react";
 import {
   MAX_UPLOAD_FILES,
   UPLOAD_ACCEPT,
   formatBytes,
 } from "@/lib/upload";
+import { cn } from "@/lib/utils";
 
 export type Attachment = {
   key: string;
@@ -22,17 +22,23 @@ export function FileUpload({
   onChange,
   label,
   hint,
+  dropHint,
+  browseLabel,
 }: {
   value: Attachment[];
   onChange: (next: Attachment[]) => void;
   label: string;
   hint: string;
+  dropHint: string;
+  browseLabel: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
+  const [dragging, setDragging] = useState(false);
   const [pending, startTransition] = useTransition();
 
   const remaining = MAX_UPLOAD_FILES - value.length;
+  const full = remaining <= 0;
 
   function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -65,7 +71,7 @@ export function FileUpload({
     <div className="space-y-2">
       <p className="flex items-center gap-1.5 text-sm font-semibold text-ink-800">
         {label}
-        <span className="font-normal text-xs text-ink-500">{hint}</span>
+        <span className="text-xs font-normal text-ink-500">{hint}</span>
       </p>
 
       <input
@@ -77,23 +83,43 @@ export function FileUpload({
         onChange={(e) => handleFiles(e.target.files)}
       />
 
-      <Button
+      {/* 드롭존 — 클릭해도 파일 선택창이 열립니다 */}
+      <button
         type="button"
-        variant="outline"
-        size="sm"
-        disabled={pending || remaining <= 0}
+        disabled={pending || full}
         onClick={() => inputRef.current?.click()}
+        onDragOver={(e) => {
+          e.preventDefault();
+          if (!full) setDragging(true);
+        }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setDragging(false);
+          if (!full) handleFiles(e.dataTransfer.files);
+        }}
+        className={cn(
+          "flex w-full flex-col items-center gap-1.5 rounded-card border-2 border-dashed px-6 py-8 transition-colors",
+          dragging
+            ? "border-brand-600 bg-brand-50"
+            : "border-ink-200 bg-surface hover:border-ink-300",
+          full && "cursor-not-allowed opacity-60",
+        )}
       >
-        <Paperclip className="size-4" aria-hidden />
-        {pending ? "업로드 중…" : "파일 선택"}
-      </Button>
+        <Upload className="size-6 text-brand-700" aria-hidden />
+        <span className="text-label font-semibold text-brand-700">
+          {pending ? "업로드 중…" : browseLabel}
+        </span>
+        <span className="text-sm text-ink-500">{dropHint}</span>
+        <span className="text-xs text-ink-400">{hint}</span>
+      </button>
 
       {value.length > 0 && (
         <ul className="space-y-2 pt-1">
           {value.map((file) => (
             <li
               key={file.key}
-              className="flex items-center gap-3 rounded-lg border border-ink-200 bg-white px-3.5 py-2.5 text-sm"
+              className="flex items-center gap-3 rounded-xl border border-ink-200 bg-white px-3.5 py-2.5 text-sm"
             >
               <Paperclip className="size-4 shrink-0 text-ink-400" aria-hidden />
               <span className="min-w-0 flex-1 truncate text-ink-800">

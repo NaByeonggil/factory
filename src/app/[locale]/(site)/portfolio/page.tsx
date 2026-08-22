@@ -56,28 +56,28 @@ export default async function PortfolioPage(
                 <li key={item.slug}>
                   <Link
                     href={`/portfolio/${item.slug}`}
-                    className="flex h-full flex-col gap-2 rounded-2xl border border-ink-200 p-6 transition-shadow hover:shadow-md"
+                    className="flex h-full flex-col overflow-hidden rounded-card border border-ink-200 bg-white transition-shadow hover:shadow-[var(--shadow-soft)]"
                   >
                     <Thumbnail
                       src={item.imageUrls[0] ?? null}
                       alt={item.title}
                       seed={item.title}
                       ratio="video"
-                      className="mb-3"
-                      sizes="(min-width: 1024px) 320px, 45vw"
+                      className="rounded-none"
+                      sizes="(min-width: 1024px) 320px, 100vw"
                     />
-                    <div className="flex flex-wrap gap-2">
-                      <Badge tone="brand">{tService(item.serviceType)}</Badge>
-                      <Badge>{tOptions(`formulation.${item.formulation}`)}</Badge>
+                    <div className="flex flex-1 flex-col gap-2 p-5">
+                      <div className="flex flex-wrap gap-2">
+                        <Badge tone="brand">{tService(item.serviceType)}</Badge>
+                        <Badge>{tOptions(`formulation.${item.formulation}`)}</Badge>
+                      </div>
+                      <p className="mt-1 text-title text-ink-900">{item.title}</p>
+                      {item.description && (
+                        <p className="line-clamp-3 text-sm leading-relaxed text-ink-700">
+                          {item.description}
+                        </p>
+                      )}
                     </div>
-                    <p className="mt-2 text-lg font-bold text-ink-900">
-                      {item.title}
-                    </p>
-                    {item.description && (
-                      <p className="line-clamp-3 text-sm leading-relaxed text-ink-600">
-                        {item.description}
-                      </p>
-                    )}
                   </Link>
                 </li>
               ))}

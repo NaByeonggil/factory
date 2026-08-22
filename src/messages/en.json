@@ -163,7 +163,9 @@
     "errorGeneric": "Something went wrong. Please try again shortly.",
     "errorRateLimit": "Too many requests. Please try again in a moment.",
     "attachments": "Attachments",
-    "attachmentsHint": "PDF, image or document — up to 3 files, 5MB each"
+    "attachmentsHint": "PDF, image or document — up to 3 files, 5MB each",
+    "attachmentsDrop": "or drag and drop files here",
+    "attachmentsBrowse": "Choose files"
   },
   "validation": {
     "nameRequired": "Please enter a contact name.",

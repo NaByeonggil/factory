@@ -29,12 +29,15 @@ export function IngredientFilter({ items }: { items: IngredientCard[] }) {
 
   return (
     <>
-      <nav aria-label={t("title")} className="mt-8 flex flex-wrap gap-2">
+      <nav
+        aria-label={t("title")}
+        className="-mx-5 mt-8 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
         <Link
           href="/ingredients"
           scroll={false}
           className={cn(
-            "rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
+            "shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
             !active
               ? "border-brand-600 bg-brand-50 text-brand-700"
               : "border-ink-200 text-ink-600 hover:border-ink-300",
@@ -48,7 +51,7 @@ export function IngredientFilter({ items }: { items: IngredientCard[] }) {
             href={{ pathname: "/ingredients", query: { category: code } }}
             scroll={false}
             className={cn(
-              "rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
+              "shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
               active === code
                 ? "border-brand-600 bg-brand-50 text-brand-700"
                 : "border-ink-200 text-ink-600 hover:border-ink-300",
@@ -69,22 +72,24 @@ export function IngredientFilter({ items }: { items: IngredientCard[] }) {
             <li key={item.slug}>
               <Link
                 href={`/ingredients/${item.slug}`}
-                className="flex h-full flex-col gap-2 rounded-2xl border border-ink-200 p-6 transition-shadow hover:shadow-md"
+                className="flex h-full flex-col overflow-hidden rounded-card border border-ink-200 bg-white transition-shadow hover:shadow-[var(--shadow-soft)]"
               >
                 <Thumbnail
                   src={item.thumbnailUrl}
                   alt={item.name}
                   seed={item.name}
-                  className="mb-2"
-                  sizes="(min-width: 1024px) 320px, 45vw"
+                  className="rounded-none"
+                  sizes="(min-width: 1024px) 320px, 100vw"
                 />
-                <Badge tone="brand">{tCategory(item.category)}</Badge>
-                <p className="mt-1 text-lg font-bold text-ink-900">{item.name}</p>
-                {item.summary && (
-                  <p className="line-clamp-3 text-sm leading-relaxed text-ink-600">
-                    {item.summary}
-                  </p>
-                )}
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <Badge tone="accent">{tCategory(item.category)}</Badge>
+                  <p className="text-title text-ink-900">{item.name}</p>
+                  {item.summary && (
+                    <p className="line-clamp-3 text-sm leading-relaxed text-ink-700">
+                      {item.summary}
+                    </p>
+                  )}
+                </div>
               </Link>
             </li>
           ))}

@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { CtaBand } from "@/components/site/cta-band";
@@ -31,11 +31,11 @@ export async function MarketingPage({
       <section className="border-b border-ink-200 bg-gradient-to-b from-brand-50 to-white">
         <Container className="py-14 sm:py-20">
           {t.has("eyebrow") && <Badge tone="brand">{t("eyebrow")}</Badge>}
-          <h1 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 max-w-3xl text-display text-brand-900">
             {t("title")}
           </h1>
           {t.has("description") && (
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-600 sm:text-lg">
+            <p className="mt-5 max-w-2xl leading-relaxed text-ink-700 lg:text-body-lg">
               {t("description")}
             </p>
           )}
@@ -45,7 +45,7 @@ export async function MarketingPage({
       {t.has("intro") && (
         <Section className="pb-0">
           <Container className="max-w-3xl">
-            <p className="whitespace-pre-line text-base leading-loose text-ink-700">
+            <p className="whitespace-pre-line leading-loose text-ink-700">
               {t("intro")}
             </p>
           </Container>
@@ -60,13 +60,13 @@ export async function MarketingPage({
               {bullets.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 rounded-xl border border-ink-200 bg-white p-5"
+                  className="flex items-start gap-3 rounded-card border border-ink-200 bg-white p-5"
                 >
                   <Check
-                    className="mt-0.5 size-5 shrink-0 text-brand-600"
+                    className="mt-0.5 size-5 shrink-0 text-brand-700"
                     aria-hidden
                   />
-                  <span className="text-[0.9375rem] leading-relaxed text-ink-800">
+                  <span className="text-[0.9375rem] leading-relaxed text-ink-700">
                     {item}
                   </span>
                 </li>
@@ -84,10 +84,10 @@ export async function MarketingPage({
               {features.map((item) => (
                 <li
                   key={item.title}
-                  className="rounded-2xl border border-ink-200 bg-white p-6"
+                  className="rounded-card border border-ink-200 bg-white p-6"
                 >
                   <p className="text-base font-bold text-ink-900">{item.title}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                  <p className="mt-2 text-sm leading-relaxed text-ink-700">
                     {item.body}
                   </p>
                 </li>
@@ -101,16 +101,16 @@ export async function MarketingPage({
         <Section>
           <Container>
             <SectionHeading title={t("stepsTitle")} />
-            <ol className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-ink-200 bg-ink-200 sm:grid-cols-2 lg:grid-cols-4">
+            <ol className="mt-10 grid gap-px overflow-hidden rounded-card border border-ink-200 bg-ink-200 sm:grid-cols-2 lg:grid-cols-4">
               {steps.map((item, index) => (
                 <li key={item.title} className="bg-white p-6">
-                  <span className="inline-flex size-8 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+                  <span className="inline-flex size-8 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white">
                     {index + 1}
                   </span>
                   <p className="mt-4 text-base font-bold text-ink-900">
                     {item.title}
                   </p>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                  <p className="mt-2 text-sm leading-relaxed text-ink-700">
                     {item.body}
                   </p>
                 </li>
@@ -124,19 +124,20 @@ export async function MarketingPage({
         <Section className="bg-ink-50">
           <Container className="max-w-3xl">
             <SectionHeading title={t("faqTitle")} />
-            <dl className="mt-8 divide-y divide-ink-200 overflow-hidden rounded-2xl border border-ink-200 bg-white">
+            <dl className="mt-8 space-y-4">
               {faq.map((item) => (
-                <details key={item.q} className="group">
-                  <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-[0.9375rem] font-semibold text-ink-900 marker:content-none">
+                <details
+                  key={item.q}
+                  className="group overflow-hidden rounded-card border border-ink-200 bg-white [&_summary::-webkit-details-marker]:hidden"
+                >
+                  <summary className="flex cursor-pointer items-center justify-between gap-3 p-5 text-label font-bold text-ink-900">
                     <dt>{item.q}</dt>
-                    <span
+                    <ChevronDown
                       aria-hidden
-                      className="shrink-0 text-xl text-ink-400 transition-transform group-open:rotate-45"
-                    >
-                      +
-                    </span>
+                      className="size-5 shrink-0 text-ink-400 transition-transform duration-300 group-open:-rotate-180"
+                    />
                   </summary>
-                  <dd className="px-6 pb-5 text-sm leading-relaxed text-ink-600">
+                  <dd className="border-t border-ink-100 bg-ink-50 px-5 py-4 text-sm leading-relaxed text-ink-700">
                     {item.a}
                   </dd>
                 </details>
