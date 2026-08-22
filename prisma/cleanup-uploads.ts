@@ -2,13 +2,17 @@ import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { getStorage } from "../src/lib/storage";
+import { mediaKeyFromUrl } from "../src/lib/upload";
 
 /**
- * 고아 첨부파일 정리.
+ * 고아 파일 정리.
  *
- * 파일은 문의 제출 전에 /api/uploads 로 먼저 올라가므로, 사용자가 업로드만
- * 하고 제출하지 않으면 저장소에 남습니다. 24시간이 지났는데도 InquiryFile
- * 행이 없는 파일을 지웁니다.
+ * 파일은 저장 전에 먼저 업로드되므로(문의 첨부는 /api/uploads, 콘텐츠
+ * 이미지는 /api/admin/uploads), 업로드만 하고 저장하지 않으면 남습니다.
+ * 24시간이 지났는데도 DB 어디에서도 참조하지 않는 파일을 지웁니다.
+ *
+ * 참조처: InquiryFile.storageKey, Ingredient.thumbnailUrl, Post.coverUrl,
+ * Product.imageUrls, Certification.imageUrl
  *
  *   npm run storage:cleanup
  *
@@ -30,12 +34,30 @@ async function main() {
     return;
   }
 
-  const [objects, referenced] = await Promise.all([
-    storage.list(),
-    prisma.inquiryFile.findMany({ select: { storageKey: true } }),
-  ]);
+  const [objects, attachments, ingredients, posts, products, certifications] =
+    await Promise.all([
+      storage.list(),
+      prisma.inquiryFile.findMany({ select: { storageKey: true } }),
+      prisma.ingredient.findMany({ select: { thumbnailUrl: true } }),
+      prisma.post.findMany({ select: { coverUrl: true } }),
+      prisma.product.findMany({ select: { imageUrls: true } }),
+      prisma.certification.findMany({ select: { imageUrl: true } }),
+    ]);
 
-  const keep = new Set(referenced.map((row) => row.storageKey));
+  const keep = new Set<string>();
+  for (const row of attachments) keep.add(row.storageKey);
+
+  // 콘텐츠 이미지는 URL로 저장되므로 키를 역산합니다
+  const mediaUrls = [
+    ...ingredients.map((r) => r.thumbnailUrl),
+    ...posts.map((r) => r.coverUrl),
+    ...products.flatMap((r) => r.imageUrls),
+    ...certifications.map((r) => r.imageUrl),
+  ];
+  for (const url of mediaUrls) {
+    const key = mediaKeyFromUrl(url);
+    if (key) keep.add(key);
+  }
   const cutoff = Date.now() - STALE_AFTER_MS;
 
   const orphans = objects.filter(

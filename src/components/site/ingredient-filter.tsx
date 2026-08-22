@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { INGREDIENT_CATEGORIES } from "@/lib/constants";
 import type { IngredientCard } from "@/lib/queries";
 import { cn } from "@/lib/utils";
+import { Thumbnail } from "@/components/site/media";
 
 /**
  * 카테고리 필터를 클라이언트에서 처리해 목록 페이지를 정적 프리렌더로 유지합니다.
@@ -70,6 +71,13 @@ export function IngredientFilter({ items }: { items: IngredientCard[] }) {
                 href={`/ingredients/${item.slug}`}
                 className="flex h-full flex-col gap-2 rounded-2xl border border-ink-200 p-6 transition-shadow hover:shadow-md"
               >
+                <Thumbnail
+                  src={item.thumbnailUrl}
+                  alt={item.name}
+                  seed={item.name}
+                  className="mb-2"
+                  sizes="(min-width: 1024px) 320px, 45vw"
+                />
                 <Badge tone="brand">{tCategory(item.category)}</Badge>
                 <p className="mt-1 text-lg font-bold text-ink-900">{item.name}</p>
                 {item.summary && (

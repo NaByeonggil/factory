@@ -19,6 +19,12 @@ export const slugSchema = z
 const optionalText = (max: number) =>
   z.string().trim().max(max).optional().transform((v) => (v ? v : null));
 
+/**
+ * 업로드된 이미지는 `/api/media/pub/...` 상대 경로이고,
+ * 외부 CDN을 직접 붙일 수도 있으므로 둘 다 허용합니다.
+ */
+const IMAGE_URL = /^(https?:\/\/|\/api\/media\/pub\/)/;
+
 const optionalUrl = z
   .string()
   .trim()
@@ -26,8 +32,8 @@ const optionalUrl = z
   .optional()
   .transform((v) => (v ? v : null))
   .refine(
-    (v) => v === null || /^https?:\/\//.test(v),
-    "http(s):// 로 시작하는 주소를 입력하세요.",
+    (v) => v === null || IMAGE_URL.test(v),
+    "이미지를 업로드하거나 http(s):// 주소를 입력하세요.",
   );
 
 // ───────────────────────── 원료 ─────────────────────────
@@ -92,7 +98,7 @@ export const productSchema = z.object({
   slug: slugSchema,
   serviceType: z.enum(SERVICE_TYPES),
   formulation: z.enum(FORMULATIONS),
-  imageUrls: z.array(z.string().trim().url()).max(10),
+  imageUrls: z.array(z.string().trim().regex(IMAGE_URL)).max(6),
   ingredientIds: z.array(z.string()).max(30),
   isFeatured: z.boolean(),
   isPublished: z.boolean(),

@@ -6,6 +6,7 @@ import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { CtaBand } from "@/components/site/cta-band";
 import { getProducts } from "@/lib/queries";
 import { routing } from "@/i18n/routing";
+import { Thumbnail } from "@/components/site/media";
 
 export const dynamic = "force-static";
 export const revalidate = 600;
@@ -57,6 +58,14 @@ export default async function PortfolioPage(
                     href={`/portfolio/${item.slug}`}
                     className="flex h-full flex-col gap-2 rounded-2xl border border-ink-200 p-6 transition-shadow hover:shadow-md"
                   >
+                    <Thumbnail
+                      src={item.imageUrls[0] ?? null}
+                      alt={item.title}
+                      seed={item.title}
+                      ratio="video"
+                      className="mb-3"
+                      sizes="(min-width: 1024px) 320px, 45vw"
+                    />
                     <div className="flex flex-wrap gap-2">
                       <Badge tone="brand">{tService(item.serviceType)}</Badge>
                       <Badge>{tOptions(`formulation.${item.formulation}`)}</Badge>

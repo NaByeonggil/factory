@@ -4,6 +4,7 @@ import { getRequestMeta } from "@/lib/request-meta";
 import { rateLimit } from "@/lib/rate-limit";
 import {
   MAX_UPLOAD_BYTES,
+  STORAGE_PREFIX,
   buildStorageKey,
   extensionOf,
   safeFilename,
@@ -62,7 +63,7 @@ export async function POST(request: Request) {
 
   try {
     const stored = await getStorage().put({
-      key: buildStorageKey(extensionOf(filename)),
+      key: buildStorageKey(STORAGE_PREFIX.inquiry, extensionOf(filename)),
       body: bytes,
       mimeType: file.type,
     });

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getStorage } from "@/lib/storage";
+import { STORAGE_PREFIX, hasPrefix } from "@/lib/upload";
 
 export const runtime = "nodejs";
 
@@ -21,6 +22,9 @@ export async function GET(
 
   const { key: segments } = await context.params;
   const key = segments.join("/");
+  if (!hasPrefix(key, STORAGE_PREFIX.inquiry)) {
+    return new NextResponse(null, { status: 404 });
+  }
 
   // DB에 등록된 첨부만 내보냅니다 (고아 파일 열람 차단)
   const record = await prisma.inquiryFile.findFirst({

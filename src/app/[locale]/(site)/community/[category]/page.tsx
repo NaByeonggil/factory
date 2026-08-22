@@ -12,6 +12,7 @@ import {
 import { routing } from "@/i18n/routing";
 import { formatDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { Thumbnail } from "@/components/site/media";
 
 export const dynamic = "force-static";
 export const revalidate = 600;
@@ -84,8 +85,19 @@ export default async function CommunityCategoryPage(
                 <li key={post.slug}>
                   <Link
                     href={`/community/${category}/${post.slug}`}
-                    className="flex flex-col gap-2 py-6 transition-colors hover:bg-ink-50/60"
+                    className="flex gap-5 py-6 transition-colors hover:bg-ink-50/60"
                   >
+                    {post.coverUrl && (
+                      <Thumbnail
+                        src={post.coverUrl}
+                        alt={post.title}
+                        seed={post.title}
+                        ratio="video"
+                        className="w-40 shrink-0"
+                        sizes="160px"
+                      />
+                    )}
+                    <div className="flex min-w-0 flex-col gap-2">
                     <p className="text-lg font-bold text-ink-900">{post.title}</p>
                     {post.excerpt && (
                       <p className="line-clamp-2 text-sm leading-relaxed text-ink-600">
@@ -100,6 +112,7 @@ export default async function CommunityCategoryPage(
                         {formatDate(post.publishedAt, locale)}
                       </time>
                     )}
+                    </div>
                   </Link>
                 </li>
               ))}

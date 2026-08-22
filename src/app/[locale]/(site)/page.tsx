@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -29,6 +30,7 @@ import {
   getRecentInquirySummaries,
 } from "@/lib/queries";
 import { formatDate } from "@/lib/utils";
+import { Thumbnail } from "@/components/site/media";
 import { routing } from "@/i18n/routing";
 
 /** 광고 랜딩 페이지 — 정적 프리렌더 후 10분마다 ISR 재생성 */
@@ -187,6 +189,13 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
                     href={`/ingredients/${item.slug}`}
                     className="flex h-full flex-col gap-2 rounded-2xl border border-ink-200 bg-white p-5 transition-shadow hover:shadow-md"
                   >
+                    <Thumbnail
+                      src={item.thumbnailUrl}
+                      alt={item.name}
+                      seed={item.name}
+                      className="mb-2"
+                      sizes="(min-width: 1024px) 260px, 45vw"
+                    />
                     <Badge tone="accent">{tCategory(item.category)}</Badge>
                     <p className="mt-1 text-base font-bold text-ink-900">
                       {item.name}
@@ -256,15 +265,33 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
 
           <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {(certifications.length > 0
-              ? certifications.map((c) => c.code)
-              : ["GMP", "HACCP", "ISO 9001", "ISO 22000"]
-            ).map((code) => (
+              ? certifications
+              : [
+                  { code: "GMP", name: "", imageUrl: null },
+                  { code: "HACCP", name: "", imageUrl: null },
+                  { code: "ISO 9001", name: "", imageUrl: null },
+                  { code: "ISO 22000", name: "", imageUrl: null },
+                ]
+            ).map((cert) => (
               <li
-                key={code}
-                className="flex items-center gap-2 rounded-xl bg-white/10 px-4 py-3.5 text-sm font-semibold"
+                key={cert.code}
+                className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3.5 text-sm font-semibold"
               >
-                <BadgeCheck className="size-5 text-brand-300" aria-hidden />
-                {code}
+                {cert.imageUrl ? (
+                  <span className="relative size-8 shrink-0 overflow-hidden rounded bg-white/90">
+                    <Image
+                      src={cert.imageUrl}
+                      alt=""
+                      fill
+                      sizes="32px"
+                      unoptimized
+                      className="object-contain p-1"
+                    />
+                  </span>
+                ) : (
+                  <BadgeCheck className="size-5 shrink-0 text-brand-300" aria-hidden />
+                )}
+                {cert.code}
               </li>
             ))}
           </ul>

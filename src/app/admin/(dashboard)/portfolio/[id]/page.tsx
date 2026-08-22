@@ -28,7 +28,7 @@ export default async function EditProductPage(
     slug: row.slug,
     serviceType: row.serviceType,
     formulation: row.formulation,
-    imageUrls: row.imageUrls.join("\n"),
+    imageUrls: row.imageUrls,
     ingredientIds: row.ingredients.map((i) => i.id),
     isFeatured: row.isFeatured,
     isPublished: row.isPublished,

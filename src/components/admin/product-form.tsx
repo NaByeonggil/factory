@@ -12,6 +12,7 @@ import {
 } from "@/components/admin/form-shell";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { CheckChip, Field, Input, Select, Textarea } from "@/components/ui/field";
+import { ImageListField } from "@/components/admin/image-field";
 import { FORMULATIONS, SERVICE_TYPES } from "@/lib/constants";
 import type { ActionState, DbLocale } from "@/lib/validations/admin";
 
@@ -30,7 +31,7 @@ export type ProductFormValues = {
   slug: string;
   serviceType: string;
   formulation: string;
-  imageUrls: string;
+  imageUrls: string[];
   ingredientIds: string[];
   isFeatured: boolean;
   isPublished: boolean;
@@ -113,20 +114,12 @@ export function ProductForm({
           </Field>
         </div>
 
-        <Field
-          label="이미지 URL"
-          htmlFor="imageUrls"
-          hint="한 줄에 하나씩"
-          error={state.fieldErrors?.imageUrls}
-        >
-          <Textarea
-            id="imageUrls"
-            name="imageUrls"
-            defaultValue={values.imageUrls}
-            className="min-h-24 font-mono text-xs"
-            placeholder={"https://…/front.jpg\nhttps://…/back.jpg"}
-          />
-        </Field>
+        <ImageListField
+          name="imageUrls"
+          label="제품 이미지"
+          hint="최대 6장 · 첫 번째가 대표 이미지"
+          defaultValue={values.imageUrls}
+        />
 
         <div className="flex flex-wrap gap-6 border-t border-ink-100 pt-5">
           <label className="flex items-center gap-2.5 text-sm font-semibold text-ink-800">

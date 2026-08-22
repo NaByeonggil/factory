@@ -14,7 +14,7 @@ export default async function NewProductPage() {
     slug: "",
     serviceType: "OEM",
     formulation: "TABLET",
-    imageUrls: "",
+    imageUrls: [],
     ingredientIds: [],
     isFeatured: false,
     isPublished: true,

@@ -12,6 +12,7 @@ import {
 } from "@/components/admin/form-shell";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
+import { ImageField } from "@/components/admin/image-field";
 import { INGREDIENT_CATEGORIES } from "@/lib/constants";
 import type { ActionState, DbLocale } from "@/lib/validations/admin";
 
@@ -95,20 +96,6 @@ export function IngredientForm({
             </Select>
           </Field>
 
-          <Field
-            label="썸네일 URL"
-            htmlFor="thumbnailUrl"
-            hint="선택"
-            error={state.fieldErrors?.thumbnailUrl}
-          >
-            <Input
-              id="thumbnailUrl"
-              name="thumbnailUrl"
-              defaultValue={values.thumbnailUrl}
-              placeholder="https://…"
-            />
-          </Field>
-
           <Field label="정렬 순서" htmlFor="sortOrder" hint="작을수록 먼저">
             <Input
               id="sortOrder"
@@ -118,6 +105,15 @@ export function IngredientForm({
               defaultValue={values.sortOrder}
             />
           </Field>
+        </div>
+
+        <div className="border-t border-ink-100 pt-5">
+          <ImageField
+            name="thumbnailUrl"
+            label="썸네일 이미지"
+            hint="선택 · 정사각형 권장"
+            defaultValue={values.thumbnailUrl}
+          />
         </div>
 
         <div className="flex flex-wrap gap-6 border-t border-ink-100 pt-5">

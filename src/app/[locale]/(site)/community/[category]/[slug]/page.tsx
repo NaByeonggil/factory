@@ -13,6 +13,7 @@ import {
 } from "@/lib/queries";
 import { routing } from "@/i18n/routing";
 import { formatDate } from "@/lib/utils";
+import { Thumbnail } from "@/components/site/media";
 
 const SLUG_BY_CATEGORY = Object.fromEntries(
   Object.entries(POST_CATEGORY_SLUGS).map(([slug, value]) => [value, slug]),
@@ -83,6 +84,18 @@ export default async function CommunityPostPage(
               </time>
             )}
           </div>
+
+          {post.coverUrl && (
+            <Thumbnail
+              src={post.coverUrl}
+              alt={post.t.title}
+              seed={post.t.title}
+              ratio="video"
+              className="mt-8"
+              sizes="(min-width: 768px) 720px, 100vw"
+              priority
+            />
+          )}
 
           <div className="mt-10 whitespace-pre-line text-[0.9375rem] leading-loose text-ink-700">
             {post.t.body}

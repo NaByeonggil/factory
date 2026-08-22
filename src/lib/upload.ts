@@ -73,12 +73,40 @@ export function validateUpload(
   return null;
 }
 
+/**
+ * 저장 네임스페이스.
+ *
+ * - `inq` 문의 첨부 — 관리자 인증이 걸린 /api/files 로만 열람
+ * - `pub` 콘텐츠 이미지 — 누구나 볼 수 있는 /api/media 로 서빙
+ *
+ * 두 라우트가 각각 자기 접두사만 허용하므로, /api/media 로 문의 첨부를
+ * 꺼내가는 경로가 막힙니다.
+ */
+export const STORAGE_PREFIX = { inquiry: "inq", media: "pub" } as const;
+export type StoragePrefix = (typeof STORAGE_PREFIX)[keyof typeof STORAGE_PREFIX];
+
 /** 저장 키. 원본 파일명은 경로에 쓰지 않습니다. */
-export function buildStorageKey(ext: string) {
+export function buildStorageKey(prefix: StoragePrefix, ext: string) {
   const now = new Date();
   const yyyy = now.getUTCFullYear();
   const mm = String(now.getUTCMonth() + 1).padStart(2, "0");
-  return `${yyyy}/${mm}/${randomUUID()}.${ext}`;
+  return `${prefix}/${yyyy}/${mm}/${randomUUID()}.${ext}`;
+}
+
+export function hasPrefix(key: string, prefix: StoragePrefix) {
+  return key.startsWith(`${prefix}/`);
+}
+
+/** 콘텐츠 이미지 전용 (문서 포맷 제외) */
+export const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "webp"] as const;
+export const IMAGE_ACCEPT = IMAGE_EXTENSIONS.map((e) => `.${e}`).join(",");
+export const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
+
+/** URL(/api/media/<key>)에서 스토리지 키를 되돌립니다 */
+export function mediaKeyFromUrl(url: string | null | undefined) {
+  if (!url) return null;
+  const match = /^\/api\/media\/(.+)$/.exec(url);
+  return match ? match[1] : null;
 }
 
 /**

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/section";
 import { getAllIngredientSlugs, getIngredientBySlug } from "@/lib/queries";
 import { routing } from "@/i18n/routing";
+import { Thumbnail } from "@/components/site/media";
 
 export const dynamic = "force-static";
 export const revalidate = 600;
@@ -46,6 +47,17 @@ export default async function IngredientDetailPage(
   return (
     <Section>
       <Container className="max-w-3xl">
+        {item.thumbnailUrl && (
+          <Thumbnail
+            src={item.thumbnailUrl}
+            alt={item.t.name}
+            seed={item.t.name}
+            ratio="video"
+            className="mb-8"
+            sizes="(min-width: 768px) 720px, 100vw"
+            priority
+          />
+        )}
         <Badge tone="brand">{tCategory(item.category)}</Badge>
         <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
           {item.t.name}

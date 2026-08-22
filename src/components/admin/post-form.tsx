@@ -12,6 +12,7 @@ import {
 } from "@/components/admin/form-shell";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
+import { ImageField } from "@/components/admin/image-field";
 import type { ActionState, DbLocale } from "@/lib/validations/admin";
 
 const CATEGORY_LABELS = {
@@ -98,19 +99,15 @@ export function PostForm({
             />
           </Field>
 
-          <Field
-            label="커버 이미지 URL"
-            htmlFor="coverUrl"
-            hint="선택"
-            error={state.fieldErrors?.coverUrl}
-          >
-            <Input
-              id="coverUrl"
-              name="coverUrl"
-              defaultValue={values.coverUrl}
-              placeholder="https://…"
-            />
-          </Field>
+        </div>
+
+        <div className="border-t border-ink-100 pt-5">
+          <ImageField
+            name="coverUrl"
+            label="커버 이미지"
+            hint="선택 · 가로형 권장"
+            defaultValue={values.coverUrl}
+          />
         </div>
       </AdminCard>
 

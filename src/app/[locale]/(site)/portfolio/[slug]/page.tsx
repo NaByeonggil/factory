@@ -7,6 +7,7 @@ import { Container, Section } from "@/components/ui/section";
 import { CtaBand } from "@/components/site/cta-band";
 import { getAllProductSlugs, getProductBySlug } from "@/lib/queries";
 import { routing } from "@/i18n/routing";
+import { Gallery } from "@/components/site/media";
 
 export const dynamic = "force-static";
 export const revalidate = 600;
@@ -51,6 +52,11 @@ export default async function PortfolioDetailPage(
     <>
       <Section>
         <Container className="max-w-3xl">
+          {item.imageUrls.length > 0 && (
+            <div className="mb-8">
+              <Gallery images={item.imageUrls} alt={item.t.title} />
+            </div>
+          )}
           <div className="flex flex-wrap gap-2">
             <Badge tone="brand">{tService(item.serviceType)}</Badge>
             <Badge>{tOptions(`formulation.${item.formulation}`)}</Badge>
