@@ -25,10 +25,11 @@
   },
   "home": {
     "heroEyebrow": "건강기능식품 OEM · ODM · CDMO",
-    "heroTitle": "당신의 아이디어를\n가장 빠르게 제품으로",
-    "heroDescription": "초기 창업자부터 확장을 준비하는 기업까지. 기획·원료·생산·디자인·유통까지 한 곳에서 해결하는 올인원 제조 파트너입니다.",
+    "heroTitle": "1,000개부터 시작해서\n브랜드가 될 때까지",
+    "heroDescription": "정제·경질캡슐 기준 1,000개 소량 생산부터 상담합니다. 기획·원료·생산·디자인·유통까지 한 곳에서 끝내는 26년 경력의 올인원 제조 파트너입니다.",
     "heroPrimaryCta": "1분 만에 견적 문의",
     "heroSecondaryCta": "보유 원료 보기",
+    "heroTrustLabel": "보유 인증",
     "statsTitle": "숫자로 보는 헬씨팜바이오",
     "stats": {
       "years": "업력",
@@ -48,6 +49,30 @@
     "certTitle": "GMP · HACCP 인증 시설",
     "certDescription": "국제 표준 인증을 갖춘 자사 공장에서 직접 생산합니다.",
     "serviceTitle": "무엇을 도와드릴까요",
+    "processTitle": "제작 프로세스",
+    "processDescription": "문의부터 납품까지 OEM 기준 약 6~10주. 단계마다 담당자가 함께합니다.",
+    "processSteps": [
+      {
+        "title": "문의·상담",
+        "body": "제품 컨셉과 예산, 희망 수량을 확인하고 방향을 정합니다."
+      },
+      {
+        "title": "처방 설계·견적",
+        "body": "원료와 배합을 설계하고 단가·최소 수량·일정을 제시합니다."
+      },
+      {
+        "title": "시제품 확인",
+        "body": "실물 시제품으로 제형과 관능을 확인하고 수정합니다."
+      },
+      {
+        "title": "인허가·표시사항",
+        "body": "표시사항 초안을 작성하고 심의 대응 방향을 함께 검토합니다."
+      },
+      {
+        "title": "양산·납품",
+        "body": "GMP 시설에서 생산하고 시험 성적서와 함께 출고합니다."
+      }
+    ],
     "priorityTitle": "Priority Service",
     "priorityDescription": "제조를 넘어 브랜드가 팔리기까지 함께합니다.",
     "ctaTitle": "제품 아이디어만 있으면 충분합니다",

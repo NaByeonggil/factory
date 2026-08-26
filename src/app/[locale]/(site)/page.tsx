@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -33,6 +33,14 @@ import {
 import { formatDate } from "@/lib/utils";
 import { Thumbnail } from "@/components/site/media";
 import { routing } from "@/i18n/routing";
+import heroImage from "../../../../public/hero-factory.jpg";
+import hardCapsuleImage from "../../../../public/formulations/hard-capsule.jpg";
+import softCapsuleImage from "../../../../public/formulations/soft-capsule.jpg";
+import tabletImage from "../../../../public/formulations/tablet.jpg";
+import pillImage from "../../../../public/formulations/pill.jpg";
+import jellyImage from "../../../../public/formulations/jelly.jpg";
+import liquidImage from "../../../../public/formulations/liquid.jpg";
+import powderImage from "../../../../public/formulations/powder.jpg";
 
 /** 광고 랜딩 페이지 — 정적 프리렌더 후 10분마다 ISR 재생성 */
 export const dynamic = "force-static";
@@ -62,6 +70,35 @@ const SERVICE_ICONS = {
   PET: Award,
 } as const;
 
+type ProcessStep = { title: string; body: string };
+
+/** 제형 코드 → 제품 사진 (FORMULATIONS 의 모든 코드를 덮습니다) */
+const FORMULATION_IMAGES: Record<(typeof FORMULATIONS)[number], StaticImageData> = {
+  PILL: pillImage,
+  HARD_CAPSULE: hardCapsuleImage,
+  SOFT_CAPSULE: softCapsuleImage,
+  JELLY: jellyImage,
+  LIQUID: liquidImage,
+  POWDER: powderImage,
+  TABLET: tabletImage,
+};
+
+/** 히어로 배지 + 지표 스트립이 공유하는 표기 순서 */
+const STATS = [
+  ["years", "yearsValue"],
+  ["ccm", "ccmValue"],
+  ["satisfaction", "satisfactionValue"],
+  ["products", "productsValue"],
+] as const;
+
+/** DB에 인증 데이터가 아직 없을 때 노출할 기본 인증 */
+const FALLBACK_CERTIFICATIONS = [
+  { code: "GMP", name: "", imageUrl: null },
+  { code: "HACCP", name: "", imageUrl: null },
+  { code: "ISO 9001", name: "", imageUrl: null },
+  { code: "ISO 22000", name: "", imageUrl: null },
+];
+
 const PRIORITY_ITEMS = [
   { key: "design", Icon: Palette },
   { key: "channel", Icon: LineChart },
@@ -89,12 +126,33 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
     getRecentInquirySummaries(),
   ]);
 
+  const processSteps = t.raw("processSteps") as ProcessStep[];
+
+  const shownCertifications =
+    certifications.length > 0 ? certifications : FALLBACK_CERTIFICATIONS;
+  const heroCertifications = shownCertifications.slice(0, 4);
+
   return (
     <>
       {/* ─── Hero ─── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
-        <Container className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
-          <div>
+      <section className="relative overflow-hidden bg-brand-50">
+        <Image
+          src={heroImage}
+          alt=""
+          fill
+          sizes="100vw"
+          preload
+          placeholder="blur"
+          className="object-cover object-center"
+        />
+        {/* 사진 위에서도 본문 대비가 유지되도록 덮는 스크림.
+            모바일은 위→아래, 데스크톱은 좌→우로 걷힙니다. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/55 lg:bg-gradient-to-r lg:from-white lg:via-white/90 lg:to-white/25"
+        />
+        <Container className="relative py-16 sm:py-24 lg:py-28">
+          <div className="max-w-3xl">
             <Badge tone="brand">{t("heroEyebrow")}</Badge>
             <h1 className="mt-5 whitespace-pre-line text-display text-brand-900">
               {t("heroTitle")}
@@ -110,25 +168,38 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
                 <Link href="/ingredients">{t("heroSecondaryCta")}</Link>
               </Button>
             </div>
-          </div>
 
-          <dl className="grid grid-cols-2 gap-4">
-            {(
-              [
-                ["years", "yearsValue"],
-                ["ccm", "ccmValue"],
-                ["satisfaction", "satisfactionValue"],
-                ["products", "productsValue"],
-              ] as const
-            ).map(([labelKey, valueKey]) => (
+            <ul
+              aria-label={t("heroTrustLabel")}
+              className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2"
+            >
+              {heroCertifications.map((cert) => (
+                <li
+                  key={cert.code}
+                  className="flex items-center gap-1.5 text-label font-semibold text-brand-700"
+                >
+                  <BadgeCheck className="size-4 shrink-0" aria-hidden />
+                  {cert.code}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      {/* ─── 신뢰 지표 스트립 ─── */}
+      <section className="border-y border-ink-200 bg-white">
+        <Container>
+          <dl className="grid grid-cols-2 divide-ink-200 sm:grid-cols-4 sm:divide-x">
+            {STATS.map(([labelKey, valueKey]) => (
               <div
                 key={labelKey}
-                className="rounded-card border border-ink-200 bg-white p-6 text-center shadow-[var(--shadow-soft)]"
+                className="flex flex-col-reverse px-2 py-6 text-center sm:py-8"
               >
-                <dt className="text-sm font-medium text-ink-500">
+                <dt className="mt-1 text-sm font-medium text-ink-500">
                   {t(`stats.${labelKey}`)}
                 </dt>
-                <dd className="mt-2 text-2xl font-extrabold text-brand-700 sm:text-3xl">
+                <dd className="text-2xl font-extrabold text-brand-700 sm:text-3xl">
                   {t(`stats.${valueKey}`)}
                 </dd>
               </div>
@@ -163,8 +234,39 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
         </Container>
       </Section>
 
-      {/* ─── HOT 원료 ─── */}
+      {/* ─── 제작 프로세스 ─── */}
       <Section className="bg-ink-50">
+        <Container>
+          <SectionHeading
+            title={t("processTitle")}
+            description={t("processDescription")}
+          />
+          <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {processSteps.map((step, index) => (
+              <li
+                key={step.title}
+                className="flex h-full flex-col rounded-card border border-ink-200 bg-white p-5"
+              >
+                <span
+                  aria-hidden
+                  className="inline-flex size-8 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white"
+                >
+                  {index + 1}
+                </span>
+                <p className="mt-4 text-base font-bold text-ink-900">
+                  {step.title}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-700">
+                  {step.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </Section>
+
+      {/* ─── HOT 원료 ─── */}
+      <Section>
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeading
@@ -213,25 +315,39 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
       </Section>
 
       {/* ─── 제형 · 포장 ─── */}
-      <Section>
-        <Container className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <SectionHeading
-              title={t("formulationTitle")}
-              description={t("formulationDescription")}
-            />
-            <ul className="mt-8 flex flex-wrap gap-2.5">
-              {FORMULATIONS.map((code) => (
+      <Section className="bg-ink-50">
+        <Container>
+          <SectionHeading
+            title={t("formulationTitle")}
+            description={t("formulationDescription")}
+          />
+          <ul className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {FORMULATIONS.map((code) => {
+              const label = tOptions(`formulation.${code}`);
+              return (
                 <li
                   key={code}
-                  className="rounded-full border border-brand-700 bg-brand-700/5 px-4 py-2 text-label text-brand-700"
+                  className="overflow-hidden rounded-card border border-ink-200 bg-white"
                 >
-                  {tOptions(`formulation.${code}`)}
+                  <div className="relative aspect-[4/3] bg-ink-100">
+                    <Image
+                      src={FORMULATION_IMAGES[code]}
+                      alt={label}
+                      fill
+                      sizes="(min-width: 768px) 272px, 45vw"
+                      placeholder="blur"
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="px-4 py-3 text-label font-semibold text-ink-900">
+                    {label}
+                  </p>
                 </li>
-              ))}
-            </ul>
-          </div>
-          <div>
+              );
+            })}
+          </ul>
+
+          <div className="mt-14">
             <SectionHeading title={t("packagingTitle")} />
             <ul className="mt-8 flex flex-wrap gap-2.5">
               {PACKAGINGS.map((code) => (
@@ -261,15 +377,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
           </div>
 
           <ul className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
-            {(certifications.length > 0
-              ? certifications
-              : [
-                  { code: "GMP", name: "", imageUrl: null },
-                  { code: "HACCP", name: "", imageUrl: null },
-                  { code: "ISO 9001", name: "", imageUrl: null },
-                  { code: "ISO 22000", name: "", imageUrl: null },
-                ]
-            ).map((cert) => (
+            {shownCertifications.map((cert) => (
               <li
                 key={cert.code}
                 className="flex items-center gap-3 rounded-card bg-white/10 px-4 py-4 text-label font-semibold"

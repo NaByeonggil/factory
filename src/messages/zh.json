@@ -25,10 +25,11 @@
   },
   "home": {
     "heroEyebrow": "保健功能食品 OEM · ODM · CDMO",
-    "heroTitle": "让您的创意\n最快变成产品",
-    "heroDescription": "无论是初创品牌还是扩张中的企业，策划、原料、生产、设计与流通一站式解决。",
+    "heroTitle": "从1,000个起步\n直到成为品牌",
+    "heroDescription": "片剂·硬胶囊最少1,000个即可小批量生产。策划、原料、生产、设计与流通一站式解决，26年经验的一站式制造伙伴。",
     "heroPrimaryCta": "一分钟获取报价",
     "heroSecondaryCta": "查看自有原料",
+    "heroTrustLabel": "持有认证",
     "statsTitle": "数字看 Healthy Farm Bio",
     "stats": {
       "years": "行业经验",
@@ -48,6 +49,30 @@
     "certTitle": "GMP · HACCP 认证工厂",
     "certDescription": "在具备国际标准认证的自有工厂直接生产。",
     "serviceTitle": "我们能提供什么",
+    "processTitle": "生产流程",
+    "processDescription": "从咨询到交付，OEM约需6~10周。每个阶段均有专属负责人跟进。",
+    "processSteps": [
+      {
+        "title": "咨询洽谈",
+        "body": "确认产品概念、预算与预计数量，共同确定方向。"
+      },
+      {
+        "title": "处方设计·报价",
+        "body": "设计原料配比，并提供单价、最小起订量与日程。"
+      },
+      {
+        "title": "样品确认",
+        "body": "以实物样品确认剂型与口感，并进行修改。"
+      },
+      {
+        "title": "许可·标示事项",
+        "body": "起草标示事项初稿，共同检讨审议应对方向。"
+      },
+      {
+        "title": "量产·交付",
+        "body": "在GMP设施生产，随附检验成绩书出货。"
+      }
+    ],
     "priorityTitle": "Priority Service",
     "priorityDescription": "不止于生产，陪伴品牌走到销售。",
     "ctaTitle": "只要有产品创意就足够",

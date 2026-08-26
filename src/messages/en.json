@@ -25,10 +25,11 @@
   },
   "home": {
     "heroEyebrow": "Health Functional Food OEM · ODM · CDMO",
-    "heroTitle": "From your idea\nto a finished product, fast",
-    "heroDescription": "Whether you are launching your first brand or scaling an existing one — planning, ingredients, production, design and distribution in one place.",
+    "heroTitle": "Start at 1,000 units.\nScale into a brand.",
+    "heroDescription": "Small runs from 1,000 units for tablets and hard capsules — plus planning, ingredients, manufacturing, design and distribution from a single partner with 26 years of experience.",
     "heroPrimaryCta": "Request a quote",
     "heroSecondaryCta": "Browse ingredients",
+    "heroTrustLabel": "Certifications",
     "statsTitle": "Healthy Farm Bio in numbers",
     "stats": {
       "years": "Years in business",
@@ -48,6 +49,30 @@
     "certTitle": "GMP · HACCP certified facility",
     "certDescription": "Manufactured in our own internationally certified plant.",
     "serviceTitle": "How can we help",
+    "processTitle": "How it works",
+    "processDescription": "Roughly 6–10 weeks from first enquiry to delivery for an OEM run, with a dedicated contact at every step.",
+    "processSteps": [
+      {
+        "title": "Consultation",
+        "body": "We review your concept, budget and target volume, then agree on a direction."
+      },
+      {
+        "title": "Formula & quote",
+        "body": "We design the blend and present unit cost, minimum quantity and schedule."
+      },
+      {
+        "title": "Prototype",
+        "body": "You check a real prototype for format, taste and feel, and we revise it."
+      },
+      {
+        "title": "Labeling & approval",
+        "body": "We draft the mandatory labeling and review the approval strategy with you."
+      },
+      {
+        "title": "Production & delivery",
+        "body": "We manufacture in our GMP facility and ship with a test report."
+      }
+    ],
     "priorityTitle": "Priority Service",
     "priorityDescription": "We stay with you beyond manufacturing — until the product sells.",
     "ctaTitle": "An idea is all you need to start",
