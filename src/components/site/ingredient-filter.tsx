@@ -79,7 +79,7 @@ export function IngredientFilter({ items }: { items: IngredientCard[] }) {
                   alt={item.name}
                   seed={item.name}
                   className="rounded-none"
-                  sizes="(min-width: 1024px) 320px, 100vw"
+                  sizes="(min-width: 1264px) 368px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 100vw"
                 />
                 <div className="flex flex-1 flex-col gap-2 p-5">
                   <Badge tone="accent">{tCategory(item.category)}</Badge>

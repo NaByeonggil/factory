@@ -297,7 +297,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
                       alt={item.name}
                       seed={item.name}
                       className="rounded-none"
-                      sizes="(min-width: 1024px) 260px, 45vw"
+                      sizes="(min-width: 1264px) 272px, (min-width: 1024px) 23vw, (min-width: 640px) 47vw, 100vw"
                     />
                     <div className="flex flex-1 flex-col gap-2 p-5">
                       <Badge tone="accent">{tCategory(item.category)}</Badge>
@@ -336,7 +336,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
                       src={FORMULATION_IMAGES[code]}
                       alt={label}
                       fill
-                      sizes="(min-width: 768px) 272px, 45vw"
+                      sizes="(min-width: 1264px) 272px, (min-width: 768px) 23vw, 45vw"
                       placeholder="blur"
                       className="object-cover"
                     />
