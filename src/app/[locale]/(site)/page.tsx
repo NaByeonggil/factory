@@ -146,10 +146,12 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
           className="object-cover object-center"
         />
         {/* 사진 위에서도 본문 대비가 유지되도록 덮는 스크림.
-            모바일은 위→아래, 데스크톱은 좌→우로 걷힙니다. */}
+            모바일은 위→아래, 데스크톱은 좌→우로 걷힙니다.
+            텍스트는 컨테이너 왼쪽 절반까지만 놓이므로, 데스크톱에서는
+            55% 지점부터 빠르게 투명해져 사진이 그대로 드러납니다. */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/55 lg:bg-gradient-to-r lg:from-white lg:via-white/90 lg:to-white/25"
+          className="absolute inset-0 bg-gradient-to-b from-white/92 via-white/78 to-white/40 lg:bg-gradient-to-r lg:from-white/92 lg:from-25% lg:via-white/55 lg:via-55% lg:to-transparent lg:to-85%"
         />
         <Container className="relative py-16 sm:py-24 lg:py-28">
           <div className="max-w-3xl">
