@@ -4,11 +4,17 @@ import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import type { ActionState } from "@/lib/validations/admin";
 
-export function SubmitButton({ label = "저장" }: { label?: string }) {
+export function SubmitButton({
+  label = "저장",
+  pendingLabel = "저장 중…",
+}: {
+  label?: string;
+  pendingLabel?: string;
+}) {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? "저장 중…" : label}
+      {pending ? pendingLabel : label}
     </Button>
   );
 }

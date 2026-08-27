@@ -6,6 +6,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/auth";
 import { POST_CATEGORY_SLUGS } from "@/lib/queries";
+import { INGREDIENT_CATEGORIES } from "@/lib/constants";
 import { routing } from "@/i18n/routing";
 import type { PostCategory } from "@/generated/prisma/enums";
 import {
@@ -14,9 +15,11 @@ import {
   type DbLocale,
   checkbox,
   ingredientSchema,
+  slugSchema,
   text,
   lines,
   parseTranslations,
+  popupSchema,
   postSchema,
   productSchema,
 } from "@/lib/validations/admin";
@@ -86,6 +89,13 @@ function revalidateProducts(slugs: (string | null | undefined)[]) {
     "/portfolio",
     ...unique(slugs).map((slug) => `/portfolio/${slug}`),
   ]);
+}
+
+/** 팝업은 로케일 레이아웃에서 렌더링되므로 하위 경로 전체를 비웁니다 */
+function revalidatePopups() {
+  for (const locale of routing.locales) {
+    revalidatePath(`/${locale}`, "layout");
+  }
 }
 
 function unique(values: (string | null | undefined)[]) {
@@ -198,6 +208,126 @@ export async function deleteIngredient(formData: FormData) {
   revalidateIngredients([removed.slug]);
   revalidatePath("/admin/ingredients");
   redirect("/admin/ingredients");
+}
+
+/**
+ * 목록에서 바로 켜고 끄는 노출 스위치.
+ * 상세 폼을 열지 않고 공개·메인추천을 바꾸기 위한 경로입니다.
+ */
+export async function toggleIngredientFlag(
+  id: string,
+  field: "isPublished" | "isFeatured",
+  value: boolean,
+) {
+  await requireSession(["ADMIN", "EDITOR"]);
+  const row = await prisma.ingredient.update({
+    where: { id },
+    data: { [field]: value },
+    select: { slug: true },
+  });
+  revalidateIngredients([row.slug]);
+  revalidatePath("/admin/ingredients");
+}
+
+/** 목록에서 분류만 바꾸는 경로 (상세 폼을 열지 않아도 되도록) */
+export async function updateIngredientCategory(id: string, category: string) {
+  await requireSession(["ADMIN", "EDITOR"]);
+  const parsed = z.enum(INGREDIENT_CATEGORIES).safeParse(category);
+  if (!parsed.success) return;
+
+  const row = await prisma.ingredient.update({
+    where: { id },
+    data: { category: parsed.data },
+    select: { slug: true },
+  });
+  revalidateIngredients([row.slug]);
+  revalidatePath("/admin/ingredients");
+}
+
+/**
+ * 목록에서 바로 만드는 빠른 추가.
+ * 이름·slug·분류만 받아 만들고, 상세 내용은 편집 화면에서 이어 채웁니다.
+ */
+export async function quickCreateIngredient(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  await requireSession(["ADMIN", "EDITOR"]);
+
+  const parsed = z
+    .object({
+      slug: slugSchema,
+      category: z.enum(INGREDIENT_CATEGORIES),
+      name: z.string().trim().min(1, "원료명을 입력해주세요.").max(120),
+    })
+    .safeParse({
+      slug: text(formData, "slug"),
+      category: text(formData, "category"),
+      name: text(formData, "name"),
+    });
+  if (!parsed.success) {
+    return { error: "입력값을 확인해주세요.", fieldErrors: toFieldErrors(parsed.error) };
+  }
+
+  const { slug, category, name } = parsed.data;
+
+  let id: string;
+  try {
+    const created = await prisma.ingredient.create({
+      data: {
+        slug,
+        category,
+        isPublished: true,
+        translations: { create: [{ locale: "KO", name }] },
+      },
+      select: { id: true },
+    });
+    id = created.id;
+  } catch (error) {
+    if (uniqueSlugError(error)) {
+      return { error: "이미 사용 중인 slug입니다.", fieldErrors: { slug: "중복된 slug" } };
+    }
+    console.error("[quickCreateIngredient]", error);
+    return { error: "저장 중 오류가 발생했습니다." };
+  }
+
+  revalidateIngredients([slug]);
+  revalidatePath("/admin/ingredients");
+  // 나머지 항목(요약·기능성·이미지·번역)을 이어서 채우도록 편집 화면으로
+  redirect(`/admin/ingredients/${id}`);
+}
+
+/**
+ * 목록 순서 변경.
+ *
+ * sortOrder 가 0으로 몰려 있으면 값 교환만으로는 순서가 바뀌지 않으므로,
+ * 현재 표시 순서대로 전부 다시 번호를 매기면서 대상만 한 칸 이동시킵니다.
+ */
+export async function moveIngredient(id: string, direction: "up" | "down") {
+  await requireSession(["ADMIN", "EDITOR"]);
+
+  const rows = await prisma.ingredient.findMany({
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+    select: { id: true, slug: true },
+  });
+
+  const index = rows.findIndex((row) => row.id === id);
+  const target = direction === "up" ? index - 1 : index + 1;
+  if (index === -1 || target < 0 || target >= rows.length) return;
+
+  [rows[index], rows[target]] = [rows[target], rows[index]];
+
+  await prisma.$transaction(
+    rows.map((row, order) =>
+      prisma.ingredient.update({
+        where: { id: row.id },
+        data: { sortOrder: order + 1 },
+      }),
+    ),
+  );
+
+  revalidateIngredients(rows.map((row) => row.slug));
+  revalidatePath("/admin/ingredients");
 }
 
 // ───────────────────────── 게시물 ─────────────────────────
@@ -380,4 +510,83 @@ export async function deleteProduct(formData: FormData) {
   revalidateProducts([removed.slug]);
   revalidatePath("/admin/portfolio");
   redirect("/admin/portfolio");
+}
+
+// ─────────────────────── 팝업 공지 ───────────────────────
+
+const POPUP_FIELDS = ["title", "body", "linkLabel"] as const;
+
+export async function savePopup(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  // id는 .bind()가 아니라 폼의 hidden 필드로 받습니다.
+  // 바인딩된 인자는 암호화되어 전달되는데, JS가 없는 폼 제출 경로에서
+  // 응답이 완결되지 않는 문제가 있어 hidden 필드 방식이 더 견고합니다.
+  let id = String(formData.get("id") ?? "") || null;
+  await requireSession(["ADMIN", "EDITOR"]);
+
+  const parsed = popupSchema.safeParse({
+    slug: text(formData, "slug"),
+    imageUrl: text(formData, "imageUrl"),
+    linkUrl: text(formData, "linkUrl"),
+    startsAt: text(formData, "startsAt"),
+    endsAt: text(formData, "endsAt"),
+    isPublished: checkbox(formData, "isPublished"),
+    sortOrder: text(formData, "sortOrder") || 0,
+    translations: parseTranslations(formData, POPUP_FIELDS),
+  });
+  if (!parsed.success) {
+    return { error: "입력값을 확인해주세요.", fieldErrors: toFieldErrors(parsed.error) };
+  }
+
+  const { translations, ...data } = parsed.data;
+  const locales = filledLocales(translations, "title");
+  if (locales.length === 0) {
+    return {
+      error: "최소 한 개 언어의 팝업 제목을 입력해주세요.",
+      fieldErrors: { "translations.KO.title": "제목을 입력해주세요." },
+    };
+  }
+
+  const rows = locales.map((locale) => ({ locale, ...translations[locale] }));
+
+  try {
+    if (id) {
+      const popupId = id;
+      await prisma.$transaction([
+        prisma.popup.update({ where: { id: popupId }, data }),
+        // 비워둔 언어의 번역은 제거하고, 채워진 언어만 다시 씁니다
+        prisma.popupTranslation.deleteMany({ where: { popupId } }),
+        prisma.popupTranslation.createMany({
+          data: rows.map((row) => ({ ...row, popupId })),
+        }),
+      ]);
+    } else {
+      const created = await prisma.popup.create({
+        data: { ...data, translations: { create: rows } },
+        select: { id: true },
+      });
+      id = created.id;
+    }
+  } catch (error) {
+    if (uniqueSlugError(error)) {
+      return { error: "이미 사용 중인 slug입니다.", fieldErrors: { slug: "중복된 slug" } };
+    }
+    console.error("[savePopup]", error);
+    return { error: "저장 중 오류가 발생했습니다." };
+  }
+
+  revalidatePopups();
+  revalidatePath("/admin/popups");
+  redirect(`/admin/popups/${id}?saved=1`);
+}
+
+export async function deletePopup(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  await requireSession(["ADMIN"]);
+  await prisma.popup.delete({ where: { id } });
+  revalidatePopups();
+  revalidatePath("/admin/popups");
+  redirect("/admin/popups");
 }

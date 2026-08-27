@@ -11,8 +11,9 @@ import { mediaKeyFromUrl } from "../src/lib/upload";
  * 이미지는 /api/admin/uploads), 업로드만 하고 저장하지 않으면 남습니다.
  * 24시간이 지났는데도 DB 어디에서도 참조하지 않는 파일을 지웁니다.
  *
- * 참조처: InquiryFile.storageKey, Ingredient.thumbnailUrl, Post.coverUrl,
- * Product.imageUrls, Certification.imageUrl
+ * 참조처: InquiryFile.storageKey, InquiryReplyFile.storageKey,
+ * Ingredient.thumbnailUrl, Post.coverUrl, Product.imageUrls,
+ * Certification.imageUrl
  *
  *   npm run storage:cleanup
  *
@@ -34,10 +35,18 @@ async function main() {
     return;
   }
 
-  const [objects, attachments, ingredients, posts, products, certifications] =
-    await Promise.all([
+  const [
+    objects,
+    attachments,
+    replyAttachments,
+    ingredients,
+    posts,
+    products,
+    certifications,
+  ] = await Promise.all([
       storage.list(),
       prisma.inquiryFile.findMany({ select: { storageKey: true } }),
+      prisma.inquiryReplyFile.findMany({ select: { storageKey: true } }),
       prisma.ingredient.findMany({ select: { thumbnailUrl: true } }),
       prisma.post.findMany({ select: { coverUrl: true } }),
       prisma.product.findMany({ select: { imageUrls: true } }),
@@ -46,6 +55,7 @@ async function main() {
 
   const keep = new Set<string>();
   for (const row of attachments) keep.add(row.storageKey);
+  for (const row of replyAttachments) keep.add(row.storageKey);
 
   // 콘텐츠 이미지는 URL로 저장되므로 키를 역산합니다
   const mediaUrls = [

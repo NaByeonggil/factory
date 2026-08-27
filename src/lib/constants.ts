@@ -80,3 +80,9 @@ export const ALLOWED_UPLOAD_TYPES = [
 
 /** 문의 개인정보 보유기간(일) — 경과분은 크론으로 파기 */
 export const INQUIRY_RETENTION_DAYS = 365 * 3;
+
+/**
+ * 팝업 공지 카드 크기 — 핸드폰 화면 규격 고정.
+ * 관리자 폼에서 크기를 받지 않고, 공개 사이트·미리보기가 이 값을 공유합니다.
+ */
+export const POPUP_SIZE = { width: 320, height: 480 } as const;

@@ -87,15 +87,23 @@ export function ImageField({
   label,
   hint,
   defaultValue,
+  onChange,
 }: {
   name: string;
   label: string;
   hint?: string;
   defaultValue: string;
+  /** 선택한 이미지를 폼 밖(미리보기 등)에서도 쓰고 싶을 때 */
+  onChange?: (url: string) => void;
 }) {
   const [url, setUrl] = useState(defaultValue);
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+
+  function update(next: string) {
+    setUrl(next);
+    onChange?.(next);
+  }
 
   function pick(files: FileList) {
     setError(null);
@@ -103,7 +111,7 @@ export function ImageField({
     if (!file) return;
     startTransition(async () => {
       try {
-        setUrl(await uploadImage(file));
+        update(await uploadImage(file));
       } catch (e) {
         setError(e instanceof Error ? e.message : "업로드 실패");
       }
@@ -116,7 +124,7 @@ export function ImageField({
       <Picker label={label} hint={hint} pending={pending} onPick={pick} />
       {url && (
         <div className="pt-1">
-          <Thumb url={url} onRemove={() => setUrl("")} />
+          <Thumb url={url} onRemove={() => update("")} />
         </div>
       )}
       {error && (

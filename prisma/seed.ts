@@ -190,6 +190,35 @@ const POSTS = [
   },
 ];
 
+
+/** 팝업 공지 3건 — 핸드폰 규격(320×480)으로 노출됩니다 */
+const POPUPS = [
+  {
+    slug: "consultation-notice",
+    linkUrl: "/ko/inquiry",
+    sortOrder: 1,
+    ko: { title: "생산 상담 안내", body: "OEM·ODM 생산 상담은 평일 09:00~18:00에 접수하시면\n영업일 기준 1일 이내에 연락드립니다.", linkLabel: "생산문의 하기" },
+    en: { title: "Production consultation", body: "Submit an OEM/ODM inquiry on weekdays 09:00–18:00\nand we will reply within one business day.", linkLabel: "Send an inquiry" },
+    zh: { title: "生产咨询指南", body: "工作日 09:00~18:00 提交 OEM/ODM 咨询，\n我们将在一个工作日内联系您。", linkLabel: "提交咨询" },
+  },
+  {
+    slug: "minimum-order-popup",
+    linkUrl: "/ko/community/notice/minimum-order-guide",
+    sortOrder: 2,
+    ko: { title: "제형별 최소 생산 수량", body: "정제·경질캡슐 1,000개 / 연질캡슐·스틱 3,000개 /\n젤리·액상 5,000개부터 생산 가능합니다.", linkLabel: "자세히 보기" },
+    en: { title: "Minimum order quantity", body: "Tablet and hard capsule from 1,000 units, soft capsule and\nstick from 3,000, jelly and liquid from 5,000.", linkLabel: "Learn more" },
+    zh: { title: "各剂型最小生产量", body: "片剂·硬胶囊 1,000个起，软胶囊·条包 3,000个起，\n果冻·液体 5,000个起。", linkLabel: "查看详情" },
+  },
+  {
+    slug: "holiday-schedule",
+    linkUrl: null,
+    sortOrder: 3,
+    ko: { title: "하계 휴무 안내", body: "8월 첫째 주(8/3~8/7)는 공장 정기 보수로 휴무입니다.\n해당 기간 접수된 문의는 8/10부터 순차 회신드립니다.", linkLabel: null },
+    en: { title: "Summer shutdown notice", body: "The plant is closed for scheduled maintenance in the first\nweek of August (Aug 3–7). Replies resume from Aug 10.", linkLabel: null },
+    zh: { title: "夏季停产通知", body: "8月第一周（8/3~8/7）工厂定期检修停产。\n期间收到的咨询将从8/10起依次回复。", linkLabel: null },
+  },
+];
+
 async function main() {
   // ── 관리자 계정 ──
   const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@example.com";
@@ -300,9 +329,32 @@ async function main() {
     });
   }
 
+  // ── 팝업 공지 ──
+  for (const item of POPUPS) {
+    const { slug, linkUrl, sortOrder, ko, en, zh } = item;
+    await prisma.popup.upsert({
+      where: { slug },
+      update: { linkUrl, sortOrder, isPublished: true },
+      create: {
+        slug,
+        linkUrl,
+        sortOrder,
+        isPublished: true,
+        translations: {
+          create: [
+            { locale: "KO", ...ko },
+            { locale: "EN", ...en },
+            { locale: "ZH", ...zh },
+          ],
+        },
+      },
+    });
+  }
+
   console.log(
     `시드 완료: 원료 ${INGREDIENTS.length}건, 인증 ${CERTIFICATIONS.length}건, ` +
-      `포트폴리오 ${PRODUCTS.length}건, 게시물 ${POSTS.length}건`,
+      `포트폴리오 ${PRODUCTS.length}건, 게시물 ${POSTS.length}건, ` +
+      `팝업 ${POPUPS.length}건`,
   );
 }
 

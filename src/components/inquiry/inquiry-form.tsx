@@ -95,7 +95,8 @@ export function InquiryForm() {
       const result = await submitInquiry(locale, values);
 
       if (result.ok) {
-        router.push("/inquiry/complete");
+        // 완료 화면에서 접수번호를 안내하고 견적문의 게시판으로 이어줍니다
+        router.push(`/inquiry/complete?id=${result.id}`);
         return;
       }
 
@@ -185,6 +186,20 @@ export function InquiryForm() {
 
       <fieldset className="space-y-6">
 <FieldsetLegend>{t("sectionProduct")}</FieldsetLegend>
+
+        <Field
+          label={t("subject")}
+          htmlFor="title"
+          hint={t("subjectHint")}
+          error={msg(errors.title?.message)}
+        >
+          <Input
+            id="title"
+            placeholder={t("subjectPlaceholder")}
+            maxLength={100}
+            {...register("title")}
+          />
+        </Field>
 
         <Field label={t("serviceType")} htmlFor="serviceType">
           <Select id="serviceType" {...register("serviceType")}>
@@ -338,6 +353,22 @@ export function InquiryForm() {
             <span className="text-sm text-ink-700">{t("marketing")}</span>
           </label>
         </div>
+
+        <Field
+          label={t("password")}
+          htmlFor="password"
+          required
+          hint={t("passwordHint")}
+          error={msg(errors.password?.message)}
+        >
+          <Input
+            id="password"
+            type="password"
+            autoComplete="new-password"
+            aria-invalid={Boolean(errors.password)}
+            {...register("password")}
+          />
+        </Field>
       </fieldset>
 
       {formError && (

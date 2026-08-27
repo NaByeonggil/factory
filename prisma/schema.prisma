@@ -46,6 +46,12 @@ enum InquiryStatus {
   SPAM /// 스팸
 }
 
+/// 견적문의 답글 작성 주체
+enum ReplyAuthor {
+  CUSTOMER /// 문의한 고객 (비밀번호로 본인 확인)
+  ADMIN /// 운영자
+}
+
 enum PostCategory {
   NEWS /// 소식
   NOTICE /// 공지
@@ -71,6 +77,8 @@ model Inquiry {
   email   String?
 
   // 문의 내용
+  /// 견적문의 게시판에 노출되는 제목. 비우면 서비스 유형으로 자동 생성합니다
+  title        String?
   serviceType  ServiceType @default(OEM)
   formulations String[] /// 제형 코드 배열 (src/lib/constants.ts)
   packagings   String[] /// 포장방식 코드 배열
@@ -101,6 +109,16 @@ model Inquiry {
   assignee   User?         @relation("InquiryAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
   files      InquiryFile[]
   memos      InquiryMemo[]
+  replies    InquiryReply[]
+
+  // 견적문의 게시판 — 고객이 본인 문의와 답변을 확인하는 경로
+  /// 본인 확인용 비밀번호 해시. 게시판 도입 전 문의는 비어 있습니다
+  passwordHash String?
+  /// 고객에게 공개되는 답변 (내부 상담 메모와 구분)
+  replyBody    String?   @db.Text
+  repliedAt    DateTime?
+  repliedById  String?
+  repliedBy    User?     @relation("InquiryReplier", fields: [repliedById], references: [id], onDelete: SetNull)
 
   // 최소 수집 원칙: IP는 원문 대신 해시 보관
   ipHash    String?
@@ -113,6 +131,7 @@ model Inquiry {
   @@index([createdAt])
   @@index([utmSource, naverKeyword])
   @@index([assigneeId])
+  @@index([repliedById])
 }
 
 model InquiryFile {
@@ -142,6 +161,47 @@ model InquiryMemo {
   createdAt DateTime @default(now())
 
   @@index([inquiryId, createdAt])
+}
+
+/// 견적문의 게시판의 답글 스레드 (고객 ↔ 운영자)
+model InquiryReply {
+  id        String  @id @default(cuid())
+  inquiryId String
+  inquiry   Inquiry @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+
+  authorType ReplyAuthor
+  /// 운영자 답글이면 작성자 계정
+  authorId   String?
+  author     User?       @relation("InquiryReplyAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+  /// 화면에 표시할 이름 (고객은 문의자 이름, 운영자는 담당자 이름)
+  authorName String
+
+  body  String             @db.Text
+  files InquiryReplyFile[]
+
+  // 최소 수집 원칙: IP는 원문 대신 해시 보관
+  ipHash    String?
+  createdAt DateTime @default(now())
+
+  @@index([inquiryId, createdAt])
+  @@index([authorId])
+}
+
+/// 답글 첨부 (견적서 PDF 등). 열람 권한은 답글이 달린 문의를 따릅니다
+model InquiryReplyFile {
+  id      String       @id @default(cuid())
+  replyId String
+  reply   InquiryReply @relation(fields: [replyId], references: [id], onDelete: Cascade)
+
+  /// 스토리지 드라이버 내부 키 (로컬: storage/uploads 하위 상대경로)
+  storageKey String @unique
+  filename   String
+  size       Int
+  mimeType   String
+
+  createdAt DateTime @default(now())
+
+  @@index([replyId])
 }
 
 // ───────────────────────── 콘텐츠 ─────────────────────────
@@ -246,6 +306,84 @@ model PostTranslation {
   @@unique([postId, locale])
 }
 
+// ─────────────────────── 문답 게시판 ───────────────────────
+
+/// 고객이 직접 남기는 공개 질문과 운영자 답변 (1:1 생산문의와 별개)
+model Question {
+  id String @id @default(cuid())
+
+  // 작성자 — 목록·상세에는 마스킹해서 노출합니다
+  authorName String
+  company    String?
+  email      String?
+  phone      String?
+
+  /// 비밀글 열람·본인 확인용 비밀번호 해시 (bcrypt)
+  passwordHash String
+  /// 비밀글이면 제목만 공개하고 내용·답변은 비밀번호로 잠급니다
+  isSecret     Boolean @default(false)
+
+  title String
+  body  String @db.Text
+
+  // 운영자 답변
+  answerBody   String?   @db.Text
+  answeredAt   DateTime?
+  answeredById String?
+  answeredBy   User?     @relation("QuestionAnswerer", fields: [answeredById], references: [id], onDelete: SetNull)
+
+  /// 스팸·부적절 글 숨김 (삭제 대신)
+  isPublished Boolean @default(true)
+  viewCount   Int     @default(0)
+
+  // 최소 수집 원칙: IP는 원문 대신 해시 보관
+  ipHash    String?
+  userAgent String?
+  locale    Locale   @default(KO)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([locale, isPublished, createdAt])
+  @@index([answeredAt])
+}
+
+// ─────────────────────── 팝업 공지 ───────────────────────
+
+/// 사이트 진입 시 뜨는 팝업 공지. 핸드폰 화면 규격(320×480) 고정입니다.
+model Popup {
+  id       String  @id @default(cuid())
+  slug     String  @unique
+  imageUrl String? /// 팝업 본문 이미지 (권장 640×800, 4:5)
+  linkUrl  String? /// 클릭 시 이동 주소. 비우면 이동하지 않습니다
+
+  /// 노출 기간. 비우면 제한 없음
+  startsAt DateTime?
+  endsAt   DateTime?
+
+  isPublished Boolean @default(false)
+  sortOrder   Int     @default(0)
+
+  translations PopupTranslation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isPublished, sortOrder])
+}
+
+model PopupTranslation {
+  id      String @id @default(cuid())
+  popupId String
+  popup   Popup  @relation(fields: [popupId], references: [id], onDelete: Cascade)
+  locale  Locale
+
+  title     String
+  body      String? @db.Text
+  linkLabel String? /// 버튼 문구 (예: 자세히 보기)
+
+  @@unique([popupId, locale])
+}
+
 /// GMP, HACCP, ISO 9001/14001/22000/45001/50001, CCM …
 model Certification {
   id        String    @id @default(cuid())
@@ -275,7 +413,10 @@ model User {
   isActive     Boolean @default(true)
 
   assignedInquiries Inquiry[]     @relation("InquiryAssignee")
+  repliedInquiries  Inquiry[]     @relation("InquiryReplier")
   memos             InquiryMemo[]
+  inquiryReplies    InquiryReply[] @relation("InquiryReplyAuthor")
+  answeredQuestions Question[]     @relation("QuestionAnswerer")
 
   lastLoginAt DateTime?
   createdAt   DateTime  @default(now())

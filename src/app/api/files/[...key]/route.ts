@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getStorage } from "@/lib/storage";
-import { STORAGE_PREFIX, hasPrefix } from "@/lib/upload";
+import { STORAGE_PREFIX, contentDisposition, hasPrefix } from "@/lib/upload";
 
 export const runtime = "nodejs";
 
@@ -27,10 +27,15 @@ export async function GET(
   }
 
   // DB에 등록된 첨부만 내보냅니다 (고아 파일 열람 차단)
-  const record = await prisma.inquiryFile.findFirst({
-    where: { storageKey: key },
-    select: { filename: true, mimeType: true },
-  });
+  const record =
+    (await prisma.inquiryFile.findFirst({
+      where: { storageKey: key },
+      select: { filename: true, mimeType: true },
+    })) ??
+    (await prisma.inquiryReplyFile.findFirst({
+      where: { storageKey: key },
+      select: { filename: true, mimeType: true },
+    }));
   if (!record) return new NextResponse(null, { status: 404 });
 
   const storage = getStorage();
@@ -47,8 +52,8 @@ export async function GET(
   return new NextResponse(bytes as unknown as BodyInit, {
     headers: {
       "Content-Type": record.mimeType || "application/octet-stream",
-      // 브라우저에서 렌더링하지 않고 항상 내려받게 합니다 (XSS 방지)
-      "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(record.filename)}`,
+      // PDF·이미지는 클릭 즉시 보이도록 inline, 나머지는 내려받기
+      "Content-Disposition": contentDisposition(record.filename, record.mimeType),
       "Content-Length": String(bytes.byteLength),
       "Cache-Control": "private, no-store",
       "X-Content-Type-Options": "nosniff",

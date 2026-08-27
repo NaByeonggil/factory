@@ -1,5 +1,6 @@
 "use server";
 
+import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { inquirySchema, type InquiryInput } from "@/lib/validations/inquiry";
 import { getRequestMeta } from "@/lib/request-meta";
@@ -61,6 +62,7 @@ export async function submitInquiry(
         phone: data.phone,
         email: data.email || null,
 
+        title: data.title || null,
         serviceType: data.serviceType as ServiceType,
         formulations: data.formulations,
         packagings: data.packagings,
@@ -71,6 +73,9 @@ export async function submitInquiry(
 
         privacyAgreedAt: new Date(),
         marketingAgreed: data.marketingAgreed,
+
+        // 견적문의 게시판에서 본인 확인용
+        passwordHash: await bcrypt.hash(data.password, 12),
 
         utmSource: attribution.utmSource ?? null,
         utmMedium: attribution.utmMedium ?? null,

@@ -106,6 +106,50 @@ export const productSchema = z.object({
   translations: z.record(z.enum(DB_LOCALES), productTranslationSchema),
 });
 
+// ─────────────────────── 팝업 공지 ───────────────────────
+
+const optionalDate = z
+  .string()
+  .trim()
+  .optional()
+  .transform((v) => (v ? new Date(v) : null))
+  .refine(
+    (v) => v === null || !Number.isNaN(v.getTime()),
+    "날짜 형식이 올바르지 않습니다.",
+  );
+
+export const popupTranslationSchema = z.object({
+  title: z.string().trim().max(60),
+  body: optionalText(300),
+  linkLabel: optionalText(30),
+});
+
+export const popupSchema = z
+  .object({
+    slug: slugSchema,
+    imageUrl: optionalUrl,
+    /** 내부 경로(/ko/...) 또는 http(s) 주소 */
+    linkUrl: z
+      .string()
+      .trim()
+      .max(1000)
+      .optional()
+      .transform((v) => (v ? v : null))
+      .refine(
+        (v) => v === null || /^(https?:\/\/|\/)/.test(v),
+        "/ 로 시작하는 내부 경로 또는 http(s):// 주소를 입력하세요.",
+      ),
+    startsAt: optionalDate,
+    endsAt: optionalDate,
+    isPublished: z.boolean(),
+    sortOrder: z.coerce.number().int().min(0).max(9999),
+    translations: z.record(z.enum(DB_LOCALES), popupTranslationSchema),
+  })
+  .refine(
+    (v) => !v.startsAt || !v.endsAt || v.startsAt <= v.endsAt,
+    { message: "종료일이 시작일보다 빠릅니다.", path: ["endsAt"] },
+  );
+
 // ───────────────────────── 헬퍼 ─────────────────────────
 
 /** `translations.KO.name` 형태의 FormData 키를 중첩 객체로 복원 */

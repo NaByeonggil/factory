@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/section";
 import { ConversionTags } from "@/components/tracking/analytics";
 
-export const dynamic = "force-static";
+// 접수번호(?id=)를 함께 안내하므로 요청마다 렌더링합니다
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/inquiry/complete">,
@@ -24,7 +25,11 @@ export default async function InquiryCompletePage(
   props: PageProps<"/[locale]/inquiry/complete">,
 ) {
   const { locale } = await props.params;
+  const search = await props.searchParams;
   const t = await getTranslations({ locale, namespace: "inquiry" });
+  const tQuote = await getTranslations({ locale, namespace: "quote" });
+
+  const id = typeof search.id === "string" ? search.id : null;
 
   return (
     <Section>
@@ -36,6 +41,24 @@ export default async function InquiryCompletePage(
         <p className="mt-4 leading-relaxed text-ink-600">
           {t("completeDescription")}
         </p>
+
+        {id && (
+          <div className="mt-8 rounded-2xl border border-ink-200 bg-ink-50 p-6">
+            <p className="text-xs font-semibold text-ink-500">
+              {tQuote("receiptTitle")}
+            </p>
+            <p className="mt-1 font-mono text-sm font-bold break-all text-ink-900">
+              {id}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-ink-600">
+              {tQuote("receiptHint")}
+            </p>
+            <Button asChild size="sm" className="mt-4">
+              <Link href={`/quote/${id}`}>{tQuote("goBoard")}</Link>
+            </Button>
+          </div>
+        )}
+
         <Button asChild size="lg" variant="outline" className="mt-8">
           <Link href="/">{t("completeHome")}</Link>
         </Button>

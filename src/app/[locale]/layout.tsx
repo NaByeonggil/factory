@@ -8,9 +8,11 @@ import { bcp47, routing, type AppLocale } from "@/i18n/routing";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { MobileCta } from "@/components/site/mobile-cta";
+import { PopupNotice } from "@/components/site/popup-notice";
 import { AttributionCapture } from "@/components/tracking/attribution-capture";
 import { Analytics } from "@/components/tracking/analytics";
 import { getCompanyInfo } from "@/lib/settings";
+import { getActivePopups } from "@/lib/queries";
 import "../globals.css";
 
 const notoSansKr = Noto_Sans_KR({
@@ -63,9 +65,10 @@ export default async function LocaleLayout(props: LayoutProps<"/[locale]">) {
   // locale·messages를 명시적으로 전달합니다.
   // setRequestLocale에 의존하면 Turbopack이 next-intl 내부 모듈을 중복
   // 번들링할 때 React cache 스코프가 갈라져 기본 로케일로 폴백합니다.
-  const [messages, company] = await Promise.all([
+  const [messages, company, popups] = await Promise.all([
     getMessages({ locale }),
     getCompanyInfo(),
+    getActivePopups(locale),
   ]);
 
   return (
@@ -90,6 +93,7 @@ export default async function LocaleLayout(props: LayoutProps<"/[locale]">) {
           </main>
           <Footer locale={locale} company={company} />
           <MobileCta tel={company.tel} />
+          <PopupNotice popups={popups} />
         </NextIntlClientProvider>
         <Analytics />
       </body>

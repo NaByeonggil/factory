@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { CtaBand } from "@/components/site/cta-band";
+import { CommunityTabs } from "@/components/site/community-tabs";
 import {
   POST_CATEGORY_SLUGS,
   getPosts,
@@ -11,7 +12,6 @@ import {
 } from "@/lib/queries";
 import { routing } from "@/i18n/routing";
 import { formatDate } from "@/lib/utils";
-import { cn } from "@/lib/utils";
 import { Thumbnail } from "@/components/site/media";
 
 export const dynamic = "force-static";
@@ -58,22 +58,7 @@ export default async function CommunityCategoryPage(
             description={t(`desc${key}`)}
           />
 
-          <nav aria-label={t("communityTitle")} className="mt-8 flex flex-wrap gap-2">
-            {Object.entries(POST_CATEGORY_SLUGS).map(([slug, value]) => (
-              <Link
-                key={slug}
-                href={`/community/${slug}`}
-                className={cn(
-                  "rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
-                  slug === category
-                    ? "border-brand-600 bg-brand-50 text-brand-700"
-                    : "border-ink-200 text-ink-600 hover:border-ink-300",
-                )}
-              >
-                {t(`category${value}`)}
-              </Link>
-            ))}
-          </nav>
+          <CommunityTabs locale={locale} active={category} />
 
           {posts.length === 0 ? (
             <p className="mt-12 rounded-2xl border border-dashed border-ink-300 p-12 text-center text-sm text-ink-500">

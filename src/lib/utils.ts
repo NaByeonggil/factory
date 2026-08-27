@@ -38,3 +38,11 @@ export function maskPhone(phone: string) {
   if (d.length < 8) return phone;
   return `${d.slice(0, 3)}-****-${d.slice(-4)}`;
 }
+
+/** 공개 게시판용 이름 마스킹 — 홍길동 → 홍*동, 김철 → 김* */
+export function maskName(name: string) {
+  const trimmed = name.trim();
+  if (trimmed.length <= 1) return trimmed;
+  if (trimmed.length === 2) return `${trimmed[0]}*`;
+  return `${trimmed[0]}${"*".repeat(trimmed.length - 2)}${trimmed.at(-1)}`;
+}

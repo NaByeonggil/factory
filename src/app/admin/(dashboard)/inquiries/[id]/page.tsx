@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { formatDateTime } from "@/lib/utils";
 import { StatusControl } from "@/components/admin/status-control";
 import { MemoForm } from "@/components/admin/memo-form";
+import { ReplyForm } from "@/components/admin/reply-form";
+import { ReplyThread } from "@/components/admin/reply-thread";
 
 export const dynamic = "force-dynamic";
 
@@ -12,12 +14,15 @@ export default async function AdminInquiryDetailPage(
   props: PageProps<"/admin/inquiries/[id]">,
 ) {
   const { id } = await props.params;
+  const search = await props.searchParams;
 
   const inquiry = await prisma.inquiry.findUnique({
     where: { id },
     include: {
       files: true,
       assignee: { select: { id: true, name: true } },
+      repliedBy: { select: { name: true } },
+      replies: { orderBy: { createdAt: "asc" }, include: { files: true } },
       memos: {
         orderBy: { createdAt: "desc" },
         include: { author: { select: { name: true } } },
@@ -59,7 +64,12 @@ export default async function AdminInquiryDetailPage(
         <Link href="/admin/inquiries" className="text-sm text-ink-500">
           ← 목록
         </Link>
-        <h1 className="text-2xl font-bold">{inquiry.name}</h1>
+        <h1 className="text-2xl font-bold">
+          {inquiry.title ?? `${inquiry.serviceType} 견적문의`}
+          <span className="ml-2 text-base font-medium text-ink-500">
+            {inquiry.name}
+          </span>
+        </h1>
         <Badge tone={inquiry.status === "NEW" ? "accent" : "neutral"}>
           {inquiry.status}
         </Badge>
@@ -106,6 +116,37 @@ export default async function AdminInquiryDetailPage(
               </ul>
             )}
           </section>
+
+          <ReplyForm
+            id={inquiry.id}
+            replyBody={inquiry.replyBody ?? ""}
+            repliedAt={
+              inquiry.repliedAt ? formatDateTime(inquiry.repliedAt) : null
+            }
+            repliedBy={inquiry.repliedBy?.name ?? null}
+            hasEmail={Boolean(inquiry.email)}
+            saved={search.replied === "1"}
+          />
+
+          <ReplyThread
+            id={inquiry.id}
+            hasEmail={Boolean(inquiry.email)}
+            replies={inquiry.replies.map((reply) => ({
+              id: reply.id,
+              authorType: reply.authorType,
+              authorName: reply.authorName,
+              body: reply.body,
+              createdAt: formatDateTime(reply.createdAt),
+              files: reply.files.map((file) => ({
+                id: file.id,
+                filename: file.filename,
+                size: file.size,
+                mimeType: file.mimeType,
+                // 관리자는 세션 인증이 걸린 기존 라우트로 엽니다
+                url: `/api/files/${file.storageKey}`,
+              })),
+            }))}
+          />
 
           <section className="rounded-2xl border border-ink-200 bg-white p-6">
             <h2 className="font-bold">상담 메모</h2>

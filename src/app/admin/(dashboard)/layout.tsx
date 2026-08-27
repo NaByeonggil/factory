@@ -6,6 +6,8 @@ import {
   FlaskConical,
   Package,
   Newspaper,
+  MessageSquareWarning,
+  MessagesSquare,
   LogOut,
 } from "lucide-react";
 import { getSession } from "@/lib/auth";
@@ -14,9 +16,11 @@ import { logout } from "@/actions/admin";
 const NAV = [
   { href: "/admin", label: "대시보드", Icon: LayoutDashboard },
   { href: "/admin/inquiries", label: "생산문의", Icon: Inbox },
-  { href: "/admin/ingredients", label: "원료 관리", Icon: FlaskConical },
+  { href: "/admin/ingredients", label: "보유 원료", Icon: FlaskConical },
   { href: "/admin/portfolio", label: "포트폴리오", Icon: Package },
   { href: "/admin/posts", label: "게시물", Icon: Newspaper },
+  { href: "/admin/qna", label: "문답 게시판", Icon: MessagesSquare },
+  { href: "/admin/popups", label: "팝업 공지", Icon: MessageSquareWarning },
 ];
 
 export default async function AdminDashboardLayout({

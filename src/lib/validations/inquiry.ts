@@ -33,6 +33,8 @@ export const inquirySchema = z.object({
     .refine((v) => v.replace(/\D/g, "").length >= 9, "phoneInvalid"),
   email: z.email("emailInvalid").max(150).optional().or(z.literal("")),
 
+  /** 게시판 목록에 노출되는 제목. 비우면 서비스 유형으로 자동 생성 */
+  title: z.string().trim().max(100, "titleTooLong").optional().or(z.literal("")),
   serviceType: z.enum(SERVICE_TYPES).default("OEM"),
   formulations: z.array(z.enum(FORMULATIONS)).max(FORMULATIONS.length).default([]),
   packagings: z.array(z.enum(PACKAGINGS)).max(PACKAGINGS.length).default([]),
@@ -40,6 +42,9 @@ export const inquirySchema = z.object({
   budget: z.enum(BUDGET_RANGES).optional().or(z.literal("")),
   targetDate: z.string().optional().or(z.literal("")),
   message: z.string().trim().max(5000, "messageTooLong").optional().or(z.literal("")),
+
+  /** 견적문의 게시판에서 본인 문의·답변을 열람할 때 쓰는 비밀번호 */
+  password: z.string().min(4, "passwordTooShort").max(50),
 
   privacyAgreed: z
     .boolean()
