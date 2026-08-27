@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import {
   BadgeCheck,
@@ -19,6 +20,13 @@ import { getCertifications } from "@/lib/queries";
 import { routing } from "@/i18n/routing";
 
 const NS = "pages.cosmetic";
+
+/**
+ * 임시 이미지 — 화장품 촬영본이 준비되면 이 값만 바꾸면 됩니다.
+ * 지금은 자사 공장 사진을 쓰고 있어 저작권 문제는 없습니다.
+ * (교체 권장 규격: 히어로 16:9 1600px 이상, 품목 4:3 1200px 이상)
+ */
+const HERO_IMAGE = "/hero-factory.jpg";
 
 export const dynamic = "force-static";
 export const revalidate = 600;
@@ -89,22 +97,35 @@ export default async function Page(
       {/* ─── 히어로 ─── */}
       <section className="border-b border-ink-200 bg-gradient-to-b from-brand-50 to-white">
         <Container className="py-16 sm:py-24">
-          <div className="max-w-3xl">
-            <Badge tone="brand">{t("eyebrow")}</Badge>
-            <h1 className="mt-5 whitespace-pre-line text-display text-brand-900">
-              {t("title")}
-            </h1>
-            <p className="mt-6 max-w-2xl leading-relaxed text-ink-700 lg:text-body-lg">
-              {t("description")}
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                {/* 문의 폼이 ?type= 을 읽어 화장품으로 미리 선택합니다 */}
-                <Link href="/inquiry?type=cosmetic">{t("heroPrimaryCta")}</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/ingredients">{t("heroSecondaryCta")}</Link>
-              </Button>
+          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
+            <div>
+              <Badge tone="brand">{t("eyebrow")}</Badge>
+              <h1 className="mt-5 whitespace-pre-line text-display text-brand-900">
+                {t("title")}
+              </h1>
+              <p className="mt-6 max-w-xl leading-relaxed text-ink-700 lg:text-body-lg">
+                {t("description")}
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Button asChild size="lg">
+                  {/* 문의 폼이 ?type= 을 읽어 화장품으로 미리 선택합니다 */}
+                  <Link href="/inquiry?type=cosmetic">{t("heroPrimaryCta")}</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/ingredients">{t("heroSecondaryCta")}</Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="relative aspect-4/3 overflow-hidden rounded-card border border-ink-200 shadow-[var(--shadow-soft-lg)]">
+              <Image
+                src={HERO_IMAGE}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 560px, 100vw"
+                className="object-cover"
+                priority
+              />
             </div>
           </div>
         </Container>
@@ -166,15 +187,18 @@ export default async function Page(
                 <li key={line.code}>
                   <Link
                     href={`/inquiry?type=cosmetic&formulation=${line.code}`}
-                    className="flex h-full flex-col gap-3 rounded-card border border-ink-200 bg-white p-7 transition-shadow hover:shadow-[var(--shadow-soft)]"
+                    className="flex h-full flex-col overflow-hidden rounded-card border border-ink-200 bg-white transition-shadow hover:shadow-[var(--shadow-soft)]"
                   >
-                    <span className="flex size-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-700">
-                      <Icon className="size-6" />
+                    {/* 제형 사진이 준비되면 이 영역을 이미지로 바꿉니다 */}
+                    <span className="flex h-28 items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100/60">
+                      <Icon className="size-9 text-brand-600" />
                     </span>
-                    <p className="text-title text-ink-900">{line.title}</p>
-                    <p className="text-sm leading-relaxed text-ink-700">
-                      {line.body}
-                    </p>
+                    <span className="flex flex-1 flex-col gap-2 p-6">
+                      <span className="text-title text-ink-900">{line.title}</span>
+                      <span className="text-sm leading-relaxed text-ink-700">
+                        {line.body}
+                      </span>
+                    </span>
                   </Link>
                 </li>
               );
