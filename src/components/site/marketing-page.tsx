@@ -1,8 +1,10 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Check, ChevronDown } from "lucide-react";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { CtaBand } from "@/components/site/cta-band";
+import { cn } from "@/lib/utils";
 
 type Pair = { title: string; body: string };
 type Faq = { q: string; a: string };
@@ -15,9 +17,15 @@ type Faq = { q: string; a: string };
 export async function MarketingPage({
   locale,
   ns,
+  heroImage,
 }: {
   locale: string;
   ns: string;
+  /**
+   * 히어로 우측에 놓을 이미지 경로 (16:9 권장).
+   * 넘기지 않으면 지금처럼 텍스트만 있는 히어로가 나옵니다.
+   */
+  heroImage?: string;
 }) {
   const t = await getTranslations({ locale, namespace: ns });
 
@@ -30,15 +38,36 @@ export async function MarketingPage({
     <>
       <section className="border-b border-ink-200 bg-gradient-to-b from-brand-50 to-white">
         <Container className="py-14 sm:py-20">
-          {t.has("eyebrow") && <Badge tone="brand">{t("eyebrow")}</Badge>}
-          <h1 className="mt-4 max-w-3xl text-display text-brand-900">
-            {t("title")}
-          </h1>
-          {t.has("description") && (
-            <p className="mt-5 max-w-2xl leading-relaxed text-ink-700 lg:text-body-lg">
-              {t("description")}
-            </p>
-          )}
+          <div
+            className={cn(
+              heroImage && "grid items-center gap-10 lg:grid-cols-[1.05fr_1fr]",
+            )}
+          >
+            <div>
+              {t.has("eyebrow") && <Badge tone="brand">{t("eyebrow")}</Badge>}
+              <h1 className="mt-4 max-w-3xl text-display text-brand-900">
+                {t("title")}
+              </h1>
+              {t.has("description") && (
+                <p className="mt-5 max-w-2xl leading-relaxed text-ink-700 lg:text-body-lg">
+                  {t("description")}
+                </p>
+              )}
+            </div>
+
+            {heroImage && (
+              <div className="relative aspect-video overflow-hidden rounded-card border border-ink-200 shadow-[var(--shadow-soft-lg)]">
+                <Image
+                  src={heroImage}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 560px, 100vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            )}
+          </div>
         </Container>
       </section>
 
