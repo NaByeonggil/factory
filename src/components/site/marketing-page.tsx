@@ -18,6 +18,7 @@ export async function MarketingPage({
   locale,
   ns,
   heroImage,
+  featureImages,
 }: {
   locale: string;
   ns: string;
@@ -26,6 +27,11 @@ export async function MarketingPage({
    * 넘기지 않으면 지금처럼 텍스트만 있는 히어로가 나옵니다.
    */
   heroImage?: string;
+  /**
+   * features 카드 상단에 넣을 이미지 경로 (4:3 권장, features 와 같은 순서).
+   * 넘기지 않으면 지금처럼 글자만 있는 카드가 나옵니다.
+   */
+  featureImages?: string[];
 }) {
   const t = await getTranslations({ locale, namespace: ns });
 
@@ -110,17 +116,35 @@ export async function MarketingPage({
           <Container>
             <SectionHeading title={t("featuresTitle")} />
             <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {features.map((item) => (
-                <li
-                  key={item.title}
-                  className="rounded-card border border-ink-200 bg-white p-6"
-                >
-                  <p className="text-base font-bold text-ink-900">{item.title}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-700">
-                    {item.body}
-                  </p>
-                </li>
-              ))}
+              {features.map((item, index) => {
+                const image = featureImages?.[index];
+                return (
+                  <li
+                    key={item.title}
+                    className="flex h-full flex-col overflow-hidden rounded-card border border-ink-200 bg-white"
+                  >
+                    {image && (
+                      <div className="relative aspect-4/3 bg-ink-100">
+                        <Image
+                          src={image}
+                          alt=""
+                          fill
+                          sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
+                      <p className="text-base font-bold text-ink-900">
+                        {item.title}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-700">
+                        {item.body}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </Container>
         </Section>
