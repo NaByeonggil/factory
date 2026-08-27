@@ -22,11 +22,20 @@ import { routing } from "@/i18n/routing";
 const NS = "pages.cosmetic";
 
 /**
- * 임시 이미지 — 화장품 촬영본이 준비되면 이 값만 바꾸면 됩니다.
- * 지금은 자사 공장 사진을 쓰고 있어 저작권 문제는 없습니다.
- * (교체 권장 규격: 히어로 16:9 1600px 이상, 품목 4:3 1200px 이상)
+ * 페이지 이미지 — public/cosmetic/ 의 같은 파일명으로 덮어쓰면
+ * 코드 수정 없이 자사 촬영본으로 교체됩니다.
+ * 출처와 규격은 public/cosmetic/CREDITS.md 참고.
  */
-const HERO_IMAGE = "/hero-factory.jpg";
+const HERO_IMAGE = "/cosmetic/hero.jpg";
+
+const LINE_IMAGES: Record<string, string> = {
+  CREAM: "/cosmetic/cream.jpg",
+  SERUM: "/cosmetic/serum.jpg",
+  TONER: "/cosmetic/toner.jpg",
+  LOTION: "/cosmetic/lotion.jpg",
+  MASK_PACK: "/cosmetic/mask.jpg",
+  CLEANSER: "/cosmetic/cleanser.jpg",
+};
 
 export const dynamic = "force-static";
 export const revalidate = 600;
@@ -183,15 +192,27 @@ export default async function Page(
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {lines.map((line) => {
               const Icon = LINE_ICONS[line.code] ?? Droplet;
+              const image = LINE_IMAGES[line.code];
               return (
                 <li key={line.code}>
                   <Link
                     href={`/inquiry?type=cosmetic&formulation=${line.code}`}
-                    className="flex h-full flex-col overflow-hidden rounded-card border border-ink-200 bg-white transition-shadow hover:shadow-[var(--shadow-soft)]"
+                    className="group flex h-full flex-col overflow-hidden rounded-card border border-ink-200 bg-white transition-shadow hover:shadow-[var(--shadow-soft)]"
                   >
-                    {/* 제형 사진이 준비되면 이 영역을 이미지로 바꿉니다 */}
-                    <span className="flex h-28 items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100/60">
-                      <Icon className="size-9 text-brand-600" />
+                    <span className="relative block aspect-4/3 overflow-hidden bg-ink-100">
+                      {image ? (
+                        <Image
+                          src={image}
+                          alt=""
+                          fill
+                          sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                        />
+                      ) : (
+                        <span className="flex h-full items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100/60">
+                          <Icon className="size-9 text-brand-600" />
+                        </span>
+                      )}
                     </span>
                     <span className="flex flex-1 flex-col gap-2 p-6">
                       <span className="text-title text-ink-900">{line.title}</span>
