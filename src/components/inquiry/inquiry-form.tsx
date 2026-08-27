@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, useWatch, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -17,10 +17,11 @@ import {
 } from "@/components/ui/field";
 import {
   BUDGET_RANGES,
-  FORMULATIONS,
-  PACKAGINGS,
+  FORMULATIONS as FORMULATION_CODES,
   QUANTITY_RANGES,
   SERVICE_TYPES,
+  formulationsFor,
+  packagingsFor,
 } from "@/lib/constants";
 import { inquirySchema, type InquiryInput } from "@/lib/validations/inquiry";
 import { readStoredAttribution } from "@/lib/tracking";
@@ -39,6 +40,13 @@ export function InquiryForm() {
   // 원료 상세/서비스 카드에서 넘어온 컨텍스트를 초기값으로
   const presetService = searchParams.get("type")?.toUpperCase();
   const presetIngredient = searchParams.get("ingredient");
+  // 화장품 페이지의 제형 카드에서 넘어온 경우 해당 제형을 미리 선택합니다
+  const presetFormulation = searchParams.get("formulation")?.toUpperCase();
+
+  const defaultService =
+    presetService && SERVICE_TYPES.includes(presetService as "OEM")
+      ? (presetService as "OEM")
+      : "OEM";
 
   const [pending, startTransition] = useTransition();
   const [formError, setFormError] = useState<string | null>(null);
@@ -49,15 +57,17 @@ export function InquiryForm() {
     control,
     setError,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm<InquiryInput>({
     resolver: zodResolver(inquirySchema),
     defaultValues: {
-      serviceType:
-        presetService && SERVICE_TYPES.includes(presetService as "OEM")
-          ? (presetService as "OEM")
-          : "OEM",
-      formulations: [],
+      serviceType: defaultService,
+      formulations:
+        presetFormulation &&
+        (FORMULATION_CODES as readonly string[]).includes(presetFormulation)
+          ? [presetFormulation as (typeof FORMULATION_CODES)[number]]
+          : [],
       packagings: [],
       privacyAgreed: false,
       marketingAgreed: false,
@@ -66,11 +76,33 @@ export function InquiryForm() {
     },
   });
 
+  // 화장품 문의에 건기식 제형이 뜨지 않도록 유형에 맞는 선택지만 보여줍니다
+  // watch() 대신 useWatch — 렌더마다 새 함수가 생기지 않아 훅 의존성이 안정적입니다
+  const serviceType = useWatch({ control, name: "serviceType" }) ?? "OEM";
+  const formulationOptions = formulationsFor(serviceType);
+  const packagingOptions = packagingsFor(serviceType);
+
   // 랜딩 시 저장해둔 광고 유입 정보를 제출 payload에 실어 보냄
   useEffect(() => {
     const attribution = readStoredAttribution();
     if (attribution) setValue("attribution", attribution);
   }, [setValue]);
+
+  // 유형을 바꾸면 이전 유형의 제형·포장 선택은 의미가 없어 비웁니다
+  useEffect(() => {
+    setValue(
+      "formulations",
+      (getValues("formulations") ?? []).filter((code) =>
+        (formulationOptions as readonly string[]).includes(code),
+      ),
+    );
+    setValue(
+      "packagings",
+      (getValues("packagings") ?? []).filter((code) =>
+        (packagingOptions as readonly string[]).includes(code),
+      ),
+    );
+  }, [serviceType, formulationOptions, packagingOptions, getValues, setValue]);
 
   // 원료 상세에서 진입한 경우 문의 내용 프리필
   useEffect(() => {
@@ -202,7 +234,11 @@ export function InquiryForm() {
         </Field>
 
         <Field label={t("serviceType")} htmlFor="serviceType">
-          <Select id="serviceType" {...register("serviceType")}>
+          <Select
+            id="serviceType"
+            defaultValue={defaultService}
+            {...register("serviceType")}
+          >
             {SERVICE_TYPES.map((type) => (
               <option key={type} value={type}>
                 {tService(type)}
@@ -217,7 +253,7 @@ export function InquiryForm() {
           render={({ field }) => (
             <Field label={t("formulations")} hint={t("multiSelectHint")}>
               <div className="flex flex-wrap gap-2">
-                {FORMULATIONS.map((code) => (
+                {formulationOptions.map((code) => (
                   <CheckChip
                     key={code}
                     label={tOptions(`formulation.${code}`)}
@@ -242,7 +278,7 @@ export function InquiryForm() {
           render={({ field }) => (
             <Field label={t("packagings")} hint={t("multiSelectHint")}>
               <div className="flex flex-wrap gap-2">
-                {PACKAGINGS.map((code) => (
+                {packagingOptions.map((code) => (
                   <CheckChip
                     key={code}
                     label={tOptions(`packaging.${code}`)}

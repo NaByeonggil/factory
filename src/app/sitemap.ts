@@ -17,6 +17,7 @@ const STATIC_PATHS = [
   "/service/cdmo",
   "/service/dtc",
   "/service/pet",
+  "/service/cosmetic",
   "/ingredients",
   "/portfolio",
   "/inquiry",

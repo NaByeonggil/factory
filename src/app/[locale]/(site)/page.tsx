@@ -7,6 +7,7 @@ import {
   Award,
   BadgeCheck,
   Boxes,
+  Droplet,
   FlaskConical,
   LineChart,
   Palette,
@@ -21,7 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { CtaBand } from "@/components/site/cta-band";
 import {
-  FORMULATIONS,
+  SUPPLEMENT_FORMULATIONS,
   PACKAGINGS,
   SERVICE_TYPES,
 } from "@/lib/constants";
@@ -68,12 +69,16 @@ const SERVICE_ICONS = {
   CDMO: ShieldCheck,
   DTC: Sparkles,
   PET: Award,
+  COSMETIC: Droplet,
 } as const;
 
 type ProcessStep = { title: string; body: string };
 
-/** 제형 코드 → 제품 사진 (FORMULATIONS 의 모든 코드를 덮습니다) */
-const FORMULATION_IMAGES: Record<(typeof FORMULATIONS)[number], StaticImageData> = {
+/** 제형 코드 → 제품 사진 (건기식 제형 전체를 덮습니다) */
+const FORMULATION_IMAGES: Record<
+  (typeof SUPPLEMENT_FORMULATIONS)[number],
+  StaticImageData
+> = {
   PILL: pillImage,
   HARD_CAPSULE: hardCapsuleImage,
   SOFT_CAPSULE: softCapsuleImage,
@@ -324,7 +329,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
             description={t("formulationDescription")}
           />
           <ul className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {FORMULATIONS.map((code) => {
+            {SUPPLEMENT_FORMULATIONS.map((code) => {
               const label = tOptions(`formulation.${code}`);
               return (
                 <li

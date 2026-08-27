@@ -25,6 +25,7 @@ enum ServiceType {
   CDMO /// 의약외품 위탁개발생산
   DTC /// 개인맞춤형 건기식(유전자검사 연계)
   PET /// 반려동물 제품
+  COSMETIC /// 화장품
 }
 
 /// 보유 원료 분류

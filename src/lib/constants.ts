@@ -4,8 +4,8 @@
  * (운영자가 직접 항목을 추가해야 할 만큼 자주 바뀌면 DB 테이블로 승격)
  */
 
-/** 생산 가능 제형 */
-export const FORMULATIONS = [
+/** 건강기능식품 제형 */
+export const SUPPLEMENT_FORMULATIONS = [
   "PILL", // 환
   "HARD_CAPSULE", // 경질캡슐
   "SOFT_CAPSULE", // 연질캡슐
@@ -14,16 +14,47 @@ export const FORMULATIONS = [
   "POWDER", // 분말
   "TABLET", // 정제
 ] as const;
+
+/** 화장품 제형 */
+export const COSMETIC_FORMULATIONS = [
+  "CREAM", // 크림
+  "SERUM", // 앰플·세럼
+  "TONER", // 토너·스킨
+  "LOTION", // 로션·에멀전
+  "MASK_PACK", // 마스크팩
+  "CLEANSER", // 클렌저
+] as const;
+
+/** 생산 가능 제형 전체 (저장·검증용) */
+export const FORMULATIONS = [
+  ...SUPPLEMENT_FORMULATIONS,
+  ...COSMETIC_FORMULATIONS,
+] as const;
 export type Formulation = (typeof FORMULATIONS)[number];
 
-/** 포장 방식 */
-export const PACKAGINGS = [
+/** 건강기능식품 포장 방식 */
+export const SUPPLEMENT_PACKAGINGS = [
   "MULTI_PACK", // 멀티팩
   "DUAL_FORM", // 이중제형
   "BOTTLE", // 병포장
   "LIQUID_POUCH", // 액상포장
   "PTP", // PTP
   "STICK", // 스틱포장
+] as const;
+
+/** 화장품 용기 */
+export const COSMETIC_PACKAGINGS = [
+  "TUBE", // 튜브
+  "PUMP", // 펌프 용기
+  "JAR", // 단지·자
+  "AIRLESS", // 에어리스
+  "SACHET", // 파우치·낱개 포장
+] as const;
+
+/** 포장 방식 전체 (저장·검증용) */
+export const PACKAGINGS = [
+  ...SUPPLEMENT_PACKAGINGS,
+  ...COSMETIC_PACKAGINGS,
 ] as const;
 export type Packaging = (typeof PACKAGINGS)[number];
 
@@ -48,7 +79,31 @@ export const BUDGET_RANGES = [
 ] as const;
 export type BudgetRange = (typeof BUDGET_RANGES)[number];
 
-export const SERVICE_TYPES = ["OEM", "ODM", "CDMO", "DTC", "PET"] as const;
+export const SERVICE_TYPES = [
+  "OEM",
+  "ODM",
+  "CDMO",
+  "DTC",
+  "PET",
+  "COSMETIC",
+] as const;
+export type ServiceTypeCode = (typeof SERVICE_TYPES)[number];
+
+/**
+ * 문의 유형에 맞는 제형·포장 선택지.
+ * 화장품 문의에 건기식 제형이 뜨지 않도록 폼에서 이 함수로 갈라 씁니다.
+ */
+export function formulationsFor(serviceType: string) {
+  return serviceType === "COSMETIC"
+    ? COSMETIC_FORMULATIONS
+    : SUPPLEMENT_FORMULATIONS;
+}
+
+export function packagingsFor(serviceType: string) {
+  return serviceType === "COSMETIC"
+    ? COSMETIC_PACKAGINGS
+    : SUPPLEMENT_PACKAGINGS;
+}
 
 export const INGREDIENT_CATEGORIES = [
   "HOT_TREND",

@@ -23,7 +23,8 @@
     "factoryTour": "Factory Tour",
     "inquiry": "Get a Quote",
     "qna": "Q&A",
-    "quote": "Quote requests"
+    "quote": "Quote requests",
+    "cosmetic": "Cosmetics"
   },
   "home": {
     "heroEyebrow": "Health Functional Food OEM · ODM · CDMO",
@@ -92,7 +93,9 @@
     "DTC": "Personalized",
     "DTC_desc": "DTC genetic testing linked personalized supplements.",
     "PET": "Pet",
-    "PET_desc": "Supplements designed and produced for pets."
+    "PET_desc": "Supplements designed and produced for pets.",
+    "COSMETIC": "Cosmetics OEM/ODM",
+    "COSMETIC_desc": "From skincare formulation to packaging, design and regulatory filing."
   },
   "priority": {
     "design": "Package design",
@@ -128,7 +131,13 @@
       "JELLY": "Jelly",
       "LIQUID": "Liquid",
       "POWDER": "Powder",
-      "TABLET": "Tablet"
+      "TABLET": "Tablet",
+      "CREAM": "Cream",
+      "SERUM": "Ampoule / serum",
+      "TONER": "Toner",
+      "LOTION": "Lotion / emulsion",
+      "MASK_PACK": "Sheet mask",
+      "CLEANSER": "Cleanser"
     },
     "packaging": {
       "MULTI_PACK": "Multi pack",
@@ -136,7 +145,12 @@
       "BOTTLE": "Bottle",
       "LIQUID_POUCH": "Liquid pouch",
       "PTP": "PTP",
-      "STICK": "Stick"
+      "STICK": "Stick",
+      "TUBE": "Tube",
+      "PUMP": "Pump bottle",
+      "JAR": "Jar",
+      "AIRLESS": "Airless",
+      "SACHET": "Sachet"
     },
     "quantity": {
       "UNDER_1K": "Under 1,000 units",
@@ -592,6 +606,103 @@
         {
           "q": "How is registration handled?",
           "a": "We advise on the filing route required by product classification and support the documentation."
+        }
+      ]
+    },
+    "cosmetic": {
+      "eyebrow": "COSMETICS OEM / ODM",
+      "title": "What you take in,\nwhat you put on",
+      "description": "We develop and manufacture skincare to the same standard as our supplements — formulation, packaging, design and filing handled by one manager.",
+      "heroPrimaryCta": "Request a cosmetics quote",
+      "heroSecondaryCta": "Browse our ingredients",
+      "statsTitle": "Our capacity in numbers",
+      "strengthsTitle": "Why Healthy Farm Bio",
+      "strengths": [
+        {
+          "title": "One contact for both lines",
+          "body": "Ingestible and topical products are handled by the same manager, so the brand never coordinates two vendors."
+        },
+        {
+          "title": "The same quality bar",
+          "body": "We apply our supplement GMP practice end to end, with records from raw material intake to finished goods."
+        },
+        {
+          "title": "Start small",
+          "body": "Launch with a small run, then scale volume once the market responds."
+        }
+      ],
+      "linesTitle": "What we make",
+      "linesDescription": "We cover the full basic skincare line. Pick a format and it carries straight into the inquiry form.",
+      "lines": [
+        {
+          "code": "CREAM",
+          "title": "Cream",
+          "body": "From rich moisture creams to gel textures"
+        },
+        {
+          "code": "SERUM",
+          "title": "Ampoule / serum",
+          "body": "High-concentration actives with stability secured"
+        },
+        {
+          "code": "TONER",
+          "title": "Toner",
+          "body": "Texture tuned from light and fresh to viscous"
+        },
+        {
+          "code": "LOTION",
+          "title": "Lotion / emulsion",
+          "body": "Daily lines balanced for oil and water"
+        },
+        {
+          "code": "MASK_PACK",
+          "title": "Sheet mask",
+          "body": "Sheet material selection with essence formulation"
+        },
+        {
+          "code": "CLEANSER",
+          "title": "Cleanser",
+          "body": "Foam, oil and water type cleansers"
+        }
+      ],
+      "stepsTitle": "How it works",
+      "steps": [
+        {
+          "title": "01. Concept",
+          "body": "We align on target, claims, budget and volume."
+        },
+        {
+          "title": "02. Formulation",
+          "body": "We build the formula and produce samples to confirm."
+        },
+        {
+          "title": "03. Stability and packaging",
+          "body": "Stability testing runs alongside container and carton design."
+        },
+        {
+          "title": "04. Filing and production",
+          "body": "We support the required filings and start production."
+        }
+      ],
+      "certTitle": "Made in certified facilities",
+      "certDescription": "The certification standards we run supplements under apply to the cosmetics line as well.",
+      "faqTitle": "FAQ",
+      "faq": [
+        {
+          "q": "Do we need a cosmetics distribution licence?",
+          "a": "The brand needs one in Korea. We guide you through registration and plan the schedule around it."
+        },
+        {
+          "q": "What is the minimum order quantity?",
+          "a": "It depends on the formulation and container. Share your concept and volume and we will confirm during consultation."
+        },
+        {
+          "q": "Can we run this together with supplements?",
+          "a": "Yes. Inner-beauty and skincare sets are common, and one manager handles both lines."
+        },
+        {
+          "q": "Can you handle packaging and cartons?",
+          "a": "Yes — container selection (tube, pump, airless) and carton design. If you already have artwork we apply it as is."
         }
       ]
     }

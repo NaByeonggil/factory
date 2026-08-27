@@ -76,6 +76,7 @@ export async function Footer({
               ["cdmo", "/service/cdmo"],
               ["dtc", "/service/dtc"],
               ["pet", "/service/pet"],
+              ["cosmetic", "/service/cosmetic"],
               ["ingredients", "/ingredients"],
               ["portfolio", "/portfolio"],
               ["news", "/community/news"],

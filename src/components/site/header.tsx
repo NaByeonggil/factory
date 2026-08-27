@@ -12,6 +12,11 @@ import { cn } from "@/lib/utils";
 
 type NavItem = { key: string; href: string; children?: { key: string; href: string }[] };
 
+/**
+ * 상단 메뉴 7개 + 언어 전환 + CTA 가 한 줄에 들어가려면 약 1160px 이 필요합니다
+ * (영문 라벨 기준 실측). 그보다 좁으면 줄바꿈이 생기므로 1200px 아래에서는
+ * 햄버거 메뉴로 내립니다.
+ */
 const NAV: NavItem[] = [
   {
     key: "about",
@@ -33,6 +38,7 @@ const NAV: NavItem[] = [
       { key: "pet", href: "/service/pet" },
     ],
   },
+  { key: "cosmetic", href: "/service/cosmetic" },
   { key: "ingredients", href: "/ingredients" },
   { key: "portfolio", href: "/portfolio" },
   {
@@ -57,18 +63,18 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-      <Container className="flex h-16 items-center justify-between gap-6 lg:h-20">
+      <Container className="flex h-16 items-center justify-between gap-6 min-[1200px]:h-20">
         <Link href="/" className="text-brand-700" aria-label={tMeta("siteName")}>
           <Logo label={tMeta("siteName")} markClassName="size-7 lg:size-8" />
         </Link>
 
-        <nav aria-label="주 메뉴" className="hidden lg:flex lg:items-center lg:gap-1">
+        <nav aria-label="주 메뉴" className="hidden min-[1200px]:flex min-[1200px]:items-center min-[1200px]:gap-1">
           {NAV.map((item) => (
             <div key={item.key} className="group relative">
               <Link
                 href={item.href}
                 className={cn(
-                  "inline-flex items-center gap-1 rounded-md px-3.5 py-2 text-[0.9375rem] font-semibold text-ink-700 transition-colors hover:text-brand-700",
+                  "inline-flex items-center gap-1 whitespace-nowrap rounded-md px-3 py-2 text-[0.9375rem] font-semibold text-ink-700 transition-colors hover:text-brand-700",
                   pathname.startsWith(item.href) && "text-brand-700",
                 )}
               >
@@ -92,7 +98,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 min-[1200px]:flex">
           <LocaleSwitcher current={locale} />
           <Button asChild size="sm">
             <Link href="/inquiry">{t("inquiry")}</Link>
@@ -105,14 +111,14 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label="메뉴 열기"
-          className="rounded-md p-2 text-ink-700 lg:hidden"
+          className="rounded-md p-2 text-ink-700 min-[1200px]:hidden"
         >
           {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
       </Container>
 
       {open && (
-        <div id="mobile-nav" className="border-t border-ink-200 bg-white lg:hidden">
+        <div id="mobile-nav" className="border-t border-ink-200 bg-white min-[1200px]:hidden">
           <Container className="flex flex-col gap-1 py-4">
             <div className="mb-2 flex justify-end">
               <button
