@@ -7,6 +7,7 @@ Pexels 라이선스(상업적 사용 무료 · 출처 표기 의무 없음 · �
 | 파일 | 쓰이는 곳 | 원본 |
 |---|---|---|
 | hero.jpg | 히어로 (16:9) | https://www.pexels.com/photo/pharmaceutical-workers-in-a-production-line-37466061/ |
+| rnd-hero.jpg | 연구소 소개 히어로 (16:9) | https://www.pexels.com/photo/vials-in-a-chromatograph-10514991/ |
 | customers.jpg | 이런 고객과 일합니다 | https://www.pexels.com/photo/business-meeting-in-modern-office-lounge-36765718/ |
 | history-1999.jpg | 연혁 1999 · 제조 시작 | https://www.pexels.com/photo/capsule-filling-machine-and-pills-on-turquoise-surface-37476249/ |
 | history-2010.jpg | 연혁 2010 · GMP·CCM 인증 | https://www.pexels.com/photo/pharmaceutical-lab-testing-in-islamabad-37889383/ |
