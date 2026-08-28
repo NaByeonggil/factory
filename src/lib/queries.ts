@@ -74,11 +74,19 @@ export const getFeaturedIngredients = cache(
 export const getIngredients = cache(
   async (
     locale: string,
-    category?: IngredientCategory,
+    /** 한 종류만 볼 때. 여러 종류는 배열로 넘깁니다 (특허·개별인정형 등) */
+    category?: IngredientCategory | IngredientCategory[],
   ): Promise<IngredientCard[]> =>
     safe(async () => {
       const rows = await prisma.ingredient.findMany({
-        where: { isPublished: true, ...(category ? { category } : {}) },
+        where: {
+          isPublished: true,
+          ...(Array.isArray(category)
+            ? { category: { in: category } }
+            : category
+              ? { category }
+              : {}),
+        },
         orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
         select: {
           slug: true,

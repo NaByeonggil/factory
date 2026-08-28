@@ -26,6 +26,7 @@ enum ServiceType {
   DTC /// 개인맞춤형 건기식(유전자검사 연계)
   PET /// 반려동물 제품
   COSMETIC /// 화장품
+  MATERIAL /// 원료 공급 (특허·개별인정형 원료)
 }
 
 /// 보유 원료 분류

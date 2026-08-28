@@ -149,11 +149,16 @@ export function InquiryForm() {
       {/* 허니팟 — 스크린리더/사용자에게 보이지 않음 */}
       <div aria-hidden className="absolute left-[-9999px]">
         <label htmlFor="website">Website</label>
-        <input id="website" tabIndex={-1} autoComplete="off" {...register("website")} />
+        <input
+          id="website"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("website")}
+        />
       </div>
 
       <fieldset className="space-y-6">
-<FieldsetLegend>{t("sectionContact")}</FieldsetLegend>
+        <FieldsetLegend>{t("sectionContact")}</FieldsetLegend>
 
         <div className="grid gap-6 sm:grid-cols-2">
           <Field
@@ -217,7 +222,7 @@ export function InquiryForm() {
       </fieldset>
 
       <fieldset className="space-y-6">
-<FieldsetLegend>{t("sectionProduct")}</FieldsetLegend>
+        <FieldsetLegend>{t("sectionProduct")}</FieldsetLegend>
 
         <Field
           label={t("subject")}
@@ -247,55 +252,59 @@ export function InquiryForm() {
           </Select>
         </Field>
 
-        <Controller
-          control={control}
-          name="formulations"
-          render={({ field }) => (
-            <Field label={t("formulations")} hint={t("multiSelectHint")}>
-              <div className="flex flex-wrap gap-2">
-                {formulationOptions.map((code) => (
-                  <CheckChip
-                    key={code}
-                    label={tOptions(`formulation.${code}`)}
-                    value={code}
-                    checked={field.value?.includes(code) ?? false}
-                    onChange={(e) => {
-                      const set = new Set(field.value ?? []);
-                      if (e.target.checked) set.add(code);
-                      else set.delete(code);
-                      field.onChange([...set]);
-                    }}
-                  />
-                ))}
-              </div>
-            </Field>
-          )}
-        />
+        {formulationOptions.length > 0 && (
+          <Controller
+            control={control}
+            name="formulations"
+            render={({ field }) => (
+              <Field label={t("formulations")} hint={t("multiSelectHint")}>
+                <div className="flex flex-wrap gap-2">
+                  {formulationOptions.map((code) => (
+                    <CheckChip
+                      key={code}
+                      label={tOptions(`formulation.${code}`)}
+                      value={code}
+                      checked={field.value?.includes(code) ?? false}
+                      onChange={(e) => {
+                        const set = new Set(field.value ?? []);
+                        if (e.target.checked) set.add(code);
+                        else set.delete(code);
+                        field.onChange([...set]);
+                      }}
+                    />
+                  ))}
+                </div>
+              </Field>
+            )}
+          />
+        )}
 
-        <Controller
-          control={control}
-          name="packagings"
-          render={({ field }) => (
-            <Field label={t("packagings")} hint={t("multiSelectHint")}>
-              <div className="flex flex-wrap gap-2">
-                {packagingOptions.map((code) => (
-                  <CheckChip
-                    key={code}
-                    label={tOptions(`packaging.${code}`)}
-                    value={code}
-                    checked={field.value?.includes(code) ?? false}
-                    onChange={(e) => {
-                      const set = new Set(field.value ?? []);
-                      if (e.target.checked) set.add(code);
-                      else set.delete(code);
-                      field.onChange([...set]);
-                    }}
-                  />
-                ))}
-              </div>
-            </Field>
-          )}
-        />
+        {packagingOptions.length > 0 && (
+          <Controller
+            control={control}
+            name="packagings"
+            render={({ field }) => (
+              <Field label={t("packagings")} hint={t("multiSelectHint")}>
+                <div className="flex flex-wrap gap-2">
+                  {packagingOptions.map((code) => (
+                    <CheckChip
+                      key={code}
+                      label={tOptions(`packaging.${code}`)}
+                      value={code}
+                      checked={field.value?.includes(code) ?? false}
+                      onChange={(e) => {
+                        const set = new Set(field.value ?? []);
+                        if (e.target.checked) set.add(code);
+                        else set.delete(code);
+                        field.onChange([...set]);
+                      }}
+                    />
+                  ))}
+                </div>
+              </Field>
+            )}
+          />
+        )}
 
         <div className="grid gap-6 sm:grid-cols-3">
           <Field label={t("quantity")} htmlFor="quantity" hint={t("optional")}>
@@ -320,7 +329,11 @@ export function InquiryForm() {
             </Select>
           </Field>
 
-          <Field label={t("targetDate")} htmlFor="targetDate" hint={t("optional")}>
+          <Field
+            label={t("targetDate")}
+            htmlFor="targetDate"
+            hint={t("optional")}
+          >
             <Input id="targetDate" type="date" {...register("targetDate")} />
           </Field>
         </div>
@@ -354,7 +367,7 @@ export function InquiryForm() {
       </fieldset>
 
       <fieldset className="space-y-4">
-<FieldsetLegend>{t("sectionAgree")}</FieldsetLegend>
+        <FieldsetLegend>{t("sectionAgree")}</FieldsetLegend>
 
         <div className="rounded-xl border border-ink-200 bg-ink-50 p-5">
           <label className="flex items-start gap-3">
@@ -366,8 +379,7 @@ export function InquiryForm() {
             />
             <span className="text-sm">
               <span className="font-semibold text-ink-900">
-                {t("privacy")}{" "}
-                <span className="text-red-600">*</span>
+                {t("privacy")} <span className="text-red-600">*</span>
               </span>
               <span className="mt-1 block leading-relaxed text-ink-500">
                 {t("privacyDetail")}
@@ -408,7 +420,10 @@ export function InquiryForm() {
       </fieldset>
 
       {formError && (
-        <p role="alert" className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
+        <p
+          role="alert"
+          className="rounded-lg bg-red-50 p-4 text-sm text-red-700"
+        >
           {formError}
         </p>
       )}

@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils";
 type NavItem = { key: string; href: string; children?: { key: string; href: string }[] };
 
 /**
- * 상단 메뉴 8개 + 언어 전환 + CTA 가 한 줄에 들어가려면 약 1200px 이 필요합니다
- * (한국어 1201px · 영어 1197px 실측). 여유를 두고 1260px 아래에서는 햄버거
- * 메뉴로 내립니다. 항목을 더 늘리면 이 값을 다시 재야 합니다.
+ * 상단 메뉴 + 언어 전환 + CTA 가 한 줄에 들어가는 최소 폭에서 가로 메뉴를
+ * 켭니다. 라벨을 바꾸거나 항목을 늘리면 폭을 다시 재고 아래 기준값을
+ * 조정해야 합니다(줄바꿈이 생깁니다).
  */
 const NAV: NavItem[] = [
   {
@@ -28,36 +28,18 @@ const NAV: NavItem[] = [
     ],
   },
   {
-    key: "service",
-    href: "/service/oem-odm",
+    key: "catalog",
+    href: "/ingredients",
     children: [
-      { key: "serviceFinished", href: "/service/oem-odm" },
-      { key: "serviceMaterial", href: "/service/material" },
-      { key: "cdmo", href: "/service/cdmo" },
-      { key: "dtc", href: "/service/dtc" },
+      { key: "ingredients", href: "/ingredients" },
+      { key: "portfolio", href: "/portfolio" },
     ],
   },
-  { key: "cosmetic", href: "/service/cosmetic" },
-  {
-    key: "pet",
-    href: "/service/pet",
-    children: [
-      { key: "petIntro", href: "/service/pet" },
-      { key: "petQuote", href: "/quote/pet" },
-    ],
-  },
-  { key: "ingredients", href: "/ingredients" },
-  { key: "portfolio", href: "/portfolio" },
-  {
-    key: "community",
-    href: "/community/news",
-    children: [
-      { key: "news", href: "/community/news" },
-      { key: "esg", href: "/community/esg" },
-      { key: "factoryTour", href: "/community/factory-tour" },
-    ],
-  },
-  { key: "quote", href: "/quote" },
+  { key: "materialQuote", href: "/quote/material" },
+  { key: "cosmeticQuote", href: "/quote/cosmetic" },
+  { key: "petQuoteTop", href: "/quote/pet" },
+  { key: "board", href: "/quote" },
+  { key: "marketing", href: "/marketing" },
 ];
 
 export function Header() {
@@ -69,12 +51,12 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-      <Container className="flex h-16 items-center justify-between gap-6 min-[1260px]:h-20">
+      <Container className="flex h-16 items-center justify-between gap-6 min-[1280px]:h-20">
         <Link href="/" className="text-brand-700" aria-label={tMeta("siteName")}>
           <Logo label={tMeta("siteName")} markClassName="size-7 lg:size-8" />
         </Link>
 
-        <nav aria-label="주 메뉴" className="hidden min-[1260px]:flex min-[1260px]:items-center min-[1260px]:gap-1">
+        <nav aria-label="주 메뉴" className="hidden min-[1280px]:flex min-[1280px]:items-center min-[1280px]:gap-1">
           {NAV.map((item) => (
             <div key={item.key} className="group relative">
               <Link
@@ -104,7 +86,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 min-[1260px]:flex">
+        <div className="hidden items-center gap-3 min-[1280px]:flex">
           <LocaleSwitcher current={locale} />
           <Button asChild size="sm" className="whitespace-nowrap">
             <Link href="/inquiry">{t("inquiry")}</Link>
@@ -117,14 +99,14 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label="메뉴 열기"
-          className="rounded-md p-2 text-ink-700 min-[1260px]:hidden"
+          className="rounded-md p-2 text-ink-700 min-[1280px]:hidden"
         >
           {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
       </Container>
 
       {open && (
-        <div id="mobile-nav" className="border-t border-ink-200 bg-white min-[1260px]:hidden">
+        <div id="mobile-nav" className="border-t border-ink-200 bg-white min-[1280px]:hidden">
           <Container className="flex flex-col gap-1 py-4">
             <div className="mb-2 flex justify-end">
               <button

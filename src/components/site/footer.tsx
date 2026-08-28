@@ -76,11 +76,12 @@ export async function Footer({
               ["cdmo", "/service/cdmo"],
               ["dtc", "/service/dtc"],
               ["pet", "/service/pet"],
-              ["petQuote", "/quote/pet"],
               ["cosmetic", "/service/cosmetic"],
+              ["marketing", "/marketing"],
               ["ingredients", "/ingredients"],
               ["portfolio", "/portfolio"],
               ["news", "/community/news"],
+              ["board", "/quote"],
               ["inquiry", "/inquiry"],
             ].map(([key, href]) => (
               <Link

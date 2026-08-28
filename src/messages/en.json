@@ -25,7 +25,13 @@
     "quote": "Quotes",
     "cosmetic": "Cosmetics",
     "petIntro": "Pet products",
-    "petQuote": "Pet inquiries"
+    "petQuote": "Pet inquiries",
+    "catalog": "Catalog",
+    "materialQuote": "Patented materials",
+    "cosmeticQuote": "Cosmetics",
+    "petQuoteTop": "Pet",
+    "board": "Inquiry board",
+    "marketing": "Marketing"
   },
   "home": {
     "heroEyebrow": "Health Functional Food OEM · ODM · CDMO",
@@ -96,7 +102,9 @@
     "PET": "Pet",
     "PET_desc": "Supplements designed and produced for pets.",
     "COSMETIC": "Cosmetics OEM/ODM",
-    "COSMETIC_desc": "From skincare formulation to packaging, design and regulatory filing."
+    "COSMETIC_desc": "From skincare formulation to packaging, design and regulatory filing.",
+    "MATERIAL": "Material supply",
+    "MATERIAL_desc": "Buy our patented and individually approved materials directly."
   },
   "priority": {
     "design": "Package design",
@@ -704,6 +712,73 @@
           "a": "Yes — container selection (tube, pump, airless) and carton design. If you already have artwork we apply it as is."
         }
       ]
+    },
+    "marketing": {
+      "eyebrow": "Marketing & advertising",
+      "title": "We don't stop\nat manufacturing",
+      "description": "The real work starts once the product exists. We help with detail pages, marketplace listings and ad campaigns.",
+      "intro": "A good product that nobody hears about becomes inventory.\n\nAcross 26 years and 3,200+ products we have watched which products sell on which channels. We put that experience to work after production too — pick only the parts you need.",
+      "featuresTitle": "What we support",
+      "features": [
+        {
+          "title": "Brand and packaging design",
+          "body": "Naming, carton and label design built around the product concept."
+        },
+        {
+          "title": "Detail pages",
+          "body": "Landing pages that convert while staying inside advertising rules."
+        },
+        {
+          "title": "Product photography",
+          "body": "Product and styled shots for online listings."
+        },
+        {
+          "title": "Marketplace listing",
+          "body": "Onboarding and initial setup for major Korean channels."
+        },
+        {
+          "title": "Search ads and social",
+          "body": "Naver search ads and social content to build early traffic."
+        },
+        {
+          "title": "Claim review",
+          "body": "We check functional claims against Korean advertising standards first."
+        }
+      ],
+      "stepsTitle": "How it works",
+      "steps": [
+        {
+          "title": "01. Goals",
+          "body": "We agree on channels, target volume and budget."
+        },
+        {
+          "title": "02. Assets",
+          "body": "Design, photography and detail pages get produced."
+        },
+        {
+          "title": "03. Channel setup",
+          "body": "Listings, product registration and initial ad setup."
+        },
+        {
+          "title": "04. Run and improve",
+          "body": "We adjust creative and budget based on traffic and conversion."
+        }
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        {
+          "q": "Can we order marketing without production?",
+          "a": "Yes, though we need to understand the product first, so we start with a short consultation."
+        },
+        {
+          "q": "How is pricing set?",
+          "a": "Each item is quoted separately. Pick only what you need; bundling with production leaves room to adjust."
+        },
+        {
+          "q": "Do you run the ads yourselves?",
+          "a": "Search and social campaigns run with partner agencies, with us as the single point of contact."
+        }
+      ]
     }
   },
   "legal": {
@@ -884,6 +959,18 @@
     "petDescription": "Only pet product requests are listed here. Check progress and our reply — every entry opens with the password you set when submitting.",
     "petWrite": "Ask about pet products",
     "petEmpty": "No pet product inquiries yet.",
-    "allBoard": "See all quote requests"
+    "allBoard": "See all quote requests",
+    "materialTitle": "Patented material supply",
+    "materialDescription": "Use this board to request supply of our patented and individually approved materials. Browse the list below and leave an inquiry.",
+    "materialWrite": "Request material supply",
+    "materialEmpty": "No material supply inquiries yet.",
+    "materialListTitle": "Patented and approved materials available",
+    "materialListMore": "See all ingredients",
+    "cosmeticTitle": "Cosmetics inquiries",
+    "cosmeticDescription": "Only cosmetics OEM/ODM requests are listed here. Check progress and our reply — every entry opens with the password you set when submitting.",
+    "cosmeticWrite": "Ask about cosmetics",
+    "cosmeticEmpty": "No cosmetics inquiries yet.",
+    "cosmeticIntro": "About our cosmetics OEM/ODM",
+    "petIntroLink": "About our pet product OEM"
   }
 }

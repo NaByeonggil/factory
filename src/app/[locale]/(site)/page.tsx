@@ -70,6 +70,7 @@ const SERVICE_ICONS = {
   DTC: Sparkles,
   PET: Award,
   COSMETIC: Droplet,
+  MATERIAL: FlaskConical,
 } as const;
 
 type ProcessStep = { title: string; body: string };

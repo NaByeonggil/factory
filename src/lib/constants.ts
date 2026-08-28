@@ -86,6 +86,7 @@ export const SERVICE_TYPES = [
   "DTC",
   "PET",
   "COSMETIC",
+  "MATERIAL",
 ] as const;
 export type ServiceTypeCode = (typeof SERVICE_TYPES)[number];
 
@@ -94,12 +95,15 @@ export type ServiceTypeCode = (typeof SERVICE_TYPES)[number];
  * 화장품 문의에 건기식 제형이 뜨지 않도록 폼에서 이 함수로 갈라 씁니다.
  */
 export function formulationsFor(serviceType: string) {
+  // 원료 공급 문의는 완제품 제형을 고르지 않습니다
+  if (serviceType === "MATERIAL") return [] as const;
   return serviceType === "COSMETIC"
     ? COSMETIC_FORMULATIONS
     : SUPPLEMENT_FORMULATIONS;
 }
 
 export function packagingsFor(serviceType: string) {
+  if (serviceType === "MATERIAL") return [] as const;
   return serviceType === "COSMETIC"
     ? COSMETIC_PACKAGINGS
     : SUPPLEMENT_PACKAGINGS;
