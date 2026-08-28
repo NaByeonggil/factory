@@ -14,6 +14,9 @@ const HERO_IMAGE = "/about/hero.jpg";
 /** 「이런 고객과 일합니다」 목록 옆 이미지 */
 const CUSTOMERS_IMAGE = "/about/customers.jpg";
 
+/** 대표 약력 옆 인물 이미지 (3:4) */
+const FOUNDER_IMAGE = "/about/founder.png";
+
 export const dynamic = "force-static";
 
 export function generateStaticParams() {
@@ -41,6 +44,7 @@ export default async function Page(props: PageProps<"/[locale]/about">) {
       ns={NS}
       heroImage={HERO_IMAGE}
       bulletsImage={CUSTOMERS_IMAGE}
+      founderImage={FOUNDER_IMAGE}
     />
   );
 }

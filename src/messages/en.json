@@ -267,6 +267,27 @@
         "Sales channels and marketing after launch"
       ],
       "missionAnswer": "<b>Healthy Farm Bio</b> brings these steps together, so you can design production with nothing more than a product concept.",
+      "founderEyebrow": "FOUNDER",
+      "founderTitle": "Built on what the factory\nfloor taught us",
+      "founderRole": "CEO",
+      "founderNote": "A licensed pharmacist who went on to run production at a supplement manufacturer. The person who knows the ingredients and the dosage forms takes your first call.",
+      "founderCareer": [
+        {
+          "label": "1989",
+          "title": "Licensed as a pharmacist",
+          "body": "Where the grounding in ingredients, dosage forms and labelling rules began."
+        },
+        {
+          "label": "4 years",
+          "title": "VP, health functional food manufacturer",
+          "body": "Led OEM and ODM production across roughly 200 products."
+        },
+        {
+          "label": "Now",
+          "title": "CEO, Healthy Farm Bio",
+          "body": "Handles everything from the first inquiry to the formulation."
+        }
+      ],
       "bulletsTitle": "Who we work with",
       "bullets": [
         "First-time founders who need to start from a small minimum order",
@@ -293,7 +314,7 @@
           "body": "We take orders from 1,000 units. Test the market first, scale after."
         },
         {
-          "title": "Talk to the founder",
+          "title": "Talk to the founder, a pharmacist",
           "body": "From the first inquiry to formulation, our CEO handles it directly — no changing hands, no changing answers."
         },
         {

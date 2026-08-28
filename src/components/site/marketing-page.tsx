@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Check, ChevronDown, ShieldCheck } from "lucide-react";
+import { getCompanyInfo } from "@/lib/settings";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { CtaBand } from "@/components/site/cta-band";
 import { cn } from "@/lib/utils";
 
 type Pair = { title: string; body: string };
+type Career = { label: string; title: string; body: string };
 
 /**
  * 제목 중 `mark` 와 일치하는 한 구절만 브랜드 색으로 칠합니다.
@@ -38,6 +40,7 @@ export async function MarketingPage({
   featureImages,
   stepImages,
   bulletsImage,
+  founderImage,
 }: {
   locale: string;
   ns: string;
@@ -55,6 +58,8 @@ export async function MarketingPage({
   stepImages?: string[];
   /** bullets 목록 옆에 놓을 이미지 경로 (4:3 권장) */
   bulletsImage?: string;
+  /** 대표 약력 옆에 놓을 인물 이미지 (3:4 권장) */
+  founderImage?: string;
 }) {
   const t = await getTranslations({ locale, namespace: ns });
 
@@ -62,6 +67,8 @@ export async function MarketingPage({
   const features = t.has("features") ? (t.raw("features") as Pair[]) : [];
   const steps = t.has("steps") ? (t.raw("steps") as Pair[]) : [];
   const faq = t.has("faq") ? (t.raw("faq") as Faq[]) : [];
+  // 대표 성함은 푸터와 같은 값을 씁니다 (관리자 → 회사 정보에서 한 번에 수정)
+  const company = t.has("founderTitle") ? await getCompanyInfo() : null;
 
   return (
     <>
@@ -165,6 +172,65 @@ export async function MarketingPage({
             <p className="whitespace-pre-line leading-loose text-ink-700">
               {t("intro")}
             </p>
+          </Container>
+        </Section>
+      )}
+
+      {t.has("founderTitle") && company && (
+        <Section>
+          <Container>
+            <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,22rem)_1fr]">
+              {founderImage && (
+                <div className="relative mx-auto aspect-3/4 w-full max-w-sm overflow-hidden rounded-card border border-ink-200 bg-ink-50 shadow-[var(--shadow-soft)]">
+                  <Image
+                    src={founderImage}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 352px, 90vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              )}
+
+              <div>
+                <p className="text-xs font-bold tracking-[0.14em] text-brand-600 uppercase">
+                  {t("founderEyebrow")}
+                </p>
+                <h2 className="mt-4 text-2xl font-bold whitespace-pre-line text-ink-900 sm:text-3xl sm:leading-snug">
+                  {t("founderTitle")}
+                </h2>
+                <p className="mt-5 text-label font-bold text-ink-900">
+                  {company.ceo}
+                  <span className="ml-2 font-medium text-ink-500">
+                    {t("founderRole")}
+                  </span>
+                </p>
+                <p className="mt-3 leading-relaxed text-ink-700">
+                  {t("founderNote")}
+                </p>
+
+                <ol className="mt-8 space-y-px overflow-hidden rounded-card border border-ink-200 bg-ink-200">
+                  {(t.raw("founderCareer") as Career[]).map((item) => (
+                    <li
+                      key={item.title}
+                      className="flex flex-col gap-1 bg-white p-5 sm:flex-row sm:gap-6"
+                    >
+                      <span className="w-20 shrink-0 text-sm font-bold text-brand-700">
+                        {item.label}
+                      </span>
+                      <span>
+                        <span className="block text-[0.9375rem] font-bold text-ink-900">
+                          {item.title}
+                        </span>
+                        <span className="mt-1 block text-sm leading-relaxed text-ink-700">
+                          {item.body}
+                        </span>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
           </Container>
         </Section>
       )}
