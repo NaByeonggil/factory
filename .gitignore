@@ -47,6 +47,9 @@ next-env.d.ts
 # 업로드된 첨부파일 (로컬 스토리지 드라이버)
 /storage
 
+# 백업 산출물 (DB 덤프·업로드 파일 묶음)
+/backups
+
 # prisma init 이 내려받는 AI 에이전트 스킬 문서 (재생성 가능)
 /.agents
 /.claude
