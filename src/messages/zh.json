@@ -2,7 +2,7 @@
   "meta": {
     "siteName": "Healthy Farm Bio",
     "defaultTitle": "保健功能食品 OEM·ODM 专业代工 | Healthy Farm Bio",
-    "defaultDescription": "GMP·HACCP认证工厂。从原料开发到设计与流通，一站式提供保健功能食品 OEM/ODM/CDMO 服务。"
+    "defaultDescription": "GMP·HACCP认证协力工厂。从原料开发到设计与流通，一站式提供保健功能食品 OEM/ODM/CDMO 服务。"
   },
   "nav": {
     "about": "公司介绍",
@@ -56,8 +56,8 @@
     "formulationTitle": "可生产剂型",
     "formulationDescription": "7种剂型与6种包装方式自由组合。",
     "packagingTitle": "包装方式",
-    "certTitle": "GMP · HACCP 认证工厂",
-    "certDescription": "在具备国际标准认证的自有工厂直接生产。",
+    "certTitle": "GMP · HACCP 认证协力工厂",
+    "certDescription": "在具备国际标准认证的协力工厂生产。",
     "serviceTitle": "我们能提供什么",
     "processTitle": "生产流程",
     "processDescription": "从咨询到交付，OEM约需6~10周。每个阶段均有专属负责人跟进。",
@@ -281,12 +281,12 @@
           "body": "代表曾任保健功能食品制造企业副社长，总管约200个品项。这份判断力让您跳过试错。"
         },
         {
-          "title": "自有工厂直接生产",
-          "body": "不外包，在自有 GMP·HACCP 认证工厂生产，交期与品质由我们直接负责。"
+          "title": "认证协力工厂生产",
+          "body": "在具备 GMP·HACCP 认证的协力工厂生产。我们为每个产品挑选合适的设备工厂，并亲自管理交期与品质。"
         },
         {
-          "title": "拥有个别认证原料",
-          "body": "自主开发的个别认证型与专利原料，可立即用于配方。"
+          "title": "拥有专利原料",
+          "body": "自有专利原料可直接用于配方，竞争对手无法使用相同组合。"
         },
         {
           "title": "支持小批量",
@@ -357,7 +357,7 @@
     "qc": {
       "eyebrow": "品质管理",
       "title": "出货前\n检查三次",
-      "description": "自有试验室在原料入库、半成品、成品各阶段直接检验。",
+      "description": "原料入库、半成品、成品各阶段由协力工厂试验室检验，检验报告由我们逐一确认。",
       "intro": "在保健食品行业，一次品质事故足以摧毁整个品牌。\n\n我们在从原料入库到成品出货的每个阶段设置检验关口，并按批次保存试验报告与生产记录。一旦出现问题，可追溯到具体批次与具体原料。",
       "bulletsTitle": "检验项目",
       "bullets": [
@@ -466,7 +466,7 @@
       "eyebrow": "原料 ODM",
       "title": "从原料开始\n做出不同",
       "description": "运用自有原料，或发掘新素材直至取得个别认证。",
-      "intro": "仅靠组合市场上已有的原料很难形成差异化。\n\n我们自有个别认证型与专利原料，采用后竞品无法使用相同的功能性标示。必要时可发掘新素材并共同推进认证取得。",
+      "intro": "仅靠组合市场上已有的原料很难做出差异化。\n\n我们拥有自有专利原料，竞争对手无法使用相同组合。如有需要，我们也可协助发掘新素材并申请个别认证。",
       "featuresTitle": "服务范围",
       "features": [
         {

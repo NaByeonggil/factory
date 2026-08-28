@@ -2,7 +2,7 @@
   "meta": {
     "siteName": "Healthy Farm Bio",
     "defaultTitle": "Health Functional Food OEM & ODM Manufacturer | Healthy Farm Bio",
-    "defaultDescription": "GMP/HACCP certified facilities. One-stop OEM, ODM and CDMO for health functional foods — from raw material to design and distribution."
+    "defaultDescription": "GMP/HACCP certified partner plants. One-stop OEM, ODM and CDMO for health functional foods — from raw material to design and distribution."
   },
   "nav": {
     "about": "About",
@@ -56,8 +56,8 @@
     "formulationTitle": "Available dosage forms",
     "formulationDescription": "Combine 7 dosage forms with 6 packaging types.",
     "packagingTitle": "Packaging",
-    "certTitle": "GMP · HACCP certified facility",
-    "certDescription": "Manufactured in our own internationally certified plant.",
+    "certTitle": "GMP · HACCP certified partner plants",
+    "certDescription": "Produced at partner plants holding international certifications.",
     "serviceTitle": "How can we help",
     "processTitle": "How it works",
     "processDescription": "Roughly 6–10 weeks from first enquiry to delivery for an OEM run, with a dedicated contact at every step.",
@@ -281,12 +281,12 @@
           "body": "Our CEO led roughly 200 products as vice president of a supplement manufacturer. That judgement lets you skip the trial and error."
         },
         {
-          "title": "Our own factory",
-          "body": "No subcontracting. We produce in our own GMP/HACCP certified facility and own the schedule and quality."
+          "title": "Certified partner plants",
+          "body": "Production runs at GMP/HACCP certified partner plants. We match each product to the right facility and manage the schedule and quality ourselves."
         },
         {
-          "title": "Proprietary approved ingredients",
-          "body": "Individually approved and patented ingredients we developed, ready to apply immediately."
+          "title": "Patented ingredients of our own",
+          "body": "Patented ingredients we hold can go straight into your formulation — and competitors cannot use the same combination."
         },
         {
           "title": "Small batch friendly",
@@ -357,7 +357,7 @@
     "qc": {
       "eyebrow": "Quality Control",
       "title": "Checked three times\nbefore it ships",
-      "description": "Our in-house lab inspects incoming materials, work in progress and finished goods at every stage.",
+      "description": "Incoming materials, work in progress and finished goods are tested at each stage by the partner plant's lab, and we review every certificate.",
       "intro": "In this industry a single quality incident can take down an entire brand.\n\nWe place an inspection gate at every stage from incoming material to finished goods, and keep test reports and production records per lot. If something goes wrong, we can trace which lot and which material it came from.",
       "bulletsTitle": "Test items",
       "bullets": [
@@ -466,7 +466,7 @@
       "eyebrow": "Raw Material ODM",
       "title": "Differentiate at\nthe ingredient level",
       "description": "Apply our proprietary ingredients, or develop a new material through to individual approval.",
-      "intro": "Recombining ingredients that everyone already has rarely produces differentiation.\n\nWe hold our own individually approved and patented ingredients — use them and a competitor cannot claim the same functionality. Where needed we discover a new material and take it through approval with you.",
+      "intro": "Recombining ingredients that everyone already has rarely produces differentiation.\n\nWe hold patented ingredients of our own, so competitors cannot use the same combination. Where it helps, we will source a new material and pursue individual approval with you.",
       "featuresTitle": "What we provide",
       "features": [
         {
