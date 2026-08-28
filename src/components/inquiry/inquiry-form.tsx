@@ -18,6 +18,9 @@ import {
 import {
   BUDGET_RANGES,
   FORMULATIONS as FORMULATION_CODES,
+  FOOD_SERVICE_TYPES,
+  MATERIAL_TYPES,
+  OWNED_ASSETS,
   QUANTITY_RANGES,
   SERVICE_TYPES,
   formulationsFor,
@@ -257,6 +260,54 @@ export function InquiryForm() {
           </Select>
         </Field>
 
+        {serviceType !== "MATERIAL" && (
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Field
+              label={t("targetAudience")}
+              htmlFor="targetAudience"
+              hint={t("targetAudienceHint")}
+            >
+              <Input
+                id="targetAudience"
+                placeholder={t("targetAudiencePlaceholder")}
+                maxLength={200}
+                {...register("targetAudience")}
+              />
+            </Field>
+
+            <Field
+              label={t("healthConcern")}
+              htmlFor="healthConcern"
+              hint={t("healthConcernHint")}
+            >
+              <Input
+                id="healthConcern"
+                placeholder={t("healthConcernPlaceholder")}
+                maxLength={200}
+                {...register("healthConcern")}
+              />
+            </Field>
+          </div>
+        )}
+
+        {/* 고시형이냐 개별인정형이냐에 따라 일정과 비용이 크게 갈립니다 */}
+        {(FOOD_SERVICE_TYPES as readonly string[]).includes(serviceType) && (
+          <Field
+            label={t("materialType")}
+            htmlFor="materialType"
+            hint={t("materialTypeHint")}
+          >
+            <Select id="materialType" defaultValue="" {...register("materialType")}>
+              <option value="">—</option>
+              {MATERIAL_TYPES.map((code) => (
+                <option key={code} value={code}>
+                  {tOptions(`materialType.${code}`)}
+                </option>
+              ))}
+            </Select>
+          </Field>
+        )}
+
         {formulationOptions.length > 0 && (
           <Controller
             control={control}
@@ -343,6 +394,48 @@ export function InquiryForm() {
           </Field>
         </div>
 
+        {serviceType !== "MATERIAL" && (
+          <>
+            <Controller
+              control={control}
+              name="ownedAssets"
+              render={({ field }) => (
+                <Field label={t("ownedAssets")} hint={t("ownedAssetsHint")}>
+                  <div className="flex flex-wrap gap-2">
+                    {OWNED_ASSETS.map((code) => (
+                      <CheckChip
+                        key={code}
+                        label={tOptions(`ownedAsset.${code}`)}
+                        value={code}
+                        checked={field.value?.includes(code) ?? false}
+                        onChange={(e) => {
+                          const set = new Set(field.value ?? []);
+                          if (e.target.checked) set.add(code);
+                          else set.delete(code);
+                          field.onChange([...set]);
+                        }}
+                      />
+                    ))}
+                  </div>
+                </Field>
+              )}
+            />
+
+            <Field
+              label={t("targetPrice")}
+              htmlFor="targetPrice"
+              hint={t("targetPriceHint")}
+            >
+              <Input
+                id="targetPrice"
+                placeholder={t("targetPricePlaceholder")}
+                maxLength={50}
+                {...register("targetPrice")}
+              />
+            </Field>
+          </>
+        )}
+
         <Field
           label={t("message")}
           htmlFor="message"
@@ -354,6 +447,11 @@ export function InquiryForm() {
             {...register("message")}
           />
         </Field>
+
+        {/* 표시·광고 기준을 접수 단계에서 미리 알립니다 */}
+        <p className="rounded-xl border border-ink-200 bg-ink-50 p-4 text-xs leading-relaxed text-ink-600">
+          {t("claimNotice")}
+        </p>
 
         <Controller
           control={control}

@@ -103,6 +103,15 @@ export type ServiceTypeCode = (typeof SERVICE_TYPES)[number];
  */
 export const FOOD_SERVICE_TYPES = ["OEM", "ODM", "CDMO", "DTC"] as const;
 
+/**
+ * 기능성 원료 방향. 고시형은 이미 인정된 원료를 쓰는 것이고,
+ * 개별인정형은 별도 인정 자료가 필요해 일정과 비용이 크게 달라집니다.
+ */
+export const MATERIAL_TYPES = ["NOTIFIED", "INDIVIDUAL", "UNKNOWN"] as const;
+
+/** 고객이 이미 가지고 있는 것 — 견적 범위를 가르는 기준입니다 */
+export const OWNED_ASSETS = ["MATERIAL", "RECIPE", "DESIGN", "BENCHMARK"] as const;
+
 /** 그 문의가 실린 게시판 경로 — 상세에서 목록으로 돌아갈 때 씁니다 */
 export function boardPathFor(serviceType: string) {
   if (serviceType === "PET") return "/quote/pet";

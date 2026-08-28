@@ -69,6 +69,12 @@ export async function submitInquiry(
         quantity: data.quantity || null,
         budget: data.budget || null,
         targetDate: data.targetDate ? new Date(data.targetDate) : null,
+
+        targetAudience: data.targetAudience || null,
+        healthConcern: data.healthConcern || null,
+        materialType: data.materialType || null,
+        ownedAssets: data.ownedAssets,
+        targetPrice: data.targetPrice || null,
         message: data.message || null,
 
         privacyAgreedAt: new Date(),

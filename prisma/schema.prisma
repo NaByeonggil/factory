@@ -89,6 +89,18 @@ model Inquiry {
   targetDate   DateTime? /// 희망 납기
   message      String?     @db.Text
 
+  // 제품 기획 브리프 — 견적 가능한 수준으로 아이디어를 좁히기 위해 받습니다
+  /// 목표 고객 (예: 40~60대 혈행·관절 관리층)
+  targetAudience String?
+  /// 원하는 기능성 또는 건강 고민
+  healthConcern  String?
+  /// 기능성 원료 방향 — NOTIFIED(고시형) / INDIVIDUAL(개별인정형) / UNKNOWN
+  materialType   String?
+  /// 이미 가지고 있는 것 (원료·레시피·디자인·벤치마킹 제품)
+  ownedAssets    String[]
+  /// 목표 판매가 (소비자가). 목표 원가는 budget 에 받습니다
+  targetPrice    String?
+
   // 동의 (개인정보보호법)
   privacyAgreedAt DateTime
   marketingAgreed Boolean  @default(false)

@@ -175,6 +175,17 @@
       "10M_50M": "KRW 10M – 50M",
       "OVER_50M": "Over KRW 50M",
       "UNDECIDED": "Not decided yet"
+    },
+    "materialType": {
+      "NOTIFIED": "Approved (notified) ingredient",
+      "INDIVIDUAL": "Individually approved ingredient",
+      "UNKNOWN": "Not sure yet"
+    },
+    "ownedAsset": {
+      "MATERIAL": "Ingredient on hand",
+      "RECIPE": "Recipe / formula",
+      "DESIGN": "Design",
+      "BENCHMARK": "Benchmark product"
     }
   },
   "inquiry": {
@@ -220,7 +231,21 @@
     "passwordHint": "At least 4 characters, used to open your request on the quote board",
     "subject": "Subject",
     "subjectHint": "Optional, shown on the quote board",
-    "subjectPlaceholder": "OEM inquiry for hangover relief jelly sticks"
+    "subjectPlaceholder": "OEM inquiry for hangover relief jelly sticks",
+    "targetAudience": "Target customer",
+    "targetAudienceHint": "Optional",
+    "targetAudiencePlaceholder": "e.g. adults 40–60 managing circulation and joints",
+    "healthConcern": "Function or health concern",
+    "healthConcernHint": "Optional",
+    "healthConcernPlaceholder": "e.g. immunity, circulation, joints, body fat, gut health",
+    "materialType": "Functional ingredient route",
+    "materialTypeHint": "It is fine not to know — we decide together after review",
+    "ownedAssets": "What you already have",
+    "ownedAssetsHint": "Optional — the more you tell us, the faster the review",
+    "targetPrice": "Target retail price",
+    "targetPriceHint": "Optional — consumer price",
+    "targetPricePlaceholder": "e.g. around ₩30,000 for a month's supply",
+    "claimNotice": "We do not accept drug-style claims to treat or prevent disease, and review everything within Korea's health functional food labelling and advertising rules. Ingredients or functions that are not already approved may require separate substantiation."
   },
   "validation": {
     "nameRequired": "Please enter a contact name.",
@@ -965,13 +990,13 @@
     "threadLinkExpired": "Download links expire after 30 minutes. Reload and unlock again if they stop working.",
     "staffView": "Staff view",
     "threadStaffNotice": "You are signed in as staff, so this opened without the customer password. Replies you post here are recorded as staff replies.",
-    "processTitle": "How your quote request is handled",
-    "step1": "Request received",
-    "step2": "Reviewed by our CEO",
-    "step3": "One-on-one consultation",
-    "step4": "Quote sent",
+    "processTitle": "How the consultation works",
+    "step1": "Product brief received",
+    "step2": "Expert review & consultation",
+    "step3": "Tailored quote",
+    "step4": "Contract, development, production",
     "stepNote": "within 1 business day",
-    "guide": "Tell us as much detail as you can — our CEO, a licensed pharmacist, reviews it personally and gets in touch. After the consultation the quote arrives as a reply on this board, which opens with the password you set when submitting.",
+    "guide": "Your brief is reviewed personally by our CEO, a licensed pharmacist — ingredient suitability, formulation and dosage form, supply, minimum order quantity and labelling risk come first, then a 20–30 minute call to set priorities. The quote arrives as a reply on this board, which opens with the password you set when submitting.",
     "colNo": "No.",
     "colReplies": "Replies",
     "searchField": "Search in",
@@ -1005,6 +1030,91 @@
     "cosmeticBoardTitle": "Cosmetics inquiry board",
     "cosmeticBoardDescription": "Check the progress of your request and our reply. Every entry is private and opens only with the password you set when submitting.",
     "cosmeticWrite": "Ask about cosmetics",
-    "cosmeticEmpty": "No cosmetics inquiries yet."
+    "cosmeticEmpty": "No cosmetics inquiries yet.",
+    "foodEyebrow": "HEALTH FUNCTIONAL FOOD",
+    "foodLead": "A pharmacist who ran production at a manufacturer reviews ingredients, dosage form, claims, MOQ, cost and filings — and hands the idea back as something you can actually make.",
+    "briefTitle": "What you get after the consultation",
+    "briefDescription": "We write the outcome up as a product development brief. Not a single unit price — a plan for what to make and how.",
+    "brief": [
+      {
+        "title": "Recommended concept",
+        "body": "Target audience and core benefit in one sentence."
+      },
+      {
+        "title": "Dosage form & packaging",
+        "body": "e.g. PTP tablets or stick powder, matched to how it will be taken and sold."
+      },
+      {
+        "title": "Claim strategy",
+        "body": "Whether an approved ingredient works, or individual approval needs to be explored."
+      },
+      {
+        "title": "Expected MOQ and plant type",
+        "body": "Minimum order quantity by dosage form, and the kind of partner plant that fits."
+      },
+      {
+        "title": "Expected timeline",
+        "body": "Formulation → sample → filing and labelling review → production, broken into stages."
+      },
+      {
+        "title": "Key risks",
+        "body": "Ingredient cost, taste and aroma, stability, and labelling limits, flagged upfront."
+      }
+    ],
+    "quoteTitle": "What the quote covers",
+    "quoteDescription": "Presented as base, recommended and premium options, so you can compare formulation, dosage form, MOQ and lead time — not just price.",
+    "quoteRows": [
+      {
+        "title": "Product spec",
+        "body": "Dosage form, daily intake, net content, packaging"
+      },
+      {
+        "title": "Formulation",
+        "body": "Main and secondary ingredients, claim strategy, point of difference"
+      },
+      {
+        "title": "Volume",
+        "body": "MOQ, first production run, reorder increments"
+      },
+      {
+        "title": "Unit price & total",
+        "body": "Ingredients, manufacturing and packaging, VAT, and one-off costs such as moulds and print plates listed separately"
+      },
+      {
+        "title": "Development cost",
+        "body": "Formulation, samples, testing, and how far we support the product filing"
+      },
+      {
+        "title": "Lead time",
+        "body": "Expected production and shipping dates from sample sign-off"
+      },
+      {
+        "title": "Included / excluded",
+        "body": "Design, package printing, delivery and storage, advertising review"
+      },
+      {
+        "title": "Payment terms",
+        "body": "Deposit, interim and balance payments, cancellation terms for samples and production"
+      },
+      {
+        "title": "Quality standard",
+        "body": "GMP status of the partner plant and the scope of quality control"
+      }
+    ],
+    "afterTitle": "After the contract, through to launch",
+    "afterDescription": "Once you approve a quote, this is the sequence. The stages change; the person does not — our CEO manages it through to launch.",
+    "after": [
+      "NDA (if needed)",
+      "Manufacturing & development contract",
+      "Formula and ingredients fixed",
+      "Sample sign-off",
+      "Design and labelling fixed",
+      "Product filing",
+      "Production",
+      "Quality testing",
+      "Shipping"
+    ],
+    "afterNote": "Before production closes we go through the final formula, ingredient COAs and specifications, Korean labelling, shelf-life substantiation, test certificates, volumes and lot numbers, and release criteria together. The product filing is made by the licensed manufacturer, and later changes may require a separate filing.",
+    "foodWrite": "Get a feasibility check"
   }
 }

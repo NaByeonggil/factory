@@ -2,6 +2,8 @@ import { z } from "zod";
 import {
   BUDGET_RANGES,
   FORMULATIONS,
+  MATERIAL_TYPES,
+  OWNED_ASSETS,
   PACKAGINGS,
   QUANTITY_RANGES,
   SERVICE_TYPES,
@@ -41,6 +43,13 @@ export const inquirySchema = z.object({
   quantity: z.enum(QUANTITY_RANGES).optional().or(z.literal("")),
   budget: z.enum(BUDGET_RANGES).optional().or(z.literal("")),
   targetDate: z.string().optional().or(z.literal("")),
+
+  // 제품 기획 브리프
+  targetAudience: z.string().trim().max(200).optional().or(z.literal("")),
+  healthConcern: z.string().trim().max(200).optional().or(z.literal("")),
+  materialType: z.enum(MATERIAL_TYPES).optional().or(z.literal("")),
+  ownedAssets: z.array(z.enum(OWNED_ASSETS)).max(OWNED_ASSETS.length).default([]),
+  targetPrice: z.string().trim().max(50).optional().or(z.literal("")),
   message: z.string().trim().max(5000, "messageTooLong").optional().or(z.literal("")),
 
   /** 견적문의 게시판에서 본인 문의·답변을 열람할 때 쓰는 비밀번호 */
