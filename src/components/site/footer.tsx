@@ -72,6 +72,8 @@ export async function Footer({
           >
             {[
               ["about", "/about"],
+              ["aboutRnd", "/about/rnd"],
+              ["aboutQc", "/about/qc"],
               ["service", "/service/oem-odm"],
               ["cdmo", "/service/cdmo"],
               ["dtc", "/service/dtc"],
