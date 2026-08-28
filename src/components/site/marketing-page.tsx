@@ -1,12 +1,29 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, ShieldCheck } from "lucide-react";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { CtaBand } from "@/components/site/cta-band";
 import { cn } from "@/lib/utils";
 
 type Pair = { title: string; body: string };
+
+/**
+ * 제목 중 `mark` 와 일치하는 한 구절만 브랜드 색으로 칠합니다.
+ * 문구가 바뀌어 일치하지 않으면 그냥 원문을 그대로 보여줍니다.
+ */
+function highlight(title: string, mark: string | null) {
+  if (!mark) return title;
+  const at = title.indexOf(mark);
+  if (at < 0) return title;
+  return (
+    <>
+      {title.slice(0, at)}
+      <span className="text-brand-500">{mark}</span>
+      {title.slice(at + mark.length)}
+    </>
+  );
+}
 type Faq = { q: string; a: string };
 
 /**
@@ -57,8 +74,9 @@ export async function MarketingPage({
           >
             <div>
               {t.has("eyebrow") && <Badge tone="brand">{t("eyebrow")}</Badge>}
-              <h1 className="mt-4 max-w-3xl text-display text-brand-900">
-                {t("title")}
+              {/* 제목의 줄바꿈은 문구에 의도적으로 넣어 둔 것이라 그대로 살립니다 */}
+              <h1 className="mt-4 max-w-3xl whitespace-pre-line text-display text-brand-900">
+                {highlight(t("title"), t.has("titleHighlight") ? t("titleHighlight") : null)}
               </h1>
               {t.has("description") && (
                 <p className="mt-5 max-w-2xl leading-relaxed text-ink-700 lg:text-body-lg">
@@ -82,6 +100,64 @@ export async function MarketingPage({
           </div>
         </Container>
       </section>
+
+      {t.has("missionTitle") && (
+        <Section>
+          <Container>
+            <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.15fr]">
+              <div>
+                {t.has("missionEyebrow") && (
+                  <p className="text-xs font-bold tracking-[0.14em] text-brand-600 uppercase">
+                    {t("missionEyebrow")}
+                  </p>
+                )}
+                <h2 className="mt-4 text-2xl font-bold whitespace-pre-line text-ink-900 sm:text-3xl sm:leading-snug">
+                  {t("missionTitle")}
+                </h2>
+                <div className="mt-6 h-1 w-16 rounded-full bg-brand-500" />
+                {t.has("missionBody") && (
+                  <p className="mt-6 whitespace-pre-line leading-loose text-ink-700">
+                    {t("missionBody")}
+                  </p>
+                )}
+              </div>
+
+              <div className="rounded-card border border-ink-200 bg-ink-50 p-6 sm:p-8">
+                <p className="flex items-center gap-2 text-base font-bold text-ink-900">
+                  <ShieldCheck className="size-5 shrink-0 text-brand-600" aria-hidden />
+                  {t("missionCardTitle")}
+                </p>
+
+                <ul className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+                  {(t.raw("missionBarriers") as string[]).map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <span
+                        aria-hidden
+                        className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-red-50 text-xs font-bold text-red-600"
+                      >
+                        !
+                      </span>
+                      <span className="text-sm leading-relaxed text-ink-700">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {t.has("missionAnswer") && (
+                  <p className="mt-8 rounded-xl border border-ink-200 bg-white p-5 text-sm leading-relaxed text-ink-700">
+                    {t.rich("missionAnswer", {
+                      b: (chunks) => (
+                        <strong className="font-bold text-ink-900">{chunks}</strong>
+                      ),
+                    })}
+                  </p>
+                )}
+              </div>
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {t.has("intro") && (
         <Section className="pb-0">

@@ -252,8 +252,21 @@
     "about": {
       "eyebrow": "About",
       "title": "The manufacturing partner\nfirst-time founders need",
+      "titleHighlight": "manufacturing partner",
       "description": "Since 1999 we have made nothing but health functional foods. Formulation, production, packaging and distribution — finished in one place.",
-      "intro": "The hardest part of starting a supplement business is rarely the manufacturing itself. It is not knowing where to begin.\n\nWhere to source ingredients, which dosage form works best, what the minimum order quantity is, how to clear labelling review — we design all of it with you. Bringing an idea is enough.",
+      "missionEyebrow": "OUR MISSION",
+      "missionTitle": "We take on the complexity\nof getting a product made.",
+      "missionBody": "The hardest part of starting a supplement business is rarely the manufacturing itself — it is not knowing where to begin.\n\nSourcing materials, choosing a dosage form, meeting minimum order quantities, clearing advertising review: decisions pile up at every practical step. Having repeated that process across 3,200 products in 26 years, we sort it out for you.",
+      "missionCardTitle": "What stands between an idea and a launch",
+      "missionBarriers": [
+        "Finding a GMP plant you can trust",
+        "Minimum order quantities that are hard to meet",
+        "Securing compliant materials with stable supply",
+        "Choosing the right dosage form and packaging",
+        "MFDS approval and advertising review",
+        "Sales channels and marketing after launch"
+      ],
+      "missionAnswer": "<b>Healthy Farm Bio</b> brings these steps together, so you can design production with nothing more than a product concept.",
       "bulletsTitle": "Who we work with",
       "bullets": [
         "First-time founders who need to start from a small minimum order",
