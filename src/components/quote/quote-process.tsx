@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight, FileCheck2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 /**
  * 견적문의 접수 프로세스 스테퍼.
@@ -11,15 +11,14 @@ export async function QuoteProcess({ locale }: { locale: string }) {
 
   /**
    * 아이콘은 공급받은 3D 타일 이미지 (public/quote-process/).
-   * 「견적서 발송」에 맞는 타일이 아직 없어 선 아이콘으로 대신합니다.
-   * 같은 톤의 이미지가 준비되면 src 를 넣어 교체하세요.
-   * (step-3.png 는 「영업담당자 배정」 단계가 사라져 지금은 쓰지 않습니다)
+   * 파일명이 단계 순서와 다른 것은 단계 구성이 바뀌었기 때문입니다
+   * (step-3.png 는 「영업담당자 배정」 단계가 사라져 지금은 쓰지 않습니다).
    */
   const steps = [
     { key: "step1", src: "/quote-process/step-1.png" },
     { key: "step2", src: "/quote-process/step-2.png" },
     { key: "step3", src: "/quote-process/step-4.png", note: t("stepNote") },
-    { key: "step4", src: null },
+    { key: "step4", src: "/quote-process/step-contract.png" },
   ] as const;
 
   return (
@@ -35,20 +34,13 @@ export async function QuoteProcess({ locale }: { locale: string }) {
             <div className="flex flex-1 items-center gap-4 md:flex-col md:gap-3 md:text-center">
               {/* 아이콘마다 타일 배경 밝기가 달라, 같은 톤의 판 위에 올려 무게를 맞춥니다 */}
               <span className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-brand-50 ring-1 ring-brand-100 sm:size-20">
-                {src ? (
-                  <Image
-                    src={src}
-                    alt=""
-                    width={160}
-                    height={160}
-                    className="size-14 rounded-xl sm:size-16"
-                  />
-                ) : (
-                  <FileCheck2
-                    className="size-9 text-brand-700 sm:size-10"
-                    aria-hidden
-                  />
-                )}
+                <Image
+                  src={src}
+                  alt=""
+                  width={160}
+                  height={160}
+                  className="size-14 rounded-xl sm:size-16"
+                />
               </span>
               <span className="flex flex-col gap-0.5 md:items-center">
                 <span className="text-sm font-bold text-ink-900">{t(key)}</span>
