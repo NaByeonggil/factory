@@ -35,10 +35,10 @@ const NAV: NavItem[] = [
       { key: "portfolio", href: "/portfolio" },
     ],
   },
-  { key: "materialQuote", href: "/quote/material" },
+  { key: "board", href: "/quote" },
   { key: "cosmeticQuote", href: "/quote/cosmetic" },
   { key: "petQuoteTop", href: "/quote/pet" },
-  { key: "board", href: "/quote" },
+  { key: "materialQuote", href: "/quote/material" },
   { key: "marketing", href: "/marketing" },
 ];
 
