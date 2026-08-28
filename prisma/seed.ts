@@ -93,7 +93,6 @@ const CERTIFICATIONS = [
   { code: "ISO 22000", name: "식품안전경영시스템", sortOrder: 4 },
   { code: "ISO 14001", name: "환경경영시스템", sortOrder: 5 },
   { code: "ISO 45001", name: "안전보건경영시스템", sortOrder: 6 },
-  { code: "CCM", name: "소비자중심경영", sortOrder: 7 },
 ];
 
 const PRODUCTS = [

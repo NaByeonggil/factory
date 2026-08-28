@@ -7,7 +7,6 @@
   "nav": {
     "about": "About",
     "aboutCompany": "Company",
-    "aboutRnd": "R&D Center",
     "aboutQc": "Quality Control",
     "service": "OEM/ODM",
     "serviceFinished": "Finished Products",
@@ -299,58 +298,6 @@
         {
           "title": "Beyond manufacturing",
           "body": "Package design, marketplace onboarding, patent strategy and government funding programs."
-        }
-      ]
-    },
-    "rnd": {
-      "eyebrow": "R&D Center",
-      "title": "Formulation comes\nout of data",
-      "description": "Our corporate research institute handles ingredient discovery, blend design and stability testing in house.",
-      "intro": "Using a good ingredient and making a good product are two different things.\n\nThe same ingredient absorbs and tastes very differently depending on ratio, excipients and dosage form. Our lab does not stop at the ingredient spec — we verify stability and sensory quality in the actual finished product before locking a formulation.",
-      "featuresTitle": "Research areas",
-      "features": [
-        {
-          "title": "Ingredient discovery",
-          "body": "We source novel materials and standardize their marker compounds."
-        },
-        {
-          "title": "Approved ingredient development",
-          "body": "From human trial design through to the approval filing."
-        },
-        {
-          "title": "Dosage form design",
-          "body": "Optimal blends per form — tablet, soft capsule, jelly and more."
-        },
-        {
-          "title": "Stability testing",
-          "body": "Accelerated and long-term studies to establish shelf life."
-        },
-        {
-          "title": "Sensory improvement",
-          "body": "Better taste and swallowability, which drives repeat purchase."
-        },
-        {
-          "title": "Patent filing",
-          "body": "Distinctive compositions are protected and become brand assets."
-        }
-      ],
-      "stepsTitle": "Development process",
-      "steps": [
-        {
-          "title": "Define concept",
-          "body": "Set the target customer and derive the functionality required."
-        },
-        {
-          "title": "Design formulation",
-          "body": "Combine ingredients, dosages and excipients into candidates."
-        },
-        {
-          "title": "Build prototype",
-          "body": "Produce in the real dosage form and check sensory and appearance."
-        },
-        {
-          "title": "Verify and lock",
-          "body": "Confirm through stability testing and finalize for mass production."
         }
       ]
     },

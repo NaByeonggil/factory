@@ -8,13 +8,8 @@ Pexels 라이선스(상업적 사용 무료 · 출처 표기 의무 없음 · �
 |---|---|---|
 | hero.jpg | 히어로 (16:9) | https://www.pexels.com/photo/pharmaceutical-workers-in-a-production-line-37466061/ |
 | qc-hero.jpg | 품질관리 히어로 (16:9) | https://www.pexels.com/photo/laboratory-worker-holding-a-petri-dish-with-bacteria-8940360/ |
-| rnd-hero.jpg | 연구소 소개 히어로 (16:9) | https://www.pexels.com/photo/vials-in-a-chromatograph-10514991/ |
 | customers.jpg | 이런 고객과 일합니다 | https://www.pexels.com/photo/business-meeting-in-modern-office-lounge-36765718/ |
-| history-1999.jpg | 연혁 1999 · 제조 시작 | https://www.pexels.com/photo/capsule-filling-machine-and-pills-on-turquoise-surface-37476249/ |
-| history-2010.jpg | 연혁 2010 · GMP·CCM 인증 | https://www.pexels.com/photo/pharmaceutical-lab-testing-in-islamabad-37889383/ |
-| history-2018.jpg | 연혁 2018 · 개별인정형 원료 개발 | https://www.pexels.com/photo/scientist-working-in-laboratory-3912482/ |
-| history-2024.jpg | 연혁 2024 · CDMO·개인맞춤형 | https://www.pexels.com/photo/photo-of-daily-medicine-in-a-container-3683070/ |
 
-주의: 회사소개 히어로는 방문자가 "이 회사의 공장"으로 읽습니다. 스톡 사진은
-어디까지나 임시이며, 자사 시설·연혁 사진이 준비되면 같은 파일명으로
-교체하는 것을 권장합니다 (히어로 16:9 1600px 이상, 연혁 4:3 1000px 이상).
+주의: 회사소개 히어로는 방문자가 "이 회사의 생산 현장"으로 읽습니다.
+스톡 사진은 어디까지나 임시이며, 실제 협력 제조사 현장 사진이 준비되면
+같은 파일명으로 교체하시는 것을 권장합니다 (16:9 · 1600px 이상).

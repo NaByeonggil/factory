@@ -10,7 +10,6 @@ import {
 const STATIC_PATHS = [
   "",
   "/about",
-  "/about/rnd",
   "/about/qc",
   "/service/oem-odm",
   "/service/material",
