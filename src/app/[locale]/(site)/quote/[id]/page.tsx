@@ -8,6 +8,7 @@ import { Container, Section } from "@/components/ui/section";
 import { QuoteGate } from "@/components/quote/quote-gate";
 import { getQuoteDetailForStaff, getQuoteSummary } from "@/lib/queries";
 import { getSession } from "@/lib/auth";
+import { boardPathFor } from "@/lib/constants";
 import { formatDate, maskName } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -83,7 +84,7 @@ export default async function QuoteDetailPage(
 
         <div className="mt-10 border-t border-ink-200 pt-6">
           <Link
-            href="/quote"
+            href={boardPathFor(summary.serviceType)}
             className="text-sm font-semibold text-ink-600 hover:text-brand-700"
           >
             ← {t("backToList")}

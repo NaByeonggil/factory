@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { PawPrint } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { QuoteBoard } from "@/components/quote/quote-board";
 import type { QuoteSearchField } from "@/lib/queries";
@@ -42,15 +40,6 @@ export default async function PetQuoteBoardPage(
           title={t("petTitle")}
           description={t("petDescription")}
         />
-
-        {/* 펫 문의만 모아 보는 화면이라 전체 게시판으로 가는 길을 열어둡니다 */}
-        <Link
-          href="/quote"
-          className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink-600 hover:text-brand-700"
-        >
-          <PawPrint className="size-4" aria-hidden />
-          {t("allBoard")} →
-        </Link>
 
         <QuoteBoard
           locale={locale}

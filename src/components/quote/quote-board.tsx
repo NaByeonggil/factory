@@ -9,8 +9,8 @@ import { cn, formatDate, maskName } from "@/lib/utils";
 import type { ServiceType } from "@/generated/prisma/enums";
 
 /**
- * 견적문의 목록 — 전체 게시판과 펫 전용 게시판이 함께 씁니다.
- * serviceType 을 넘기면 그 유형만 모아 보여줍니다.
+ * 견적문의 목록 — 식품·화장품·펫·원료 게시판이 함께 씁니다.
+ * serviceType 을 넘기면 그 유형만(배열이면 그 유형들만) 모아 보여줍니다.
  */
 export async function QuoteBoard({
   locale,
@@ -29,7 +29,7 @@ export async function QuoteBoard({
   page: number;
   keyword: string;
   field: QuoteSearchField;
-  serviceType?: ServiceType;
+  serviceType?: ServiceType | readonly ServiceType[];
   basePath: string;
   writeHref: string;
   writeLabel: string;

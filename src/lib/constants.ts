@@ -91,6 +91,20 @@ export const SERVICE_TYPES = [
 export type ServiceTypeCode = (typeof SERVICE_TYPES)[number];
 
 /**
+ * 식품 생산문의 게시판이 모으는 유형 — 건강기능식품과 일반식품.
+ * 화장품·펫·원료 공급은 각자 전용 게시판이 따로 있습니다.
+ */
+export const FOOD_SERVICE_TYPES = ["OEM", "ODM", "CDMO", "DTC"] as const;
+
+/** 그 문의가 실린 게시판 경로 — 상세에서 목록으로 돌아갈 때 씁니다 */
+export function boardPathFor(serviceType: string) {
+  if (serviceType === "PET") return "/quote/pet";
+  if (serviceType === "COSMETIC") return "/quote/cosmetic";
+  if (serviceType === "MATERIAL") return "/quote/material";
+  return "/quote";
+}
+
+/**
  * 문의 유형에 맞는 제형·포장 선택지.
  * 화장품 문의에 건기식 제형이 뜨지 않도록 폼에서 이 함수로 갈라 씁니다.
  */
