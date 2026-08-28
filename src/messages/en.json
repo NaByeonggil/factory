@@ -30,7 +30,7 @@
     "materialQuote": "Patented materials",
     "cosmeticQuote": "Cosmetics",
     "petQuoteTop": "Pet",
-    "board": "Health food",
+    "board": "Health functional food",
     "marketing": "Marketing"
   },
   "home": {
@@ -965,9 +965,9 @@
     "materialEmpty": "No material supply inquiries yet.",
     "materialListTitle": "Patented and approved materials available",
     "materialListMore": "See all ingredients",
-    "foodTitle": "Health food production inquiries",
+    "foodTitle": "Health functional food production inquiries",
     "foodDescription": "Requests for health functional foods and general foods are listed here. Check progress and our reply — every entry opens with the password you set when submitting.",
-    "foodEmpty": "No health food production inquiries yet.",
+    "foodEmpty": "No health functional food production inquiries yet.",
     "cosmeticTitle": "Cosmetics inquiries",
     "cosmeticDescription": "Only cosmetics OEM/ODM requests are listed here. Check progress and our reply — every entry opens with the password you set when submitting.",
     "cosmeticWrite": "Ask about cosmetics",

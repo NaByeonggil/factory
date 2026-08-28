@@ -51,12 +51,12 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-      <Container className="flex h-16 items-center justify-between gap-6 min-[1340px]:h-20">
+      <Container className="flex h-16 items-center justify-between gap-6 min-[1360px]:h-20">
         <Link href="/" className="text-brand-700" aria-label={tMeta("siteName")}>
           <Logo label={tMeta("siteName")} markClassName="size-7 lg:size-8" />
         </Link>
 
-        <nav aria-label="주 메뉴" className="hidden min-[1340px]:flex min-[1340px]:items-center min-[1340px]:gap-1">
+        <nav aria-label="주 메뉴" className="hidden min-[1360px]:flex min-[1360px]:items-center min-[1360px]:gap-1">
           {NAV.map((item) => (
             <div key={item.key} className="group relative">
               <Link
@@ -86,7 +86,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 min-[1340px]:flex">
+        <div className="hidden items-center gap-3 min-[1360px]:flex">
           <LocaleSwitcher current={locale} />
           <Button asChild size="sm" className="whitespace-nowrap">
             <Link href="/inquiry">{t("inquiry")}</Link>
@@ -99,14 +99,14 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label="메뉴 열기"
-          className="rounded-md p-2 text-ink-700 min-[1340px]:hidden"
+          className="rounded-md p-2 text-ink-700 min-[1360px]:hidden"
         >
           {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
       </Container>
 
       {open && (
-        <div id="mobile-nav" className="border-t border-ink-200 bg-white min-[1340px]:hidden">
+        <div id="mobile-nav" className="border-t border-ink-200 bg-white min-[1360px]:hidden">
           <Container className="flex flex-col gap-1 py-4">
             <div className="mb-2 flex justify-end">
               <button

@@ -30,7 +30,7 @@
     "materialQuote": "专利原料咨询",
     "cosmeticQuote": "化妆品生产咨询",
     "petQuoteTop": "宠物产品咨询",
-    "board": "健康食品生产咨询",
+    "board": "保健功能食品生产咨询",
     "marketing": "营销·广告"
   },
   "home": {
@@ -965,9 +965,9 @@
     "materialEmpty": "暂无原料供应咨询。",
     "materialListTitle": "可供应的专利·个别认证原料",
     "materialListMore": "查看全部持有原料",
-    "foodTitle": "健康食品生产咨询",
+    "foodTitle": "保健功能食品生产咨询",
     "foodDescription": "汇总保健功能食品与一般食品的生产咨询。可查看进度与负责人回复，所有内容均需提交时设置的密码方可查看。",
-    "foodEmpty": "暂无健康食品生产咨询。",
+    "foodEmpty": "暂无保健功能食品生产咨询。",
     "cosmeticTitle": "化妆品生产咨询",
     "cosmeticDescription": "仅汇总化妆品 OEM/ODM 咨询。可查看进度与负责人回复，所有内容均需提交时设置的密码方可查看。",
     "cosmeticWrite": "咨询化妆品",
