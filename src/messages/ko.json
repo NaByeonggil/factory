@@ -30,7 +30,7 @@
     "materialQuote": "공급가능 특허원료 문의",
     "cosmeticQuote": "화장품 생산문의",
     "petQuoteTop": "펫제품 생산문의",
-    "board": "식품 생산문의",
+    "board": "건강식품 생산문의",
     "marketing": "마케팅·광고"
   },
   "home": {
@@ -965,9 +965,9 @@
     "materialEmpty": "접수된 원료 공급 문의가 없습니다.",
     "materialListTitle": "공급 가능한 특허·개별인정형 원료",
     "materialListMore": "보유 원료 전체 보기",
-    "foodTitle": "식품 생산문의",
+    "foodTitle": "건강식품 생산문의",
     "foodDescription": "건강기능식품과 일반식품 생산에 관한 문의를 모아 봅니다. 남기신 문의의 진행 상태와 담당자 답변을 확인하실 수 있으며, 모든 글은 접수 시 입력한 비밀번호로만 열립니다.",
-    "foodEmpty": "접수된 식품 생산문의가 없습니다.",
+    "foodEmpty": "접수된 건강식품 생산문의가 없습니다.",
     "cosmeticTitle": "화장품 생산문의",
     "cosmeticDescription": "화장품 OEM·ODM 문의만 모아 봅니다. 남기신 문의의 진행 상태와 담당자 답변을 확인하실 수 있으며, 모든 글은 접수 시 입력한 비밀번호로만 열립니다.",
     "cosmeticWrite": "화장품 문의하기",
