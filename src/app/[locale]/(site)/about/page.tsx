@@ -5,6 +5,12 @@ import { routing } from "@/i18n/routing";
 
 const NS = "pages.about";
 
+/**
+ * 히어로 이미지 — public/about/hero.jpg 를 같은 파일명으로 덮어쓰면
+ * 코드 수정 없이 교체됩니다. 출처와 주의사항은 public/about/CREDITS.md 참고.
+ */
+const HERO_IMAGE = "/about/hero.jpg";
+
 export const dynamic = "force-static";
 
 export function generateStaticParams() {
@@ -26,5 +32,5 @@ export async function generateMetadata(
 
 export default async function Page(props: PageProps<"/[locale]/about">) {
   const { locale } = await props.params;
-  return <MarketingPage locale={locale} ns={NS} />;
+  return <MarketingPage locale={locale} ns={NS} heroImage={HERO_IMAGE} />;
 }
