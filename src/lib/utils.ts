@@ -27,6 +27,22 @@ export function formatDate(date: Date | string, locale = "ko-KR") {
   return intlDate(locale, { dateStyle: "medium" }).format(new Date(date));
 }
 
+/**
+ * 최근 글은 「2일 전」처럼 상대 시간으로, 일주일이 지나면 날짜로 보여줍니다.
+ * 목록에서 방금 올라온 글을 알아보기 쉽게 하려는 것입니다.
+ */
+export function formatRelativeDate(date: Date | string, locale = "ko-KR") {
+  const target = new Date(date);
+  const days = Math.floor((Date.now() - target.getTime()) / 86_400_000);
+  if (days < 0 || days > 6) return formatDate(target, locale);
+  try {
+    const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+    return rtf.format(-days, "day");
+  } catch {
+    return formatDate(target, locale);
+  }
+}
+
 /** 010-1234-5678 형태로 정규화 */
 export function normalizePhone(input: string) {
   return input.replace(/[^0-9]/g, "");

@@ -910,10 +910,12 @@
     "foodDescription": "汇总保健功能食品与一般食品的生产咨询。可查看进度与负责人回复，所有内容均需提交时设置的密码方可查看。",
     "foodEmpty": "暂无保健功能食品生产咨询。",
     "cosmeticTitle": "化妆品生产咨询",
+    "cosmeticEyebrow": "COSMETIC PRODUCTION",
     "cosmeticDescription": "仅汇总化妆品 OEM/ODM 咨询。可查看进度与负责人回复，所有内容均需提交时设置的密码方可查看。",
+    "cosmeticBoardTitle": "化妆品生产咨询留言板",
+    "cosmeticBoardDescription": "可查看您提交的咨询进度与负责人回复。所有内容均为私密，仅能通过提交时设置的密码查看。",
     "cosmeticWrite": "咨询化妆品",
     "cosmeticEmpty": "暂无化妆品咨询。",
-    "cosmeticIntro": "查看化妆品 OEM/ODM 介绍",
     "petIntroLink": "查看宠物产品 OEM 介绍"
   }
 }

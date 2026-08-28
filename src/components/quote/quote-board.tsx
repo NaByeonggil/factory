@@ -5,8 +5,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { QuoteSearch } from "@/components/quote/quote-search";
 import { getQuoteBoard, type QuoteSearchField } from "@/lib/queries";
-import { cn, formatDate, maskName } from "@/lib/utils";
-import type { ServiceType } from "@/generated/prisma/enums";
+import { cn, formatRelativeDate, maskName } from "@/lib/utils";
+import type { InquiryStatus, ServiceType } from "@/generated/prisma/enums";
+
+/** 진행 상태별 배지 색 — 목록에서 상태를 한눈에 구분하기 위한 것입니다 */
+const STATUS_TONES: Record<InquiryStatus, "brand" | "accent" | "success" | "neutral"> = {
+  NEW: "brand",
+  CONTACTED: "accent",
+  QUOTED: "accent",
+  CONTRACTED: "success",
+  CLOSED: "neutral",
+  SPAM: "neutral",
+};
 
 /**
  * 견적문의 목록 — 식품·화장품·펫·원료 게시판이 함께 씁니다.
@@ -117,8 +127,10 @@ export async function QuoteBoard({
                   </Link>
                 </td>
 
-                <td className="px-4 py-4 text-ink-600">
-                  {t(`status${item.status}`)}
+                <td className="px-4 py-4">
+                  <Badge tone={STATUS_TONES[item.status]}>
+                    {t(`status${item.status}`)}
+                  </Badge>
                 </td>
 
                 <td className="px-4 py-4 text-ink-500">
@@ -127,7 +139,7 @@ export async function QuoteBoard({
 
                 <td className="px-4 py-4 whitespace-nowrap text-ink-400">
                   <time dateTime={item.createdAt.toISOString()}>
-                    {formatDate(item.createdAt, locale)}
+                    {formatRelativeDate(item.createdAt, locale)}
                   </time>
                 </td>
               </tr>
@@ -144,7 +156,17 @@ export async function QuoteBoard({
         </table>
       </div>
 
-      <p className="mt-4 text-xs text-ink-400">
+      {/* 목록을 끝까지 본 사람이 위로 돌아가지 않도록 버튼을 한 번 더 둡니다 */}
+      <div className="mt-6 flex justify-end">
+        <Button asChild size="sm">
+          <Link href={writeHref}>
+            <Plus className="size-4" aria-hidden />
+            {writeLabel}
+          </Link>
+        </Button>
+      </div>
+
+      <p className="mt-6 text-xs text-ink-400">
         {t("maskedNotice")} {t("searchNotice")}
       </p>
 
