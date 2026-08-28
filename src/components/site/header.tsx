@@ -48,7 +48,6 @@ const NAV: NavItem[] = [
       { key: "news", href: "/community/news" },
       { key: "esg", href: "/community/esg" },
       { key: "factoryTour", href: "/community/factory-tour" },
-      { key: "qna", href: "/community/qna" },
     ],
   },
   { key: "quote", href: "/quote" },

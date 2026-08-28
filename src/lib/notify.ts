@@ -70,57 +70,6 @@ export async function notifyNewInquiry(i: InquiryNotification) {
   }
 }
 
-// ─────────────────────── 문답 게시판 ───────────────────────
-
-type QuestionNotification = {
-  id: string;
-  authorName: string;
-  title: string;
-  body: string;
-  isSecret: boolean;
-};
-
-function buildQuestionText(q: QuestionNotification) {
-  const url = `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/admin/qna/${q.id}`;
-  return [
-    `[문답 접수] ${q.title}`,
-    `작성자: ${q.authorName}${q.isSecret ? " (비밀글)" : ""}`,
-    "",
-    q.body,
-    "",
-    url,
-  ].join("\n");
-}
-
-export async function notifyNewQuestion(q: QuestionNotification) {
-  try {
-    const apiKey = process.env.RESEND_API_KEY;
-    const to = (process.env.NOTIFY_TO ?? "").split(",").map((s) => s.trim()).filter(Boolean);
-    if (!apiKey || to.length === 0) {
-      // 알림 채널 미설정 시 로컬 개발 편의를 위해 콘솔 출력
-      console.info("[notify] 알림 채널 미설정 — 콘솔 출력\n" + buildQuestionText(q));
-      return;
-    }
-
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: process.env.NOTIFY_FROM ?? "noreply@example.com",
-        to,
-        subject: `[문답] ${q.title}`,
-        text: buildQuestionText(q),
-      }),
-    });
-    if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
-  } catch (error) {
-    console.error("[notify] 문답 알림 전송 실패", error);
-  }
-}
-
 // ─────────────────────── 견적문의 답변 알림 ───────────────────────
 
 type ReplyNotification = {

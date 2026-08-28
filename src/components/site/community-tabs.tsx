@@ -3,29 +3,22 @@ import { Link } from "@/i18n/navigation";
 import { POST_CATEGORY_SLUGS } from "@/lib/queries";
 import { cn } from "@/lib/utils";
 
-/**
- * 커뮤니티 상단 탭. 게시물 카테고리 4종 + 문답 게시판을 한 줄에 둡니다.
- * (문답은 Post가 아니라 Question 모델이라 별도 항목으로 붙입니다)
- */
+/** 커뮤니티 상단 탭 — 게시물 카테고리 4종 */
 export async function CommunityTabs({
   locale,
   active,
 }: {
   locale: string;
-  /** 카테고리 slug 또는 "qna" */
+  /** 현재 카테고리 slug */
   active: string;
 }) {
   const t = await getTranslations({ locale, namespace: "collections" });
-  const tQna = await getTranslations({ locale, namespace: "qna" });
 
-  const tabs = [
-    ...Object.entries(POST_CATEGORY_SLUGS).map(([slug, value]) => ({
-      slug,
-      href: `/community/${slug}`,
-      label: t(`category${value}`),
-    })),
-    { slug: "qna", href: "/community/qna", label: tQna("title") },
-  ];
+  const tabs = Object.entries(POST_CATEGORY_SLUGS).map(([slug, value]) => ({
+    slug,
+    href: `/community/${slug}`,
+    label: t(`category${value}`),
+  }));
 
   return (
     <nav aria-label={t("communityTitle")} className="mt-8 flex flex-wrap gap-2">

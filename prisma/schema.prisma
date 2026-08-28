@@ -307,47 +307,6 @@ model PostTranslation {
   @@unique([postId, locale])
 }
 
-// ─────────────────────── 문답 게시판 ───────────────────────
-
-/// 고객이 직접 남기는 공개 질문과 운영자 답변 (1:1 생산문의와 별개)
-model Question {
-  id String @id @default(cuid())
-
-  // 작성자 — 목록·상세에는 마스킹해서 노출합니다
-  authorName String
-  company    String?
-  email      String?
-  phone      String?
-
-  /// 비밀글 열람·본인 확인용 비밀번호 해시 (bcrypt)
-  passwordHash String
-  /// 비밀글이면 제목만 공개하고 내용·답변은 비밀번호로 잠급니다
-  isSecret     Boolean @default(false)
-
-  title String
-  body  String @db.Text
-
-  // 운영자 답변
-  answerBody   String?   @db.Text
-  answeredAt   DateTime?
-  answeredById String?
-  answeredBy   User?     @relation("QuestionAnswerer", fields: [answeredById], references: [id], onDelete: SetNull)
-
-  /// 스팸·부적절 글 숨김 (삭제 대신)
-  isPublished Boolean @default(true)
-  viewCount   Int     @default(0)
-
-  // 최소 수집 원칙: IP는 원문 대신 해시 보관
-  ipHash    String?
-  userAgent String?
-  locale    Locale   @default(KO)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([locale, isPublished, createdAt])
-  @@index([answeredAt])
-}
-
 // ─────────────────────── 팝업 공지 ───────────────────────
 
 /// 사이트 진입 시 뜨는 팝업 공지. 핸드폰 화면 규격(320×480) 고정입니다.
@@ -417,7 +376,6 @@ model User {
   repliedInquiries  Inquiry[]     @relation("InquiryReplier")
   memos             InquiryMemo[]
   inquiryReplies    InquiryReply[] @relation("InquiryReplyAuthor")
-  answeredQuestions Question[]     @relation("QuestionAnswerer")
 
   lastLoginAt DateTime?
   createdAt   DateTime  @default(now())

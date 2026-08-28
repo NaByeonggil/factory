@@ -400,107 +400,6 @@ export async function getActivePopups(locale: string): Promise<PopupCard[]> {
   }, []);
 }
 
-// ─────────────────────── 문답 게시판 ───────────────────────
-
-export const QNA_PAGE_SIZE = 15;
-
-export type QuestionCard = {
-  id: string;
-  title: string;
-  authorName: string;
-  isSecret: boolean;
-  isAnswered: boolean;
-  createdAt: Date;
-};
-
-/**
- * 공개 문답 목록. 비밀글도 제목까지는 보이고(한국 게시판 관행),
- * 본문·답변은 상세에서 비밀번호를 확인해야 열립니다.
- */
-export async function getQuestions(locale: string, page = 1) {
-  const take = QNA_PAGE_SIZE;
-  const skip = (Math.max(page, 1) - 1) * take;
-
-  return safe(
-    async () => {
-      const where = {
-        isPublished: true,
-        locale: toDbLocale(locale) as "KO",
-      };
-      const [rows, total] = await Promise.all([
-        prisma.question.findMany({
-          where,
-          orderBy: { createdAt: "desc" },
-          skip,
-          take,
-          select: {
-            id: true,
-            title: true,
-            authorName: true,
-            isSecret: true,
-            answeredAt: true,
-            createdAt: true,
-          },
-        }),
-        prisma.question.count({ where }),
-      ]);
-
-      return {
-        items: rows.map((row) => ({
-          id: row.id,
-          title: row.title,
-          authorName: row.authorName,
-          isSecret: row.isSecret,
-          isAnswered: row.answeredAt !== null,
-          createdAt: row.createdAt,
-        })),
-        total,
-        page: Math.max(page, 1),
-        pageCount: Math.max(Math.ceil(total / take), 1),
-      };
-    },
-    { items: [] as QuestionCard[], total: 0, page: 1, pageCount: 1 },
-  );
-}
-
-export type QuestionDetail = {
-  id: string;
-  title: string;
-  authorName: string;
-  isSecret: boolean;
-  createdAt: Date;
-  answeredAt: Date | null;
-  /** 비밀글이면 null — 열람은 revealQuestion 서버 액션으로만 */
-  body: string | null;
-  answerBody: string | null;
-};
-
-export async function getQuestion(id: string): Promise<QuestionDetail | null> {
-  return safe(async () => {
-    const row = await prisma.question.findFirst({
-      where: { id, isPublished: true },
-      select: {
-        id: true,
-        title: true,
-        authorName: true,
-        isSecret: true,
-        body: true,
-        answerBody: true,
-        answeredAt: true,
-        createdAt: true,
-      },
-    });
-    if (!row) return null;
-
-    // 비밀글 본문은 서버 컴포넌트 페이로드에도 실리지 않도록 여기서 잘라냅니다
-    return {
-      ...row,
-      body: row.isSecret ? null : row.body,
-      answerBody: row.isSecret ? null : row.answerBody,
-    };
-  }, null);
-}
-
 // ─────────────────────── 견적문의 게시판 ───────────────────────
 
 export const QUOTE_PAGE_SIZE = 15;
@@ -638,20 +537,6 @@ export async function getQuoteSummary(id: string): Promise<QuoteSummary | null> 
 }
 
 /** 견적문의 답글 한 건 (고객 화면·관리자 화면 공용) */
-/**
- * 관리자용 비밀글 본문 — 비밀번호 없이 조회합니다.
- * 호출부(서버 컴포넌트)에서 반드시 세션을 먼저 확인해야 합니다.
- */
-export async function getQuestionForStaff(id: string) {
-  return safe(async () => {
-    const row = await prisma.question.findFirst({
-      where: { id, isPublished: true },
-      select: { body: true, answerBody: true },
-    });
-    return row;
-  }, null);
-}
-
 export type QuoteReply = {
   id: string;
   authorType: ReplyAuthor;

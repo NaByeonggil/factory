@@ -7,7 +7,6 @@ import {
   Package,
   Newspaper,
   MessageSquareWarning,
-  MessagesSquare,
   LogOut,
 } from "lucide-react";
 import { getSession } from "@/lib/auth";
@@ -19,7 +18,6 @@ const NAV = [
   { href: "/admin/ingredients", label: "보유 원료", Icon: FlaskConical },
   { href: "/admin/portfolio", label: "포트폴리오", Icon: Package },
   { href: "/admin/posts", label: "게시물", Icon: Newspaper },
-  { href: "/admin/qna", label: "문답 게시판", Icon: MessagesSquare },
   { href: "/admin/popups", label: "팝업 공지", Icon: MessageSquareWarning },
 ];
 
