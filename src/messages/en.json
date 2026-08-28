@@ -682,28 +682,69 @@
       "featuresTitle": "What we support",
       "features": [
         {
-          "title": "Brand and packaging design",
-          "body": "Naming, carton and label design built around the product concept."
+          "title": "Brand & package design",
+          "subtitle": "Naming · carton · label",
+          "body": "A product has to register on a shelf and in a thumbnail first. We settle the name, colour and carton structure with you, and hand over print-ready files.",
+          "points": [
+            "Naming options that fit the concept",
+            "Carton, label and sticker design",
+            "Mandatory-label layout and print specs",
+            "Final files ready for the printer"
+          ]
         },
         {
-          "title": "Detail pages",
-          "body": "Landing pages that convert while staying inside advertising rules."
+          "title": "Detail page production",
+          "subtitle": "Structure first, review rules built in",
+          "body": "On a detail page, order converts — not length. We plan the sequence first, then write it while checking every functional claim against the review standard.",
+          "points": [
+            "Structure planned around the buying flow",
+            "Functional claims checked in advance",
+            "Imagery built mobile-first",
+            "Resizing for each channel's specs"
+          ]
         },
         {
           "title": "Product photography",
-          "body": "Product and styled shots for online listings."
+          "subtitle": "Cut-outs, styled shots, page assets",
+          "body": "Online, the photo is the product. From cut-outs for thumbnails to styled shots in use, we deliver files ready to upload to each channel.",
+          "points": [
+            "Cut-out product shots",
+            "Styled in-use photography",
+            "Assets for the detail page",
+            "Retouching and resizing per channel"
+          ]
         },
         {
-          "title": "Marketplace listing",
-          "body": "Onboarding and initial setup for major Korean channels."
+          "title": "Channel onboarding",
+          "subtitle": "Smart Store, Coupang and more",
+          "body": "Every channel asks for different paperwork and listing steps. We take the first setup with you — application, listing, options and delivery policy.",
+          "points": [
+            "Guidance on each channel's paperwork",
+            "Listing and option setup",
+            "Delivery and return policy setup",
+            "Checks on initial exposure settings"
+          ]
         },
         {
-          "title": "Search ads and social",
-          "body": "Naver search ads and social content to build early traffic."
+          "title": "Search ads & social",
+          "subtitle": "Naver search ads · social content",
+          "body": "Early traffic starts with search. We organise product and ingredient keywords, set up search ads, and build social content. Run with partner agencies, with us as your single contact.",
+          "points": [
+            "Product and ingredient keyword work",
+            "Naver search ad setup",
+            "Social content planning and production",
+            "Performance reports shared with you"
+          ]
         },
         {
-          "title": "Claim review",
-          "body": "We check functional claims against Korean advertising standards first."
+          "title": "Advertising claim review",
+          "subtitle": "Functional claims checked first",
+          "body": "For health functional foods, one phrase can bring an administrative penalty. We read detail pages and ad copy sentence by sentence before they run.",
+          "points": [
+            "Pre-review of detail pages and ad copy",
+            "Compliant alternatives suggested",
+            "Permitted wording listed per ingredient"
+          ]
         }
       ],
       "stepsTitle": "How it works",
@@ -739,7 +780,11 @@
           "q": "Do you run the ads yourselves?",
           "a": "Search and social campaigns run with partner agencies, with us as the single point of contact."
         }
-      ]
+      ],
+      "serviceCta": "Ask about this",
+      "consultTitle": "Not sure which of these you need?",
+      "consultBody": "Tell us the product and the budget — we will propose the combination that matters at your stage.",
+      "consultCta": "Ask for a free consultation"
     }
   },
   "legal": {

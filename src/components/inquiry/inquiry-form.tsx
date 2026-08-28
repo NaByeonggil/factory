@@ -42,6 +42,8 @@ export function InquiryForm() {
   const presetIngredient = searchParams.get("ingredient");
   // 화장품 페이지의 제형 카드에서 넘어온 경우 해당 제형을 미리 선택합니다
   const presetFormulation = searchParams.get("formulation")?.toUpperCase();
+  // 마케팅 페이지의 항목별 상담 버튼에서 넘어온 경우 제목을 채워 둡니다
+  const presetTitle = searchParams.get("title")?.slice(0, 100) ?? undefined;
 
   const defaultService =
     presetService && SERVICE_TYPES.includes(presetService as "OEM")
@@ -63,6 +65,7 @@ export function InquiryForm() {
     resolver: zodResolver(inquirySchema),
     defaultValues: {
       serviceType: defaultService,
+      title: presetTitle,
       formulations:
         presetFormulation &&
         (FORMULATION_CODES as readonly string[]).includes(presetFormulation)
@@ -234,6 +237,8 @@ export function InquiryForm() {
             id="title"
             placeholder={t("subjectPlaceholder")}
             maxLength={100}
+            // 마케팅 페이지에서 넘어온 제목이 실제 입력칸에도 보이도록
+            defaultValue={presetTitle}
             {...register("title")}
           />
         </Field>
