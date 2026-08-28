@@ -14,7 +14,7 @@
     "serviceMaterial": "Raw Materials",
     "cdmo": "CDMO",
     "dtc": "Personalized Nutrition",
-    "pet": "Pet Products",
+    "pet": "Pet",
     "ingredients": "Ingredients",
     "portfolio": "Portfolio",
     "community": "Community",
@@ -22,8 +22,10 @@
     "esg": "ESG",
     "factoryTour": "Factory Tour",
     "inquiry": "Get a Quote",
-    "quote": "Quote requests",
-    "cosmetic": "Cosmetics"
+    "quote": "Quotes",
+    "cosmetic": "Cosmetics",
+    "petIntro": "Pet products",
+    "petQuote": "Pet inquiries"
   },
   "home": {
     "heroEyebrow": "Health Functional Food OEM · ODM · CDMO",
@@ -877,6 +879,11 @@
     "search": "Search",
     "searchReset": "Clear search",
     "searchResult": "{count} results for '{keyword}'",
-    "searchNotice": "Request contents are private, so only subjects and authors are searched."
+    "searchNotice": "Request contents are private, so only subjects and authors are searched.",
+    "petTitle": "Pet product inquiries",
+    "petDescription": "Only pet product requests are listed here. Check progress and our reply — every entry opens with the password you set when submitting.",
+    "petWrite": "Ask about pet products",
+    "petEmpty": "No pet product inquiries yet.",
+    "allBoard": "See all quote requests"
   }
 }

@@ -15,9 +15,12 @@ import type { QuoteSearchField } from "@/lib/queries";
 export function QuoteSearch({
   field,
   keyword,
+  /** 검색 결과가 열릴 게시판 경로 (전체 / 펫 전용) */
+  basePath = "/quote",
 }: {
   field: QuoteSearchField;
   keyword: string;
+  basePath?: string;
 }) {
   const t = useTranslations("quote");
   const router = useRouter();
@@ -31,7 +34,9 @@ export function QuoteSearch({
         e.preventDefault();
         const query = value.trim();
         router.push(
-          query ? `/quote?field=${target}&q=${encodeURIComponent(query)}` : "/quote",
+          query
+            ? `${basePath}?field=${target}&q=${encodeURIComponent(query)}`
+            : basePath,
         );
       }}
     >
@@ -72,7 +77,7 @@ export function QuoteSearch({
           variant="ghost"
           onClick={() => {
             setValue("");
-            router.push("/quote");
+            router.push(basePath);
           }}
         >
           <X className="size-4" aria-hidden />

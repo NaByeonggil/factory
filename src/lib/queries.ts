@@ -429,6 +429,8 @@ export async function getQuoteBoard(
   locale: string,
   page = 1,
   search?: { field: QuoteSearchField; keyword: string },
+  /** 특정 유형만 보는 전용 게시판(예: 펫 제품)에서 씁니다 */
+  serviceType?: ServiceType,
 ) {
   const take = QUOTE_PAGE_SIZE;
   const skip = (Math.max(page, 1) - 1) * take;
@@ -440,6 +442,7 @@ export async function getQuoteBoard(
         // 스팸으로 분류한 문의는 게시판에서 제외합니다
         status: { not: "SPAM" as InquiryStatus },
         locale: toDbLocale(locale) as "KO",
+        ...(serviceType ? { serviceType } : {}),
         ...(keyword
           ? search?.field === "author"
             ? { name: { contains: keyword, mode: "insensitive" as const } }

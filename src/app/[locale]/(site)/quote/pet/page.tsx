@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { PawPrint } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { Container, Section, SectionHeading } from "@/components/ui/section";
-import { QuoteProcess } from "@/components/quote/quote-process";
 import { QuoteBoard } from "@/components/quote/quote-board";
 import type { QuoteSearchField } from "@/lib/queries";
 
@@ -9,21 +10,21 @@ import type { QuoteSearchField } from "@/lib/queries";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(
-  props: PageProps<"/[locale]/quote">,
+  props: PageProps<"/[locale]/quote/pet">,
 ): Promise<Metadata> {
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "quote" });
   return {
-    title: t("title"),
-    description: t("description"),
-    alternates: { canonical: `/${locale}/quote` },
+    title: t("petTitle"),
+    description: t("petDescription"),
+    alternates: { canonical: `/${locale}/quote/pet` },
     // 고객 문의 목록은 색인 대상이 아닙니다
     robots: { index: false, follow: true },
   };
 }
 
-export default async function QuoteBoardPage(
-  props: PageProps<"/[locale]/quote">,
+export default async function PetQuoteBoardPage(
+  props: PageProps<"/[locale]/quote/pet">,
 ) {
   const { locale } = await props.params;
   const search = await props.searchParams;
@@ -38,23 +39,29 @@ export default async function QuoteBoardPage(
       <Container>
         <SectionHeading
           eyebrow={t("eyebrow")}
-          title={t("title")}
-          description={t("description")}
+          title={t("petTitle")}
+          description={t("petDescription")}
         />
 
-        <div className="mt-8">
-          <QuoteProcess locale={locale} />
-        </div>
+        {/* 펫 문의만 모아 보는 화면이라 전체 게시판으로 가는 길을 열어둡니다 */}
+        <Link
+          href="/quote"
+          className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink-600 hover:text-brand-700"
+        >
+          <PawPrint className="size-4" aria-hidden />
+          {t("allBoard")} →
+        </Link>
 
         <QuoteBoard
           locale={locale}
           page={page}
           keyword={keyword}
           field={field}
-          basePath="/quote"
-          writeHref="/inquiry"
-          writeLabel={t("write")}
-          emptyLabel={t("listEmpty")}
+          serviceType="PET"
+          basePath="/quote/pet"
+          writeHref="/inquiry?type=pet"
+          writeLabel={t("petWrite")}
+          emptyLabel={t("petEmpty")}
         />
       </Container>
     </Section>

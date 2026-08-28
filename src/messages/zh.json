@@ -23,7 +23,9 @@
     "factoryTour": "工厂参观",
     "inquiry": "生产咨询",
     "quote": "报价咨询",
-    "cosmetic": "化妆品"
+    "cosmetic": "化妆品",
+    "petIntro": "宠物产品介绍",
+    "petQuote": "宠物生产咨询"
   },
   "home": {
     "heroEyebrow": "保健功能食品 OEM · ODM · CDMO",
@@ -877,6 +879,11 @@
     "search": "搜索",
     "searchReset": "清除搜索",
     "searchResult": "“{keyword}” 的搜索结果 {count} 条",
-    "searchNotice": "咨询内容为私密，仅搜索标题与作者。"
+    "searchNotice": "咨询内容为私密，仅搜索标题与作者。",
+    "petTitle": "宠物产品生产咨询",
+    "petDescription": "仅汇总宠物产品咨询。可查看进度与负责人回复，所有内容均需提交时设置的密码方可查看。",
+    "petWrite": "咨询宠物产品",
+    "petEmpty": "暂无宠物产品咨询。",
+    "allBoard": "查看全部报价咨询"
   }
 }
