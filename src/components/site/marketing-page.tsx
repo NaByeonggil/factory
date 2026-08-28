@@ -19,6 +19,7 @@ export async function MarketingPage({
   ns,
   heroImage,
   featureImages,
+  stepImages,
 }: {
   locale: string;
   ns: string;
@@ -32,6 +33,8 @@ export async function MarketingPage({
    * 넘기지 않으면 지금처럼 글자만 있는 카드가 나옵니다.
    */
   featureImages?: string[];
+  /** steps 카드 상단에 넣을 이미지 경로 (4:3 권장, steps 와 같은 순서) */
+  stepImages?: string[];
 }) {
   const t = await getTranslations({ locale, namespace: ns });
 
@@ -155,19 +158,35 @@ export async function MarketingPage({
           <Container>
             <SectionHeading title={t("stepsTitle")} />
             <ol className="mt-10 grid gap-px overflow-hidden rounded-card border border-ink-200 bg-ink-200 sm:grid-cols-2 lg:grid-cols-4">
-              {steps.map((item, index) => (
-                <li key={item.title} className="bg-white p-6">
-                  <span className="inline-flex size-8 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white">
-                    {index + 1}
-                  </span>
-                  <p className="mt-4 text-base font-bold text-ink-900">
-                    {item.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-700">
-                    {item.body}
-                  </p>
-                </li>
-              ))}
+              {steps.map((item, index) => {
+                const image = stepImages?.[index];
+                return (
+                  <li key={item.title} className="flex flex-col bg-white">
+                    {image && (
+                      <div className="relative aspect-4/3 bg-ink-100">
+                        <Image
+                          src={image}
+                          alt=""
+                          fill
+                          sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
+                      <span className="inline-flex size-8 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white">
+                        {index + 1}
+                      </span>
+                      <p className="mt-4 text-base font-bold text-ink-900">
+                        {item.title}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-700">
+                        {item.body}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
             </ol>
           </Container>
         </Section>

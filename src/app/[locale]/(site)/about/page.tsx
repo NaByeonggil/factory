@@ -11,6 +11,14 @@ const NS = "pages.about";
  */
 const HERO_IMAGE = "/about/hero.jpg";
 
+/** 연혁 카드 이미지 — pages.about.steps 와 같은 순서(1999·2010·2018·2024) */
+const HISTORY_IMAGES = [
+  "/about/history-1999.jpg",
+  "/about/history-2010.jpg",
+  "/about/history-2018.jpg",
+  "/about/history-2024.jpg",
+];
+
 export const dynamic = "force-static";
 
 export function generateStaticParams() {
@@ -32,5 +40,12 @@ export async function generateMetadata(
 
 export default async function Page(props: PageProps<"/[locale]/about">) {
   const { locale } = await props.params;
-  return <MarketingPage locale={locale} ns={NS} heroImage={HERO_IMAGE} />;
+  return (
+    <MarketingPage
+      locale={locale}
+      ns={NS}
+      heroImage={HERO_IMAGE}
+      stepImages={HISTORY_IMAGES}
+    />
+  );
 }
