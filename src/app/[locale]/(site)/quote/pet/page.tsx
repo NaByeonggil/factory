@@ -24,6 +24,16 @@ const FEATURE_IMAGES = [
   "/pet/treat.jpg", // 기호성 간식형
 ];
 
+/** 품목별 기본 제형 — 간식형만 츄어블, 나머지는 분말로 폼을 채웁니다 */
+const FEATURE_FORMULATIONS = [
+  "POWDER",
+  "POWDER",
+  "POWDER",
+  "POWDER",
+  "POWDER",
+  "CHEWABLE",
+];
+
 type Pair = { title: string; body: string };
 
 export async function generateMetadata(
@@ -82,7 +92,7 @@ export default async function PetQuoteBoardPage(
             {features.map((item, index) => (
               <li key={item.title}>
                 <Link
-                  href="/inquiry?type=pet"
+                  href={`/inquiry?type=pet&formulation=${FEATURE_FORMULATIONS[index]}`}
                   className="flex h-full flex-col overflow-hidden rounded-card border border-ink-200 bg-white transition-shadow hover:shadow-[var(--shadow-soft)]"
                 >
                   <div className="relative aspect-4/3 bg-ink-100">

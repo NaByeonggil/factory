@@ -25,10 +25,17 @@ export const COSMETIC_FORMULATIONS = [
   "CLEANSER", // 클렌저
 ] as const;
 
+/** 펫 제품 제형 — 건기식 제형에 급여 편의를 위한 츄어블을 더합니다 */
+export const PET_FORMULATIONS = [
+  ...SUPPLEMENT_FORMULATIONS,
+  "CHEWABLE", // 츄어블
+] as const;
+
 /** 생산 가능 제형 전체 (저장·검증용) */
 export const FORMULATIONS = [
   ...SUPPLEMENT_FORMULATIONS,
   ...COSMETIC_FORMULATIONS,
+  "CHEWABLE",
 ] as const;
 export type Formulation = (typeof FORMULATIONS)[number];
 
@@ -111,9 +118,9 @@ export function boardPathFor(serviceType: string) {
 export function formulationsFor(serviceType: string) {
   // 원료 공급 문의는 완제품 제형을 고르지 않습니다
   if (serviceType === "MATERIAL") return [] as const;
-  return serviceType === "COSMETIC"
-    ? COSMETIC_FORMULATIONS
-    : SUPPLEMENT_FORMULATIONS;
+  if (serviceType === "COSMETIC") return COSMETIC_FORMULATIONS;
+  if (serviceType === "PET") return PET_FORMULATIONS;
+  return SUPPLEMENT_FORMULATIONS;
 }
 
 export function packagingsFor(serviceType: string) {
