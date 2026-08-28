@@ -20,6 +20,7 @@ export async function MarketingPage({
   heroImage,
   featureImages,
   stepImages,
+  bulletsImage,
 }: {
   locale: string;
   ns: string;
@@ -35,6 +36,8 @@ export async function MarketingPage({
   featureImages?: string[];
   /** steps 카드 상단에 넣을 이미지 경로 (4:3 권장, steps 와 같은 순서) */
   stepImages?: string[];
+  /** bullets 목록 옆에 놓을 이미지 경로 (4:3 권장) */
+  bulletsImage?: string;
 }) {
   const t = await getTranslations({ locale, namespace: ns });
 
@@ -93,23 +96,50 @@ export async function MarketingPage({
       {bullets.length > 0 && (
         <Section>
           <Container>
-            <SectionHeading title={t("bulletsTitle")} />
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {bullets.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 rounded-card border border-ink-200 bg-white p-5"
+            <div
+              className={cn(
+                bulletsImage &&
+                  "grid items-center gap-10 lg:grid-cols-[1.05fr_1fr]",
+              )}
+            >
+              <div>
+                <SectionHeading title={t("bulletsTitle")} />
+                <ul
+                  className={cn(
+                    "mt-8 grid gap-3",
+                    // 이미지가 있으면 한 줄로 세워 사진과 나란히 놓습니다
+                    !bulletsImage && "sm:grid-cols-2",
+                  )}
                 >
-                  <Check
-                    className="mt-0.5 size-5 shrink-0 text-brand-700"
-                    aria-hidden
+                  {bullets.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 rounded-card border border-ink-200 bg-white p-5"
+                    >
+                      <Check
+                        className="mt-0.5 size-5 shrink-0 text-brand-700"
+                        aria-hidden
+                      />
+                      <span className="text-[0.9375rem] leading-relaxed text-ink-700">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {bulletsImage && (
+                <div className="relative aspect-4/3 overflow-hidden rounded-card border border-ink-200 shadow-[var(--shadow-soft)]">
+                  <Image
+                    src={bulletsImage}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 560px, 100vw"
+                    className="object-cover"
                   />
-                  <span className="text-[0.9375rem] leading-relaxed text-ink-700">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
+                </div>
+              )}
+            </div>
           </Container>
         </Section>
       )}

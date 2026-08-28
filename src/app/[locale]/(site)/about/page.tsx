@@ -11,6 +11,9 @@ const NS = "pages.about";
  */
 const HERO_IMAGE = "/about/hero.jpg";
 
+/** 「이런 고객과 일합니다」 목록 옆 이미지 */
+const CUSTOMERS_IMAGE = "/about/customers.jpg";
+
 /** 연혁 카드 이미지 — pages.about.steps 와 같은 순서(1999·2010·2018·2024) */
 const HISTORY_IMAGES = [
   "/about/history-1999.jpg",
@@ -45,6 +48,7 @@ export default async function Page(props: PageProps<"/[locale]/about">) {
       locale={locale}
       ns={NS}
       heroImage={HERO_IMAGE}
+      bulletsImage={CUSTOMERS_IMAGE}
       stepImages={HISTORY_IMAGES}
     />
   );
