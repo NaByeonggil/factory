@@ -243,7 +243,7 @@ async function main() {
       key: "company",
       value: {
         name: "(주)헬씨팜바이오",
-        ceo: "홍길동",
+        ceo: "나병길",
         bizNo: "000-00-00000",
         address: "경기도 성남시 분당구 판교로 000",
         tel: "031-000-0000",
