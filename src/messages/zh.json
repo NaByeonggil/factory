@@ -545,6 +545,25 @@
           "body": "咀嚼片与零食形态，便于喂食"
         }
       ],
+      "stepsTitle": "进行流程",
+      "steps": [
+        {
+          "title": "01. 概念协商",
+          "body": "共同确定目标动物、目的、预算与数量。"
+        },
+        {
+          "title": "02. 配方与适口性设计",
+          "body": "在功能性原料之外，调校动物爱吃的风味与口感。"
+        },
+        {
+          "title": "03. 试样投喂测试",
+          "body": "制作试样，确认实际投喂反应后进行改进。"
+        },
+        {
+          "title": "04. 申报与生产",
+          "body": "支持产品类别所需的申报手续，随后进入正式生产。"
+        }
+      ],
       "faqTitle": "常见问题",
       "faq": [
         {
@@ -897,7 +916,11 @@
     "searchResult": "“{keyword}” 的搜索结果 {count} 条",
     "searchNotice": "咨询内容为私密，仅搜索标题与作者。",
     "petTitle": "宠物产品生产咨询",
+    "petEyebrow": "PET PRODUCT PRODUCTION",
+    "petLead": "同时设计功能与宠物爱吃的形态，再进行生产。",
     "petDescription": "仅汇总宠物产品咨询。可查看进度与负责人回复，所有内容均需提交时设置的密码方可查看。",
+    "petBoardTitle": "宠物产品生产咨询留言板",
+    "petBoardDescription": "可查看您提交的咨询进度与负责人回复。所有内容均为私密，仅能通过提交时设置的密码查看。",
     "petWrite": "咨询宠物产品",
     "petEmpty": "暂无宠物产品咨询。",
     "materialTitle": "专利原料供应咨询",
@@ -915,7 +938,6 @@
     "cosmeticBoardTitle": "化妆品生产咨询留言板",
     "cosmeticBoardDescription": "可查看您提交的咨询进度与负责人回复。所有内容均为私密，仅能通过提交时设置的密码查看。",
     "cosmeticWrite": "咨询化妆品",
-    "cosmeticEmpty": "暂无化妆品咨询。",
-    "petIntroLink": "查看宠物产品 OEM 介绍"
+    "cosmeticEmpty": "暂无化妆品咨询。"
   }
 }

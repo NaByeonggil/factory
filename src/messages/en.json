@@ -545,6 +545,25 @@
           "body": "Chewable and treat forms for easy feeding"
         }
       ],
+      "stepsTitle": "How it works",
+      "steps": [
+        {
+          "title": "01. Concept",
+          "body": "We define the target animal, purpose, budget and volume together."
+        },
+        {
+          "title": "02. Formula & palatability",
+          "body": "Functional ingredients, plus the flavour and texture animals will accept."
+        },
+        {
+          "title": "03. Feeding trial",
+          "body": "We build a sample, watch how animals take it, and adjust."
+        },
+        {
+          "title": "04. Filing & production",
+          "body": "We support the filings your product class needs, then run production."
+        }
+      ],
       "faqTitle": "Frequently asked",
       "faq": [
         {
@@ -897,7 +916,11 @@
     "searchResult": "{count} results for '{keyword}'",
     "searchNotice": "Request contents are private, so only subjects and authors are searched.",
     "petTitle": "Pet product inquiries",
+    "petEyebrow": "PET PRODUCT PRODUCTION",
+    "petLead": "We design both the function and the form animals will actually eat.",
     "petDescription": "Only pet product requests are listed here. Check progress and our reply — every entry opens with the password you set when submitting.",
+    "petBoardTitle": "Pet product inquiry board",
+    "petBoardDescription": "Check the progress of your request and our reply. Every entry is private and opens only with the password you set when submitting.",
     "petWrite": "Ask about pet products",
     "petEmpty": "No pet product inquiries yet.",
     "materialTitle": "Patented material supply",
@@ -915,7 +938,6 @@
     "cosmeticBoardTitle": "Cosmetics inquiry board",
     "cosmeticBoardDescription": "Check the progress of your request and our reply. Every entry is private and opens only with the password you set when submitting.",
     "cosmeticWrite": "Ask about cosmetics",
-    "cosmeticEmpty": "No cosmetics inquiries yet.",
-    "petIntroLink": "About our pet product OEM"
+    "cosmeticEmpty": "No cosmetics inquiries yet."
   }
 }

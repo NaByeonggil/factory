@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { FlaskConical } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container, Section } from "@/components/ui/section";
+import { CtaBand } from "@/components/site/cta-band";
 import { QuoteBoard } from "@/components/quote/quote-board";
 import type { QuoteSearchField } from "@/lib/queries";
 
@@ -182,6 +183,8 @@ export default async function CosmeticQuoteBoardPage(
           />
         </Container>
       </Section>
+
+      <CtaBand locale={locale} href="/inquiry?type=cosmetic" />
     </>
   );
 }

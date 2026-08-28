@@ -4,7 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/section";
 
 /** 모든 하위 페이지 하단 공통 전환 배너 */
-export async function CtaBand({ locale }: { locale: string }) {
+export async function CtaBand({
+  locale,
+  /** 유형이 정해진 페이지에서는 그 유형이 선택된 문의 폼으로 보냅니다 */
+  href = "/inquiry",
+}: {
+  locale: string;
+  href?: string;
+}) {
   const t = await getTranslations({ locale, namespace: "home" });
   const tNav = await getTranslations({ locale, namespace: "nav" });
 
@@ -20,7 +27,7 @@ export async function CtaBand({ locale }: { locale: string }) {
           size="lg"
           className="shrink-0 bg-white text-brand-700 shadow-sm hover:bg-brand-50"
         >
-          <Link href="/inquiry">{tNav("inquiry")}</Link>
+          <Link href={href}>{tNav("inquiry")}</Link>
         </Button>
       </Container>
     </Section>
