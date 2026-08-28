@@ -2,7 +2,7 @@
   "meta": {
     "siteName": "Healthy Farm Bio",
     "defaultTitle": "Health Functional Food OEM & ODM Manufacturer | Healthy Farm Bio",
-    "defaultDescription": "26 years of manufacturing in GMP/HACCP certified facilities. One-stop OEM, ODM and CDMO for health functional foods — from raw material to design and distribution."
+    "defaultDescription": "GMP/HACCP certified facilities. One-stop OEM, ODM and CDMO for health functional foods — from raw material to design and distribution."
   },
   "nav": {
     "about": "About",
@@ -36,20 +36,20 @@
   "home": {
     "heroEyebrow": "Health Functional Food OEM · ODM · CDMO",
     "heroTitle": "Start at 1,000 units.\nScale into a brand.",
-    "heroDescription": "Small runs from 1,000 units for tablets and hard capsules — plus planning, ingredients, manufacturing, design and distribution from a single partner with 26 years of experience.",
+    "heroDescription": "Small runs from 1,000 units for tablets and hard capsules — plus planning, ingredients, manufacturing, design and distribution from a single partner.",
     "heroPrimaryCta": "Request a quote",
     "heroSecondaryCta": "Browse ingredients",
     "heroTrustLabel": "Certifications",
     "statsTitle": "Healthy Farm Bio in numbers",
     "stats": {
-      "years": "Years in business",
-      "yearsValue": "26",
-      "ccm": "CCM certified",
-      "ccmValue": "16 years",
-      "satisfaction": "Client satisfaction",
-      "satisfactionValue": "98%",
-      "products": "Products manufactured",
-      "productsValue": "3,200+"
+      "experience": "Products led by our CEO",
+      "experienceValue": "≈200",
+      "moq": "Minimum order",
+      "moqValue": "1,000",
+      "forms": "Dosage forms",
+      "formsValue": "7",
+      "response": "Response time",
+      "responseValue": "24 hours"
     },
     "hotTitle": "Trending ingredients",
     "hotDescription": "The most requested ingredients on the market, ready to formulate.",
@@ -253,10 +253,10 @@
       "eyebrow": "About",
       "title": "The manufacturing partner\nfirst-time founders need",
       "titleHighlight": "manufacturing partner",
-      "description": "Since 1999 we have made nothing but health functional foods. Formulation, production, packaging and distribution — finished in one place.",
+      "description": "Founded by a manufacturing executive who led roughly 200 supplement products to market. Formulation, production, packaging and distribution — finished in one place.",
       "missionEyebrow": "OUR MISSION",
       "missionTitle": "We take on the complexity\nof getting a product made.",
-      "missionBody": "The hardest part of starting a supplement business is rarely the manufacturing itself — it is not knowing where to begin.\n\nSourcing materials, choosing a dosage form, meeting minimum order quantities, clearing advertising review: decisions pile up at every practical step. Having repeated that process across 3,200 products in 26 years, we sort it out for you.",
+      "missionBody": "The hardest part of starting a supplement business is rarely the manufacturing itself — it is not knowing where to begin.\n\nSourcing materials, choosing a dosage form, meeting minimum order quantities, clearing advertising review: decisions pile up at every practical step. Our CEO worked through that process across roughly 200 products as a manufacturing executive, and sorts it out for you.",
       "missionCardTitle": "What stands between an idea and a launch",
       "missionBarriers": [
         "Finding a GMP plant you can trust",
@@ -277,8 +277,8 @@
       "featuresTitle": "Why work with us",
       "features": [
         {
-          "title": "26 years of production data",
-          "body": "Over 3,200 products manufactured. That history is formulation knowledge you can skip ahead to."
+          "title": "≈200 products of experience",
+          "body": "Our CEO led roughly 200 products as vice president of a supplement manufacturer. That judgement lets you skip the trial and error."
         },
         {
           "title": "Our own factory",
@@ -293,31 +293,12 @@
           "body": "We take orders from 1,000 units. Test the market first, scale after."
         },
         {
-          "title": "16 consecutive CCM years",
-          "body": "Consumer Centered Management certification maintained for 16 years running."
+          "title": "Talk to the founder",
+          "body": "From the first inquiry to formulation, our CEO handles it directly — no changing hands, no changing answers."
         },
         {
           "title": "Beyond manufacturing",
           "body": "Package design, marketplace onboarding, patent strategy and government funding programs."
-        }
-      ],
-      "stepsTitle": "History",
-      "steps": [
-        {
-          "title": "1999",
-          "body": "Company founded, health functional food manufacturing begins"
-        },
-        {
-          "title": "2010",
-          "body": "GMP certification and first CCM certification obtained"
-        },
-        {
-          "title": "2018",
-          "body": "First in-house individually approved ingredient developed"
-        },
-        {
-          "title": "2024",
-          "body": "CDMO and personalized nutrition businesses expanded"
         }
       ]
     },
@@ -730,7 +711,7 @@
       "eyebrow": "Marketing & advertising",
       "title": "We don't stop\nat manufacturing",
       "description": "The real work starts once the product exists. We help with detail pages, marketplace listings and ad campaigns.",
-      "intro": "A good product that nobody hears about becomes inventory.\n\nAcross 26 years and 3,200+ products we have watched which products sell on which channels. We put that experience to work after production too — pick only the parts you need.",
+      "intro": "A good product that nobody hears about becomes inventory.\n\nAcross roughly 200 products we have watched which products sell on which channels. We put that to work on the steps after manufacturing — pick only what you need.",
       "featuresTitle": "What we support",
       "features": [
         {

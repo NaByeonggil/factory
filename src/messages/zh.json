@@ -2,7 +2,7 @@
   "meta": {
     "siteName": "Healthy Farm Bio",
     "defaultTitle": "保健功能食品 OEM·ODM 专业代工 | Healthy Farm Bio",
-    "defaultDescription": "26年制造经验，GMP·HACCP认证工厂。从原料开发到设计与流通，一站式提供保健功能食品 OEM/ODM/CDMO 服务。"
+    "defaultDescription": "GMP·HACCP认证工厂。从原料开发到设计与流通，一站式提供保健功能食品 OEM/ODM/CDMO 服务。"
   },
   "nav": {
     "about": "公司介绍",
@@ -36,20 +36,20 @@
   "home": {
     "heroEyebrow": "保健功能食品 OEM · ODM · CDMO",
     "heroTitle": "从1,000个起步\n直到成为品牌",
-    "heroDescription": "片剂·硬胶囊最少1,000个即可小批量生产。策划、原料、生产、设计与流通一站式解决，26年经验的一站式制造伙伴。",
+    "heroDescription": "片剂·硬胶囊最少1,000个即可小批量生产。策划、原料、生产、设计与流通一站式解决的制造伙伴。",
     "heroPrimaryCta": "一分钟获取报价",
     "heroSecondaryCta": "查看自有原料",
     "heroTrustLabel": "持有认证",
     "statsTitle": "数字看 Healthy Farm Bio",
     "stats": {
-      "years": "行业经验",
-      "yearsValue": "26年",
-      "ccm": "消费者中心经营",
-      "ccmValue": "连续16年",
-      "satisfaction": "客户满意度",
-      "satisfactionValue": "98%",
-      "products": "累计生产品项",
-      "productsValue": "3,200+"
+      "experience": "代表总管品项",
+      "experienceValue": "约200",
+      "moq": "最低生产数量",
+      "moqValue": "1,000个",
+      "forms": "可生产剂型",
+      "formsValue": "7种",
+      "response": "咨询回复",
+      "responseValue": "24小时内"
     },
     "hotTitle": "热门趋势原料",
     "hotDescription": "市场需求最高的原料，可立即应用于配方。",
@@ -253,10 +253,10 @@
       "eyebrow": "公司介绍",
       "title": "初创企业的\n完善制造伙伴",
       "titleHighlight": "完善的制造伙伴",
-      "description": "自1999年成立以来，26年只做保健功能食品。从配方开发到生产、包装与流通对接，一站完成。",
+      "description": "由曾总管约200个保健功能食品品项的制造业高管创办。从配方开发到生产、包装与流通对接，一站完成。",
       "missionEyebrow": "OUR MISSION",
       "missionTitle": "产品问世前的复杂环节，\n由我们来承担。",
-      "missionBody": "开展保健功能食品业务时，最难的往往不是制造本身，而是不知从何入手。\n\n原料采购、剂型设计、最低生产数量、标示广告审查——每一个实务环节都需要判断。26年间生产3,200余种产品、反复走过同样流程的我们，替您理清这一切。",
+      "missionBody": "开展保健功能食品业务时，最难的往往不是制造本身，而是不知从何入手。\n\n原料采购、剂型设计、最低生产数量、标示广告审查——每一个实务环节都需要判断。曾总管约200个品项、反复走过同样流程的代表，替您理清这一切。",
       "missionCardTitle": "产品上市前需要跨越的门槛",
       "missionBarriers": [
         "寻找值得信赖的GMP生产厂",
@@ -277,8 +277,8 @@
       "featuresTitle": "为什么选择我们",
       "features": [
         {
-          "title": "26年制造数据",
-          "body": "累计3,200余个品项的生产履历就是配方资产，可以跳过试错。"
+          "title": "约200个品项的生产经验",
+          "body": "代表曾任保健功能食品制造企业副社长，总管约200个品项。这份判断力让您跳过试错。"
         },
         {
           "title": "自有工厂直接生产",
@@ -293,31 +293,12 @@
           "body": "1,000个起的小批量也可洽谈。先验证市场反应再扩大。"
         },
         {
-          "title": "CCM 连续16年认证",
-          "body": "消费者中心经营认证已连续保持16年。"
+          "title": "由代表直接洽谈",
+          "body": "从首次咨询到配方设计均由代表亲自负责，不会因经手人更换而说法不一。"
         },
         {
           "title": "不止于制造",
           "body": "包装设计、线上入驻、专利策略、政府扶持项目全面对接。"
-        }
-      ],
-      "stepsTitle": "发展历程",
-      "steps": [
-        {
-          "title": "1999",
-          "body": "公司成立，开始保健功能食品制造"
-        },
-        {
-          "title": "2010",
-          "body": "取得 GMP 认证与首次 CCM 认证"
-        },
-        {
-          "title": "2018",
-          "body": "成功自主开发个别认证型原料"
-        },
-        {
-          "title": "2024",
-          "body": "扩展 CDMO 与个人定制业务"
         }
       ]
     },
@@ -730,7 +711,7 @@
       "eyebrow": "营销 · 广告",
       "title": "我们不止于\n把产品做出来",
       "description": "产品完成之后才是真正的开始。详情页、线上入驻到广告投放，我们一起准备。",
-      "intro": "再好的产品，无人知晓就会变成库存。\n\n26年间生产3,200多个品项，我们清楚什么产品在什么渠道卖得动。我们把这些经验用在生产之后的环节，您也可以只选择需要的项目。",
+      "intro": "再好的产品，无人知晓就会变成库存。\n\n在约200个品项的经验中，我们清楚什么产品在什么渠道卖得动。我们把这些经验用在生产之后的环节，您也可以只选择需要的项目。",
       "featuresTitle": "支持项目",
       "features": [
         {

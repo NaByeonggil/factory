@@ -91,10 +91,10 @@ const FORMULATION_IMAGES: Record<
 
 /** 히어로 배지 + 지표 스트립이 공유하는 표기 순서 */
 const STATS = [
-  ["years", "yearsValue"],
-  ["ccm", "ccmValue"],
-  ["satisfaction", "satisfactionValue"],
-  ["products", "productsValue"],
+  ["experience", "experienceValue"],
+  ["moq", "moqValue"],
+  ["forms", "formsValue"],
+  ["response", "responseValue"],
 ] as const;
 
 /** DB에 인증 데이터가 아직 없을 때 노출할 기본 인증 */
