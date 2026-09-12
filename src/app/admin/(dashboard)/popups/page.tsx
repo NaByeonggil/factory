@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Pencil, Plus } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { getSession } from "@/lib/auth";
+import { deletePopup } from "@/actions/content";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { DeleteButton } from "@/components/admin/delete-button";
 import { POPUP_SIZE } from "@/lib/constants";
 import { formatDateTime } from "@/lib/utils";
 
@@ -31,6 +34,10 @@ function period(startsAt: Date | null, endsAt: Date | null) {
 }
 
 export default async function AdminPopupsPage() {
+  const session = await getSession();
+  // 삭제는 ADMIN 권한에서만 노출합니다 (deletePopup 도 같은 권한을 요구합니다)
+  const canDelete = session?.role === "ADMIN";
+
   const rows = await prisma.popup.findMany({
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
     select: {
@@ -74,6 +81,7 @@ export default async function AdminPopupsPage() {
               <th className="px-4 py-3 font-semibold">노출 기간</th>
               <th className="px-4 py-3 font-semibold">순서</th>
               <th className="px-4 py-3 font-semibold">상태</th>
+              <th className="px-4 py-3 font-semibold">작업</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-ink-100">
@@ -103,12 +111,26 @@ export default async function AdminPopupsPage() {
                   <td className="px-4 py-3">
                     <Badge tone={state.tone}>{state.label}</Badge>
                   </td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <Link
+                        href={`/admin/popups/${row.id}`}
+                        className="rounded-lg border border-ink-200 px-2.5 py-1.5 text-xs font-semibold text-ink-700 hover:bg-ink-50"
+                      >
+                        <Pencil className="mr-1 inline size-3" aria-hidden />
+                        수정
+                      </Link>
+                      {canDelete && (
+                        <DeleteButton action={deletePopup} id={row.id} />
+                      )}
+                    </div>
+                  </td>
                 </tr>
               );
             })}
             {rows.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-12 text-center text-ink-400">
+                <td colSpan={7} className="px-4 py-12 text-center text-ink-400">
                   등록된 팝업이 없습니다.
                 </td>
               </tr>
