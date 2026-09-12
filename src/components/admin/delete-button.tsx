@@ -23,10 +23,13 @@ export function DeleteButton({
   action,
   id,
   label = "삭제",
+  hiddenFields,
 }: {
   action: (formData: FormData) => Promise<void>;
   id: string;
   label?: string;
+  /** 삭제 후 돌아갈 목록처럼, 액션에 함께 넘길 값 */
+  hiddenFields?: Record<string, string>;
 }) {
   const [armed, setArmed] = useState(false);
 
@@ -42,6 +45,9 @@ export function DeleteButton({
   return (
     <form action={action} className="flex items-center gap-2">
       <input type="hidden" name="id" value={id} />
+      {Object.entries(hiddenFields ?? {}).map(([name, value]) => (
+        <input key={name} type="hidden" name={name} value={value} />
+      ))}
       <span className="text-sm font-semibold text-red-700">되돌릴 수 없습니다.</span>
       <ConfirmButton />
       <Button

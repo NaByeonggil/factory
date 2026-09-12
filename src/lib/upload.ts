@@ -78,11 +78,17 @@ export function validateUpload(
  *
  * - `inq` 문의 첨부 — 관리자 인증이 걸린 /api/files 로만 열람
  * - `pub` 콘텐츠 이미지 — 누구나 볼 수 있는 /api/media 로 서빙
+ * - `adm` 관리자 전용 자료(강의 정리 사진) — 세션이 있어야 하는
+ *   /api/admin/media 로만 서빙
  *
- * 두 라우트가 각각 자기 접두사만 허용하므로, /api/media 로 문의 첨부를
- * 꺼내가는 경로가 막힙니다.
+ * 각 라우트가 자기 접두사만 허용하므로, 공개 라우트로 문의 첨부나
+ * 관리자 자료를 꺼내가는 경로가 막힙니다.
  */
-export const STORAGE_PREFIX = { inquiry: "inq", media: "pub" } as const;
+export const STORAGE_PREFIX = {
+  inquiry: "inq",
+  media: "pub",
+  adminMedia: "adm",
+} as const;
 export type StoragePrefix = (typeof STORAGE_PREFIX)[keyof typeof STORAGE_PREFIX];
 
 /** 저장 키. 원본 파일명은 경로에 쓰지 않습니다. */
@@ -102,10 +108,14 @@ export const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "webp"] as const;
 export const IMAGE_ACCEPT = IMAGE_EXTENSIONS.map((e) => `.${e}`).join(",");
 export const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
 
-/** URL(/api/media/<key>)에서 스토리지 키를 되돌립니다 */
+/**
+ * 이미지 URL에서 스토리지 키를 되돌립니다.
+ * 공개 이미지(/api/media/<key>)와 관리자 전용 자료(/api/admin/media/<key>)
+ * 양쪽을 받습니다 — 고아 파일 정리가 두 종류를 함께 봐야 하기 때문입니다.
+ */
 export function mediaKeyFromUrl(url: string | null | undefined) {
   if (!url) return null;
-  const match = /^\/api\/media\/(.+)$/.exec(url);
+  const match = /^\/api\/(?:admin\/)?media\/(.+)$/.exec(url);
   return match ? match[1] : null;
 }
 

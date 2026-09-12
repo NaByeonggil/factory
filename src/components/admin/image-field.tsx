@@ -6,9 +6,11 @@ import { ImagePlus, X, GripVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IMAGE_ACCEPT } from "@/lib/upload";
 
-async function uploadImage(file: File) {
+/** scope="adm" 는 공개되지 않는 관리자 전용 저장소로 올립니다 */
+async function uploadImage(file: File, scope?: "adm") {
   const body = new FormData();
   body.append("file", file);
+  if (scope) body.append("scope", scope);
   const res = await fetch("/api/admin/uploads", { method: "POST", body });
   const data = (await res.json()) as { url?: string; error?: string };
   if (!res.ok || !data.url) throw new Error(data.error ?? "업로드 실패");
@@ -136,19 +138,22 @@ export function ImageField({
   );
 }
 
-/** 다중 이미지 (포트폴리오). 순서는 위에서부터 앞쪽입니다. */
+/** 다중 이미지 (포트폴리오, 강의 자료). 순서는 위에서부터 앞쪽입니다. */
 export function ImageListField({
   name,
   label,
   hint,
   defaultValue,
   max = 6,
+  scope,
 }: {
   name: string;
   label: string;
   hint?: string;
   defaultValue: string[];
   max?: number;
+  /** "adm" 이면 로그인해야 열리는 관리자 전용 저장소에 올립니다 */
+  scope?: "adm";
 }) {
   const [urls, setUrls] = useState(defaultValue);
   const [error, setError] = useState<string | null>(null);
@@ -161,7 +166,7 @@ export function ImageListField({
       const added: string[] = [];
       for (const file of picked) {
         try {
-          added.push(await uploadImage(file));
+          added.push(await uploadImage(file, scope));
         } catch (e) {
           setError(`${file.name}: ${e instanceof Error ? e.message : "업로드 실패"}`);
         }

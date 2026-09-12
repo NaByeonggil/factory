@@ -13,7 +13,7 @@ import { mediaKeyFromUrl } from "../src/lib/upload";
  *
  * 참조처: InquiryFile.storageKey, InquiryReplyFile.storageKey,
  * Ingredient.thumbnailUrl, Post.coverUrl, Product.imageUrls,
- * Certification.imageUrl
+ * Certification.imageUrl, Lecture.imageUrls(관리자 전용 자료)
  *
  *   npm run storage:cleanup
  *
@@ -43,6 +43,7 @@ async function main() {
     posts,
     products,
     certifications,
+    lectures,
   ] = await Promise.all([
       storage.list(),
       prisma.inquiryFile.findMany({ select: { storageKey: true } }),
@@ -51,6 +52,7 @@ async function main() {
       prisma.post.findMany({ select: { coverUrl: true } }),
       prisma.product.findMany({ select: { imageUrls: true } }),
       prisma.certification.findMany({ select: { imageUrl: true } }),
+      prisma.lecture.findMany({ select: { imageUrls: true } }),
     ]);
 
   const keep = new Set<string>();
@@ -63,6 +65,8 @@ async function main() {
     ...posts.map((r) => r.coverUrl),
     ...products.flatMap((r) => r.imageUrls),
     ...certifications.map((r) => r.imageUrl),
+    // 강의 자료는 /api/admin/media 주소로 저장됩니다
+    ...lectures.flatMap((r) => r.imageUrls),
   ];
   for (const url of mediaUrls) {
     const key = mediaKeyFromUrl(url);

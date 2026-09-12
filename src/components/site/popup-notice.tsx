@@ -4,11 +4,12 @@ import Image from "next/image";
 import {
   useCallback,
   useEffect,
+  useRef,
   useState,
   useSyncExternalStore,
 } from "react";
 import { useTranslations } from "next-intl";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { PopupCard } from "@/lib/queries";
 import { POPUP_SIZE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -56,13 +57,15 @@ function hideToday(id: string) {
 
 /**
  * 진입 팝업 공지. 카드 크기는 핸드폰 화면 규격(320×480)으로 고정이라
- * 데스크톱에서도 같은 크기로 보입니다. 여러 건이면 가로로 나란히 놓고,
- * 폭이 모자라면 스냅 스크롤로 넘깁니다.
+ * 데스크톱에서도 같은 크기로 보입니다. 여러 건이어도 한 번에 한 장만 보이고,
+ * 좌우 스와이프(또는 화살표·점 버튼)로 다음 장을 넘깁니다.
  */
 export function PopupNotice({ popups }: { popups: PopupCard[] }) {
   const t = useTranslations("popup");
   // 이번 방문에서 닫은 팝업 (새로고침하면 다시 뜹니다)
   const [closed, setClosed] = useState<string[]>([]);
+  const [index, setIndex] = useState(0);
+  const scrollerRef = useRef<HTMLDivElement>(null);
 
   // "0101…" 형태의 문자열이라 값이 같으면 재렌더가 일어나지 않습니다
   const hiddenFlags = useSyncExternalStore(
@@ -77,37 +80,104 @@ export function PopupNotice({ popups }: { popups: PopupCard[] }) {
   const shown = popups.filter(
     (p, i) => hiddenFlags[i] !== "1" && !closed.includes(p.id),
   );
+  const count = shown.length;
+
+  // 카드를 닫아 장수가 줄어도 범위를 넘지 않게 렌더 시점에 보정합니다
+  const active = Math.min(index, Math.max(0, count - 1));
+
+  /** 스와이프 대신 버튼으로 넘길 때 — 스크롤을 움직이면 index 는 onScroll 이 맞춥니다 */
+  const goTo = useCallback((next: number) => {
+    const el = scrollerRef.current;
+    if (!el || el.clientWidth === 0) return;
+    el.scrollTo({ left: next * el.clientWidth, behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
-    if (shown.length === 0) return;
+    if (count === 0) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setClosed(popups.map((p) => p.id));
+      if (e.key === "ArrowLeft") goTo(Math.max(0, active - 1));
+      if (e.key === "ArrowRight") goTo(Math.min(count - 1, active + 1));
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [popups, shown.length]);
+  }, [popups, count, active, goTo]);
 
-  if (shown.length === 0) return null;
+  if (count === 0) return null;
 
   const close = (id: string) => setClosed((prev) => [...prev, id]);
+
+  const onScroll = () => {
+    const el = scrollerRef.current;
+    if (!el || el.clientWidth === 0) return;
+    const current = Math.round(el.scrollLeft / el.clientWidth);
+    setIndex(Math.max(0, Math.min(count - 1, current)));
+  };
 
   return (
     // 컨테이너는 화면 전체를 덮으므로 빈 영역의 클릭을 가로채지 않게 합니다
     <aside
       aria-label={t("notice")}
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex snap-x snap-mandatory overflow-x-auto overscroll-contain px-4 pt-4 pb-24 lg:pb-4"
+      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4 pb-24 lg:pb-4"
     >
-      {/* mx-auto 는 남는 폭이 있을 때만 먹으므로, 넘칠 때는 왼쪽부터 스크롤됩니다
-          (justify-center 로 가운데 정렬하면 왼쪽으로 넘친 영역에 닿을 수 없습니다) */}
-      <div className="mx-auto flex gap-4">
-        {shown.map((popup) => (
-          <PopupItem
-            key={popup.id}
-            popup={popup}
-            onClose={() => close(popup.id)}
-            onHideToday={() => hideToday(popup.id)}
-          />
-        ))}
+      <div
+        className="pointer-events-auto flex w-full flex-col items-center gap-3"
+        style={{ maxWidth: POPUP_SIZE.width }}
+      >
+        {/* 한 장이 정확히 컨테이너 폭이라 스와이프 한 번에 한 장씩 넘어갑니다 */}
+        <div
+          ref={scrollerRef}
+          onScroll={onScroll}
+          className="no-scrollbar flex w-full snap-x snap-mandatory items-start overflow-x-auto overscroll-x-contain"
+        >
+          {shown.map((popup) => (
+            <div key={popup.id} className="flex w-full shrink-0 snap-center">
+              <PopupItem
+                popup={popup}
+                onClose={() => close(popup.id)}
+                onHideToday={() => hideToday(popup.id)}
+              />
+            </div>
+          ))}
+        </div>
+
+        {count > 1 && (
+          <nav className="flex items-center gap-1 rounded-full bg-white/95 px-2 py-1.5 shadow-soft-lg ring-1 ring-ink-200">
+            <button
+              type="button"
+              onClick={() => goTo(Math.max(0, active - 1))}
+              disabled={active === 0}
+              aria-label={t("prev")}
+              className="rounded-full p-1 text-ink-600 hover:text-ink-900 disabled:opacity-30"
+            >
+              <ChevronLeft className="size-4" aria-hidden />
+            </button>
+            <span className="flex items-center gap-1.5 px-1">
+              {shown.map((popup, i) => (
+                <button
+                  key={popup.id}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={t("go", { index: i + 1 })}
+                  aria-current={i === active}
+                  className={cn(
+                    "size-2 rounded-full transition-colors",
+                    i === active ? "bg-brand-600" : "bg-ink-300",
+                  )}
+                />
+              ))}
+            </span>
+            <button
+              type="button"
+              onClick={() => goTo(Math.min(count - 1, active + 1))}
+              disabled={active === count - 1}
+              aria-label={t("next")}
+              className="rounded-full p-1 text-ink-600 hover:text-ink-900 disabled:opacity-30"
+            >
+              <ChevronRight className="size-4" aria-hidden />
+            </button>
+          </nav>
+        )}
       </div>
     </aside>
   );
@@ -157,9 +227,8 @@ function PopupItem({
 
   return (
     <section
-      // 핸드폰 규격 고정 — 좁은 화면에서는 화면 폭에 맞춰 줄입니다
-      style={{ width: POPUP_SIZE.width, maxWidth: "calc(100vw - 2rem)" }}
-      className="pointer-events-auto flex max-h-[calc(100dvh-8rem)] shrink-0 snap-center flex-col overflow-hidden rounded-2xl bg-white shadow-soft-lg ring-1 ring-ink-200"
+      // 폭은 캐러셀 한 칸(핸드폰 규격)에 맞춥니다
+      className="flex max-h-[calc(100dvh-10rem)] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-soft-lg ring-1 ring-ink-200"
     >
       <div className="relative flex-1 overflow-y-auto">
         <button

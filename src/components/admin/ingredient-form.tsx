@@ -49,9 +49,15 @@ export type IngredientFormValues = {
 export function IngredientForm({
   values,
   saved,
+  basePath = "/admin/ingredients",
+  categories = INGREDIENT_CATEGORIES,
 }: {
   values: IngredientFormValues;
   saved?: boolean;
+  /** 저장·삭제 후 돌아갈 목록 (「보유 원료」 또는 「공급 특허원료」) */
+  basePath?: string;
+  /** 분류 선택지 — 특정 목록 전용 화면에서는 좁혀서 넘깁니다 */
+  categories?: readonly string[];
 }) {
   const [state, formAction] = useActionState<ActionState, FormData>(
     saveIngredient,
@@ -68,6 +74,7 @@ export function IngredientForm({
   const formBody = (
     <form action={formAction} className="space-y-6">
       {values.id && <input type="hidden" name="id" value={values.id} />}
+      <input type="hidden" name="basePath" value={basePath} />
       <SavedNotice show={Boolean(saved)} />
       <FormError state={state} />
 
@@ -88,7 +95,7 @@ export function IngredientForm({
 
           <Field label="분류" htmlFor="category" required>
             <Select id="category" name="category" defaultValue={values.category}>
-              {INGREDIENT_CATEGORIES.map((code) => (
+              {categories.map((code) => (
                 <option key={code} value={code}>
                   {CATEGORY_LABELS[code]}
                 </option>
@@ -208,7 +215,7 @@ export function IngredientForm({
       <div className="flex flex-wrap items-center gap-3">
         <SubmitButton />
         <Link
-          href="/admin/ingredients"
+          href={basePath}
           className="rounded-lg px-4 py-2.5 text-sm font-semibold text-ink-600 hover:bg-ink-100"
         >
           목록으로
@@ -223,7 +230,11 @@ export function IngredientForm({
       {/* 삭제는 별도 form이므로 저장 form 밖에 둡니다 (form 중첩은 무효) */}
       {values.id && (
         <div className="flex justify-end border-t border-ink-200 pt-6">
-          <DeleteButton action={deleteIngredient} id={values.id} />
+          <DeleteButton
+            action={deleteIngredient}
+            id={values.id}
+            hiddenFields={{ basePath }}
+          />
         </div>
       )}
     </div>

@@ -30,3 +30,8 @@ export function toDatetimeLocal(date: Date | null) {
   const offset = date.getTimezoneOffset() * 60_000;
   return new Date(date.getTime() - offset).toISOString().slice(0, 16);
 }
+
+/** Date -> <input type="date"> 값 (로컬 타임존 기준) */
+export function toDateInput(date: Date | null) {
+  return toDatetimeLocal(date).slice(0, 10);
+}

@@ -7,6 +7,7 @@ import { Container, Section, SectionHeading } from "@/components/ui/section";
 import { Thumbnail } from "@/components/site/media";
 import { QuoteBoard } from "@/components/quote/quote-board";
 import { getIngredients, type QuoteSearchField } from "@/lib/queries";
+import { MATERIAL_CATEGORIES } from "@/lib/constants";
 
 // 접수 즉시 목록에 보여야 하므로 정적 캐시를 쓰지 않습니다
 export const dynamic = "force-dynamic";
@@ -36,11 +37,8 @@ export default async function MaterialQuoteBoardPage(
   const keyword = typeof search.q === "string" ? search.q.slice(0, 60) : "";
   const field: QuoteSearchField = search.field === "author" ? "author" : "title";
 
-  // 공급 대상은 특허·개별인정형 원료입니다
-  const ingredients = await getIngredients(locale, [
-    "PATENT",
-    "INDIVIDUAL_APPROVED",
-  ]);
+  // 공급 대상은 특허·개별인정형 원료입니다 (관리자 →「공급 특허원료」에서 관리)
+  const ingredients = await getIngredients(locale, [...MATERIAL_CATEGORIES]);
 
   return (
     <>

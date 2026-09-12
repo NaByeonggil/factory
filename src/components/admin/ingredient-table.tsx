@@ -40,14 +40,28 @@ export type IngredientRow = {
 /**
  * 보유 원료 목록 — 상세 폼에 들어가지 않고 이 화면에서
  * 공개 여부·메인 노출·정렬 순서를 바로 바꿉니다.
+ *
+ * 「공급 특허원료」처럼 일부 분류만 모아 보는 화면에서도 그대로 씁니다.
+ * 그때 `rows`는 이미 걸러진 목록이고, 순서 이동도 그 안에서 이뤄집니다.
  */
 export function IngredientTable({
   rows,
   canDelete,
+  basePath = "/admin/ingredients",
+  categories = INGREDIENT_CATEGORIES,
+  scoped = false,
+  emptyLabel = "등록된 원료가 없습니다.",
 }: {
   rows: IngredientRow[];
   /** 삭제는 ADMIN 권한에서만 노출합니다 */
   canDelete: boolean;
+  /** 수정 화면 경로의 앞부분 */
+  basePath?: string;
+  /** 필터 칩과 분류 선택에 보일 분류 */
+  categories?: readonly string[];
+  /** 분류를 걸러 보는 화면인지 — 순서 이동 범위와 안내 문구가 달라집니다 */
+  scoped?: boolean;
+  emptyLabel?: string;
 }) {
   const [category, setCategory] = useState<string | null>(null);
   const [keyword, setKeyword] = useState("");
@@ -64,8 +78,11 @@ export function IngredientTable({
     });
   }, [rows, category, keyword]);
 
-  // 순서는 전체 목록 기준이라 걸러진 상태에서는 헷갈립니다
+  // 순서는 이 화면에 보이는 목록 기준이라 걸러진 상태에서는 헷갈립니다
   const canReorder = !category && keyword.trim().length === 0;
+
+  // 걸러 보는 화면에서는 그 분류 안에서만 앞뒤 자리를 바꿉니다
+  const moveScope = scoped ? [...categories] : undefined;
 
   const counts = useMemo(() => {
     const map: Record<string, number> = {};
@@ -75,7 +92,11 @@ export function IngredientTable({
 
   return (
     <div className="space-y-4">
-      <QuickCreate />
+      <QuickCreate
+        basePath={basePath}
+        categories={categories}
+        defaultCategory={categories[0] ?? "BASIC"}
+      />
 
       <div className="flex flex-wrap items-center gap-2">
         <button
@@ -85,7 +106,7 @@ export function IngredientTable({
         >
           전체 {rows.length}
         </button>
-        {INGREDIENT_CATEGORIES.map((code) => (
+        {categories.map((code) => (
           <button
             key={code}
             type="button"
@@ -120,6 +141,13 @@ export function IngredientTable({
         </p>
       )}
 
+      {scoped && (
+        <p className="text-xs text-ink-400">
+          분류를 이 목록 밖으로 바꾸면 여기서 빠지고,「보유 원료」에서 이어서
+          관리할 수 있습니다.
+        </p>
+      )}
+
       <div className="overflow-x-auto rounded-2xl border border-ink-200 bg-white">
         <table className="w-full min-w-4xl text-left text-sm">
           <thead className="border-b border-ink-200 bg-ink-50 text-xs uppercase text-ink-500">
@@ -146,7 +174,7 @@ export function IngredientTable({
                         disabled={!canReorder || pending || index === 0}
                         onClick={() =>
                           startTransition(async () => {
-                            await moveIngredient(row.id, "up");
+                            await moveIngredient(row.id, "up", moveScope);
                           })
                         }
                         className={arrow}
@@ -161,7 +189,7 @@ export function IngredientTable({
                         }
                         onClick={() =>
                           startTransition(async () => {
-                            await moveIngredient(row.id, "down");
+                            await moveIngredient(row.id, "down", moveScope);
                           })
                         }
                         className={arrow}
@@ -176,7 +204,7 @@ export function IngredientTable({
 
                   <td className="px-4 py-3">
                     <Link
-                      href={`/admin/ingredients/${row.id}`}
+                      href={`${basePath}/${row.id}`}
                       className="flex items-center gap-3"
                     >
                       <span className="relative size-11 shrink-0 overflow-hidden rounded-lg bg-ink-100">
@@ -275,7 +303,7 @@ export function IngredientTable({
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <Link
-                        href={`/admin/ingredients/${row.id}`}
+                        href={`${basePath}/${row.id}`}
                         className="rounded-lg border border-ink-200 px-2.5 py-1.5 text-xs font-semibold text-ink-700 hover:bg-ink-50"
                       >
                         <Pencil className="mr-1 inline size-3" aria-hidden />
@@ -286,6 +314,7 @@ export function IngredientTable({
                           action={deleteIngredient}
                           id={row.id}
                           label="삭제"
+                          hiddenFields={{ basePath }}
                         />
                       )}
                     </div>
@@ -297,9 +326,7 @@ export function IngredientTable({
             {visible.length === 0 && (
               <tr>
                 <td colSpan={7} className="px-4 py-12 text-center text-ink-400">
-                  {rows.length === 0
-                    ? "등록된 원료가 없습니다."
-                    : "조건에 맞는 원료가 없습니다."}
+                  {rows.length === 0 ? emptyLabel : "조건에 맞는 원료가 없습니다."}
                 </td>
               </tr>
             )}

@@ -25,7 +25,11 @@ const MESSAGES: Record<string, string> = {
  * 콘텐츠 이미지 업로드 — 관리자 전용.
  *
  * 문의 첨부(/api/uploads)와 달리 결과물이 공개 사이트에 노출되므로
- * `pub` 네임스페이스에 저장하고 이미지 포맷만 허용합니다.
+ * 기본은 `pub` 네임스페이스에 저장하고 이미지 포맷만 허용합니다.
+ *
+ * `scope=adm` 으로 올리면 공개되지 않는 `adm` 네임스페이스에 저장하고,
+ * 세션이 있어야 열리는 /api/admin/media 주소를 돌려줍니다
+ * (강의 정리 자료처럼 밖으로 나가면 안 되는 사진용).
  */
 export async function POST(request: Request) {
   const session = await getSession();
@@ -60,15 +64,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: MESSAGES[rejection] }, { status: 400 });
   }
 
+  // 비공개 자료는 별도 네임스페이스에 두고 인증이 걸린 주소로 돌려줍니다
+  const isPrivate = String(form.get("scope") ?? "") === "adm";
+  const prefix = isPrivate ? STORAGE_PREFIX.adminMedia : STORAGE_PREFIX.media;
+
   try {
     const stored = await getStorage().put({
-      key: buildStorageKey(STORAGE_PREFIX.media, ext),
+      key: buildStorageKey(prefix, ext),
       body: bytes,
       mimeType: file.type,
     });
 
     return NextResponse.json({
-      url: `/api/media/${stored.key}`,
+      url: `${isPrivate ? "/api/admin/media" : "/api/media"}/${stored.key}`,
       filename,
       size: stored.size,
     });

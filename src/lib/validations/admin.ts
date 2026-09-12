@@ -25,6 +25,12 @@ const optionalText = (max: number) =>
  */
 const IMAGE_URL = /^(https?:\/\/|\/api\/media\/pub\/)/;
 
+/**
+ * 관리자 전용 자료 이미지. 공개 주소(/api/media)를 섞으면 로그인 없이도
+ * 열리므로, 세션이 필요한 주소만 받습니다.
+ */
+const ADMIN_IMAGE_URL = /^\/api\/admin\/media\/adm\//;
+
 const optionalUrl = z
   .string()
   .trim()
@@ -149,6 +155,34 @@ export const popupSchema = z
     (v) => !v.startsAt || !v.endsAt || v.startsAt <= v.endsAt,
     { message: "종료일이 시작일보다 빠릅니다.", path: ["endsAt"] },
   );
+
+// ─────────────────────── 견적서 항목 ───────────────────────
+
+/** 관리자 전용 내부 체크리스트라 번역 없이 한국어 한 벌만 받습니다 */
+export const quoteItemSchema = z.object({
+  title: z.string().trim().min(1, "항목 이름을 입력해주세요.").max(60),
+  body: z.string().trim().min(1, "내용을 입력해주세요.").max(1000),
+  sortOrder: z.coerce.number().int().min(0).max(9999),
+});
+
+// ─────────────────────── 약사 강의 ───────────────────────
+
+/** 관리자 전용 노트라 번역 없이 한국어 한 벌만 받습니다 */
+export const lectureSchema = z.object({
+  title: z.string().trim().min(1, "강의 제목을 입력해주세요.").max(200),
+  /** 비우면 날짜 없음 */
+  lectureAt: z
+    .string()
+    .trim()
+    .optional()
+    .transform((v) => (v ? new Date(v) : null))
+    .refine(
+      (v) => v === null || !Number.isNaN(v.getTime()),
+      "날짜 형식이 올바르지 않습니다.",
+    ),
+  body: z.string().trim().min(1, "강의 내용을 입력해주세요.").max(50000),
+  imageUrls: z.array(z.string().trim().regex(ADMIN_IMAGE_URL)).max(30),
+});
 
 // ───────────────────────── 헬퍼 ─────────────────────────
 

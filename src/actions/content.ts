@@ -15,6 +15,7 @@ import {
   type DbLocale,
   checkbox,
   ingredientSchema,
+  lectureSchema,
   slugSchema,
   text,
   lines,
@@ -22,6 +23,7 @@ import {
   popupSchema,
   postSchema,
   productSchema,
+  quoteItemSchema,
 } from "@/lib/validations/admin";
 
 const SLUG_BY_CATEGORY = Object.fromEntries(
@@ -113,6 +115,30 @@ function uniqueSlugError(error: unknown) {
 
 // ───────────────────────── 원료 ─────────────────────────
 
+/**
+ * 원료는 「보유 원료」와 「공급 특허원료」 두 목록에서 같이 다룹니다.
+ * 저장·삭제 뒤 어느 목록으로 돌아갈지는 폼이 hidden 필드로 알려주고,
+ * 열린 리다이렉트가 되지 않도록 값은 아래 두 개로만 제한합니다.
+ */
+const INGREDIENT_BASE_PATHS = [
+  "/admin/ingredients",
+  "/admin/materials",
+] as const;
+
+type IngredientBasePath = (typeof INGREDIENT_BASE_PATHS)[number];
+
+function ingredientBasePath(formData: FormData): IngredientBasePath {
+  const value = String(formData.get("basePath") ?? "");
+  return (
+    INGREDIENT_BASE_PATHS.find((path) => path === value) ?? "/admin/ingredients"
+  );
+}
+
+/** 두 목록이 같은 데이터를 보여주므로 함께 비웁니다 */
+function revalidateIngredientAdmin() {
+  for (const path of INGREDIENT_BASE_PATHS) revalidatePath(path);
+}
+
 const INGREDIENT_FIELDS = [
   "name",
   "summary",
@@ -194,8 +220,8 @@ export async function saveIngredient(
   }
 
   revalidateIngredients([data.slug, previousSlug]);
-  revalidatePath("/admin/ingredients");
-  redirect(`/admin/ingredients/${id}?saved=1`);
+  revalidateIngredientAdmin();
+  redirect(`${ingredientBasePath(formData)}/${id}?saved=1`);
 }
 
 export async function deleteIngredient(formData: FormData) {
@@ -206,8 +232,8 @@ export async function deleteIngredient(formData: FormData) {
     select: { slug: true },
   });
   revalidateIngredients([removed.slug]);
-  revalidatePath("/admin/ingredients");
-  redirect("/admin/ingredients");
+  revalidateIngredientAdmin();
+  redirect(ingredientBasePath(formData));
 }
 
 /**
@@ -226,7 +252,7 @@ export async function toggleIngredientFlag(
     select: { slug: true },
   });
   revalidateIngredients([row.slug]);
-  revalidatePath("/admin/ingredients");
+  revalidateIngredientAdmin();
 }
 
 /** 목록에서 분류만 바꾸는 경로 (상세 폼을 열지 않아도 되도록) */
@@ -241,7 +267,7 @@ export async function updateIngredientCategory(id: string, category: string) {
     select: { slug: true },
   });
   revalidateIngredients([row.slug]);
-  revalidatePath("/admin/ingredients");
+  revalidateIngredientAdmin();
 }
 
 /**
@@ -292,9 +318,9 @@ export async function quickCreateIngredient(
   }
 
   revalidateIngredients([slug]);
-  revalidatePath("/admin/ingredients");
+  revalidateIngredientAdmin();
   // 나머지 항목(요약·기능성·이미지·번역)을 이어서 채우도록 편집 화면으로
-  redirect(`/admin/ingredients/${id}`);
+  redirect(`${ingredientBasePath(formData)}/${id}`);
 }
 
 /**
@@ -302,20 +328,40 @@ export async function quickCreateIngredient(
  *
  * sortOrder 가 0으로 몰려 있으면 값 교환만으로는 순서가 바뀌지 않으므로,
  * 현재 표시 순서대로 전부 다시 번호를 매기면서 대상만 한 칸 이동시킵니다.
+ *
+ * `categories` 를 주면 그 분류만 모아 놓고 본 화면(「공급 특허원료」)의
+ * 순서대로 한 칸 옮깁니다. 전체 목록 기준으로 옮기면 화면에 없는 원료와
+ * 자리를 바꿔 아무 변화도 없는 것처럼 보입니다.
  */
-export async function moveIngredient(id: string, direction: "up" | "down") {
+export async function moveIngredient(
+  id: string,
+  direction: "up" | "down",
+  categories?: string[],
+) {
   await requireSession(["ADMIN", "EDITOR"]);
+
+  const scope = z
+    .array(z.enum(INGREDIENT_CATEGORIES))
+    .nonempty()
+    .safeParse(categories);
 
   const rows = await prisma.ingredient.findMany({
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-    select: { id: true, slug: true },
+    select: { id: true, slug: true, category: true },
   });
 
-  const index = rows.findIndex((row) => row.id === id);
-  const target = direction === "up" ? index - 1 : index + 1;
-  if (index === -1 || target < 0 || target >= rows.length) return;
+  // 순서를 따질 대상 — 분류가 지정되면 그 안에서만 이웃을 찾습니다
+  const pool = scope.success
+    ? rows.filter((row) => scope.data.includes(row.category))
+    : rows;
 
-  [rows[index], rows[target]] = [rows[target], rows[index]];
+  const index = pool.findIndex((row) => row.id === id);
+  const target = direction === "up" ? index - 1 : index + 1;
+  if (index === -1 || target < 0 || target >= pool.length) return;
+
+  const from = rows.indexOf(pool[index]);
+  const to = rows.indexOf(pool[target]);
+  [rows[from], rows[to]] = [rows[to], rows[from]];
 
   await prisma.$transaction(
     rows.map((row, order) =>
@@ -327,7 +373,7 @@ export async function moveIngredient(id: string, direction: "up" | "down") {
   );
 
   revalidateIngredients(rows.map((row) => row.slug));
-  revalidatePath("/admin/ingredients");
+  revalidateIngredientAdmin();
 }
 
 // ───────────────────────── 게시물 ─────────────────────────
@@ -589,4 +635,135 @@ export async function deletePopup(formData: FormData) {
   revalidatePopups();
   revalidatePath("/admin/popups");
   redirect("/admin/popups");
+}
+
+// ─────────────────────── 견적서 항목 ───────────────────────
+
+/**
+ * 견적서에 담기는 항목.
+ *
+ * 공개 페이지에서 내리고 관리자 전용으로 옮긴 내부 체크리스트라
+ * 공개 경로를 다시 만들 일이 없어 캐시 무효화도 관리자 화면만 합니다.
+ */
+export async function saveQuoteItem(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  let id = String(formData.get("id") ?? "") || null;
+  await requireSession(["ADMIN", "EDITOR"]);
+
+  const parsed = quoteItemSchema.safeParse({
+    title: text(formData, "title"),
+    body: text(formData, "body"),
+    sortOrder: text(formData, "sortOrder") || 0,
+  });
+  if (!parsed.success) {
+    return { error: "입력값을 확인해주세요.", fieldErrors: toFieldErrors(parsed.error) };
+  }
+
+  try {
+    if (id) {
+      await prisma.quoteItem.update({ where: { id }, data: parsed.data });
+    } else {
+      const created = await prisma.quoteItem.create({
+        data: parsed.data,
+        select: { id: true },
+      });
+      id = created.id;
+    }
+  } catch (error) {
+    console.error("[saveQuoteItem]", error);
+    return { error: "저장 중 오류가 발생했습니다." };
+  }
+
+  revalidatePath("/admin/quote-items");
+  redirect(`/admin/quote-items/${id}?saved=1`);
+}
+
+export async function deleteQuoteItem(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  await requireSession(["ADMIN"]);
+  await prisma.quoteItem.delete({ where: { id } });
+  revalidatePath("/admin/quote-items");
+  redirect("/admin/quote-items");
+}
+
+/** 원료 목록과 같은 방식 — 표시 순서대로 다시 번호를 매기며 한 칸 옮깁니다 */
+export async function moveQuoteItem(id: string, direction: "up" | "down") {
+  await requireSession(["ADMIN", "EDITOR"]);
+
+  const rows = await prisma.quoteItem.findMany({
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
+    select: { id: true },
+  });
+
+  const index = rows.findIndex((row) => row.id === id);
+  const target = direction === "up" ? index - 1 : index + 1;
+  if (index === -1 || target < 0 || target >= rows.length) return;
+
+  [rows[index], rows[target]] = [rows[target], rows[index]];
+
+  await prisma.$transaction(
+    rows.map((row, order) =>
+      prisma.quoteItem.update({
+        where: { id: row.id },
+        data: { sortOrder: order + 1 },
+      }),
+    ),
+  );
+
+  revalidatePath("/admin/quote-items");
+}
+
+// ─────────────────────── 약사 강의 ───────────────────────
+
+/**
+ * 대표가 들은 강의 정리 노트.
+ *
+ * 공개 페이지에 나가지 않는 관리자 전용 자료라 공개 경로 캐시는 건드리지
+ * 않습니다. 자료 사진은 폼에서 업로드한 뒤 줄바꿈으로 구분해 넘어옵니다.
+ */
+export async function saveLecture(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  let id = String(formData.get("id") ?? "") || null;
+  await requireSession(["ADMIN", "EDITOR"]);
+
+  const parsed = lectureSchema.safeParse({
+    title: text(formData, "title"),
+    lectureAt: text(formData, "lectureAt"),
+    body: text(formData, "body"),
+    imageUrls: lines(formData, "imageUrls"),
+  });
+  if (!parsed.success) {
+    return { error: "입력값을 확인해주세요.", fieldErrors: toFieldErrors(parsed.error) };
+  }
+
+  try {
+    if (id) {
+      await prisma.lecture.update({ where: { id }, data: parsed.data });
+    } else {
+      const created = await prisma.lecture.create({
+        data: parsed.data,
+        select: { id: true },
+      });
+      id = created.id;
+    }
+  } catch (error) {
+    console.error("[saveLecture]", error);
+    return { error: "저장 중 오류가 발생했습니다." };
+  }
+
+  revalidatePath("/admin/lectures");
+  revalidatePath(`/admin/lectures/${id}`);
+  redirect(`/admin/lectures/${id}`);
+}
+
+export async function deleteLecture(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  await requireSession(["ADMIN"]);
+  await prisma.lecture.delete({ where: { id } });
+  revalidatePath("/admin/lectures");
+  redirect("/admin/lectures");
 }

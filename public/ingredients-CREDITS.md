@@ -10,11 +10,12 @@ Pexels 라이선스(상업적 사용 무료 · 출처 표기 의무 없음 · �
 | 원료 | 이미지 | 원본 |
 |---|---|---|
 | 멜라토닌 | 앰버 연질캡슐 | https://www.pexels.com/photo/close-up-shot-of-softgel-capsules-14744702/ |
-| NMN | 베이지 하드캡슐 | https://www.pexels.com/photo/capsule-supplements-on-white-surface-13787565/ |
-| 베르베린 | 캡슐에서 쏟아진 노란 분말 | https://www.pexels.com/photo/yellow-powder-in-a-capsule-7615608/ |
+| NMN | 무라벨 병에 담긴 백색 하드캡슐 | https://www.pexels.com/photo/capsules-in-the-plastic-bottle-13787561/ |
+| 베르베린 | 황갈색 하드캡슐 | https://www.pexels.com/photo/capsule-supplements-on-white-surface-13787565/ |
 | 피세틴 | 식물 유래 분말 스푼 | https://www.pexels.com/photo/close-up-shot-of-spoons-with-colored-powders-on-a-white-surface-5078581/ |
 | IB Complex | 무라벨 벌크 통과 스쿱 | https://www.pexels.com/photo/white-plastic-container-without-a-label-and-a-pile-of-dry-food-with-a-clear-spoon-13779103/ |
 | HL-Joint100 | 흰 분말 스쿱 | https://www.pexels.com/photo/photo-of-a-white-powder-and-a-scoop-lying-on-the-blue-background-12625114/ |
 | 비타민 D3 | 무라벨 병과 연질캡슐 | https://www.pexels.com/photo/supplements-beside-white-plastic-bottle-14744699/ |
 
+모든 컷은 1200×900(4:3)으로 내려받아 카드 비율(aspect-[4/3])에 맞췄습니다.
 교체는 관리자 → 보유 원료 → 각 원료의 「썸네일 이미지」에서 하시면 됩니다.

@@ -15,7 +15,8 @@ services:
       LANG: ko_KR.utf8
       POSTGRES_INITDB_ARGS: "--encoding=UTF8"
     ports:
-      - "5432:5432"
+      # 호스트 루프백에만 공개 (LAN 노출 방지)
+      - "127.0.0.1:5432:5432"
     volumes:
       - factory-db-data:/var/lib/postgresql/data
     healthcheck:
@@ -24,5 +25,62 @@ services:
       timeout: 5s
       retries: 10
 
+  # 프로덕션 앱 — health.cancerwith.kr
+  #   nh 스택의 nginx(nh_nginx)가 factory-app:3000 으로 프록시합니다.
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # 빌드 중 SSG 페이지가 DB를 읽어야 해서 호스트 네트워크로 붙입니다.
+      network: host
+      args:
+        DATABASE_URL: "postgresql://dev:devpass@localhost:5432/factory?schema=public"
+        NEXT_PUBLIC_SITE_URL: "https://health.cancerwith.kr"
+    image: factory-app
+    container_name: factory-app
+    restart: unless-stopped
+    # 업로드 폴더(./storage/uploads)는 호스트 사용자(1000) 소유라, 이미지의
+    # nextjs(1001) 그대로 돌리면 파일을 쓰지 못합니다(EACCES). 그룹만 호스트에
+    # 맞춰 마운트한 폴더에 쓸 수 있게 합니다.
+    user: "1001:1000"
+    expose:
+      - "3000"
+    environment:
+      DATABASE_URL: "postgresql://dev:devpass@db:5432/factory?schema=public"
+      NEXT_PUBLIC_SITE_URL: "https://health.cancerwith.kr"
+      AUTH_SECRET: ${AUTH_SECRET:?AUTH_SECRET must be set in .env}
+      IP_HASH_SALT: ${IP_HASH_SALT:?IP_HASH_SALT must be set in .env}
+      STORAGE_DRIVER: "local"
+      # 앱 폴더 밖(호스트 ./storage/uploads)에 bind mount 됩니다.
+      UPLOAD_DIR: "/app/storage/uploads"
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      NOTIFY_FROM: ${NOTIFY_FROM:-}
+      NOTIFY_TO: ${NOTIFY_TO:-}
+      SOLAPI_API_KEY: ${SOLAPI_API_KEY:-}
+      SOLAPI_API_SECRET: ${SOLAPI_API_SECRET:-}
+      SOLAPI_PFID: ${SOLAPI_PFID:-}
+      SOLAPI_TEMPLATE_ID: ${SOLAPI_TEMPLATE_ID:-}
+      SOLAPI_SENDER: ${SOLAPI_SENDER:-}
+      NOTIFY_SMS_TO: ${NOTIFY_SMS_TO:-}
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
+      NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID:-}
+      NEXT_PUBLIC_NAVER_CONVERSION_ID: ${NEXT_PUBLIC_NAVER_CONVERSION_ID:-}
+      NEXT_PUBLIC_META_PIXEL_ID: ${NEXT_PUBLIC_META_PIXEL_ID:-}
+    volumes:
+      - ./storage/uploads:/app/storage/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - default
+      - nh_network
+
 volumes:
   factory-db-data:
+
+networks:
+  # nh 스택의 nginx 와 같은 네트워크에 올라타 프록시를 받습니다.
+  nh_network:
+    external: true
+    name: nh_nh_network

@@ -42,7 +42,7 @@
     "statsTitle": "Healthy Farm Bio in numbers",
     "stats": {
       "experience": "Products led by our CEO",
-      "experienceValue": "≈200",
+      "experienceValue": "≈3,000",
       "moq": "Minimum order",
       "moqValue": "1,000",
       "forms": "Dosage forms",
@@ -85,7 +85,7 @@
     "priorityTitle": "Priority Service",
     "priorityDescription": "We stay with you beyond manufacturing — until the product sells.",
     "ctaTitle": "An idea is all you need to start",
-    "ctaDescription": "Our team replies within one business day.",
+    "ctaDescription": "Our pharmacist CEO replies personally within 24 business hours.",
     "recentTitle": "Recent inquiries",
     "recentDescription": "What clients asked us over the last six months."
   },
@@ -190,7 +190,7 @@
   },
   "inquiry": {
     "title": "Production inquiry",
-    "description": "Leave your details and our team will reply within one business day.",
+    "description": "Leave your details and our pharmacist CEO will reply personally within 24 business hours.",
     "sectionContact": "Contact details",
     "sectionProduct": "Product details",
     "sectionAgree": "Consent",
@@ -219,7 +219,7 @@
     "submit": "Send inquiry",
     "submitting": "Sending…",
     "completeTitle": "Your inquiry has been received",
-    "completeDescription": "We will contact you within one business day.",
+    "completeDescription": "Our pharmacist CEO will contact you personally within 24 business hours.",
     "completeHome": "Back to home",
     "errorGeneric": "Something went wrong. Please try again shortly.",
     "errorRateLimit": "Too many requests. Please try again in a moment.",
@@ -278,10 +278,10 @@
       "eyebrow": "About",
       "title": "The manufacturing partner\nfirst-time founders need",
       "titleHighlight": "manufacturing partner",
-      "description": "Founded by a manufacturing executive who led roughly 200 supplement products to market. Formulation, production, packaging and distribution — finished in one place.",
+      "description": "Founded by a manufacturing executive who led roughly 3,000 supplement products to market. Formulation, production, packaging and distribution — finished in one place.",
       "missionEyebrow": "OUR MISSION",
       "missionTitle": "We take on the complexity\nof getting a product made.",
-      "missionBody": "The hardest part of starting a supplement business is rarely the manufacturing itself — it is not knowing where to begin.\n\nSourcing materials, choosing a dosage form, meeting minimum order quantities, clearing advertising review: decisions pile up at every practical step. Our CEO worked through that process across roughly 200 products as a manufacturing executive, and sorts it out for you.",
+      "missionBody": "The hardest part of starting a supplement business is rarely the manufacturing itself — it is not knowing where to begin.\n\nSourcing materials, choosing a dosage form, meeting minimum order quantities, clearing advertising review: decisions pile up at every practical step. Our CEO worked through that process across roughly 3,000 products as a manufacturing executive, and sorts it out for you.",
       "missionCardTitle": "What stands between an idea and a launch",
       "missionBarriers": [
         "Finding a GMP plant you can trust",
@@ -305,7 +305,7 @@
         {
           "label": "4 years",
           "title": "VP, health functional food manufacturer",
-          "body": "Led OEM and ODM production across roughly 200 products."
+          "body": "Led OEM and ODM production across roughly 3,000 products."
         },
         {
           "label": "Now",
@@ -323,8 +323,8 @@
       "featuresTitle": "Why work with us",
       "features": [
         {
-          "title": "≈200 products of experience",
-          "body": "Our CEO led roughly 200 products as vice president of a supplement manufacturer. That judgement lets you skip the trial and error."
+          "title": "≈3,000 products of experience",
+          "body": "Our CEO led roughly 3,000 products as vice president of a supplement manufacturer. That judgement lets you skip the trial and error."
         },
         {
           "title": "Certified partner plants",
@@ -724,7 +724,7 @@
       "eyebrow": "Marketing & advertising",
       "title": "We don't stop\nat manufacturing",
       "description": "The real work starts once the product exists. We help with detail pages, marketplace listings and ad campaigns.",
-      "intro": "A good product that nobody hears about becomes inventory.\n\nAcross roughly 200 products we have watched which products sell on which channels. We put that to work on the steps after manufacturing — pick only what you need.",
+      "intro": "A good product that nobody hears about becomes inventory.\n\nAcross roughly 3,000 products we have watched which products sell on which channels. We put that to work on the steps after manufacturing — pick only what you need.",
       "featuresTitle": "What we support",
       "features": [
         {
@@ -932,6 +932,7 @@
     "descFACTORY_TOUR": "An open look at our production floor."
   },
   "popup": {
+    "go": "Go to notice {index}",
     "close": "Close",
     "hideToday": "Don't show today",
     "notice": "Notice",
@@ -1033,6 +1034,7 @@
     "cosmeticEmpty": "No cosmetics inquiries yet.",
     "foodEyebrow": "HEALTH FUNCTIONAL FOOD",
     "foodLead": "A pharmacist who ran production at a manufacturer reviews ingredients, dosage form, claims, MOQ, cost and filings — and hands the idea back as something you can actually make.",
+    "briefBadge": "Consultation output",
     "briefTitle": "What you get after the consultation",
     "briefDescription": "We write the outcome up as a product development brief. Not a single unit price — a plan for what to make and how.",
     "brief": [
@@ -1061,46 +1063,6 @@
         "body": "Ingredient cost, taste and aroma, stability, and labelling limits, flagged upfront."
       }
     ],
-    "quoteTitle": "What the quote covers",
-    "quoteDescription": "Presented as base, recommended and premium options, so you can compare formulation, dosage form, MOQ and lead time — not just price.",
-    "quoteRows": [
-      {
-        "title": "Product spec",
-        "body": "Dosage form, daily intake, net content, packaging"
-      },
-      {
-        "title": "Formulation",
-        "body": "Main and secondary ingredients, claim strategy, point of difference"
-      },
-      {
-        "title": "Volume",
-        "body": "MOQ, first production run, reorder increments"
-      },
-      {
-        "title": "Unit price & total",
-        "body": "Ingredients, manufacturing and packaging, VAT, and one-off costs such as moulds and print plates listed separately"
-      },
-      {
-        "title": "Development cost",
-        "body": "Formulation, samples, testing, and how far we support the product filing"
-      },
-      {
-        "title": "Lead time",
-        "body": "Expected production and shipping dates from sample sign-off"
-      },
-      {
-        "title": "Included / excluded",
-        "body": "Design, package printing, delivery and storage, advertising review"
-      },
-      {
-        "title": "Payment terms",
-        "body": "Deposit, interim and balance payments, cancellation terms for samples and production"
-      },
-      {
-        "title": "Quality standard",
-        "body": "GMP status of the partner plant and the scope of quality control"
-      }
-    ],
     "afterTitle": "After the contract, through to launch",
     "afterDescription": "Once you approve a quote, this is the sequence. The stages change; the person does not — our CEO manages it through to launch.",
     "after": [
@@ -1115,6 +1077,8 @@
       "Shipping"
     ],
     "afterNote": "Before production closes we go through the final formula, ingredient COAs and specifications, Korean labelling, shelf-life substantiation, test certificates, volumes and lot numbers, and release criteria together. The product filing is made by the licensed manufacturer, and later changes may require a separate filing.",
-    "foodWrite": "Get a feasibility check"
+    "foodWrite": "Get a feasibility check",
+    "foodCtaTitle": "Start by finding out if it can be made",
+    "foodCtaDescription": "Our pharmacist CEO reviews it personally and replies within 24 business hours."
   }
 }

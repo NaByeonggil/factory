@@ -357,6 +357,39 @@ model PopupTranslation {
   @@unique([popupId, locale])
 }
 
+// ─────────────────────── 약사 강의 ───────────────────────
+
+/// 대표가 들은 약사 강의를 정리해 두는 관리자 전용 노트.
+/// 자료 사진은 업로드 순서대로 imageUrls 에 담습니다.
+model Lecture {
+  id        String    @id @default(cuid())
+  title     String
+  /// 강의를 들은 날. 모르면 비워 둡니다
+  lectureAt DateTime?
+  body      String    @db.Text
+  imageUrls String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([lectureAt])
+}
+
+// ─────────────────────── 견적서 항목 ───────────────────────
+
+/// 견적서에 담기는 항목. 고객 페이지에서 내리고 관리자 전용으로 옮긴
+/// 내부 체크리스트라, 번역 없이 한국어 한 벌만 둡니다.
+model QuoteItem {
+  id        String   @id @default(cuid())
+  title     String
+  body      String   @db.Text
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
 /// GMP, HACCP, ISO 9001/14001/22000/45001/50001, CCM …
 model Certification {
   id        String    @id @default(cuid())

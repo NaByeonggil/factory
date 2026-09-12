@@ -14,7 +14,17 @@ import type { ActionState } from "@/lib/validations/admin";
  * 목록 위에서 바로 만드는 빠른 추가.
  * 이름·slug·분류만 받아 만들고 편집 화면으로 넘겨 나머지를 채우게 합니다.
  */
-export function QuickCreate() {
+export function QuickCreate({
+  basePath = "/admin/ingredients",
+  categories = INGREDIENT_CATEGORIES,
+  defaultCategory = "BASIC",
+}: {
+  /** 추가 후 넘어갈 편집 화면이 속한 목록 */
+  basePath?: string;
+  /** 분류 선택지 — 특정 목록 전용 화면에서는 좁혀서 넘깁니다 */
+  categories?: readonly string[];
+  defaultCategory?: string;
+}) {
   const [open, setOpen] = useState(false);
   const [state, formAction] = useActionState<ActionState, FormData>(
     quickCreateIngredient,
@@ -48,6 +58,7 @@ export function QuickCreate() {
       </div>
 
       <FormError state={state} />
+      <input type="hidden" name="basePath" value={basePath} />
 
       <div className="grid gap-4 sm:grid-cols-[1.2fr_1fr_auto] sm:items-end">
         <Field
@@ -70,8 +81,12 @@ export function QuickCreate() {
         </Field>
 
         <Field label="분류" htmlFor="quick-category" required>
-          <Select id="quick-category" name="category" defaultValue="BASIC">
-            {INGREDIENT_CATEGORIES.map((code) => (
+          <Select
+            id="quick-category"
+            name="category"
+            defaultValue={defaultCategory}
+          >
+            {categories.map((code) => (
               <option key={code} value={code}>
                 {CATEGORY_LABELS[code]}
               </option>

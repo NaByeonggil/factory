@@ -127,3 +127,12 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* 캐러셀용 — 스와이프 스크롤바 숨김 */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

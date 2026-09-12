@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ClipboardList, FileText } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Container, Section } from "@/components/ui/section";
 import { CtaBand } from "@/components/site/cta-band";
 import { QuoteProcess } from "@/components/quote/quote-process";
@@ -10,8 +10,6 @@ import { FOOD_SERVICE_TYPES } from "@/lib/constants";
 
 // 접수 즉시 목록에 보여야 하므로 정적 캐시를 쓰지 않습니다
 export const dynamic = "force-dynamic";
-
-type Pair = { title: string; body: string };
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/quote">,
@@ -38,8 +36,6 @@ export default async function QuoteBoardPage(
   const keyword = typeof search.q === "string" ? search.q.slice(0, 60) : "";
   const field: QuoteSearchField = search.field === "author" ? "author" : "title";
 
-  const brief = t.raw("brief") as Pair[];
-  const quoteRows = t.raw("quoteRows") as Pair[];
   const after = t.raw("after") as string[];
 
   return (
@@ -57,112 +53,58 @@ export default async function QuoteBoardPage(
         </Container>
       </section>
 
-      {/* ─── 상담 진행 방식 ─── */}
-      <Section>
+      {/* ─── 상담 진행 방식 + 상담 결과물 도해 ─── */}
+      <Section className="bg-ink-50">
         <Container>
           <QuoteProcess locale={locale} />
         </Container>
       </Section>
 
-      {/* ─── 상담 결과물 (제품개발 방향서) ─── */}
-      <Section className="bg-ink-50">
-        <Container>
-          <div className="rounded-card border border-ink-200 bg-white p-6 sm:p-8">
-            <p className="flex items-center gap-2 text-xl font-bold text-ink-900">
-              <ClipboardList
-                className="size-5 shrink-0 text-brand-600"
-                aria-hidden
-              />
-              {t("briefTitle")}
-            </p>
-            <p className="mt-3 max-w-2xl leading-relaxed text-ink-700">
-              {t("briefDescription")}
-            </p>
-
-            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {brief.map((item) => (
-                <li
-                  key={item.title}
-                  className="rounded-xl border border-ink-200 bg-ink-50 p-5"
-                >
-                  <p className="text-[0.9375rem] font-bold text-ink-900">
-                    {item.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-700">
-                    {item.body}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ─── 견적서 구성 ─── */}
+      {/* ─── 계약 이후 진행 (아코디언) ─── */}
       <Section>
         <Container>
-          <h2 className="flex items-center gap-2 text-2xl font-bold text-ink-900 sm:text-3xl">
-            <FileText className="size-6 shrink-0 text-brand-600" aria-hidden />
-            {t("quoteTitle")}
-          </h2>
-          <p className="mt-3 max-w-3xl leading-relaxed text-ink-700">
-            {t("quoteDescription")}
-          </p>
+          <details className="group overflow-hidden rounded-card border border-ink-200 bg-white [&_summary::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer items-center justify-between gap-4 p-6 sm:p-8">
+              <h2 className="text-2xl font-bold text-ink-900 sm:text-3xl">
+                {t("afterTitle")}
+              </h2>
+              <ChevronDown
+                aria-hidden
+                className="size-6 shrink-0 text-ink-400 transition-transform duration-300 group-open:-rotate-180"
+              />
+            </summary>
 
-          <div className="mt-8 overflow-hidden rounded-card border border-ink-200">
-            <dl className="divide-y divide-ink-100 bg-white">
-              {quoteRows.map((row) => (
-                <div
-                  key={row.title}
-                  className="grid gap-1 p-5 sm:grid-cols-[12rem_1fr] sm:gap-6"
-                >
-                  <dt className="text-[0.9375rem] font-bold text-ink-900">
-                    {row.title}
-                  </dt>
-                  <dd className="text-sm leading-relaxed text-ink-700">
-                    {row.body}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Container>
-      </Section>
+            <div className="border-t border-ink-100 p-6 sm:p-8">
+              <p className="max-w-3xl leading-relaxed text-ink-700">
+                {t("afterDescription")}
+              </p>
 
-      {/* ─── 계약 이후 진행 ─── */}
-      <Section className="bg-ink-50">
-        <Container>
-          <h2 className="text-2xl font-bold text-ink-900 sm:text-3xl">
-            {t("afterTitle")}
-          </h2>
-          <p className="mt-3 max-w-3xl leading-relaxed text-ink-700">
-            {t("afterDescription")}
-          </p>
+              <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {after.map((step, index) => (
+                  <li
+                    key={step}
+                    className="flex items-center gap-3 rounded-xl border border-ink-200 bg-white p-4"
+                  >
+                    <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">
+                      {index + 1}
+                    </span>
+                    <span className="text-sm font-semibold text-ink-800">
+                      {step}
+                    </span>
+                  </li>
+                ))}
+              </ol>
 
-          <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {after.map((step, index) => (
-              <li
-                key={step}
-                className="flex items-center gap-3 rounded-xl border border-ink-200 bg-white p-4"
-              >
-                <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">
-                  {index + 1}
-                </span>
-                <span className="text-sm font-semibold text-ink-800">
-                  {step}
-                </span>
-              </li>
-            ))}
-          </ol>
-
-          <p className="mt-6 max-w-4xl text-xs leading-relaxed text-ink-500">
-            {t("afterNote")}
-          </p>
+              <p className="mt-6 max-w-4xl text-xs leading-relaxed text-ink-500">
+                {t("afterNote")}
+              </p>
+            </div>
+          </details>
         </Container>
       </Section>
 
       {/* ─── 게시판 ─── */}
-      <Section>
+      <Section className="bg-ink-50">
         <Container>
           <h2 className="text-2xl font-bold text-ink-900 sm:text-3xl">
             {t("foodTitle")}
@@ -185,7 +127,13 @@ export default async function QuoteBoardPage(
         </Container>
       </Section>
 
-      <CtaBand locale={locale} />
+      {/* 이 페이지는 「제조 가능성 진단」 흐름이라 배너 문구도 그에 맞춥니다 */}
+      <CtaBand
+        locale={locale}
+        title={t("foodCtaTitle")}
+        description={t("foodCtaDescription")}
+        label={t("foodWrite")}
+      />
     </>
   );
 }

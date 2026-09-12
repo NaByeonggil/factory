@@ -147,6 +147,12 @@ export const INGREDIENT_CATEGORIES = [
   "SUPERFOOD",
 ] as const;
 
+/**
+ * 「공급가능 특허원료 문의」 페이지에 카드로 깔리는 분류.
+ * 공개 페이지(quote/material)와 관리자 전용 메뉴가 같은 기준을 봅니다.
+ */
+export const MATERIAL_CATEGORIES = ["PATENT", "INDIVIDUAL_APPROVED"] as const;
+
 export const INQUIRY_STATUSES = [
   "NEW",
   "CONTACTED",
