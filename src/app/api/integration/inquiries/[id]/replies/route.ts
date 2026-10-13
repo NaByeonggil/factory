@@ -12,10 +12,11 @@ export const runtime = "nodejs";
 const PDF = "application/pdf";
 
 /**
- * 견적·원가 시스템(datahealth)이 보내는 견적서 답글.
+ * 견적·원가 시스템(datahealth)이 보내는 운영자 답글.
  *
- * 담당자가 그쪽 견적서 화면에서 「홈페이지 문의에 보내기」를 확인하면 불립니다.
- * 견적서 PDF 를 첨부한 운영자 답글을 달고, 문의를 「견적발송」 단계로 옮깁니다.
+ * - 견적서 화면의 「홈페이지 문의에 보내기」: 견적서 PDF 를 첨부한 답글을 달고,
+ *   문의를 「견적발송」 단계로 옮깁니다.
+ * - 홈페이지 문의 화면의 「답변 달기」: 글만 있는 답글. 처리 단계는 건드리지 않습니다.
  * 로그인 없이 열려 있는 경로라 공유 비밀키 서명이 유일한 관문입니다.
  */
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -47,23 +48,29 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   const authorName =
     (typeof body.authorName === "string" ? body.authorName.trim().slice(0, 50) : "") || "담당자";
 
-  if (typeof body.file?.base64 !== "string" || typeof body.file.filename !== "string") {
-    return NextResponse.json({ error: "견적서 파일이 없습니다." }, { status: 400 });
-  }
-  const bytes = new Uint8Array(Buffer.from(body.file.base64, "base64"));
-  const filename = safeFilename(body.file.filename);
-  // 고객 첨부와 같은 검사 — 확장자·크기·실제 내용이 PDF 인지 확인합니다
-  const rejection = validateUpload(filename, PDF, bytes);
-  if (rejection || !filename.toLowerCase().endsWith(".pdf")) {
-    return NextResponse.json({ error: `견적서 파일을 받을 수 없습니다 (${rejection ?? "EXTENSION"}).` }, { status: 400 });
-  }
-
   const storage = getStorage();
-  const key = buildStorageKey(STORAGE_PREFIX.inquiry, "pdf");
-  await storage.put({ key, body: bytes, mimeType: PDF });
+  let attached: { storageKey: string; filename: string; size: number; mimeType: string } | null = null;
 
-  // 이미 계약·종료까지 간 문의의 단계는 되돌리지 않습니다
-  const advance = inquiry.status === "NEW" || inquiry.status === "CONTACTED";
+  if (body.file !== undefined && body.file !== null) {
+    if (typeof body.file.base64 !== "string" || typeof body.file.filename !== "string") {
+      return NextResponse.json({ error: "견적서 파일이 올바르지 않습니다." }, { status: 400 });
+    }
+    const bytes = new Uint8Array(Buffer.from(body.file.base64, "base64"));
+    const filename = safeFilename(body.file.filename);
+    // 고객 첨부와 같은 검사 — 확장자·크기·실제 내용이 PDF 인지 확인합니다
+    const rejection = validateUpload(filename, PDF, bytes);
+    if (rejection || !filename.toLowerCase().endsWith(".pdf")) {
+      return NextResponse.json({ error: `견적서 파일을 받을 수 없습니다 (${rejection ?? "EXTENSION"}).` }, { status: 400 });
+    }
+    const storageKey = buildStorageKey(STORAGE_PREFIX.inquiry, "pdf");
+    await storage.put({ key: storageKey, body: bytes, mimeType: PDF });
+    attached = { storageKey, filename, size: bytes.byteLength, mimeType: PDF };
+  } else if (!message) {
+    return NextResponse.json({ error: "답글 내용을 입력해주세요." }, { status: 400 });
+  }
+
+  // 견적서를 보낼 때만 단계를 옮깁니다. 이미 계약·종료까지 간 문의의 단계는 되돌리지 않습니다
+  const advance = attached !== null && (inquiry.status === "NEW" || inquiry.status === "CONTACTED");
 
   try {
     await prisma.inquiry.update({
@@ -75,7 +82,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
             authorType: "ADMIN",
             authorName,
             body: message,
-            files: { create: [{ storageKey: key, filename, size: bytes.byteLength, mimeType: PDF }] },
+            ...(attached ? { files: { create: [attached] } } : {}),
           },
         },
       },
@@ -83,7 +90,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   } catch (error) {
     console.error("[integration/replies] 저장 실패", error);
     // 답글이 저장되지 않았으면 방금 올린 파일은 고아가 되므로 지웁니다
-    await storage.delete(key).catch(() => undefined);
+    if (attached) await storage.delete(attached.storageKey).catch(() => undefined);
     return NextResponse.json({ error: "답글 저장 중 오류가 발생했습니다." }, { status: 500 });
   }
 

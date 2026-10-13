@@ -13,6 +13,7 @@ import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import ko from "@/messages/ko.json";
 import type { SessionUser } from "@/lib/session";
+import type { Inquiry } from "@/generated/prisma/client";
 
 const TIMEOUT_MS = 4000;
 const SSO_TOKEN_TTL_MS = 60 * 1000;
@@ -78,6 +79,39 @@ type Options = Record<string, string>;
 const label = (table: Options, code: string | null) => (code ? (table[code] ?? code) : null);
 const labels = (table: Options, codes: string[]) => codes.map((c) => table[c] ?? c);
 
+type InquiryBrief = Pick<
+  Inquiry,
+  | "id" | "name" | "company" | "title" | "serviceType" | "formulations" | "packagings"
+  | "quantity" | "budget" | "targetDate" | "targetAudience" | "healthConcern"
+  | "materialType" | "ownedAssets" | "targetPrice" | "message"
+>;
+
+/**
+ * 선택형 코드를 사람이 읽는 말로 풀어 쓴 문의 내용.
+ * 연락처·이메일은 담지 않습니다 — 분석에 필요 없고 고객 응대는 이쪽 기록을 기준으로 합니다.
+ */
+export function describeInquiry(i: InquiryBrief) {
+  const o = ko.options;
+  return {
+    id: i.id,
+    name: i.name,
+    company: i.company,
+    title: i.title,
+    serviceType: i.serviceType,
+    formulations: labels(o.formulation, i.formulations),
+    packagings: labels(o.packaging, i.packagings),
+    quantity: label(o.quantity, i.quantity),
+    budget: label(o.budget, i.budget),
+    targetDate: i.targetDate ? i.targetDate.toISOString().slice(0, 10) : null,
+    targetAudience: i.targetAudience,
+    healthConcern: i.healthConcern,
+    materialType: label(o.materialType, i.materialType),
+    ownedAssets: labels(o.ownedAsset, i.ownedAssets),
+    targetPrice: i.targetPrice,
+    message: i.message,
+  };
+}
+
 /**
  * 문의 한 건을 넘겨 AI 분석(분류·정보 추출·답변 초안)을 요청합니다.
  * 같은 문의를 다시 보내도 상대편에서 한 건으로 유지됩니다.
@@ -89,25 +123,7 @@ export async function pushInquiryToDatahealth(inquiryId: string): Promise<boolea
     const i = await prisma.inquiry.findUnique({ where: { id: inquiryId } });
     if (!i || i.status === "SPAM") return false;
 
-    const o = ko.options;
-    const body = JSON.stringify({
-      id: i.id,
-      name: i.name,
-      company: i.company,
-      title: i.title,
-      serviceType: i.serviceType,
-      formulations: labels(o.formulation, i.formulations),
-      packagings: labels(o.packaging, i.packagings),
-      quantity: label(o.quantity, i.quantity),
-      budget: label(o.budget, i.budget),
-      targetDate: i.targetDate ? i.targetDate.toISOString().slice(0, 10) : null,
-      targetAudience: i.targetAudience,
-      healthConcern: i.healthConcern,
-      materialType: label(o.materialType, i.materialType),
-      ownedAssets: labels(o.ownedAsset, i.ownedAssets),
-      targetPrice: i.targetPrice,
-      message: i.message,
-    });
+    const body = JSON.stringify(describeInquiry(i));
 
     const res = await call("POST", "/api/integration/inquiries", body);
     if (!res?.ok) {
