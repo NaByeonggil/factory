@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
@@ -7,6 +8,7 @@ import { StatusControl } from "@/components/admin/status-control";
 import { MemoForm } from "@/components/admin/memo-form";
 import { ReplyForm } from "@/components/admin/reply-form";
 import { ReplyThread } from "@/components/admin/reply-thread";
+import { AiAnalysisPanel } from "@/components/admin/ai-analysis-panel";
 
 export const dynamic = "force-dynamic";
 
@@ -121,6 +123,11 @@ export default async function AdminInquiryDetailPage(
               </ul>
             )}
           </section>
+
+          {/* 다른 앱에 물어보는 것이라 느릴 수 있습니다 — 문의 화면이 그걸 기다리지 않게 따로 띄웁니다 */}
+          <Suspense fallback={null}>
+            <AiAnalysisPanel inquiryId={inquiry.id} replyFieldId="replyBody" />
+          </Suspense>
 
           <ReplyForm
             id={inquiry.id}

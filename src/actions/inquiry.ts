@@ -1,12 +1,14 @@
 "use server";
 
 import bcrypt from "bcryptjs";
+import { after } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { inquirySchema, type InquiryInput } from "@/lib/validations/inquiry";
 import { getRequestMeta } from "@/lib/request-meta";
 import { rateLimit } from "@/lib/rate-limit";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { notifyNewInquiry } from "@/lib/notify";
+import { pushInquiryToDatahealth } from "@/lib/datahealth";
 import { getStorage } from "@/lib/storage";
 import { verifyUploadKey } from "@/lib/upload";
 import { toDbLocale } from "@/i18n/routing";
@@ -123,6 +125,10 @@ export async function submitInquiry(
 
     // 저장이 커밋된 뒤에 알림 — 알림 실패가 접수를 되돌리지 않도록
     await notifyNewInquiry(inquiry);
+
+    // 견적·원가 시스템에 넘겨 AI 분석을 요청합니다. 응답을 보낸 뒤에 돌려
+    // 고객을 기다리게 하지 않고, 실패해도 접수에는 영향이 없습니다.
+    after(() => pushInquiryToDatahealth(inquiry.id));
 
     return { ok: true, id: inquiry.id };
   } catch (error) {

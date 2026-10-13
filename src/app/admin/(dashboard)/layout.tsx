@@ -11,10 +11,16 @@ import {
   GraduationCap,
   Newspaper,
   MessageSquareWarning,
+  Calculator,
+  ExternalLink,
   LogOut,
 } from "lucide-react";
 import { getSession } from "@/lib/auth";
 import { logout } from "@/actions/admin";
+import { datahealthConfigured } from "@/lib/datahealth";
+
+/** 견적·원가 시스템(datahealth)으로 넘어가는 주소 — 자동 로그인을 거칩니다 */
+const DATAHEALTH_HREF = "/admin/go/datahealth";
 
 const NAV = [
   { href: "/admin", label: "대시보드", Icon: LayoutDashboard },
@@ -54,6 +60,19 @@ export default async function AdminDashboardLayout({
               {label}
             </Link>
           ))}
+          {/* 다른 앱으로 나가는 링크라 <a> 로 둡니다. Link 는 미리 불러오면서 1회용 토큰을 써버립니다 */}
+          {datahealthConfigured() && (
+            <a
+              href={DATAHEALTH_HREF}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 flex items-center gap-2.5 rounded-lg border-t border-ink-100 px-3 py-2.5 pt-4 text-sm font-semibold text-ink-700 hover:bg-ink-50"
+            >
+              <Calculator className="size-4" aria-hidden />
+              견적·원가 시스템
+              <ExternalLink className="ml-auto size-3.5 text-ink-400" aria-hidden />
+            </a>
+          )}
         </nav>
         <div className="border-t border-ink-200 p-3">
           <p className="px-3 py-2 text-xs text-ink-500">
@@ -80,6 +99,11 @@ export default async function AdminDashboardLayout({
                 {label}
               </Link>
             ))}
+            {datahealthConfigured() && (
+              <a href={DATAHEALTH_HREF} target="_blank" rel="noreferrer" className="text-ink-600">
+                견적·원가
+              </a>
+            )}
           </nav>
         </header>
         <main className="p-5 lg:p-8 print:p-0">{children}</main>
