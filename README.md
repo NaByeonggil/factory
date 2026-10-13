@@ -160,13 +160,16 @@ const t = await getTranslations({ locale, namespace: "home" });
 ## 견적·원가 시스템 연동 (datahealth)
 
 고객 창구는 이 사이트 하나이고, 원가 계산과 AI 분석은 별도 앱인
-견적·원가 시스템(`data.cancerwith.kr`)이 맡습니다. 코드는 합치지 않고 세 군데만 잇습니다.
+견적·원가 시스템(`data.cancerwith.kr`)이 맡습니다. 코드는 합치지 않고 아래 지점만 잇습니다.
 
 | 연결 | 동작 |
 |---|---|
 | 문의 전달 | 문의가 접수되면 응답을 보낸 뒤 `POST /api/integration/inquiries` 로 넘깁니다. 연락처·이메일은 보내지 않습니다 |
 | AI 분석 패널 | 관리자 문의 상세가 분류·누락 정보·답변 초안을 받아와 보여줍니다. 초안은 「답변란에 불러오기」로 가져와 고친 뒤 저장합니다 |
 | 자동 로그인 | 사이드바 「견적·원가 시스템」이 1회용 토큰(60초)으로 그쪽에 로그인시킵니다. ADMIN 만 해당 |
+| 견적서 만들기 | 문의 상세의 버튼이 고객 정보를 넘기고 그쪽 견적서 작성 화면을 엽니다. 연락처는 이때만 넘어갑니다 |
+| 견적서 답글 | 그쪽에서 「홈페이지 문의에 보내기」를 확인하면 `POST /api/integration/inquiries/[id]/replies` 로 견적서 PDF 가 운영자 답글로 달리고 문의가 QUOTED 로 바뀝니다 |
+| 상태 전달 | 처리 단계를 바꾸거나 답변을 저장하면 그쪽 문의 게시판에도 반영됩니다 |
 
 - 두 앱은 로그인 대신 공유 비밀키(`INTEGRATION_SECRET`) 서명으로 서로를 확인합니다.
   규칙은 `src/lib/datahealth.ts` 와 datahealth 의 `src/lib/integration/factory.ts` 에 같이 있습니다.

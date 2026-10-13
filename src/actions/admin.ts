@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import {
@@ -14,6 +15,7 @@ import { getRequestMeta } from "@/lib/request-meta";
 import { INQUIRY_STATUSES } from "@/lib/constants";
 import type { InquiryStatus } from "@/generated/prisma/enums";
 import { revalidatePath } from "next/cache";
+import { pushInquiryStatusToDatahealth } from "@/lib/datahealth";
 
 const loginSchema = z.object({
   email: z.email(),
@@ -83,6 +85,8 @@ export async function updateInquiryStatus(id: string, status: string) {
 
   revalidatePath(`/admin/inquiries/${id}`);
   revalidatePath("/admin/inquiries");
+  // 견적·원가 시스템의 문의 게시판도 같은 단계로 맞춥니다 (응답을 보낸 뒤에)
+  after(() => pushInquiryStatusToDatahealth(id));
 }
 
 export async function assignInquiry(id: string, assigneeId: string | null) {

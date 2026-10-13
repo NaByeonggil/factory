@@ -9,13 +9,15 @@
  * 연동은 부가 기능입니다. 설정이 없거나 상대가 꺼져 있어도 문의 접수와
  * 관리자 화면은 그대로 동작해야 하므로, 여기 함수들은 예외를 던지지 않습니다.
  */
-import { createHmac, randomBytes } from "node:crypto";
+import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import ko from "@/messages/ko.json";
 import type { SessionUser } from "@/lib/session";
 
 const TIMEOUT_MS = 4000;
 const SSO_TOKEN_TTL_MS = 60 * 1000;
+/** 요청 시각 허용 오차 — 가로챈 요청을 나중에 다시 보내는 것을 막습니다 */
+const MAX_SKEW_MS = 5 * 60 * 1000;
 
 function config() {
   const secret = process.env.INTEGRATION_SECRET;
@@ -53,6 +55,21 @@ async function call(method: "GET" | "POST", path: string, body = ""): Promise<Re
   } catch {
     return null;
   }
+}
+
+/**
+ * 상대편이 보낸 요청의 서명 확인 (이쪽이 받는 연동 API 용).
+ * 로그인 없이 열려 있는 /api 경로라 이 확인이 유일한 관문입니다.
+ */
+export function verifyDatahealthRequest(request: Request, path: string, body: string): boolean {
+  const cfg = config();
+  if (!cfg) return false;
+  const timestamp = request.headers.get("x-integration-timestamp") ?? "";
+  const signature = request.headers.get("x-integration-signature") ?? "";
+  if (!/^\d+$/.test(timestamp) || Math.abs(Date.now() - Number(timestamp)) > MAX_SKEW_MS) return false;
+  const expected = Buffer.from(hmac(cfg.secret, `${timestamp}.${request.method}.${path}.${body}`));
+  const given = Buffer.from(signature);
+  return expected.length === given.length && timingSafeEqual(expected, given);
 }
 
 // ── 문의 전달 ───────────────────────────────────────────────
@@ -101,6 +118,48 @@ export async function pushInquiryToDatahealth(inquiryId: string): Promise<boolea
   } catch (error) {
     console.error("[datahealth] 문의 전달 실패", inquiryId, error);
     return false;
+  }
+}
+
+/**
+ * 견적서를 쓰기로 한 문의의 고객 정보를 넘겨 고객사로 등록합니다.
+ * 접수 때는 연락처를 보내지 않고, 담당자가 「견적서 만들기」를 누른 시점에만 보냅니다.
+ */
+export async function pushCustomerToDatahealth(inquiryId: string): Promise<boolean> {
+  if (!config()) return false;
+  try {
+    const i = await prisma.inquiry.findUnique({
+      where: { id: inquiryId },
+      select: { name: true, company: true, phone: true, email: true },
+    });
+    if (!i) return false;
+    const res = await call("POST", `/api/integration/inquiries/${inquiryId}/customer`, JSON.stringify(i));
+    return res?.ok ?? false;
+  } catch (error) {
+    console.error("[datahealth] 고객 정보 전달 실패", inquiryId, error);
+    return false;
+  }
+}
+
+/**
+ * 문의 처리 단계와 답변 여부를 알려 상대편 문의 게시판을 맞춥니다.
+ * 실패해도 이쪽 동작에는 영향이 없습니다.
+ */
+export async function pushInquiryStatusToDatahealth(inquiryId: string): Promise<void> {
+  if (!config()) return;
+  try {
+    const i = await prisma.inquiry.findUnique({
+      where: { id: inquiryId },
+      select: { status: true, repliedAt: true, _count: { select: { replies: { where: { authorType: "ADMIN" } } } } },
+    });
+    if (!i) return;
+    await call(
+      "POST",
+      `/api/integration/inquiries/${inquiryId}/status`,
+      JSON.stringify({ status: i.status, replied: Boolean(i.repliedAt) || i._count.replies > 0 }),
+    );
+  } catch (error) {
+    console.error("[datahealth] 상태 전달 실패", inquiryId, error);
   }
 }
 

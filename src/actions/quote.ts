@@ -3,6 +3,7 @@
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/auth";
@@ -10,6 +11,7 @@ import { getRequestMeta } from "@/lib/request-meta";
 import { rateLimit } from "@/lib/rate-limit";
 import { notifyCustomerReply, notifyInquiryReply } from "@/lib/notify";
 import { getStorage } from "@/lib/storage";
+import { pushInquiryStatusToDatahealth } from "@/lib/datahealth";
 import {
   MAX_UPLOAD_BYTES,
   MAX_UPLOAD_FILES,
@@ -295,6 +297,7 @@ export async function replyToInquiry(
     revalidatePath(`/${locale}/quote/${id}`);
   }
   revalidatePath(`/admin/inquiries/${id}`);
+  after(() => pushInquiryStatusToDatahealth(id));
   redirect(`/admin/inquiries/${id}?replied=1`);
 }
 
@@ -361,6 +364,7 @@ export async function addAdminReply(
     revalidatePath(`/${locale}/quote/${id}`);
   }
   revalidatePath(`/admin/inquiries/${id}`);
+  after(() => pushInquiryStatusToDatahealth(id));
   redirect(`/admin/inquiries/${id}?replied=1`);
 }
 

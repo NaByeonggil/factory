@@ -9,6 +9,7 @@ import { MemoForm } from "@/components/admin/memo-form";
 import { ReplyForm } from "@/components/admin/reply-form";
 import { ReplyThread } from "@/components/admin/reply-thread";
 import { AiAnalysisPanel } from "@/components/admin/ai-analysis-panel";
+import { datahealthConfigured } from "@/lib/datahealth";
 
 export const dynamic = "force-dynamic";
 
@@ -86,6 +87,24 @@ export default async function AdminInquiryDetailPage(
       </div>
 
       <StatusControl id={inquiry.id} status={inquiry.status} />
+
+      {/* 다른 앱으로 나가는 링크라 <a> 로 둡니다 (Link 는 미리 불러오면서 1회용 토큰을 써버립니다) */}
+      {datahealthConfigured() && inquiry.status !== "SPAM" && (
+        <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-ink-200 bg-white p-4">
+          <a
+            href={`/admin/go/datahealth?inquiry=${inquiry.id}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-9 items-center rounded-lg bg-ink-900 px-3.5 text-sm font-semibold text-white hover:bg-ink-800"
+          >
+            견적서 만들기
+          </a>
+          <p className="text-sm text-ink-500">
+            견적·원가 시스템에서 이 고객 정보가 채워진 견적서 작성 화면이 열립니다. 완성한 견적서는
+            그쪽에서 이 문의의 답글로 보낼 수 있습니다.
+          </p>
+        </div>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <div className="space-y-6">
