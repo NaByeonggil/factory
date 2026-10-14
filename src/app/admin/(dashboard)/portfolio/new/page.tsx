@@ -24,7 +24,7 @@ export default async function NewProductPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">포트폴리오 추가</h1>
+      <h1 className="text-2xl font-bold">생산 제품 등록</h1>
       <ProductForm values={values} ingredients={ingredients} />
     </div>
   );

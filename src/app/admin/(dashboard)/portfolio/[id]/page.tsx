@@ -38,7 +38,7 @@ export default async function EditProductPage(
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">포트폴리오 수정</h1>
+      <h1 className="text-2xl font-bold">생산 제품 수정</h1>
       <ProductForm
         values={values}
         ingredients={ingredients}

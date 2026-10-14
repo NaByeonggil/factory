@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
 import { deleteProduct, saveProduct } from "@/actions/content";
 import { LocaleTabs } from "@/components/admin/locale-tabs";
@@ -13,18 +13,18 @@ import {
 import { DeleteButton } from "@/components/admin/delete-button";
 import { CheckChip, Field, Input, Select, Textarea } from "@/components/ui/field";
 import { ImageListField } from "@/components/admin/image-field";
-import { FORMULATIONS, SERVICE_TYPES } from "@/lib/constants";
+import { FORMULATIONS, SERVICE_TYPES, formulationsFor } from "@/lib/constants";
 import type { ActionState, DbLocale } from "@/lib/validations/admin";
+import ko from "@/messages/ko.json";
 
-const FORMULATION_LABELS: Record<string, string> = {
-  PILL: "환",
-  HARD_CAPSULE: "경질캡슐",
-  SOFT_CAPSULE: "연질캡슐",
-  JELLY: "젤리",
-  LIQUID: "액상",
-  POWDER: "분말",
-  TABLET: "정제",
-};
+const SERVICE_LABELS: Record<string, string> = ko.service;
+const FORMULATION_LABELS: Record<string, string> = ko.options.formulation;
+
+/** 생산 방식에 맞는 제형만 고르게 합니다. 원료 공급은 제형 구분이 없어 전체를 보여줍니다 */
+function formulationOptions(serviceType: string): readonly string[] {
+  const list = formulationsFor(serviceType);
+  return list.length > 0 ? list : FORMULATIONS;
+}
 
 export type ProductFormValues = {
   id: string | null;
@@ -55,6 +55,13 @@ export function ProductForm({
     saveProduct,
     {},
   );
+  const [serviceType, setServiceType] = useState(values.serviceType);
+  const [formulation, setFormulation] = useState(values.formulation);
+  // 예전에 저장된 값이 지금 방식의 제형 목록에 없어도 선택값이 사라지지 않게 남겨둡니다
+  const options = formulationOptions(serviceType);
+  const formulations = options.includes(formulation)
+    ? options
+    : [formulation, ...options];
 
   const filled = Object.fromEntries(
     (["KO", "EN", "ZH"] as DbLocale[]).map((l) => [
@@ -71,7 +78,13 @@ export function ProductForm({
 
       <AdminCard title="기본 정보">
         <div className="grid gap-5 sm:grid-cols-2">
-          <Field label="slug" htmlFor="slug" required error={state.fieldErrors?.slug}>
+          <Field
+            label="slug"
+            htmlFor="slug"
+            required
+            hint="영문 소문자·숫자·하이픈 · 상세 페이지 주소"
+            error={state.fieldErrors?.slug}
+          >
             <Input id="slug" name="slug" defaultValue={values.slug} required />
           </Field>
 
@@ -79,11 +92,17 @@ export function ProductForm({
             <Select
               id="serviceType"
               name="serviceType"
-              defaultValue={values.serviceType}
+              value={serviceType}
+              onChange={(e) => {
+                const next = e.target.value;
+                setServiceType(next);
+                const options = formulationOptions(next);
+                if (!options.includes(formulation)) setFormulation(options[0]);
+              }}
             >
               {SERVICE_TYPES.map((code) => (
                 <option key={code} value={code}>
-                  {code}
+                  {SERVICE_LABELS[code] ?? code}
                 </option>
               ))}
             </Select>
@@ -93,11 +112,12 @@ export function ProductForm({
             <Select
               id="formulation"
               name="formulation"
-              defaultValue={values.formulation}
+              value={formulation}
+              onChange={(e) => setFormulation(e.target.value)}
             >
-              {FORMULATIONS.map((code) => (
+              {formulations.map((code) => (
                 <option key={code} value={code}>
-                  {FORMULATION_LABELS[code]}
+                  {FORMULATION_LABELS[code] ?? code}
                 </option>
               ))}
             </Select>

@@ -30,7 +30,7 @@ const NAV = [
   { href: "/admin/quote-items", label: "견적서 항목", Icon: ReceiptText },
   { href: "/admin/quasi-drug-limits", label: "의약외품 배합한도", Icon: Pill },
   { href: "/admin/lectures", label: "약사 강의 정리", Icon: GraduationCap },
-  { href: "/admin/portfolio", label: "포트폴리오", Icon: Package },
+  { href: "/admin/portfolio", label: "포트폴리오(생산 제품)", Icon: Package },
   { href: "/admin/posts", label: "게시물", Icon: Newspaper },
   { href: "/admin/popups", label: "팝업 공지", Icon: MessageSquareWarning },
 ];
