@@ -53,15 +53,39 @@ export default async function QuoteBoardPage(
         </Container>
       </section>
 
-      {/* ─── 상담 진행 방식 + 상담 결과물 도해 ─── */}
+      {/* ─── 게시판 ─── */}
       <Section className="bg-ink-50">
+        <Container>
+          <h2 className="text-2xl font-bold text-ink-900 sm:text-3xl">
+            {t("foodTitle")}
+          </h2>
+          <p className="mt-3 max-w-2xl leading-relaxed text-ink-700">
+            {t("foodDescription")}
+          </p>
+
+          <QuoteBoard
+            locale={locale}
+            page={page}
+            keyword={keyword}
+            field={field}
+            serviceType={FOOD_SERVICE_TYPES}
+            basePath="/quote"
+            writeHref="/inquiry"
+            writeLabel={t("foodWrite")}
+            emptyLabel={t("foodEmpty")}
+          />
+        </Container>
+      </Section>
+
+      {/* ─── 상담 진행 방식 + 상담 결과물 도해 ─── */}
+      <Section>
         <Container>
           <QuoteProcess locale={locale} />
         </Container>
       </Section>
 
       {/* ─── 계약 이후 진행 (아코디언) ─── */}
-      <Section>
+      <Section className="bg-ink-50">
         <Container>
           <details className="group overflow-hidden rounded-card border border-ink-200 bg-white [&_summary::-webkit-details-marker]:hidden">
             <summary className="flex cursor-pointer items-center justify-between gap-4 p-6 sm:p-8">
@@ -100,30 +124,6 @@ export default async function QuoteBoardPage(
               </p>
             </div>
           </details>
-        </Container>
-      </Section>
-
-      {/* ─── 게시판 ─── */}
-      <Section className="bg-ink-50">
-        <Container>
-          <h2 className="text-2xl font-bold text-ink-900 sm:text-3xl">
-            {t("foodTitle")}
-          </h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-ink-700">
-            {t("foodDescription")}
-          </p>
-
-          <QuoteBoard
-            locale={locale}
-            page={page}
-            keyword={keyword}
-            field={field}
-            serviceType={FOOD_SERVICE_TYPES}
-            basePath="/quote"
-            writeHref="/inquiry"
-            writeLabel={t("foodWrite")}
-            emptyLabel={t("foodEmpty")}
-          />
         </Container>
       </Section>
 
