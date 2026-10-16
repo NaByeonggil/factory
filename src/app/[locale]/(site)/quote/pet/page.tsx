@@ -81,6 +81,30 @@ export default async function PetQuoteBoardPage(
         </Container>
       </section>
 
+      {/* ─── 게시판 ─── */}
+      <Section className="bg-ink-50">
+        <Container>
+          <h2 className="text-2xl font-bold text-ink-900 sm:text-3xl">
+            {t("petBoardTitle")}
+          </h2>
+          <p className="mt-3 max-w-2xl leading-relaxed text-ink-700">
+            {t("petBoardDescription")}
+          </p>
+
+          <QuoteBoard
+            locale={locale}
+            page={page}
+            keyword={keyword}
+            field={field}
+            serviceType="PET"
+            basePath="/quote/pet"
+            writeHref="/inquiry?type=pet"
+            writeLabel={t("petWrite")}
+            emptyLabel={t("petEmpty")}
+          />
+        </Container>
+      </Section>
+
       {/* ─── 생산 가능 품목 ─── */}
       <Section>
         <Container>
@@ -161,30 +185,6 @@ export default async function PetQuoteBoardPage(
               </ol>
             </div>
           </div>
-        </Container>
-      </Section>
-
-      {/* ─── 게시판 ─── */}
-      <Section>
-        <Container>
-          <h2 className="text-2xl font-bold text-ink-900 sm:text-3xl">
-            {t("petBoardTitle")}
-          </h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-ink-700">
-            {t("petBoardDescription")}
-          </p>
-
-          <QuoteBoard
-            locale={locale}
-            page={page}
-            keyword={keyword}
-            field={field}
-            serviceType="PET"
-            basePath="/quote/pet"
-            writeHref="/inquiry?type=pet"
-            writeLabel={t("petWrite")}
-            emptyLabel={t("petEmpty")}
-          />
         </Container>
       </Section>
 
