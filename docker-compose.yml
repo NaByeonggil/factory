@@ -67,6 +67,8 @@ services:
       INTEGRATION_SECRET: ${INTEGRATION_SECRET:-}
       DATAHEALTH_INTERNAL_URL: "http://datahealth-app:3000"
       DATAHEALTH_PUBLIC_URL: "https://data.cancerwith.kr"
+      # AI 견적이 건기식 생산문의 게시판에 글을 올릴 때 쓰는 공유 키 — 비어 있으면 /api/integration/ai-quote 가 꺼집니다.
+      AI_QUOTE_KEY: ${AI_QUOTE_KEY:-}
       NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-}
       TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
       NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID:-}

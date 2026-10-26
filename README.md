@@ -171,6 +171,17 @@ const t = await getTranslations({ locale, namespace: "home" });
 | 견적서 답글 | 그쪽에서 「홈페이지 문의에 보내기」를 확인하면 `POST /api/integration/inquiries/[id]/replies` 로 견적서 PDF 가 운영자 답글로 달리고 문의가 QUOTED 로 바뀝니다 |
 | 상태 전달 | 처리 단계를 바꾸거나 답변을 저장하면 그쪽 문의 게시판에도 반영됩니다 |
 
+### AI 견적 연동
+
+AI 견적이 견적서를 내거나 상담을 담당자에게 넘기면 `POST /api/integration/ai-quote` 로
+건기식 생산문의 게시판에 비밀글을 올립니다. 응답의 `url` 이 고객이 비밀번호로 글을 여는 주소입니다.
+
+- `Authorization: Bearer <AI_QUOTE_KEY>` 로 확인합니다. 키가 비어 있으면 503 으로 꺼집니다.
+  출발지 IP(AI 견적 서버) 제한은 nginx 에서 겁니다.
+- 같은 `externalId` 로 다시 오면 새 글을 만들지 않고 기존 글을 돌려줍니다. 글에는 `source = "ai-quote"` 가 남습니다.
+- 제형은 한글 이름을 코드로 바꿔 저장하고, 목록에 없는 제형은 본문 맨 위에 적습니다.
+- 이미 견적이 나온 글이라 datahealth 로 AI 분석을 넘기지 않습니다.
+
 - 두 앱은 로그인 대신 공유 비밀키(`INTEGRATION_SECRET`) 서명으로 서로를 확인합니다.
   규칙은 `src/lib/datahealth.ts` 와 datahealth 의 `src/lib/integration/factory.ts` 에 같이 있습니다.
 - 연동은 부가 기능입니다. 설정이 없거나 상대 앱·AI 서버가 꺼져 있어도 문의 접수와 관리자 화면은 그대로 동작합니다.

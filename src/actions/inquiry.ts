@@ -1,8 +1,7 @@
 "use server";
 
-import bcrypt from "bcryptjs";
 import { after } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { createInquiryPost } from "@/lib/inquiry";
 import { inquirySchema, type InquiryInput } from "@/lib/validations/inquiry";
 import { getRequestMeta } from "@/lib/request-meta";
 import { rateLimit } from "@/lib/rate-limit";
@@ -57,69 +56,56 @@ export async function submitInquiry(
   try {
     const attribution = data.attribution ?? {};
 
-    const inquiry = await prisma.inquiry.create({
-      data: {
-        name: data.name,
-        company: data.company || null,
-        phone: data.phone,
-        email: data.email || null,
+    const inquiry = await createInquiryPost({
+      name: data.name,
+      company: data.company || null,
+      phone: data.phone,
+      email: data.email || null,
 
-        title: data.title || null,
-        serviceType: data.serviceType as ServiceType,
-        formulations: data.formulations,
-        packagings: data.packagings,
-        quantity: data.quantity || null,
-        budget: data.budget || null,
-        targetDate: data.targetDate ? new Date(data.targetDate) : null,
+      title: data.title || null,
+      serviceType: data.serviceType as ServiceType,
+      formulations: data.formulations,
+      packagings: data.packagings,
+      quantity: data.quantity || null,
+      budget: data.budget || null,
+      targetDate: data.targetDate ? new Date(data.targetDate) : null,
 
-        targetAudience: data.targetAudience || null,
-        healthConcern: data.healthConcern || null,
-        materialType: data.materialType || null,
-        ownedAssets: data.ownedAssets,
-        targetPrice: data.targetPrice || null,
-        message: data.message || null,
+      targetAudience: data.targetAudience || null,
+      healthConcern: data.healthConcern || null,
+      materialType: data.materialType || null,
+      ownedAssets: data.ownedAssets,
+      targetPrice: data.targetPrice || null,
+      message: data.message || null,
 
-        privacyAgreedAt: new Date(),
-        marketingAgreed: data.marketingAgreed,
+      privacyAgreedAt: new Date(),
+      marketingAgreed: data.marketingAgreed,
 
-        // 견적문의 게시판에서 본인 확인용
-        passwordHash: await bcrypt.hash(data.password, 12),
+      // 견적문의 게시판에서 본인 확인용
+      password: data.password,
 
-        utmSource: attribution.utmSource ?? null,
-        utmMedium: attribution.utmMedium ?? null,
-        utmCampaign: attribution.utmCampaign ?? null,
-        utmTerm: attribution.utmTerm ?? null,
-        naverKeyword: attribution.naverKeyword ?? null,
-        naverRank: attribution.naverRank ?? null,
-        naverAdGroup: attribution.naverAdGroup ?? null,
-        landingPath: attribution.landingPath ?? null,
-        referrer: attribution.referrer ?? null,
-        rawParams: attribution.rawParams ?? undefined,
+      utmSource: attribution.utmSource ?? null,
+      utmMedium: attribution.utmMedium ?? null,
+      utmCampaign: attribution.utmCampaign ?? null,
+      utmTerm: attribution.utmTerm ?? null,
+      naverKeyword: attribution.naverKeyword ?? null,
+      naverRank: attribution.naverRank ?? null,
+      naverAdGroup: attribution.naverAdGroup ?? null,
+      landingPath: attribution.landingPath ?? null,
+      referrer: attribution.referrer ?? null,
+      rawParams: attribution.rawParams ?? undefined,
 
-        ipHash: meta.ipHash,
-        userAgent: meta.userAgent,
-        locale: toDbLocale(locale) as Locale,
+      ipHash: meta.ipHash,
+      userAgent: meta.userAgent,
+      locale: toDbLocale(locale) as Locale,
 
-        files: {
-          create: attachments.map((file) => ({
-            storageKey: file.key,
-            url: `/api/files/${file.key}`,
-            filename: file.filename,
-            size: file.size,
-            mimeType: file.mimeType,
-          })),
-        },
-      },
-      select: {
-        id: true,
-        name: true,
-        company: true,
-        phone: true,
-        email: true,
-        serviceType: true,
-        message: true,
-        naverKeyword: true,
-        utmSource: true,
+      files: {
+        create: attachments.map((file) => ({
+          storageKey: file.key,
+          url: `/api/files/${file.key}`,
+          filename: file.filename,
+          size: file.size,
+          mimeType: file.mimeType,
+        })),
       },
     });
 
