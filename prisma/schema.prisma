@@ -372,11 +372,25 @@ model Lecture {
   lectureAt DateTime?
   body      String    @db.Text
   imageUrls String[]
+  /// 칸반 열
+  status    LectureStatus @default(ATTENDED)
+  /// 주제 태그 (LECTURE_TAGS 중에서)
+  tags      String[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([lectureAt])
+  @@index([status])
+}
+
+/// 강의 정리 진행 단계 (관리자 칸반 열)
+enum LectureStatus {
+  PLANNED /// 수강 예정
+  ATTENDED /// 수강 완료 (메모만)
+  DRAFTING /// 정리 중
+  DONE /// 정리 완료
+  APPLIED /// 현장 활용
 }
 
 // ─────────────────────── 견적서 항목 ───────────────────────

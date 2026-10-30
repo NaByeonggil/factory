@@ -6,7 +6,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/auth";
 import { POST_CATEGORY_SLUGS } from "@/lib/queries";
-import { INGREDIENT_CATEGORIES } from "@/lib/constants";
+import { INGREDIENT_CATEGORIES, LECTURE_STATUSES } from "@/lib/constants";
 import { routing } from "@/i18n/routing";
 import type { PostCategory } from "@/generated/prisma/enums";
 import {
@@ -735,6 +735,8 @@ export async function saveLecture(
     lectureAt: text(formData, "lectureAt"),
     body: text(formData, "body"),
     imageUrls: lines(formData, "imageUrls"),
+    status: text(formData, "status") || "ATTENDED",
+    tags: formData.getAll("tags").map(String),
   });
   if (!parsed.success) {
     return { error: "입력값을 확인해주세요.", fieldErrors: toFieldErrors(parsed.error) };
@@ -758,6 +760,17 @@ export async function saveLecture(
   revalidatePath("/admin/lectures");
   revalidatePath(`/admin/lectures/${id}`);
   redirect(`/admin/lectures/${id}`);
+}
+
+/** 칸반에서 카드를 다른 열로 옮길 때 — 단계만 바꿉니다 */
+export async function updateLectureStatus(id: string, status: string) {
+  await requireSession(["ADMIN", "EDITOR"]);
+  const parsed = z.enum(LECTURE_STATUSES).safeParse(status);
+  if (!parsed.success) throw new Error("INVALID_STATUS");
+
+  await prisma.lecture.update({ where: { id }, data: { status: parsed.data } });
+  revalidatePath("/admin/lectures");
+  revalidatePath(`/admin/lectures/${id}`);
 }
 
 export async function deleteLecture(formData: FormData) {

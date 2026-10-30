@@ -10,7 +10,13 @@ import {
 } from "@/components/admin/form-shell";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { ImageListField } from "@/components/admin/image-field";
-import { Field, Input, Textarea } from "@/components/ui/field";
+import { CheckChip, Field, Input, Select, Textarea } from "@/components/ui/field";
+import {
+  LECTURE_STATUSES,
+  LECTURE_STATUS_LABELS,
+  LECTURE_TAGS,
+  type LectureStatusCode,
+} from "@/lib/constants";
 import type { ActionState } from "@/lib/validations/admin";
 
 export type LectureFormValues = {
@@ -20,6 +26,8 @@ export type LectureFormValues = {
   lectureAt: string;
   body: string;
   imageUrls: string[];
+  status: LectureStatusCode;
+  tags: string[];
 };
 
 /** 강의 정리 작성·수정. 저장하면 보기 화면으로 돌아갑니다. */
@@ -66,6 +74,36 @@ export function LectureForm({ values }: { values: LectureFormValues }) {
                 type="date"
                 defaultValue={values.lectureAt}
               />
+            </Field>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-[12rem_1fr]">
+            <Field
+              label="진행 단계"
+              htmlFor="status"
+              error={state.fieldErrors?.status}
+            >
+              <Select id="status" name="status" defaultValue={values.status}>
+                {LECTURE_STATUSES.map((value) => (
+                  <option key={value} value={value}>
+                    {LECTURE_STATUS_LABELS[value]}
+                  </option>
+                ))}
+              </Select>
+            </Field>
+
+            <Field label="주제 태그" hint="선택 · 여러 개" error={state.fieldErrors?.tags}>
+              <div className="flex flex-wrap gap-2">
+                {LECTURE_TAGS.map((tag) => (
+                  <CheckChip
+                    key={tag}
+                    name="tags"
+                    value={tag}
+                    label={tag}
+                    defaultChecked={values.tags.includes(tag)}
+                  />
+                ))}
+              </div>
             </Field>
           </div>
 

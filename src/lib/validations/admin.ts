@@ -2,6 +2,8 @@ import { z } from "zod";
 import {
   FORMULATIONS,
   INGREDIENT_CATEGORIES,
+  LECTURE_STATUSES,
+  LECTURE_TAGS,
   SERVICE_TYPES,
 } from "@/lib/constants";
 
@@ -182,6 +184,8 @@ export const lectureSchema = z.object({
     ),
   body: z.string().trim().min(1, "강의 내용을 입력해주세요.").max(50000),
   imageUrls: z.array(z.string().trim().regex(ADMIN_IMAGE_URL)).max(30),
+  status: z.enum(LECTURE_STATUSES),
+  tags: z.array(z.enum(LECTURE_TAGS)).max(LECTURE_TAGS.length),
 });
 
 // ───────────────────────── 헬퍼 ─────────────────────────

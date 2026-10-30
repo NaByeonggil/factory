@@ -2,14 +2,23 @@ import {
   LectureForm,
   type LectureFormValues,
 } from "@/components/admin/lecture-form";
+import { LECTURE_STATUSES } from "@/lib/constants";
 
-export default function NewLecturePage() {
+/** 칸반 열의 「+」에서 들어오면 그 열의 단계로 시작합니다 */
+export default async function NewLecturePage(
+  props: PageProps<"/admin/lectures/new">,
+) {
+  const { status } = await props.searchParams;
+  const initial = LECTURE_STATUSES.find((value) => value === status);
+
   const values: LectureFormValues = {
     id: null,
     title: "",
     lectureAt: "",
     body: "",
     imageUrls: [],
+    status: initial ?? "ATTENDED",
+    tags: [],
   };
 
   return (
