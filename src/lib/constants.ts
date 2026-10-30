@@ -162,6 +162,33 @@ export const INQUIRY_STATUSES = [
   "SPAM",
 ] as const;
 
+/** 약사 강의 정리 칸반 열 — 왼쪽부터 진행 순서입니다 */
+export const LECTURE_STATUSES = [
+  "PLANNED",
+  "ATTENDED",
+  "DRAFTING",
+  "DONE",
+  "APPLIED",
+] as const;
+export type LectureStatusCode = (typeof LECTURE_STATUSES)[number];
+
+export const LECTURE_STATUS_LABELS: Record<LectureStatusCode, string> = {
+  PLANNED: "수강 예정",
+  ATTENDED: "수강 완료",
+  DRAFTING: "정리 중",
+  DONE: "정리 완료",
+  APPLIED: "현장 활용",
+};
+
+/** 강의 정리 주제 태그 */
+export const LECTURE_TAGS = [
+  "대사 생화학",
+  "미토콘드리아",
+  "암·염증",
+  "영양소 처방",
+  "제품",
+] as const;
+
 /** 첨부파일 제한 */
 export const MAX_UPLOAD_SIZE = 10 * 1024 * 1024; // 10MB
 export const ALLOWED_UPLOAD_TYPES = [

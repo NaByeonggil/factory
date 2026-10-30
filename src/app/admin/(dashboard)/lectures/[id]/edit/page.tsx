@@ -22,6 +22,8 @@ export default async function EditLecturePage(
     lectureAt: toDateInput(row.lectureAt),
     body: row.body,
     imageUrls: row.imageUrls,
+    status: row.status,
+    tags: row.tags,
   };
 
   return (
