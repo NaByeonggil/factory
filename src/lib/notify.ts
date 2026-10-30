@@ -156,3 +156,39 @@ export async function notifyCustomerReply(r: {
     console.error("[notify] 답글 알림 전송 실패", error);
   }
 }
+
+/**
+ * 긴급으로 분류된 메일을 담당자에게 알립니다.
+ * 메일 내용이 외부 발송 서비스로 나가지 않도록 관리자 화면 주소만 보냅니다.
+ */
+export async function notifyUrgentMail() {
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/admin/mail?urgent=1`;
+  const text = ["긴급으로 분류된 메일이 도착했습니다.", "", url].join("\n");
+
+  try {
+    const apiKey = process.env.RESEND_API_KEY;
+    const to = (process.env.NOTIFY_TO ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+    if (!apiKey || to.length === 0) {
+      // 알림 채널 미설정 시 로컬 개발 편의를 위해 콘솔 출력
+      console.info("[notify] 알림 채널 미설정 — 콘솔 출력\n" + text);
+      return;
+    }
+
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: process.env.NOTIFY_FROM ?? "noreply@example.com",
+        to,
+        subject: "[메일 분류] 긴급 메일이 도착했습니다",
+        text,
+      }),
+    });
+    if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
+  } catch (error) {
+    console.error("[notify] 긴급 메일 알림 전송 실패", error);
+  }
+}

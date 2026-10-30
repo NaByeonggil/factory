@@ -445,3 +445,75 @@ model User {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
+
+// ─────────────────────── Gmail 분류 ───────────────────────
+
+/// 연결된 Gmail 계정 — 한 계정만 연결하므로 한 줄입니다.
+/// refreshToken 은 AES-GCM 으로 암호화해 저장합니다.
+model MailAccount {
+  id           String    @id @default("gmail")
+  email        String
+  refreshToken String
+  /// 켜면 분류 결과를 Gmail 라벨로도 답니다
+  applyLabels  Boolean   @default(false)
+  /// 이 시각 이후의 메일만 확인합니다. 비어 있으면 첫 동기화입니다
+  syncCursor   DateTime?
+  lastSyncAt   DateTime?
+  lastError    String?
+  /// 동기화가 겹치지 않게 잡는 임대 — 프로세스가 죽어도 시간이 지나면 풀립니다
+  lockedUntil  DateTime?
+  connectedAt  DateTime  @default(now())
+}
+
+/// 받은편지함 메일의 분류·요약 결과. 메일 본문은 저장하지 않고,
+/// 정리할 때 Gmail 에서 읽어 옵니다.
+model Mail {
+  id              String       @id @default(cuid())
+  accountEmail    String
+  gmailId         String       @unique
+  threadId        String
+  fromName        String?
+  fromEmail       String
+  subject         String
+  receivedAt      DateTime
+  attachmentNames String[]
+
+  status     MailStatus @default(PENDING)
+  attempts   Int        @default(0)
+  failReason String?
+
+  category MailCategory?
+  urgent   Boolean       @default(false)
+  summary  String[]
+  company  String?
+  product  String?
+  quantity String?
+  dueDate  String?
+  action   String?
+
+  /// 비어 있으면 아직 Gmail 라벨에 반영되지 않았습니다
+  labeledAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([accountEmail, receivedAt])
+  @@index([status])
+  @@index([category])
+}
+
+enum MailStatus {
+  PENDING /// 정리 대기
+  DONE /// 정리 완료
+  FAILED /// 재시도 한도 초과
+}
+
+enum MailCategory {
+  INQUIRY /// 생산문의
+  QUOTE_ORDER /// 견적·발주
+  SUPPLIER /// 원료 공급사
+  INVOICE /// 세금계산서·정산
+  REGULATORY /// 인허가·규제
+  PROMO /// 광고·스팸
+  OTHER /// 기타
+}
