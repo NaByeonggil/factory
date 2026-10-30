@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/auth";
+import { chatCompletion, type LlmFailure } from "@/lib/llm";
 import { POST_CATEGORY_SLUGS } from "@/lib/queries";
 import { INGREDIENT_CATEGORIES, LECTURE_STATUSES } from "@/lib/constants";
 import { routing } from "@/i18n/routing";
@@ -760,6 +761,41 @@ export async function saveLecture(
   revalidatePath("/admin/lectures");
   revalidatePath(`/admin/lectures/${id}`);
   redirect(`/admin/lectures/${id}`);
+}
+
+const LECTURE_ORGANIZE_PROMPT = `당신은 약사 강의 메모를 정리하는 도우미입니다.
+- 메모에 있는 내용만 사용하고, 새로운 사실이나 수치를 덧붙이지 마세요.
+- 약 이름, 함량, 복용 간격 같은 수치와 주의사항은 빠뜨리거나 바꾸지 마세요.
+- 정리한 노트만 답하세요. 인사말이나 설명, 마크다운 강조(**, #)는 쓰지 마세요.
+- 아래 형식을 지키세요.
+
+핵심 내용
+- 항목
+
+적용할 점
+- 항목`;
+
+const LECTURE_ORGANIZE_ERRORS: Record<LlmFailure, string> = {
+  TOO_LONG: "메모가 너무 길어 한 번에 정리할 수 없습니다. 나눠서 정리해주세요.",
+  TRUNCATED: "정리 결과가 너무 길어 중간에 끊겼습니다. 메모를 나눠서 정리해주세요.",
+  UNAVAILABLE: "AI 서버에 연결하지 못했습니다. 잠시 후 다시 시도해주세요.",
+};
+
+/**
+ * 작성 중인 강의 메모를 AI로 정리해 돌려줍니다. 저장은 하지 않으며,
+ * 결과를 확인하고 저장하는 것은 작성자의 몫입니다.
+ */
+export async function organizeLectureBody(
+  body: string,
+): Promise<ActionState & { body?: string }> {
+  await requireSession(["ADMIN", "EDITOR"]);
+
+  const parsed = lectureSchema.shape.body.safeParse(body);
+  if (!parsed.success) return { error: parsed.error.issues[0].message };
+
+  const result = await chatCompletion(LECTURE_ORGANIZE_PROMPT, parsed.data);
+  if (!result.ok) return { error: LECTURE_ORGANIZE_ERRORS[result.reason] };
+  return { ok: true, body: result.content };
 }
 
 /** 칸반에서 카드를 다른 열로 옮길 때 — 단계만 바꿉니다 */
