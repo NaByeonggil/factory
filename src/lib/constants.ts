@@ -189,6 +189,28 @@ export const LECTURE_TAGS = [
   "제품",
 ] as const;
 
+/** Gmail 메일 분류 */
+export const MAIL_CATEGORIES = [
+  "INQUIRY",
+  "QUOTE_ORDER",
+  "SUPPLIER",
+  "INVOICE",
+  "REGULATORY",
+  "PROMO",
+  "OTHER",
+] as const;
+export type MailCategoryCode = (typeof MAIL_CATEGORIES)[number];
+
+export const MAIL_CATEGORY_LABELS: Record<MailCategoryCode, string> = {
+  INQUIRY: "생산문의",
+  QUOTE_ORDER: "견적·발주",
+  SUPPLIER: "원료 공급사",
+  INVOICE: "세금계산서·정산",
+  REGULATORY: "인허가·규제",
+  PROMO: "광고·스팸",
+  OTHER: "기타",
+};
+
 /** 첨부파일 제한 */
 export const MAX_UPLOAD_SIZE = 10 * 1024 * 1024; // 10MB
 export const ALLOWED_UPLOAD_TYPES = [

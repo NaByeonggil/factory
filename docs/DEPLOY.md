@@ -113,3 +113,22 @@ npm run storage:cleanup            # 참조가 끊긴 이미지 정리 (24시간
 1. `/ko/ingredients` — 원료 카드 **이미지가 보이는지** (DB만 복원했으면 여기서 깨집니다)
 2. `/admin` 로그인
 3. 문의를 한 건 넣어 보고 **알림 메일이 오는지**
+
+## Gmail 메일 분류 켜기
+
+관리자 화면 `/admin/mail` 은 받은편지함의 새 메일을 3분마다 확인해 로컬 LLM 으로 분류·요약합니다.
+
+1. [Google Cloud 콘솔](https://console.cloud.google.com/)에서 프로젝트를 만들고 **Gmail API** 를 사용 설정합니다.
+2. OAuth 동의 화면을 **외부** 로 만들고 **프로덕션으로 게시** 합니다. 테스트 상태로 두면 인증이 7일마다 만료됩니다. 검수를 받지 않은 앱이라 연결할 때 경고 화면이 나오며, 「고급」에서 계속 진행합니다.
+3. OAuth 클라이언트 ID 를 **웹 애플리케이션** 으로 만들고, 승인된 리디렉션 URI 에 `https://factory.cancerwith.kr/admin/mail/oauth/callback` 을 넣습니다.
+4. `.env` 에 `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` 을 넣고 배포합니다.
+
+```bash
+npm run db:deploy
+docker compose up -d --build app
+```
+
+5. 관리자(ADMIN)로 로그인해 `/admin/mail` 에서 「Gmail 연결」을 누릅니다. 최근 메일 50건을 가져와 정리합니다.
+6. 분류 결과를 확인한 뒤 「Gmail에 라벨 달기」를 켭니다. 처음에는 꺼져 있습니다.
+
+메일 본문은 DB 에 저장하지 않습니다. `AUTH_SECRET` 을 바꾸면 연결을 해제하고 다시 연결해야 합니다.

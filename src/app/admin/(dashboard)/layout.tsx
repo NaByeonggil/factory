@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import {
   LayoutDashboard,
   Inbox,
+  Mail,
   FlaskConical,
   BadgeCheck,
   Package,
@@ -25,6 +26,7 @@ const DATAHEALTH_HREF = "/admin/go/datahealth";
 const NAV = [
   { href: "/admin", label: "대시보드", Icon: LayoutDashboard },
   { href: "/admin/inquiries", label: "생산문의", Icon: Inbox },
+  { href: "/admin/mail", label: "메일 분류", Icon: Mail },
   { href: "/admin/ingredients", label: "보유 원료", Icon: FlaskConical },
   { href: "/admin/materials", label: "공급 특허원료", Icon: BadgeCheck },
   { href: "/admin/quote-items", label: "견적서 항목", Icon: ReceiptText },
@@ -41,6 +43,10 @@ export default async function AdminDashboardLayout({
   children: ReactNode;
 }) {
   const session = await getSession();
+  // 메일 분류는 대표 메일함이라 관리자에게만 보입니다
+  const nav = NAV.filter(
+    ({ href }) => href !== "/admin/mail" || session?.role === "ADMIN",
+  );
 
   return (
     <div className="flex min-h-screen">
@@ -50,7 +56,7 @@ export default async function AdminDashboardLayout({
           <p className="text-xs text-ink-400">Admin</p>
         </div>
         <nav className="flex-1 space-y-1 p-3">
-          {NAV.map(({ href, label, Icon }) => (
+          {nav.map(({ href, label, Icon }) => (
             <Link
               key={href}
               href={href}
@@ -94,7 +100,7 @@ export default async function AdminDashboardLayout({
         <header className="flex items-center gap-4 border-b border-ink-200 bg-white px-5 py-3 lg:hidden print:hidden">
           <p className="font-extrabold text-brand-700">헬씨팜바이오 Admin</p>
           <nav className="ml-auto flex gap-3 text-sm">
-            {NAV.map(({ href, label }) => (
+            {nav.map(({ href, label }) => (
               <Link key={href} href={href} className="text-ink-600">
                 {label}
               </Link>
