@@ -5,6 +5,7 @@ import {
   type LectureFormValues,
 } from "@/components/admin/lecture-form";
 import { toDateInput } from "@/lib/admin-defaults";
+import { llmConfigured } from "@/lib/llm";
 
 export const dynamic = "force-dynamic";
 
@@ -29,7 +30,7 @@ export default async function EditLecturePage(
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">강의 정리 수정</h1>
-      <LectureForm values={values} />
+      <LectureForm values={values} aiEnabled={llmConfigured()} />
     </div>
   );
 }

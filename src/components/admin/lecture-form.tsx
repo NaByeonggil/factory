@@ -1,8 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
-import { deleteLecture, saveLecture } from "@/actions/content";
+import { Sparkles, Undo2 } from "lucide-react";
+import { useActionState, useState, useTransition } from "react";
+import {
+  deleteLecture,
+  organizeLectureBody,
+  saveLecture,
+} from "@/actions/content";
 import {
   AdminCard,
   FormError,
@@ -10,6 +15,7 @@ import {
 } from "@/components/admin/form-shell";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { ImageListField } from "@/components/admin/image-field";
+import { Button } from "@/components/ui/button";
 import { CheckChip, Field, Input, Select, Textarea } from "@/components/ui/field";
 import {
   LECTURE_STATUSES,
@@ -31,11 +37,36 @@ export type LectureFormValues = {
 };
 
 /** 강의 정리 작성·수정. 저장하면 보기 화면으로 돌아갑니다. */
-export function LectureForm({ values }: { values: LectureFormValues }) {
+export function LectureForm({
+  values,
+  aiEnabled,
+}: {
+  values: LectureFormValues;
+  /** LLM 설정이 있을 때만 AI 정리 버튼을 보여 줍니다 */
+  aiEnabled: boolean;
+}) {
   const [state, formAction] = useActionState<ActionState, FormData>(
     saveLecture,
     {},
   );
+  const [body, setBody] = useState(values.body);
+  /** AI 정리 직전의 원문 — 되돌리기용 */
+  const [originalBody, setOriginalBody] = useState<string | null>(null);
+  const [aiError, setAiError] = useState<string | null>(null);
+  const [organizing, startOrganizing] = useTransition();
+
+  function organize() {
+    setAiError(null);
+    startOrganizing(async () => {
+      const result = await organizeLectureBody(body);
+      if (result.body) {
+        setOriginalBody(body);
+        setBody(result.body);
+      } else {
+        setAiError(result.error ?? "AI 정리에 실패했습니다.");
+      }
+    });
+  }
 
   return (
     <div className="space-y-6">
@@ -117,13 +148,56 @@ export function LectureForm({ values }: { values: LectureFormValues }) {
             <Textarea
               id="body"
               name="body"
-              defaultValue={values.body}
+              value={body}
+              onChange={(event) => setBody(event.target.value)}
+              readOnly={organizing}
               maxLength={50000}
               className="min-h-96"
               placeholder={"핵심 내용\n- …\n\n적용할 점\n- …"}
               required
             />
           </Field>
+
+          {aiEnabled && (
+            <div className="space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={organize}
+                  disabled={organizing || !body.trim()}
+                >
+                  <Sparkles className="h-4 w-4" aria-hidden />
+                  {organizing ? "AI 정리 중…" : "AI로 정리"}
+                </Button>
+                {originalBody !== null && !organizing && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setBody(originalBody);
+                      setOriginalBody(null);
+                    }}
+                  >
+                    <Undo2 className="h-4 w-4" aria-hidden />
+                    원문으로 되돌리기
+                  </Button>
+                )}
+              </div>
+              {aiError && (
+                <p role="alert" className="text-sm text-red-600">
+                  {aiError}
+                </p>
+              )}
+              {originalBody !== null && !aiError && !organizing && (
+                <p className="text-sm text-ink-500">
+                  AI가 정리한 내용입니다. 약물 정보와 수치를 원문과 대조한 뒤 저장해주세요.
+                </p>
+              )}
+            </div>
+          )}
         </AdminCard>
 
         <AdminCard

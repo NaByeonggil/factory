@@ -3,6 +3,7 @@ import {
   type LectureFormValues,
 } from "@/components/admin/lecture-form";
 import { LECTURE_STATUSES } from "@/lib/constants";
+import { llmConfigured } from "@/lib/llm";
 
 /** 칸반 열의 「+」에서 들어오면 그 열의 단계로 시작합니다 */
 export default async function NewLecturePage(
@@ -24,7 +25,7 @@ export default async function NewLecturePage(
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">강의 정리 추가</h1>
-      <LectureForm values={values} />
+      <LectureForm values={values} aiEnabled={llmConfigured()} />
     </div>
   );
 }
